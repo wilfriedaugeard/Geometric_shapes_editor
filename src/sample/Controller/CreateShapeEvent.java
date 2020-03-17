@@ -44,10 +44,17 @@ public class CreateShapeEvent implements Events {
                 }
             }
 
+            for(Events event : controller.getEvents()) {
+                event.launchEvent();
+            }
+
+            //System.out.println("test size : " + controller.getView().getShapesInCanvas().size());
+
             mouseEvent.consume();
         }
     };
 
+    @Override
     public void launchEvent() {
         controller.getView().launch_createShapeInToolBarOnClick(createShapeInToolBarOnClick);
     }

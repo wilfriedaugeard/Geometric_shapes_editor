@@ -1,6 +1,8 @@
 package sample.View;
 
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -8,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -54,6 +58,7 @@ public class View implements Serializable {
 	public View() {
 		canvas = new Pane();
 		menuBar = new ToolBar();
+
 		toolBar = new ToolBar();
 		root = new BorderPane();
 		
@@ -178,8 +183,10 @@ public class View implements Serializable {
 	/*Events*/
 
 	public void launch_finalShapeToCanvas(EventHandler<MouseEvent> event) {
+		//System.out.println("test");
 		for(Shape item : shapesInCanvas) {
 			item.setOnMouseDragged(event);
+			System.out.println("test size : " + getShapesInCanvas().size());
 		}
 	}
 
@@ -191,6 +198,7 @@ public class View implements Serializable {
 
 	public void launch_getShapeOnMousePressed(EventHandler<MouseEvent> event) {
 		for(Shape item : shapesInCanvas) {
+			System.out.println("test");
 			item.setOnMousePressed(event);
 		}
 	}

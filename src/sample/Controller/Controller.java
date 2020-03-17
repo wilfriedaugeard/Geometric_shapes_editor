@@ -67,6 +67,10 @@ public class Controller {
         }
     }
 
+    public ArrayList<Events> getEvents() {
+        return events;
+    }
+
     public Scene getScene() {
         return view.getScene();
     }

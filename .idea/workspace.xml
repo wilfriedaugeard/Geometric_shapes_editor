@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sample/ressources/trash-can_38501.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/META-INF/AL M1.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/CreateShapeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/CreateShapeEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/DragAndDrop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/DragAndDrop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/View.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,11 +76,15 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1YWg0orNZgoOTfSMSMhyVGgQSyt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
@@ -90,12 +103,13 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sample/View" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sample/ressources" />
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alexandre Legendre\Documents\Java M1\AL M1\Geometric_shapes_editor\src\sample\ressources" />
       <recent name="C:\Users\Alexandre Legendre\Documents\Java M1\AL M1\src\sample\View" />
       <recent name="C:\Users\Alexandre Legendre\Documents\Java M1\AL M1\src\sample\Model" />
     </key>
@@ -202,10 +216,10 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1583086465952">
+    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1584476113613">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1583086465952" />
+    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584476113613" />
     <state x="755" y="405" width="410" height="239" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1583088289892">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -222,22 +236,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1583068182997" />
-    <state width="1875" height="114" key="GridCell.Tab.0.bottom" timestamp="1583155071285">
+    <state width="1875" height="140" key="GridCell.Tab.0.bottom" timestamp="1584476141665">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="114" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583155071285" />
-    <state width="1875" height="114" key="GridCell.Tab.0.center" timestamp="1583155071285">
+    <state width="1875" height="140" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584476141665" />
+    <state width="1875" height="140" key="GridCell.Tab.0.center" timestamp="1584476141665">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="114" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583155071285" />
-    <state width="1875" height="114" key="GridCell.Tab.0.left" timestamp="1583155071285">
+    <state width="1875" height="140" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584476141665" />
+    <state width="1875" height="140" key="GridCell.Tab.0.left" timestamp="1584476141665">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="114" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583155071285" />
-    <state width="1875" height="114" key="GridCell.Tab.0.right" timestamp="1583155071285">
+    <state width="1875" height="140" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584476141665" />
+    <state width="1875" height="140" key="GridCell.Tab.0.right" timestamp="1584476141665">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="114" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583155071285" />
+    <state width="1875" height="140" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584476141665" />
+    <state width="1875" height="347" key="GridCell.Tab.1.bottom" timestamp="1584457286498">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1875" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584457286498" />
+    <state width="1875" height="347" key="GridCell.Tab.1.center" timestamp="1584457286498">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1875" height="347" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584457286498" />
+    <state width="1875" height="347" key="GridCell.Tab.1.left" timestamp="1584457286498">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1875" height="347" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584457286498" />
+    <state width="1875" height="347" key="GridCell.Tab.1.right" timestamp="1584457286498">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1875" height="347" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584457286498" />
     <state x="460" y="162" key="SettingsEditor" timestamp="1583077018510">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

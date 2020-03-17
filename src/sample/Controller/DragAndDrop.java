@@ -18,24 +18,6 @@ public class DragAndDrop implements Events {
         this.controller = controller;
     }
 
-    EventHandler<MouseEvent> getShapeOnMousePressed= new EventHandler<MouseEvent>() {
-        public void handle(MouseEvent mouseEvent) {
-            Shape shape = (Shape) mouseEvent.getSource();
-
-            shapeX = shape.getTranslateX();
-            shapeY = shape.getTranslateY();
-            MousePos = new Point2D(mouseEvent.getSceneX(), mouseEvent.getSceneY());
-            System.out.println("TESTTTT = " + shapeX + " TESTTTT = " + shapeY);
-        }
-    };
-
-    EventHandler<MouseEvent> moveShapeOnPressingMouse = new EventHandler<MouseEvent>() {
-        public void handle(MouseEvent mouseEvent) {
-            Shape shape = (Shape) mouseEvent.getSource();
-            shape.toFront();
-        }
-    };
-
     EventHandler<MouseEvent> finalShapeToCanvas = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -62,10 +44,29 @@ public class DragAndDrop implements Events {
         }
     };
 
+    EventHandler<MouseEvent> moveShapeOnPressingMouse = new EventHandler<MouseEvent>() {
+        public void handle(MouseEvent mouseEvent) {
+            Shape shape = (Shape) mouseEvent.getSource();
+            shape.toFront();
+        }
+    };
+
+    EventHandler<MouseEvent> getShapeOnMousePressed= new EventHandler<MouseEvent>() {
+        public void handle(MouseEvent mouseEvent) {
+            Shape shape = (Shape) mouseEvent.getSource();
+
+            shapeX = shape.getTranslateX();
+            shapeY = shape.getTranslateY();
+            MousePos = new Point2D(mouseEvent.getSceneX(), mouseEvent.getSceneY());
+            System.out.println("TESTTTT = " + shapeX + " TESTTTT = " + shapeY);
+        }
+    };
+
+    @Override
     public void launchEvent() {
-        controller.getView().launch_getShapeOnMousePressed(getShapeOnMousePressed);
-        controller.getView().launch_moveShapeOnPressingMouse(moveShapeOnPressingMouse);
         controller.getView().launch_finalShapeToCanvas(finalShapeToCanvas);
+        controller.getView().launch_moveShapeOnPressingMouse(moveShapeOnPressingMouse);
+        controller.getView().launch_getShapeOnMousePressed(getShapeOnMousePressed);
     }
 
 }
