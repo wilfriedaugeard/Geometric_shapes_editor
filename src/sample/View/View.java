@@ -1,5 +1,6 @@
 package sample.View;
 
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import sample.Model.Point;
 
 
 public class View implements Serializable {
@@ -128,6 +130,23 @@ public class View implements Serializable {
 		return boundsInScene.getMinY();
 	}
 
+	public double getNodeXPosition(Node node) {
+		Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+		return boundsInScene.getMinX();
+	}
+
+	public double getNodeYPosition(Node node) {
+		Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
+		return boundsInScene.getMinY();
+	}
+
+	public boolean isOnTrash(Point point){
+		return point.getX() >= getNodeXPosition(getTrash()) &&
+				point.getY() >= getNodeXPosition(getTrash()) &&
+				point.getX() <= getNodeXPosition(getTrash())+getTrash().getWidth() &&
+				point.getY() <= getNodeYPosition(getTrash())+getTrash().getHeight();
+	}
+
 	public void addShapeMenu() {
 		shapeMenu.getItems().addAll(group, deGroup, edit);
 	}
@@ -205,6 +224,12 @@ public class View implements Serializable {
 	}
 
 	/*Events*/
+
+	public void launch_overTrash(EventHandler<MouseEvent> event) {
+		for (Shape item : shapesInCanvas) {
+			item.setOnMouseReleased(event);
+		}
+	}
 
 	public void launch_finalShapeToCanvas(EventHandler<MouseEvent> event) {
 		for(Shape item : shapesInCanvas) {

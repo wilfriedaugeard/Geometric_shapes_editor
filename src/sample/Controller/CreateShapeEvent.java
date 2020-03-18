@@ -20,7 +20,6 @@ public class CreateShapeEvent implements Events {
             Shape shape = (Shape) mouseEvent.getSource();
             double x = controller.getView().getShapeXPositionInToolBar(shape);
             double y = controller.getView().getShapeYPositionInToolBar(shape);
-            System.out.println("X = "+ x + ";;;" + " y = " + y);
 
             /* Set the model position */
             ArrayList<Shape> shapes = controller.getView().getShapesInToolBar();

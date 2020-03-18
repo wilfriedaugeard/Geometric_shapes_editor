@@ -45,6 +45,7 @@ public class Controller {
         Double posX = view.getRoot().getWidth();
         Double posY = view.getRoot().getHeight();
 
+
         /*trash_btn.setLayoutX(posX-trash_btn.getWidth());
         trash_btn.setLayoutY(posY-trash_btn.getHeight());*/
 
@@ -75,6 +76,7 @@ public class Controller {
 
         events.add(new DragAndDrop(this));
         events.add(new CreateShapeEvent(this));
+        events.add(new DeleteShape(this));
 
         for(Events event : events) {
             event.launchEvent();

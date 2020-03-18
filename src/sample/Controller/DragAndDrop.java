@@ -35,6 +35,10 @@ public class DragAndDrop implements Events {
             shape.setTranslateY(newYPosition);
 
             for(ShapeInter model : controller.getShapesInCanvas()) {
+                System.out.println("x from get shape = " + x);
+                System.out.println("x from model shapeinter = " + model.getPos().getX());
+                System.out.println("y from get shape = " + y);
+                System.out.println("y from model shapeinter = " + model.getPos().getY());
                 if(model.getPos().getX() == x && model.getPos().getY() == y) {
                     model.translate(dragX,dragY);
                     System.out.println("TEST");
@@ -51,7 +55,7 @@ public class DragAndDrop implements Events {
         }
     };
 
-    EventHandler<MouseEvent> getShapeOnMousePressed= new EventHandler<MouseEvent>() {
+    EventHandler<MouseEvent> getShapeOnMousePressed = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             Shape shape = (Shape) mouseEvent.getSource();
 
