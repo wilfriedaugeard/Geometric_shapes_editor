@@ -21,6 +21,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 
+
 public class View implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -41,6 +42,7 @@ public class View implements Serializable {
 	private Button load;
 	private Button undo;
 	private Button redo;
+	private Button trash;
 
 	private ArrayList<Shape> shapesInToolBar;
 	private ArrayList<Shape> shapesInCanvas;
@@ -61,6 +63,7 @@ public class View implements Serializable {
 
 		toolBar = new ToolBar();
 		root = new BorderPane();
+
 		
 		shapesInToolBar = new ArrayList<Shape>();
 		shapesInCanvas = new ArrayList<Shape>();
@@ -77,6 +80,22 @@ public class View implements Serializable {
         load = new Button("Load");
         undo = new Button("Undo");
         redo = new Button("Redo");
+
+        trash = new Button();
+		//System.out.println(System.getProperty("user.dir"));
+
+		Image image;
+		try {
+			image = new Image(new FileInputStream("src/sample/ressources/trash.png"),30,30,true, false);
+			ImageView imageView = new ImageView(image);
+			trash.setGraphic(imageView);
+		} catch (FileNotFoundException ex) {
+			System.out.println("File not found !");
+		}
+
+		ToolBar tool_trash = new ToolBar(trash);
+
+
 	}
 
 	public void addMenuBar() {
@@ -96,6 +115,7 @@ public class View implements Serializable {
 		/* Canvas */
 		root.setRight(canvas);
 		root.setBackground(Background.EMPTY);
+
 	}
 
 	public double getShapeXPositionInToolBar(Shape shape) {
@@ -172,6 +192,10 @@ public class View implements Serializable {
 		return redo;
 	}
 
+	public Button getTrash() {
+		return trash;
+	}
+
 	public ArrayList<Shape> getShapesInToolBar() {
 		return shapesInToolBar;
 	}
@@ -183,10 +207,8 @@ public class View implements Serializable {
 	/*Events*/
 
 	public void launch_finalShapeToCanvas(EventHandler<MouseEvent> event) {
-		//System.out.println("test");
 		for(Shape item : shapesInCanvas) {
 			item.setOnMouseDragged(event);
-			System.out.println("test size : " + getShapesInCanvas().size());
 		}
 	}
 
@@ -198,7 +220,6 @@ public class View implements Serializable {
 
 	public void launch_getShapeOnMousePressed(EventHandler<MouseEvent> event) {
 		for(Shape item : shapesInCanvas) {
-			System.out.println("test");
 			item.setOnMousePressed(event);
 		}
 	}
