@@ -40,8 +40,6 @@ public class CreateShapeEvent implements Events {
                     ShapeDrawer drawer = copy.createShapeDrawer(controller);
                     drawer.drawShape();
                     controller.getShapesInCanvas().add(copy);
-                    System.out.println("X -> "+model.getPos().getX()+" == "+x);
-                    System.out.println("Y -> "+model.getPos().getY()+" == "+y+"\n");
 
                 }
             }

@@ -154,10 +154,19 @@ public class View implements Serializable {
 	 * @return a boolean
 	 */
 	public boolean isOnTrash(Point point){
+
 		return point.getX() >= getNodeXPosition(getTrash()) &&
-				point.getY() >= getNodeXPosition(getTrash()) &&
+				point.getY() >= getNodeYPosition(getTrash()) &&
 				point.getX() <= getNodeXPosition(getTrash())+getTrash().getWidth() &&
 				point.getY() <= getNodeYPosition(getTrash())+getTrash().getHeight();
+	}
+
+	public void onTrashInfo(Point point){
+		double x2 = getNodeXPosition(getTrash())+getTrash().getWidth();
+		double y2 = getNodeYPosition(getTrash())+getTrash().getHeight();
+		System.out.println("Trash:\nx1,y1 ("+getNodeXPosition(getTrash())+","+getNodeYPosition(getTrash())+")");
+		System.out.println("x2,y2 ("+x2+","+y2+")");
+		System.out.println("Point:\nx1,x2 ("+point.getX()+","+point.getY()+")\n");
 	}
 
 	public void addShapeMenu() {

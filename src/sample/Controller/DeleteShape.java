@@ -26,22 +26,27 @@ public class DeleteShape implements Events {
         @Override
         public void handle(MouseEvent mouseEvent) {
             Shape shape = (Shape) mouseEvent.getSource();
-
+          
+            System.out.println("resleased");
             double x = controller.getView().getShapeXPositionInToolBar(shape);
             double y = controller.getView().getShapeYPositionInToolBar(shape);
 
-            Point p = new Point(x,y);
             for(ShapeInter model : controller.getShapesInCanvas()) {
-                /*System.out.println("Model x: "+model.getPos().getX());
-                System.out.println("Layout x: "+shape.getTranslateX());*/
-                if(model.getPos().getX() == shape.getTranslateX() && model.getPos().getY() == shape.getTranslateY()) { // Ne marche pas
-                    if(controller.getView().isOnTrash(p)){
-                        controller.getView().getShapesInCanvas().remove(model);
-                        controller.getShapesInCanvas().remove(model);
+                if(model.getPos().getX() == x && model.getPos().getY() == y){
+                    controller.getView().onTrashInfo(new Point(x,y));
+                    if(controller.getView().isOnTrash(new Point(x,y))){
+                        System.out.println("ON TRASH");
+                        if(!controller.getView().getShapesInCanvas().remove(shape)){
+                            System.out.println("Shape in view.getShapesCanvas not find");
+                        }
+                        if(!controller.getShapesInCanvas().remove(model)){
+                            System.out.println("model in getShapesInCanvas not find");
+                        }
+                        controller.getView().getRoot().getChildren().remove(shape);
+                        return;
                     }
                 }
             }
-
         }
     };
 
