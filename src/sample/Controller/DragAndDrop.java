@@ -5,7 +5,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
+import sample.Model.Point;
 import sample.Model.ShapeInter;
+
+import java.util.ArrayList;
 
 
 public class DragAndDrop implements Events {
@@ -31,19 +34,31 @@ public class DragAndDrop implements Events {
             //calculate new position
             double newXPosition = shapeX + dragX;
             double newYPosition = shapeY + dragY;
-            shape.setTranslateX(newXPosition);
-            shape.setTranslateY(newYPosition);
+
+            ArrayList<Shape> shapes = controller.getView().getShapesInCanvas();
+            if(shapes.size() == controller.getShapesInCanvas().size()) {
+                double shapeX, shapeY;
+                for(int i = 0 ; i < shapes.size(); i++) {
+                    shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
+                    shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
+                    if(shapeX == x && shapeY == y) {
+                        controller.getShapesInCanvas().get(i).setPos(new Point(shapeX,shapeY));
+                    }
+                }
+            }
 
             for(ShapeInter model : controller.getShapesInCanvas()) {
-                System.out.println("x from get shape = " + x);
-                System.out.println("x from model shapeinter = " + model.getPos().getX());
-                System.out.println("y from get shape = " + y);
-                System.out.println("y from model shapeinter = " + model.getPos().getY());
+                System.out.println("X -> "+model.getPos().getX()+" == "+x);
+                System.out.println("Y -> "+model.getPos().getY()+" == "+y+"\n");
+
                 if(model.getPos().getX() == x && model.getPos().getY() == y) {
                     model.translate(dragX,dragY);
                     System.out.println("TEST");
                 }
             }
+
+            shape.setTranslateX(newXPosition);
+            shape.setTranslateY(newYPosition);
 
         }
     };
@@ -62,7 +77,7 @@ public class DragAndDrop implements Events {
             shapeX = shape.getTranslateX();
             shapeY = shape.getTranslateY();
             MousePos = new Point2D(mouseEvent.getSceneX(), mouseEvent.getSceneY());
-            System.out.println("TESTTTT = " + shapeX + " TESTTTT = " + shapeY);
+
         }
     };
 

@@ -41,19 +41,7 @@ public class Controller {
            ShapeDrawer drawer = shape.createShapeDrawer(this);
            drawer.drawShapeInToolBar();
         }
-        Button trash_btn = view.getTrash();
-        Double posX = view.getRoot().getWidth();
-        Double posY = view.getRoot().getHeight();
 
-
-        /*trash_btn.setLayoutX(posX-trash_btn.getWidth());
-        trash_btn.setLayoutY(posY-trash_btn.getHeight());*/
-
-        /*view.getToolBar().getItems().get(
-                view.getToolBar().getItems().indexOf(
-                        view.getTrash()
-                )
-        ).setLayoutY(view.getToolBar().getHeight()-25);*/
         view.getToolBar().getItems().add(view.getTrash());
 
     }

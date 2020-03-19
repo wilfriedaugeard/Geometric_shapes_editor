@@ -95,8 +95,6 @@ public class View implements Serializable {
 			System.out.println("File not found !");
 		}
 
-		ToolBar tool_trash = new ToolBar(trash);
-
 
 	}
 
@@ -130,16 +128,31 @@ public class View implements Serializable {
 		return boundsInScene.getMinY();
 	}
 
+	/**
+	 * @brief Get x pos of a node
+	 * @param node
+	 * @return x
+	 */
 	public double getNodeXPosition(Node node) {
 		Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
 		return boundsInScene.getMinX();
 	}
 
+	/**
+	 * @brief Get y pos of a node
+	 * @param node
+	 * @return
+	 */
 	public double getNodeYPosition(Node node) {
 		Bounds boundsInScene = node.localToScene(node.getBoundsInLocal());
 		return boundsInScene.getMinY();
 	}
 
+	/**
+	 * @brief Check if the point is on the Trash icon
+	 * @param point
+	 * @return a boolean
+	 */
 	public boolean isOnTrash(Point point){
 		return point.getX() >= getNodeXPosition(getTrash()) &&
 				point.getY() >= getNodeXPosition(getTrash()) &&
