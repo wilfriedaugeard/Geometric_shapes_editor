@@ -11,11 +11,13 @@ import static java.lang.Math.sin;
 public class Polygon extends ShapeNoJavaFX {
 	private int nbEdges;
     private double length;
-    
-	public Polygon(int nbEdges, double length, Point pos, RGB RGB) {
-		super(pos, RGB);
+	private Point rotationCenter;
+
+	public Polygon(int nbEdges, double length, Point pos, RGB rgb) {
+		super(pos, rgb);
 		this.nbEdges = nbEdges;
 		this.length = length;
+		rotationCenter = new Point();
 	}
 
 	public int getNbEdges() {
@@ -55,6 +57,29 @@ public class Polygon extends ShapeNoJavaFX {
 		}
 
 		return tmp;
+	}
+
+	@Override
+	public Point getRotationCenter() {
+		Double[] points = this.getPoints(getNbEdges(),getLength());
+		double sumX = 0.0; double sumY = 0.0;
+		for(int i = 0; i < getNbEdges()*2; i+=2){
+			sumX += points[i];
+		}
+		for(int j = 1; j < getNbEdges()*2; j+=2){
+			sumY += points[j];
+		}
+		double CenterX = sumX/getNbEdges();
+		double CenterY = sumY/getNbEdges();
+		rotationCenter.setX(CenterX);
+		rotationCenter.setY(CenterY);
+		return rotationCenter;
+	}
+
+	@Override
+	public void setRotationCenter(Point center) {
+		this.rotationCenter.setX(center.getX());
+		this.rotationCenter.setY(center.getY());
 	}
 
 	public ShapeDrawer createShapeDrawer(Controller controller) {

@@ -11,13 +11,13 @@ import sample.Model.ShapeInter;
 import java.util.ArrayList;
 
 
-public class DragAndDrop implements Events {
+public class DragAndDropEvent implements Events {
 
     private double shapeX, shapeY;
-    private Point2D MousePos;
+    private Point MousePos;
     protected Controller controller;
 
-    public DragAndDrop(Controller controller) {
+    public DragAndDropEvent(Controller controller) {
         this.controller = controller;
     }
 
@@ -73,7 +73,7 @@ public class DragAndDrop implements Events {
 
             shapeX = shape.getTranslateX();
             shapeY = shape.getTranslateY();
-            MousePos = new Point2D(mouseEvent.getSceneX(), mouseEvent.getSceneY());
+            MousePos = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
 
         }
     };

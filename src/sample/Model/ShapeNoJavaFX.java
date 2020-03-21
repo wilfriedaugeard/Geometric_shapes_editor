@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public abstract class ShapeNoJavaFX implements ShapeInter{
 	private int rotation;
-    private Point rotationCenter;
-    private Point translationCenter;
     private Point pos;
     private RGB RGB;
     
@@ -50,22 +48,6 @@ public abstract class ShapeNoJavaFX implements ShapeInter{
 		this.rotation = rotation;
 	}
 	
-	public Point getRotationCenter() {
-		return rotationCenter;
-	}
-	
-	public void setRotationCenter(Point rotationCenter) {
-		this.rotationCenter = rotationCenter;
-	}
-	
-	public Point getTranslationCenter() {
-		return translationCenter;
-	}
-	
-	public void setTranslationCenter(Point translationCenter) {
-		this.translationCenter = translationCenter;
-	}
-	
 	public RGB getRGB() {
 		return RGB;
 	}
@@ -74,7 +56,8 @@ public abstract class ShapeNoJavaFX implements ShapeInter{
 		this.RGB = RGB;
 	}
 
-
+	public abstract Point getRotationCenter();
+    public abstract void setRotationCenter(Point rotationCenter);
 	public abstract ShapeDrawer createShapeDrawer(Controller controller);
 
 	@Override

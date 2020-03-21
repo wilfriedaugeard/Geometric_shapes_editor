@@ -9,11 +9,13 @@ public class Rectangle extends ShapeNoJavaFX {
 	private double width;
     private double height;
     private int arrondi;
-    
-	public Rectangle(double width, double height, Point pos, RGB RGB) {
-		super(pos, RGB);
+	private Point rotationCenter;
+
+	public Rectangle(double width, double height, Point pos, RGB rgb) {
+		super(pos, rgb);
 		this.width = width;
 		this.height = height;
+		rotationCenter = new Point();
 	}
 
 	public double getWidth() {
@@ -41,6 +43,22 @@ public class Rectangle extends ShapeNoJavaFX {
 	}
 
 
+	@Override
+	public Point getRotationCenter() {
+		double CenterX = getPos().getX() + width/2;
+		double CenterY = getPos().getY() + height/2;
+		rotationCenter.setX(CenterX);
+		rotationCenter.setY(CenterY);
+		return rotationCenter;
+	}
+
+	@Override
+	public void setRotationCenter(Point center) {
+		this.rotationCenter.setX(center.getX());
+		this.rotationCenter.setY(center.getY());
+	}
+
+	@Override
 	public ShapeDrawer createShapeDrawer(Controller controller) {
 		RGB rgb = this.getRGB();
 		int red = rgb.getR();

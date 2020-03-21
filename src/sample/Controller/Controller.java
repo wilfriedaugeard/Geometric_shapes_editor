@@ -1,7 +1,6 @@
 package sample.Controller;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import sample.Model.*;
@@ -19,6 +18,7 @@ public class Controller {
     private ArrayList<ShapeInter> shapesInToolBar;
     private ArrayList<ShapeInter> shapesInCanvas;
     private ArrayList<Events> events;
+    private ArrayList<ShapeInter> shapeGroups;
 
     public Controller(View view) {
         this.view = view;
@@ -62,7 +62,7 @@ public class Controller {
 
     public void initEvents() {
 
-        events.add(new DragAndDrop(this));
+        events.add(new DragAndDropEvent(this));
         events.add(new CreateShapeEvent(this));
         events.add(new DeleteShape(this));
 
@@ -89,5 +89,9 @@ public class Controller {
 
     public ArrayList<ShapeInter> getShapesInCanvas() {
         return shapesInCanvas;
+    }
+
+    public ArrayList<ShapeInter> getShapeGroups() {
+        return shapeGroups;
     }
 }

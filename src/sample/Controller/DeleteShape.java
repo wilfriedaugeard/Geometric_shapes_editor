@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DeleteShape implements Events {
 
     private double shapeX, shapeY;
-    private Point2D MousePos;
+    private Point MousePos;
     protected Controller controller;
 
     public DeleteShape(Controller controller) {
