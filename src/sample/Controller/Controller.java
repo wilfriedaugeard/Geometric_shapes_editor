@@ -64,7 +64,6 @@ public class Controller {
 
         events.add(new DragAndDropEvent(this));
         events.add(new CreateShapeEvent(this));
-        events.add(new DeleteShape(this));
 
         for(Events event : events) {
             event.launchEvent();

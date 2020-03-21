@@ -71,11 +71,53 @@ public class DragAndDropEvent implements Events {
         }
     };
 
+
+    EventHandler<MouseEvent> overTrash = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+            Shape shape = (Shape) mouseEvent.getSource();
+
+            double x = controller.getView().getShapeXPositionInToolBar(shape);
+            double y = controller.getView().getShapeYPositionInToolBar(shape);
+
+            ArrayList<Shape> shapes = controller.getView().getShapesInCanvas();
+            if (shapes.size() == controller.getShapesInCanvas().size()) {
+                double shapeX, shapeY;
+                for (int i = 0; i < shapes.size(); i++) {
+                    shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
+                    shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
+                    if (shapeX == x && shapeY == y) {
+                        controller.getShapesInCanvas().get(i).setPos(new Point(shapeX, shapeY));
+                    }
+                }
+            }
+            System.out.println("Mouse: " + x + " " + y);
+            for (ShapeInter model : controller.getShapesInCanvas()) {
+                System.out.println("Model :" + model + " -> " + model.getPos().getX() + " " + model.getPos().getY());
+                if (model.getPos().getX() == x && model.getPos().getY() == y) {
+                    controller.getView().onTrashInfo(new Point(x, y));
+                    if (controller.getView().isOnTrash(new Point(x, y))) {
+                        System.out.println("ON TRASH");
+                        if (!controller.getView().getShapesInCanvas().remove(shape)) {
+                            System.out.println("Shape in view.getShapesCanvas not find");
+                        }
+                        if (!controller.getShapesInCanvas().remove(model)) {
+                            System.out.println("model in getShapesInCanvas not find");
+                        }
+                        controller.getView().getRoot().getChildren().remove(shape);
+                        return;
+                    }
+                }
+            }
+        }
+    };
+
     @Override
     public void launchEvent() {
         controller.getView().launch_finalShapeToCanvas(finalShapeToCanvas);
         controller.getView().launch_moveShapeOnPressingMouse(moveShapeOnPressingMouse);
         controller.getView().launch_getShapeOnMousePressed(getShapeOnMousePressed);
+        controller.getView().launch_overTrash(overTrash);
     }
 
 }
