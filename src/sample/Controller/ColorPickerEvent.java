@@ -65,7 +65,7 @@ public class ColorPickerEvent implements Events {
 
         }
     };
-    
+
 
     @Override
     public void launchEvent() {

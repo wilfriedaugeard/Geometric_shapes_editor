@@ -2,10 +2,14 @@ package sample.Controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import sample.Model.*;
 import sample.View.ShapeDrawer;
+
+import java.util.ArrayList;
 
 public class GroupShapeEvent implements Events{
     protected Controller controller;
@@ -16,13 +20,25 @@ public class GroupShapeEvent implements Events{
         this.controller = controller;
     }
 
+
+    public boolean isOnToolbar(double x, double y){
+        return x <= controller.getView().getToolBar().getWidth();
+    }
+
+
     EventHandler<MouseEvent> createSelectionRectangleOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
-            if(mouseEvent.getSource() == controller.getView().getRoot()) {
+            if(mouseEvent.getSource() == controller.getView().getRoot() && !isOnToolbar(mouseEvent.getX(), mouseEvent.getY())) {
                 mousePosStart = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
                 selectionRectangle = new Rectangle(mousePosStart.getX(), mousePosStart.getY(), 0, 0);
                 controller.getView().getRoot().getChildren().add(selectionRectangle);
-                selectionRectangle.setStrokeDashOffset(5);
+
+                /* CSS */
+                selectionRectangle.setFill(Color.rgb(133,213,243));
+                selectionRectangle.setStroke(Color.rgb(0,194,225));
+                selectionRectangle.setStrokeDashOffset(10);
+                selectionRectangle.getStrokeDashArray().addAll(3.0,7.0,3.0,7.0);
+                selectionRectangle.setOpacity(0.3);
             }
         }
     };
