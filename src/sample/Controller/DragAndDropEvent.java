@@ -47,13 +47,6 @@ public class DragAndDropEvent implements Events {
                 }
             }
 
-            for(ShapeInter model : controller.getShapesInCanvas()) {
-                if(model.getPos().getX() == x && model.getPos().getY() == y) {
-                    model.translate(dragX,dragY);
-
-                }
-            }
-
             shape.setTranslateX(newXPosition);
             shape.setTranslateY(newYPosition);
 

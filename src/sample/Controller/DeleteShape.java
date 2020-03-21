@@ -26,12 +26,12 @@ public class DeleteShape implements Events {
         @Override
         public void handle(MouseEvent mouseEvent) {
             Shape shape = (Shape) mouseEvent.getSource();
-          
-            System.out.println("resleased");
+
             double x = controller.getView().getShapeXPositionInToolBar(shape);
             double y = controller.getView().getShapeYPositionInToolBar(shape);
-
+            System.out.println("Mouse: "+x+" "+y);
             for(ShapeInter model : controller.getShapesInCanvas()) {
+                System.out.println("Model :"+model+" -> "+model.getPos().getX()+" "+model.getPos().getY());
                 if(model.getPos().getX() == x && model.getPos().getY() == y){
                     controller.getView().onTrashInfo(new Point(x,y));
                     if(controller.getView().isOnTrash(new Point(x,y))){
