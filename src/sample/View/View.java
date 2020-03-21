@@ -2,6 +2,8 @@ package sample.View;
 
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
@@ -11,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
@@ -282,19 +285,19 @@ public class View implements Serializable {
 	/*Rectangle selection events on canvas*/
 
 	public void launch_createSelectionRectangleOnClick(EventHandler<MouseEvent> event) {
-		canvas.setOnMouseClicked(event);
+		root.setOnMousePressed(event);
 	}
 
 	public void launch_rectangleSelectionReleased(EventHandler<MouseEvent> event) {
-		canvas.setOnMouseReleased(event);
+		root.setOnMouseReleased(event);
 	}
 
 	public void launch_selectionRectangleDraggedInCanvas(EventHandler<MouseEvent> event) {
-		canvas.setOnMouseDragged(event);
+		root.setOnMouseDragged(event);
 	}
 
 	public void launch_moveSelectionRectangleOnPressingMouse(EventHandler<MouseEvent> event) {
-		canvas.setOnMouseEntered(event);
+		root.setOnMouseEntered(event);
 	}
 
 }

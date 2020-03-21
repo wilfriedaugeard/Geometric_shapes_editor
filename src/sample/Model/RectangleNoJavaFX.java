@@ -8,7 +8,7 @@ import sample.View.ShapeDrawer;
 public class RectangleNoJavaFX extends ShapeNoJavaFX {
 	private double width;
     private double height;
-    private int arrondi;
+    private double arrondi;
 	private Point rotationCenter;
 
 	public RectangleNoJavaFX(double width, double height, Point pos, RGB rgb) {
@@ -16,6 +16,7 @@ public class RectangleNoJavaFX extends ShapeNoJavaFX {
 		this.width = width;
 		this.height = height;
 		rotationCenter = new Point();
+		this.arrondi = 0.0;
 	}
 
 	public double getWidth() {
@@ -34,7 +35,7 @@ public class RectangleNoJavaFX extends ShapeNoJavaFX {
 		this.height = height;
 	}
 
-	public int getArrondi() {
+	public double getArrondi() {
 		return arrondi;
 	}
 
@@ -66,7 +67,7 @@ public class RectangleNoJavaFX extends ShapeNoJavaFX {
 		int green = rgb.getG();
 
 		return new RectangleDrawerJavaFX(this.getPos().getX(), this.getPos().getY(), this.getWidth(), this.getHeight(),
-				Color.rgb(red, green, blue),  controller.getView());
+				Color.rgb(red, green, blue),  controller.getView(), this.getArrondi());
 	}
 
 }
