@@ -83,12 +83,12 @@ public class ShapeGroup implements ShapeInter {
 
     }
 
-    @Override
+    //@Override
     public Point getTranslationCenter() {
         return null;
     }
 
-    @Override
+    //@Override
     public void setTranslationCenter(Point p) {
 
     }
