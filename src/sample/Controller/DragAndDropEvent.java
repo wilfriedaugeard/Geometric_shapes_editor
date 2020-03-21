@@ -91,11 +91,8 @@ public class DragAndDropEvent implements Events {
                     }
                 }
             }
-            System.out.println("Mouse: " + x + " " + y);
             for (ShapeInter model : controller.getShapesInCanvas()) {
-                System.out.println("Model :" + model + " -> " + model.getPos().getX() + " " + model.getPos().getY());
                 if (model.getPos().getX() == x && model.getPos().getY() == y) {
-                    controller.getView().onTrashInfo(new Point(x, y));
                     if (controller.getView().isOnTrash(new Point(x, y))) {
                         System.out.println("ON TRASH");
                         if (!controller.getView().getShapesInCanvas().remove(shape)) {

@@ -65,6 +65,7 @@ public class Controller {
         events.add(new DragAndDropEvent(this));
         events.add(new CreateShapeEvent(this));
         events.add(new GroupShapeEvent(this));
+        events.add(new ColorPickerEvent(this));
 
         for(Events event : events) {
             event.launchEvent();

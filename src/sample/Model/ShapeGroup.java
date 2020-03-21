@@ -9,6 +9,10 @@ public class ShapeGroup implements ShapeInter {
 
     private ArrayList<ShapeInter> group;
 
+    public ShapeGroup (){
+        group = new ArrayList<ShapeInter>();
+    }
+
     @Override
     public ShapeGroup clone() {
         try {

@@ -7,6 +7,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
@@ -80,6 +81,7 @@ public class View implements Serializable {
 		edit = new MenuItem("Edit Color", colorPicker);
 		
 		scene = new Scene(root, WIDTH, HEIGHT);
+
 		
 
         save_as = new Button("Save");
@@ -294,6 +296,13 @@ public class View implements Serializable {
 
 	public void launch_selectionRectangleDraggedInCanvas(EventHandler<MouseEvent> event) {
 		root.setOnMouseDragged(event);
+	}
+
+	/*Color Picker*/
+	public void launch_colorPickerOnRightClick(EventHandler<MouseEvent> event){
+		for(Shape item : shapesInCanvas){
+			item.setOnMouseClicked(event);
+		}
 	}
 
 	public void launch_moveSelectionRectangleOnPressingMouse(EventHandler<MouseEvent> event) {
