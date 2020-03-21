@@ -3,6 +3,8 @@ package sample.Model;
 import sample.Controller.Controller;
 import sample.View.ShapeDrawer;
 
+import java.util.ArrayList;
+
 public abstract class ShapeNoJavaFX implements ShapeInter{
 	private int rotation;
     private Point rotationCenter;
@@ -74,5 +76,25 @@ public abstract class ShapeNoJavaFX implements ShapeInter{
 
 
 	public abstract ShapeDrawer createShapeDrawer(Controller controller);
+
+	@Override
+	public void add(ShapeInter shapeInter){
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void remove(ShapeInter shapeInter){
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ArrayList<ShapeInter> getChildren(){
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ShapeInter getChild(int n){
+		throw new UnsupportedOperationException();
+	}
 
 }
