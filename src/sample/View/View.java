@@ -279,4 +279,22 @@ public class View implements Serializable {
 		}
 	}
 
+	/*Rectangle selection events on canvas*/
+
+	public void launch_createSelectionRectangleOnClick(EventHandler<MouseEvent> event) {
+		canvas.setOnMouseClicked(event);
+	}
+
+	public void launch_rectangleSelectionReleased(EventHandler<MouseEvent> event) {
+		canvas.setOnMouseReleased(event);
+	}
+
+	public void launch_selectionRectangleDraggedInCanvas(EventHandler<MouseEvent> event) {
+		canvas.setOnMouseDragged(event);
+	}
+
+	public void launch_moveSelectionRectangleOnPressingMouse(EventHandler<MouseEvent> event) {
+		canvas.setOnMouseEntered(event);
+	}
+
 }

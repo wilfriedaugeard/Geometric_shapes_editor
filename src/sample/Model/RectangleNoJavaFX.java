@@ -5,13 +5,13 @@ import sample.Controller.Controller;
 import sample.View.RectangleDrawerJavaFX;
 import sample.View.ShapeDrawer;
 
-public class Rectangle extends ShapeNoJavaFX {
+public class RectangleNoJavaFX extends ShapeNoJavaFX {
 	private double width;
     private double height;
     private int arrondi;
 	private Point rotationCenter;
 
-	public Rectangle(double width, double height, Point pos, RGB rgb) {
+	public RectangleNoJavaFX(double width, double height, Point pos, RGB rgb) {
 		super(pos, rgb);
 		this.width = width;
 		this.height = height;

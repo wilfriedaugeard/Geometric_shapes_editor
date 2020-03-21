@@ -32,8 +32,8 @@ public class Controller {
         view.addCanvas();
         view.addShapeMenu();
 
-        shapesInToolBar.add(new Rectangle(50, 25, new Point(0,0), new RGB(255, 0, 0)));
-        shapesInToolBar.add(new Rectangle(50, 25, new Point(0,0), new RGB(0, 255, 0)));
+        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(255, 0, 0)));
+        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(0, 255, 0)));
         shapesInToolBar.add(new Polygon(5, 25, new Point(20,0), new RGB(0, 0, 255)));
         shapesInToolBar.add(new Polygon(7, 35, new Point(20,0), new RGB(255, 255, 0)));
 
@@ -64,6 +64,7 @@ public class Controller {
 
         events.add(new DragAndDropEvent(this));
         events.add(new CreateShapeEvent(this));
+        events.add(new GroupShapeEvent(this));
 
         for(Events event : events) {
             event.launchEvent();
