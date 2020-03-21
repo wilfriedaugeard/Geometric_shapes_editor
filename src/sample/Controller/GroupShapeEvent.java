@@ -18,7 +18,7 @@ public class GroupShapeEvent implements Events{
 
     EventHandler<MouseEvent> createSelectionRectangleOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
-            /*
+
             //if()mouseEvent.getSource() == NULL ou != Shape, pour être sûr qu'on ne fait pas un rectangle alors que y a un shape
             mousePosStart = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
             //ShapeInter selectionRectangle = new RectangleNoJavaFX(100, 100, mousePosStart, new RGB(0, 0, 0));
@@ -27,7 +27,7 @@ public class GroupShapeEvent implements Events{
             selectionRectangle = new Rectangle(mousePosStart.getX(),mousePosStart.getY(),0,0);
             controller.getView().getRoot().getChildren().add(selectionRectangle);
             selectionRectangle.setStrokeDashOffset(5);
-            */
+
              
         }
     };
@@ -35,13 +35,6 @@ public class GroupShapeEvent implements Events{
     EventHandler<MouseEvent> moveSelectionRectangleOnPressingMouse = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
            // selectionRectangle.toBack();
-            mousePosStart = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
-            //ShapeInter selectionRectangle = new RectangleNoJavaFX(100, 100, mousePosStart, new RGB(0, 0, 0));
-            //ShapeDrawer drawer = selectionRectangle.createShapeDrawer(controller);
-            //drawer.drawShape();
-            selectionRectangle = new Rectangle(mousePosStart.getX(),mousePosStart.getY(),0,0);
-            controller.getView().getRoot().getChildren().add(selectionRectangle);
-            selectionRectangle.setStrokeDashOffset(5);
         }
     };
 
@@ -64,6 +57,7 @@ public class GroupShapeEvent implements Events{
         public void handle(MouseEvent mouseEvent) {
             Point MousePosEnd = new Point(mouseEvent.getSceneX(),mouseEvent.getSceneY());
             ShapeGroup shapeGroup = new ShapeGroup();
+            controller.getView().getRoot().getChildren().remove(selectionRectangle);
             for(ShapeInter s : controller.getShapesInCanvas()){
                 Point rotationCenter = s.getRotationCenter();
                 if(rotationCenter.getX() >= mousePosStart.getX() && rotationCenter.getX() <= MousePosEnd.getX()
