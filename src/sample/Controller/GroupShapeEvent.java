@@ -54,8 +54,8 @@ public class GroupShapeEvent implements Events{
             double newWidth = mousePosStart.getX() + dragX;
             double newHeight = mousePosStart.getY() + dragY;
             if (newWidth >= 0 && newHeight >= 0) {
-                selectionRectangle.setWidth(newWidth);
-                selectionRectangle.setHeight(newHeight);
+                selectionRectangle.setWidth(dragX);
+                selectionRectangle.setHeight(dragY);
             }
         }
     };

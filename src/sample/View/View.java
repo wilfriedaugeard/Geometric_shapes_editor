@@ -80,6 +80,7 @@ public class View implements Serializable {
 		edit = new MenuItem("Edit Color", colorPicker);
 		
 		scene = new Scene(root, WIDTH, HEIGHT);
+		
 
         save_as = new Button("Save");
         load = new Button("Load");
@@ -116,8 +117,7 @@ public class View implements Serializable {
 		root.setLeft(toolBar);
 
 		/* Canvas */
-		root.setRight(canvas);
-		root.setBackground(Background.EMPTY);
+		//root.setBackground(Background.EMPTY);
 
 	}
 
