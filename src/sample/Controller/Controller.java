@@ -19,6 +19,7 @@ public class Controller {
     private ArrayList<ShapeInter> shapesInCanvas;
     private ArrayList<Events> events;
     private ArrayList<ShapeInter> shapeGroups;
+    private ShapeInter shapeGroupTmp;
 
     public Controller(View view) {
         this.view = view;
@@ -26,6 +27,7 @@ public class Controller {
         shapesInToolBar = new ArrayList<>();
         shapeGroups = new ArrayList<>();
         events = new ArrayList<>();
+        shapeGroupTmp = new ShapeGroup();
     }
 
     public void initializeView() {
@@ -67,11 +69,17 @@ public class Controller {
         events.add(new DragAndDropEvent(this));
         events.add(new CreateShapeEvent(this));
         events.add(new SelectionShapeEvent(this));
+        events.add(new GroupShapeEvent(this));
 
         for(Events event : events) {
             event.launchEvent();
         }
     }
+
+    public ShapeInter getShapeGroupTmp(){
+        return shapeGroupTmp;
+    }
+
 
     public ArrayList<Events> getEvents() {
         return events;

@@ -300,6 +300,7 @@ public class View implements Serializable {
 		root.setOnMouseDragged(event);
 	}
 
+	/* Menu Item */
 
 	public void launch_rightClick(EventHandler<ContextMenuEvent> event){
 		for(Shape item : shapesInCanvas){
@@ -311,6 +312,15 @@ public class View implements Serializable {
 	public void launch_colorPickerHandler(EventHandler<ActionEvent> event) {
 		colorPicker.setOnAction(event);
 	}
+
+	public void launch_groupShape(EventHandler<ActionEvent> event){
+		group.setOnAction(event);
+	}
+
+	public void launch_deGroupShape(EventHandler<ActionEvent> event){
+		deGroup.setOnAction(event);
+	}
+
 
 	/*Control clic*/
 

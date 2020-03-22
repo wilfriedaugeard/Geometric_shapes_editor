@@ -20,7 +20,7 @@ public class SelectionShapeEvent implements Events{
 
     public SelectionShapeEvent(Controller controller) {
         this.controller = controller;
-        shapeGroup = new ShapeGroup();
+        shapeGroup = controller.getShapeGroupTmp();
     }
 
 
@@ -80,7 +80,6 @@ public class SelectionShapeEvent implements Events{
                     }
                 }
             }
-            System.out.println(shapeGroup.getChildren());
             /*
             if (shapeGroup.getChildren().isEmpty()==false){
                 controller.getShapeGroups().add(shapeGroup);
@@ -122,6 +121,10 @@ public class SelectionShapeEvent implements Events{
             mouseEvent.consume();
         }
     };
+
+    public ShapeInter getShapeGroup() {
+        return shapeGroup;
+    }
 
     @Override
     public void launchEvent() {
