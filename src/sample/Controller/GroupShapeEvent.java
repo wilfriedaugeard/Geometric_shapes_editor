@@ -119,7 +119,7 @@ public class GroupShapeEvent implements Events{
 
     @Override
     public void launchEvent() {
-        controller.getView().launch_CTRLAndMouseOnClicShapeGroup(CTRLAndMouseOnClickShapeGroup);
+        controller.getView().launch_CTRLAndMouseOnClickShapeGroup(CTRLAndMouseOnClickShapeGroup);
         controller.getView().launch_createSelectionRectangleOnClick(createSelectionRectangleOnClick);
         controller.getView().launch_rectangleSelectionReleased(releasedMouseAndCreateGroupShape);
         controller.getView().launch_selectionRectangleDraggedInCanvas(selectionRectangleDraggedInCanvas);
