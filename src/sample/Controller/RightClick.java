@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import sample.Model.RGB;
+import sample.Model.ShapeInter;
 
 import java.util.ArrayList;
 
@@ -51,8 +52,6 @@ public class RightClick implements Events {
         }
     };
 
-
-
     EventHandler<ActionEvent> colorPicker = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -67,14 +66,26 @@ public class RightClick implements Events {
                     shapeX = controller.getView().getShapeXPositionInToolBar(value);
                     shapeY = controller.getView().getShapeYPositionInToolBar(value);
                     if (shapeX == x && shapeY == y) {
-                        int index = controller.getView().getShapesInCanvas().indexOf(value);
                         ColorPicker colorPicker = controller.getView().getColorPicker();
                         //shapeInCanvas.setFill(colorPicker.getValue());
 
                         double red = colorPicker.getValue().getRed();
                         double green = colorPicker.getValue().getGreen();
                         double blue = colorPicker.getValue().getBlue();
-                        Command colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), controller.getShapesInCanvas().get(index), controller);
+
+                        int index = controller.getView().getShapesInCanvas().indexOf(value);
+                        ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
+
+                        Command colorShapeCommand = null;
+                        for (ShapeInter shapeGroup : controller.getShapeGroups()){
+                            if(shapeGroup.getChildren().contains(shapeSelected)){
+                                colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeGroup, controller);
+                                break;
+                            }
+                            if(controller.getShapeGroups().indexOf(shapeGroup)==controller.getShapeGroups().size()-1){
+                                colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeSelected, controller);
+                            }
+                        }
                         controller.getCommands().addLast(colorShapeCommand);
                         colorShapeCommand.execute();
 
