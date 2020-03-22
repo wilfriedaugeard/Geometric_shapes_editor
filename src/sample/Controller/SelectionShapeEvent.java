@@ -12,13 +12,13 @@ import sample.View.ShapeDrawer;
 
 import java.util.ArrayList;
 
-public class GroupShapeEvent implements Events{
+public class SelectionShapeEvent implements Events{
     protected Controller controller;
     private Point mousePosStart;
     private Rectangle selectionRectangle;
     private ShapeInter shapeGroup;
 
-    public GroupShapeEvent(Controller controller) {
+    public SelectionShapeEvent(Controller controller) {
         this.controller = controller;
         shapeGroup = new ShapeGroup();
     }
@@ -80,6 +80,7 @@ public class GroupShapeEvent implements Events{
                     }
                 }
             }
+            System.out.println(shapeGroup.getChildren());
             /*
             if (shapeGroup.getChildren().isEmpty()==false){
                 controller.getShapeGroups().add(shapeGroup);
