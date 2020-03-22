@@ -76,14 +76,11 @@ public class GroupShapeEvent implements Events{
                             && rotationCenter.getY() >= mousePosStart.getY() && rotationCenter.getY() <= MousePosEnd.getY()) {
                         if(!shapeGroup.getChildren().contains(s)) {
                             shapeGroup.add(s);
+                            System.out.println(s.getClass().toString() + " is added to ShapeGroup");
                         }
                     }
                 }
             }
-            /*
-            if (shapeGroup.getChildren().isEmpty()==false){
-                controller.getShapeGroups().add(shapeGroup);
-            }*/
             mouseEvent.consume();
         }
     };

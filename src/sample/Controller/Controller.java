@@ -8,6 +8,7 @@ import sample.View.ShapeDrawer;
 import sample.View.View;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Controller {
 
@@ -20,12 +21,16 @@ public class Controller {
     private ArrayList<Events> events;
     private ArrayList<ShapeInter> shapeGroups;
 
+    /* Pattern Command */
+    private LinkedList<Command> commands;
+
     public Controller(View view) {
         this.view = view;
         shapesInCanvas = new ArrayList<>();
         shapesInToolBar = new ArrayList<>();
         shapeGroups = new ArrayList<>();
         events = new ArrayList<>();
+        commands = new LinkedList<>();
     }
 
     public void initializeView() {
@@ -33,10 +38,10 @@ public class Controller {
         view.addCanvas();
         view.addShapeMenu();
 
-        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(255, 0, 0)));
-        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(0, 255, 0)));
-        shapesInToolBar.add(new Polygon(5, 25, new Point(20,0), new RGB(0, 0, 255)));
-        shapesInToolBar.add(new Polygon(7, 35, new Point(20,0), new RGB(255, 255, 0)));
+        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(1, 0, 0)));
+        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(0, 1, 0)));
+        shapesInToolBar.add(new Polygon(5, 25, new Point(20,0), new RGB(0, 0, 1)));
+        shapesInToolBar.add(new Polygon(7, 35, new Point(20,0), new RGB(1, 1, 0)));
 
         for(ShapeInter shape : shapesInToolBar) {
            ShapeDrawer drawer = shape.createShapeDrawer(this);
@@ -51,10 +56,10 @@ public class Controller {
         for(ShapeInter shapeModel : shapesInCanvas) {
             for(Shape shapeView : view.getShapesInCanvas()) {
                 if(shapeModel.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shapeModel.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
-                    int red = shapeModel.getRGB().getR();
-                    int blue = shapeModel.getRGB().getB();
-                    int green = shapeModel.getRGB().getG();
-                    shapeView.setFill(Color.rgb(red, green, blue));
+                    double red = shapeModel.getRGB().getR();
+                    double blue = shapeModel.getRGB().getB();
+                    double green = shapeModel.getRGB().getG();
+                    shapeView.setFill(Color.color(red,green,blue));
                 }
             }
         }
@@ -95,5 +100,9 @@ public class Controller {
 
     public ArrayList<ShapeInter> getShapeGroups() {
         return shapeGroups;
+    }
+
+    public LinkedList<Command> getCommands() {
+        return commands;
     }
 }
