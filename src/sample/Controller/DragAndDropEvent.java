@@ -3,6 +3,7 @@ package sample.Controller;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Model.Point;
@@ -26,6 +27,10 @@ public class DragAndDropEvent implements Events {
     EventHandler<MouseEvent> finalShapeToCanvas = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
+            if(mouseEvent.getButton() != MouseButton.PRIMARY){
+                mouseEvent.consume();
+                return;
+            }
 
             Shape shape = (Shape) mouseEvent.getSource();
 
@@ -58,6 +63,10 @@ public class DragAndDropEvent implements Events {
 
     EventHandler<MouseEvent> moveShapeOnPressingMouse = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
+            if(mouseEvent.getButton() != MouseButton.PRIMARY){
+                mouseEvent.consume();
+                return;
+            }
             Shape shape = (Shape) mouseEvent.getSource();
             shape.toFront();
         }
@@ -65,22 +74,16 @@ public class DragAndDropEvent implements Events {
 
     EventHandler<MouseEvent> getShapeOnMousePressed = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
+            if(mouseEvent.getButton() != MouseButton.PRIMARY){
+                mouseEvent.consume();
+                return;
+            }
             Shape shape = (Shape) mouseEvent.getSource();
 
             shapeX = shape.getTranslateX();
             shapeY = shape.getTranslateY();
             MousePos = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
-           /* ArrayList<Shape> shapes = controller.getView().getShapesInCanvas();
-            if(shapes.size() == controller.getShapesInCanvas().size()) {
-                double X, Y;
-                for (int i = 0; i < shapes.size(); i++) {
-                    X = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
-                    Y = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
-                    if (shapeX == x && shapeY == y) {
 
-                    }
-                }
-            }*/
         }
     };
 
@@ -88,6 +91,7 @@ public class DragAndDropEvent implements Events {
     EventHandler<MouseEvent> overTrash = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
+
             Shape shape = (Shape) mouseEvent.getSource();
 
             double x = controller.getView().getShapeXPositionInToolBar(shape);
