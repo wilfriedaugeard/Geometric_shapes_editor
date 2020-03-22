@@ -20,6 +20,7 @@ public class Controller {
     private ArrayList<ShapeInter> shapesInCanvas;
     private ArrayList<Events> events;
     private ArrayList<ShapeInter> shapeGroups;
+    private ShapeInter shapeGroupTmp;
 
     /* Pattern Command */
     private LinkedList<Command> commands;
@@ -31,6 +32,7 @@ public class Controller {
         shapeGroups = new ArrayList<>();
         events = new ArrayList<>();
         commands = new LinkedList<>();
+        shapeGroupTmp = new ShapeGroup();
     }
 
     public void initializeView() {
@@ -71,12 +73,18 @@ public class Controller {
         events.add(new RightClick(this));
         events.add(new DragAndDropEvent(this));
         events.add(new CreateShapeEvent(this));
+        events.add(new SelectionShapeEvent(this));
         events.add(new GroupShapeEvent(this));
 
         for(Events event : events) {
             event.launchEvent();
         }
     }
+
+    public ShapeInter getShapeGroupTmp(){
+        return shapeGroupTmp;
+    }
+
 
     public ArrayList<Events> getEvents() {
         return events;

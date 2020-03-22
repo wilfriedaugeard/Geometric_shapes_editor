@@ -50,7 +50,10 @@ public class DragAndDropEvent implements Events {
                     shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
                     shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
                     if(shapeX == x && shapeY == y) {
-                        controller.getShapesInCanvas().get(i).setPos(new Point(mouseEvent.getSceneX(),mouseEvent.getSceneY()));
+                        //controller.getShapesInCanvas().get(i).setPos(new Point(mouseEvent.getSceneX(),mouseEvent.getSceneY()));
+                        Command translateCommand = new TranslateCommand(mouseEvent.getSceneX(), mouseEvent.getSceneY(), controller.getShapesInCanvas().get(i));
+                        controller.getCommands().addLast(translateCommand);
+                        translateCommand.execute();
                     }
                 }
             }

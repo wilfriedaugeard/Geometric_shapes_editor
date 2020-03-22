@@ -1,17 +1,17 @@
 package sample.Model;
 
 public class RGB {
-	  private int r;
-	   private int g;
-	   private int b;
+	  private double r;
+	  private double g;
+	  private double b;
 
-	   public RGB(int r, int g, int b) {
+	   public RGB(double r, double g, double b) {
 	        this.r = r;
 	        this.g = g;
 	        this.b = b;
 	    }
 
-	    public int getR() {
+	    public double getR() {
 	        return r;
 	    }
 
@@ -19,7 +19,7 @@ public class RGB {
 	        this.r = r;
 	    }
 
-	    public int getG() {
+	    public double getG() {
 	        return g;
 	    }
 
@@ -27,7 +27,7 @@ public class RGB {
 	        this.g = g;
 	    }
 
-	    public int getB() {
+	    public double getB() {
 	        return b;
 	    }
 

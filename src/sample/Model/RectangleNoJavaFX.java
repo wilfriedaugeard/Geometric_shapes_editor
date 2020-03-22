@@ -62,12 +62,12 @@ public class RectangleNoJavaFX extends ShapeNoJavaFX {
 	@Override
 	public ShapeDrawer createShapeDrawer(Controller controller) {
 		RGB rgb = this.getRGB();
-		int red = rgb.getR();
-		int blue = rgb.getB();
-		int green = rgb.getG();
+		double red = rgb.getR();
+		double blue = rgb.getB();
+		double green = rgb.getG();
 
 		return new RectangleDrawerJavaFX(this.getPos().getX(), this.getPos().getY(), this.getWidth(), this.getHeight(),
-				Color.rgb(red, green, blue),  controller.getView(), this.getArrondi());
+				Color.color(red, green, blue),  controller.getView(), this.getArrondi());
 	}
 
 }
