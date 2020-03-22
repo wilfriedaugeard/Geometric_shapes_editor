@@ -1,6 +1,7 @@
 package sample.Controller;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -89,6 +90,9 @@ public class GroupShapeEvent implements Events{
 
     EventHandler<MouseEvent> CTRLAndMouseOnClickShapeGroup = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
+            if(mouseEvent.getButton() != MouseButton.PRIMARY){
+                return;
+            }
             if(mouseEvent.isControlDown()) {
                 Shape shape = (Shape) mouseEvent.getSource();
                 double x = controller.getView().getShapeXPositionInToolBar(shape);
@@ -101,9 +105,9 @@ public class GroupShapeEvent implements Events{
                         shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
                         if (shapeX == x && shapeY == y) {
                             ShapeInter shapetoAdd = controller.getShapesInCanvas().get(i);
-                            if (shapeGroup.getChildren().contains(shapetoAdd) == false) {
+                            if (!shapeGroup.getChildren().contains(shapetoAdd)) {
                                 for(ShapeInter shapeGroup : controller.getShapeGroups()){
-                                    if(shapeGroup.getChildren().contains(shapetoAdd) == true){
+                                    if(shapeGroup.getChildren().contains(shapetoAdd)){
                                         return;
                                     }
                                 }
@@ -114,6 +118,7 @@ public class GroupShapeEvent implements Events{
                     }
                 }
             }
+            mouseEvent.consume();
         }
     };
 
