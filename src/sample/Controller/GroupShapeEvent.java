@@ -21,14 +21,26 @@ public class GroupShapeEvent implements Events{
     }
 
 
-    public boolean isOnToolbar(double x, double y){
+    public boolean isOnToolbar(double x){
         return x <= controller.getView().getToolBar().getWidth();
     }
 
 
     EventHandler<MouseEvent> createSelectionRectangleOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
-            if(mouseEvent.getSource() == controller.getView().getRoot() && !isOnToolbar(mouseEvent.getX(), mouseEvent.getY())) {
+            for(Shape item : controller.getView().getShapesInCanvas()){
+                System.out.println(mouseEvent.getSceneX()+" "+mouseEvent.getSceneY());
+                double x2 = controller.getView().getShapeXPositionInToolBar(item);
+                double y2 = controller.getView().getShapeYPositionInToolBar(item);
+                int i = controller.getView().getRoot().getChildren().indexOf(item);
+                System.out.println(controller.getView().getRoot().getChildren().get(i));
+                System.out.println(x2+" "+y2);
+                System.out.println(item.contains(mouseEvent.getX(),mouseEvent.getY())+"\n");
+                if(item.contains(mouseEvent.getX(),mouseEvent.getY())){
+                    return;
+                }
+            }
+            if(mouseEvent.getSource() == controller.getView().getRoot() && !isOnToolbar(mouseEvent.getX())) {
                 mousePosStart = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
                 selectionRectangle = new Rectangle(mousePosStart.getX(), mousePosStart.getY(), 0, 0);
                 controller.getView().getRoot().getChildren().add(selectionRectangle);

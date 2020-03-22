@@ -5,15 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import sample.Model.Point;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class ColorPickerEvent implements Events {
@@ -52,9 +51,9 @@ public class ColorPickerEvent implements Events {
                                 shapeTmp.setFill(colorPicker.getValue());
                             }
                         });
-
-                        VBox vBox = new VBox(colorPicker);
-                        Scene scene = new Scene(vBox, 100,100);
+                        Label l = new Label("Choose a color");
+                        VBox vBox = new VBox(l,colorPicker);
+                        Scene scene = new Scene(vBox, 150,50);
                         Stage stage = new Stage();
                         stage.setScene(scene);
                         stage.show();

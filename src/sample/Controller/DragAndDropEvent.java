@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Model.Point;
 import sample.Model.ShapeInter;
+import javafx.scene.shape.MoveTo;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class DragAndDropEvent implements Events {
 
     private double shapeX, shapeY;
     private Point MousePos;
+    private ShapeInter model;
     protected Controller controller;
 
     public DragAndDropEvent(Controller controller) {
@@ -24,6 +26,7 @@ public class DragAndDropEvent implements Events {
     EventHandler<MouseEvent> finalShapeToCanvas = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
+
             Shape shape = (Shape) mouseEvent.getSource();
 
             double x = controller.getView().getShapeXPositionInToolBar(shape);
@@ -42,13 +45,13 @@ public class DragAndDropEvent implements Events {
                     shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
                     shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
                     if(shapeX == x && shapeY == y) {
-                        controller.getShapesInCanvas().get(i).setPos(new Point(shapeX,shapeY));
+                        controller.getShapesInCanvas().get(i).setPos(new Point(mouseEvent.getSceneX(),mouseEvent.getSceneY()));
                     }
                 }
             }
-
             shape.setTranslateX(newXPosition);
             shape.setTranslateY(newYPosition);
+            mouseEvent.consume();
 
         }
     };
@@ -67,7 +70,17 @@ public class DragAndDropEvent implements Events {
             shapeX = shape.getTranslateX();
             shapeY = shape.getTranslateY();
             MousePos = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
+           /* ArrayList<Shape> shapes = controller.getView().getShapesInCanvas();
+            if(shapes.size() == controller.getShapesInCanvas().size()) {
+                double X, Y;
+                for (int i = 0; i < shapes.size(); i++) {
+                    X = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
+                    Y = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
+                    if (shapeX == x && shapeY == y) {
 
+                    }
+                }
+            }*/
         }
     };
 
