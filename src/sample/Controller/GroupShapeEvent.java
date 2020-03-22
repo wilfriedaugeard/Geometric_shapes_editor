@@ -55,25 +55,14 @@ public class GroupShapeEvent implements Events{
         }
     };
 
-    EventHandler<MouseEvent> moveSelectionRectangleOnPressingMouse = new EventHandler<MouseEvent>() {
-        public void handle(MouseEvent mouseEvent) {
-           // selectionRectangle.toBack();
-        }
-    };
-
     EventHandler<MouseEvent> selectionRectangleDraggedInCanvas = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
-            //selectionRectangle.toBack();
             if(selectionRectangle!=null) {
-                double dragX = mouseEvent.getSceneX() - mousePosStart.getX();
-                double dragY = mouseEvent.getSceneY() - mousePosStart.getY();
+                double newWidth = mouseEvent.getSceneX() - mousePosStart.getX();
+                double newHeight = mouseEvent.getSceneY() - mousePosStart.getY();
                 //calculate new position
-                double newWidth = mousePosStart.getX() + dragX;
-                double newHeight = mousePosStart.getY() + dragY;
-                if (newWidth >= 0 && newHeight >= 0) {
-                    selectionRectangle.setWidth(dragX);
-                    selectionRectangle.setHeight(dragY);
-                }
+                selectionRectangle.setWidth(newWidth);
+                selectionRectangle.setHeight(newHeight);
             }
         }
     };
@@ -88,7 +77,9 @@ public class GroupShapeEvent implements Events{
                     Point rotationCenter = s.getRotationCenter();
                     if (rotationCenter.getX() >= mousePosStart.getX() && rotationCenter.getX() <= MousePosEnd.getX()
                             && rotationCenter.getY() >= mousePosStart.getY() && rotationCenter.getY() <= MousePosEnd.getY()) {
-                        shapeGroup.add(s);
+                        if(shapeGroup.getChildren().contains(s)==false) {
+                            shapeGroup.add(s);
+                        }
                     }
                 }
             }
@@ -104,6 +95,5 @@ public class GroupShapeEvent implements Events{
         controller.getView().launch_createSelectionRectangleOnClick(createSelectionRectangleOnClick);
         controller.getView().launch_rectangleSelectionReleased(releasedMouseAndCreateGroupShape);
         controller.getView().launch_selectionRectangleDraggedInCanvas(selectionRectangleDraggedInCanvas);
-        controller.getView().launch_moveSelectionRectangleOnPressingMouse(moveSelectionRectangleOnPressingMouse);
     }
 }

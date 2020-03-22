@@ -305,8 +305,4 @@ public class View implements Serializable {
 		}
 	}
 
-	public void launch_moveSelectionRectangleOnPressingMouse(EventHandler<MouseEvent> event) {
-		root.setOnMouseEntered(event);
-	}
-
 }
