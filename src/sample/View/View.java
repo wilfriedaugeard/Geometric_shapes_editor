@@ -41,7 +41,7 @@ public class View implements Serializable {
 	private ContextMenu shapeMenu;
 	private MenuItem group;
 	private MenuItem deGroup;
-	private MenuItem edit;
+	private MenuItem color;
 	private ColorPicker colorPicker;
 
 	private Button save_as;
@@ -78,7 +78,7 @@ public class View implements Serializable {
 		group = new MenuItem("Group");
 		deGroup = new MenuItem("De-group");
 		colorPicker = new ColorPicker();
-		edit = new MenuItem("Edit Color", colorPicker);
+		color = new MenuItem("Edit Color", colorPicker);
 		
 		scene = new Scene(root, WIDTH, HEIGHT);
 
@@ -175,7 +175,7 @@ public class View implements Serializable {
 	}
 
 	public void addShapeMenu() {
-		shapeMenu.getItems().addAll(group, deGroup, edit);
+		shapeMenu.getItems().addAll(group, deGroup, color);
 	}
 
 	public Scene getScene() {
@@ -214,8 +214,8 @@ public class View implements Serializable {
 		return deGroup;
 	}
 
-	public MenuItem getEdit() {
-		return edit;
+	public MenuItem getColor() {
+		return color;
 	}
 
 	public ColorPicker getColorPicker() {
@@ -299,12 +299,12 @@ public class View implements Serializable {
 	}
 
 	/*Color Picker*/
-	/*
-	public void launch_colorPickerOnRightClick(EventHandler<MouseEvent> event){
+
+	public void launch_rightClick(EventHandler<MouseEvent> event){
 		for(Shape item : shapesInCanvas){
 			item.setOnMouseClicked(event);
 		}
-	}*/
+	}
 
 	/*Control clic*/
 

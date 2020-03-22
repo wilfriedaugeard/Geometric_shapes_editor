@@ -3,6 +3,7 @@ package sample.Controller;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Model.Point;
@@ -17,6 +18,10 @@ public class CreateShapeEvent implements Events {
     }
     EventHandler<MouseEvent> createShapeInToolBarOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
+            if(mouseEvent.getButton() != MouseButton.PRIMARY){
+                mouseEvent.consume();
+                return;
+            }
             Shape shape = (Shape) mouseEvent.getSource();
             double x = controller.getView().getShapeXPositionInToolBar(shape);
             double y = controller.getView().getShapeYPositionInToolBar(shape);

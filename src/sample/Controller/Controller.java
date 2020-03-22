@@ -63,10 +63,10 @@ public class Controller {
 
     public void initEvents() {
 
+        events.add(new RightClick(this));
         events.add(new DragAndDropEvent(this));
         events.add(new CreateShapeEvent(this));
         events.add(new GroupShapeEvent(this));
-        events.add(new ColorPickerEvent(this));
 
         for(Events event : events) {
             event.launchEvent();

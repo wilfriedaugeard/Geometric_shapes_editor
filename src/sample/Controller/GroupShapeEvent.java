@@ -30,13 +30,9 @@ public class GroupShapeEvent implements Events{
     EventHandler<MouseEvent> createSelectionRectangleOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             for(Shape item : controller.getView().getShapesInCanvas()){
-                System.out.println(mouseEvent.getSceneX()+" "+mouseEvent.getSceneY());
                 double x2 = controller.getView().getShapeXPositionInToolBar(item);
                 double y2 = controller.getView().getShapeYPositionInToolBar(item);
                 int i = controller.getView().getRoot().getChildren().indexOf(item);
-                System.out.println(controller.getView().getRoot().getChildren().get(i));
-                System.out.println(x2+" "+y2);
-                System.out.println(item.contains(mouseEvent.getX(),mouseEvent.getY())+"\n");
                 if(item.contains(mouseEvent.getX(),mouseEvent.getY())){
                     return;
                 }
@@ -77,7 +73,7 @@ public class GroupShapeEvent implements Events{
                     Point rotationCenter = s.getRotationCenter();
                     if (rotationCenter.getX() >= mousePosStart.getX() && rotationCenter.getX() <= MousePosEnd.getX()
                             && rotationCenter.getY() >= mousePosStart.getY() && rotationCenter.getY() <= MousePosEnd.getY()) {
-                        if(shapeGroup.getChildren().contains(s)==false) {
+                        if(!shapeGroup.getChildren().contains(s)) {
                             shapeGroup.add(s);
                         }
                     }
@@ -87,6 +83,7 @@ public class GroupShapeEvent implements Events{
             if (shapeGroup.getChildren().isEmpty()==false){
                 controller.getShapeGroups().add(shapeGroup);
             }*/
+            mouseEvent.consume();
         }
     };
 
