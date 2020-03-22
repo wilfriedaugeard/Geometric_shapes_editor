@@ -68,6 +68,6 @@ public class ColorPickerEvent implements Events {
 
     @Override
     public void launchEvent() {
-        controller.getView().launch_colorPickerOnRightClick(getShapeOnMousePressed);
+        //controller.getView().launch_colorPickerOnRightClick(getShapeOnMousePressed);
     }
 }

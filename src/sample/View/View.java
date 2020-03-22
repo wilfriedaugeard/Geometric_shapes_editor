@@ -299,7 +299,16 @@ public class View implements Serializable {
 	}
 
 	/*Color Picker*/
+	/*
 	public void launch_colorPickerOnRightClick(EventHandler<MouseEvent> event){
+		for(Shape item : shapesInCanvas){
+			item.setOnMouseClicked(event);
+		}
+	}*/
+
+	/*Control clic*/
+
+	public void launch_CTRLAndMouseOnClickShapeGroup(EventHandler<MouseEvent> event){
 		for(Shape item : shapesInCanvas){
 			item.setOnMouseClicked(event);
 		}

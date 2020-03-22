@@ -24,6 +24,7 @@ public class Controller {
         this.view = view;
         shapesInCanvas = new ArrayList<>();
         shapesInToolBar = new ArrayList<>();
+        shapeGroups = new ArrayList<>();
         events = new ArrayList<>();
     }
 

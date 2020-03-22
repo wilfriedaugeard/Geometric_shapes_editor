@@ -81,6 +81,7 @@ public class DragAndDropEvent implements Events {
                     }
                 }
             }*/
+           mouseEvent.consume();
         }
     };
 
