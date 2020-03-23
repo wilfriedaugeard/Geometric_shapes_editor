@@ -7,6 +7,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Model.Point;
+import sample.Model.RGB;
 import sample.Model.ShapeInter;
 import javafx.scene.shape.MoveTo;
 
@@ -50,8 +51,20 @@ public class DragAndDropEvent implements Events {
                     shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
                     shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
                     if(shapeX == x && shapeY == y) {
-                        //controller.getShapesInCanvas().get(i).setPos(new Point(mouseEvent.getSceneX(),mouseEvent.getSceneY()));
-                        Command translateCommand = new TranslateCommand(mouseEvent.getSceneX(), mouseEvent.getSceneY(), controller.getShapesInCanvas().get(i));
+
+//                        boolean isShapeInGroup = false;
+                        ShapeInter shapeMoved = controller.getShapesInCanvas().get(i);
+                        Command translateCommand = null;
+//
+//                        for (ShapeInter shapeGroup : controller.getShapeGroups()){
+//                            if(shapeGroup.getChildren().contains(shapeMoved)){
+//                                isShapeInGroup = true;
+//                                translateCommand = new TranslateCommand(newXPosition, newYPosition, shapeGroup, controller);
+//                            }
+                        //}
+                        //if(isShapeInGroup == false) {
+                            translateCommand = new TranslateCommand(newXPosition, newYPosition, shapeMoved, controller);
+                        //}
                         controller.getCommands().addLast(translateCommand);
                         translateCommand.execute();
                     }

@@ -38,7 +38,6 @@ public class GroupShapeEvent implements Events{
                     }
                 }
             }
-
         }
     };
 

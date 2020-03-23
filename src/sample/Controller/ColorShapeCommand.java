@@ -17,7 +17,7 @@ public class ColorShapeCommand implements Command{
         @Override
         public void execute() {
             shape.setRGB(color);
-            controller.updateView();
+            controller.updateViewColor();
         }
 
 }
