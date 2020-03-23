@@ -76,11 +76,7 @@ public class SelectionShapeEvent implements Events{
                     if (rotationCenter.getX() >= mousePosStart.getX() && rotationCenter.getX() <= MousePosEnd.getX()
                             && rotationCenter.getY() >= mousePosStart.getY() && rotationCenter.getY() <= MousePosEnd.getY()) {
                         if (!shapeGroup.getChildren().contains(s)) {
-                            for(ShapeInter shapeGroup : controller.getShapeGroups()){
-                                if(shapeGroup.getChildren().contains(s)){
-                                    return;
-                                }
-                            }
+
                             System.out.println("add + " + s.getClass().toString());
                             shapeGroup.add(s);
                         }

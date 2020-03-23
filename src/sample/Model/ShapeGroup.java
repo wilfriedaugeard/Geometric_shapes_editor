@@ -16,7 +16,13 @@ public class ShapeGroup implements ShapeInter {
     @Override
     public ShapeGroup clone() {
         try {
-            return (ShapeGroup) super.clone();
+            ArrayList<ShapeInter> groupCloned = new ArrayList<>(group.size());
+            for(ShapeInter shape : group){
+                groupCloned.add(shape);
+            }
+            ShapeGroup clone = (ShapeGroup) super.clone();
+            clone.group = groupCloned;
+            return clone;
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -98,4 +104,7 @@ public class ShapeGroup implements ShapeInter {
             shape.setRGB(rgb);
         }
     }
+
+
+
 }

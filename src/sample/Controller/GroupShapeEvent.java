@@ -15,9 +15,16 @@ public class GroupShapeEvent implements Events{
         @Override
         public void handle(ActionEvent event) {
             ShapeInter shapeGroupTmp = controller.getShapeGroupTmp().clone();
+            System.out.println("TMP: "+shapeGroupTmp);
             System.out.println("TMP: "+shapeGroupTmp.getChildren());
+            System.out.println("TMP: "+shapeGroupTmp.getChildren().size());
             controller.getShapeGroups().add(shapeGroupTmp);
+            System.out.println("TMP: "+controller.getShapeGroupTmp());
+            System.out.println("TMP: "+controller.getShapeGroupTmp().getChildren());
+            System.out.println("TMP: "+controller.getShapeGroupTmp().getChildren().size());
             controller.getShapeGroupTmp().getChildren().clear();
+            System.out.println("TMP: "+controller.getShapeGroupTmp().getChildren().size());
+            System.out.println("TMP: "+shapeGroupTmp.getChildren().size());
         }
     };
 
