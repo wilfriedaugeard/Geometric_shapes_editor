@@ -14,11 +14,10 @@ public class GroupShapeEvent implements Events{
    EventHandler<ActionEvent> groupShape = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            ShapeInter shapeGroupTmp = controller.getShapeGroupTmp();
+            ShapeInter shapeGroupTmp = controller.getShapeGroupTmp().clone();
             System.out.println("TMP: "+shapeGroupTmp.getChildren());
             controller.getShapeGroups().add(shapeGroupTmp);
-            controller.getShapeGroupTmp().remove(shapeGroupTmp);
-            shapeGroupTmp.getChildren().clear();
+            controller.getShapeGroupTmp().getChildren().clear();
         }
     };
 
@@ -28,7 +27,6 @@ public class GroupShapeEvent implements Events{
             ShapeInter shapeGroupTmp = controller.getShapeGroupTmp();
             System.out.println("TMP: "+shapeGroupTmp.getChildren());
             System.out.println("GROUP: "+controller.getShapeGroups().toString());
-            controller.getShapeGroups().remove(shapeGroupTmp);
             System.out.println("DeGROUP: "+controller.getShapeGroups().toString());
         }
     };

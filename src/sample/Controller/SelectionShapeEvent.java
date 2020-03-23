@@ -70,20 +70,23 @@ public class SelectionShapeEvent implements Events{
             if(selectionRectangle!=null) {
                 Point MousePosEnd = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
                 controller.getView().getRoot().getChildren().remove(selectionRectangle);
+                selectionRectangle = null;
                 for (ShapeInter s : controller.getShapesInCanvas()) {
                     Point rotationCenter = s.getRotationCenter();
                     if (rotationCenter.getX() >= mousePosStart.getX() && rotationCenter.getX() <= MousePosEnd.getX()
                             && rotationCenter.getY() >= mousePosStart.getY() && rotationCenter.getY() <= MousePosEnd.getY()) {
-                        if(!shapeGroup.getChildren().contains(s)) {
+                        if (!shapeGroup.getChildren().contains(s)) {
+                            for(ShapeInter shapeGroup : controller.getShapeGroups()){
+                                if(shapeGroup.getChildren().contains(s)){
+                                    return;
+                                }
+                            }
+                            System.out.println("add + " + s.getClass().toString());
                             shapeGroup.add(s);
                         }
                     }
                 }
             }
-            /*
-            if (shapeGroup.getChildren().isEmpty()==false){
-                controller.getShapeGroups().add(shapeGroup);
-            }*/
             mouseEvent.consume();
         }
     };

@@ -77,18 +77,21 @@ public class RightClick implements Events {
                         ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
 
                         Command colorShapeCommand = null;
+                        System.out.println(controller.getShapeGroups().size() + "ize");
                         for (ShapeInter shapeGroup : controller.getShapeGroups()){
+                            System.out.println("SHAPEGROUP : " + shapeGroup.getChildren().size());
+                            System.out.println("SHAPEGROUP : " + shapeGroup);
                             if(shapeGroup.getChildren().contains(shapeSelected)){
+                                //System.out.println("teeesttt");
                                 colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeGroup, controller);
-                                break;
-                            }
-                            if(controller.getShapeGroups().indexOf(shapeGroup)==controller.getShapeGroups().size()-1){
-                                colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeSelected, controller);
+                                controller.getCommands().addLast(colorShapeCommand);
+                                colorShapeCommand.execute();
+                                return;
                             }
                         }
+                        colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeSelected, controller);
                         controller.getCommands().addLast(colorShapeCommand);
                         colorShapeCommand.execute();
-
                     }
                 }
             }

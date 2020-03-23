@@ -113,4 +113,8 @@ public class Controller {
     public LinkedList<Command> getCommands() {
         return commands;
     }
+
+    public void setShapeGroupTmp(ShapeInter shapeGroupTmp) {
+        this.shapeGroupTmp = shapeGroupTmp;
+    }
 }
