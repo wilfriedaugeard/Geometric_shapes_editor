@@ -153,18 +153,28 @@ public class View implements Serializable {
 		return boundsInScene.getMinY();
 	}
 
+
 	/**
-	 * @brief Check if the point is on the Trash icon
-	 * @param point
+	 * @brief Check if the point is on the Node
+	 * @param node, point
 	 * @return a boolean
 	 */
+	public boolean isOnNode(Control node, Point point){
+
+		return point.getX() >= getNodeXPosition(node) &&
+				point.getY() >= getNodeYPosition(node) &&
+				point.getX() <= getNodeXPosition(node)+node.getWidth() &&
+				point.getY() <= getNodeYPosition(node)+node.getHeight();
+	}
+
+	/*
 	public boolean isOnTrash(Point point){
 
 		return point.getX() >= getNodeXPosition(getTrash()) &&
 				point.getY() >= getNodeYPosition(getTrash()) &&
 				point.getX() <= getNodeXPosition(getTrash())+getTrash().getWidth() &&
 				point.getY() <= getNodeYPosition(getTrash())+getTrash().getHeight();
-	}
+	}*/
 
 	public void onTrashInfo(Point point){
 		double x2 = getNodeXPosition(getTrash())+getTrash().getWidth();

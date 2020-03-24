@@ -127,7 +127,7 @@ public class DragAndDropEvent implements Events {
             }
             for (ShapeInter model : controller.getShapesInCanvas()) {
                 if (model.getPos().getX() == x && model.getPos().getY() == y) {
-                    if (controller.getView().isOnTrash(new Point(x, y))) {
+                    if (controller.getView().isOnNode(controller.getView().getTrash(), new Point(x, y))) {
                         System.out.println("ON TRASH");
                         if (!controller.getView().getShapesInCanvas().remove(shape)) {
                             System.out.println("Shape in view.getShapesCanvas not find");
