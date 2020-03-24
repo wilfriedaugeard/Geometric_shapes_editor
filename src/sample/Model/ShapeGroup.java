@@ -5,7 +5,7 @@ import sample.View.ShapeDrawer;
 
 import java.util.ArrayList;
 
-public class ShapeGroup implements ShapeInter {
+public class ShapeGroup extends ShapeNoJavaFXObservableAbstract {
 
     private ArrayList<ShapeInter> group;
 
