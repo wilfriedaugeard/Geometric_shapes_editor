@@ -5,7 +5,7 @@ import sample.View.ShapeDrawer;
 
 import java.util.ArrayList;
 
-public abstract class ShapeNoJavaFX implements ShapeInter{
+public abstract class ShapeNoJavaFX extends ShapeNoJavaFXObservableAbstract{
 	private int rotation;
     private Point pos;
     private RGB RGB;

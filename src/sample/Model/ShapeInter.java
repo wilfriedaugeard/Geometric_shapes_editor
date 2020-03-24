@@ -15,6 +15,11 @@ public interface ShapeInter extends Cloneable {
     ArrayList<ShapeInter> getChildren();
     ShapeInter getChild(int n);
 
+    /* Pattern Observer */
+    void addObserver(ShapeObserver obs);
+    void removeObserver(ShapeObserver obs);
+    void notifyObservers();
+
     /* Simple shape methods */
     public ShapeDrawer createShapeDrawer(Controller controller);
 
@@ -30,5 +35,4 @@ public interface ShapeInter extends Cloneable {
 
     public RGB getRGB();
     public void setRGB(RGB rgb);
-
 }
