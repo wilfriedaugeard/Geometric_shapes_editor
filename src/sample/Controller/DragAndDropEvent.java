@@ -10,6 +10,7 @@ import sample.Model.Point;
 import sample.Model.RGB;
 import sample.Model.ShapeInter;
 import javafx.scene.shape.MoveTo;
+import sample.View.ShapeDrawer;
 
 import java.util.ArrayList;
 
@@ -125,10 +126,11 @@ public class DragAndDropEvent implements Events {
                     }
                 }
             }
+            ArrayList<ShapeInter> shapeOnToolbar = new ArrayList<>();
             for (ShapeInter model : controller.getShapesInCanvas()) {
                 if (model.getPos().getX() == x && model.getPos().getY() == y) {
+                    // Test if the released shape is on the trash
                     if (controller.getView().isOnNode(controller.getView().getTrash(), new Point(x, y))) {
-                        System.out.println("ON TRASH");
                         if (!controller.getView().getShapesInCanvas().remove(shape)) {
                             System.out.println("Shape in view.getShapesCanvas not find");
                         }
@@ -137,11 +139,48 @@ public class DragAndDropEvent implements Events {
                         }
                         controller.getView().getRoot().getChildren().remove(shape);
                         return;
+                    }else{
+                        // Test if the released shape is on Toolbar and if has been modify
+                        if (controller.getView().isOnNode(controller.getView().getToolBar(),new Point(x,y)) && !sameShapeInToolBar(model)){
+                            // View
+                            int pos = controller.getView().getToolBar().getItems().size();
+                            controller.getView().getToolBar().getItems().add(pos-1, shape);
+                            controller.getView().getShapesInCanvas().remove(shape);
+                            // Add shape on the list
+                            shapeOnToolbar.add(model);
+                        }
                     }
                 }
             }
+            // Controller modification
+            if(shapeOnToolbar.size() != 0){
+                // Draw shape
+                for(ShapeInter modelToDraw : shapeOnToolbar) {
+                    controller.getShapesInToolBar().add(model);
+                    ShapeDrawer drawer = modelToDraw.createShapeDrawer(controller);
+                    drawer.drawShapeInToolBar();
+                }
+                // Remove shape in Canvas Controller
+                for(ShapeInter modelToRemove : shapeOnToolbar){
+                    controller.getShapesInCanvas().remove(modelToRemove);
+                }
+
+            }
         }
     };
+
+
+    /**
+     * Check if the shapeInCanvas has a same shape in toolbar
+     */
+    public boolean sameShapeInToolBar(ShapeInter shapeInCanvas) {
+        for (ShapeInter shapeInToolBar : controller.getShapesInToolBar()) {
+            if (shapeInCanvas.getRGB() == shapeInToolBar.getRGB()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void launchEvent() {
