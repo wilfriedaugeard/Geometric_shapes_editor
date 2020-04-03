@@ -16,8 +16,10 @@ public class GroupShapeEvent implements Events{
         public void handle(ActionEvent event) {
             ShapeInter shapeGroupTmp = controller.getShapeGroupTmp().clone();
             System.out.println("TMP: "+shapeGroupTmp.getChildren());
-            controller.getShapeGroups().add(shapeGroupTmp);
-            controller.getShapeGroupTmp().getChildren().clear();
+            Command addGroupShapeCommand = new AddGroupShapeCommand(shapeGroupTmp,controller);
+            controller.getCommands().addLast(addGroupShapeCommand);
+            controller.setCurrentPosInCommands(controller.getCommands().size()-1);
+            addGroupShapeCommand.execute();
         }
     };
 
@@ -29,15 +31,10 @@ public class GroupShapeEvent implements Events{
             System.out.println("GROUP: "+controller.getShapeGroups().toString());
             System.out.println("DeGROUP: "+controller.getShapeGroups().toString());
 
-            for(ShapeInter shapeGroup : controller.getShapeGroups()){
-                for(ShapeInter shape : shapeGroup.getChildren()){
-                    for(ShapeInter shapetoDegroup : shapeGroupTmp.getChildren()){
-                        if(shape.equals(shapetoDegroup)){
-                            shapeGroup.remove(shape);
-                        }
-                    }
-                }
-            }
+            DeGroupShapeCommand deGroupShapeCommand = new DeGroupShapeCommand(controller, shapeGroupTmp);
+            controller.getCommands().addLast(deGroupShapeCommand);
+            controller.setCurrentPosInCommands(controller.getCommands().size()-1);
+            deGroupShapeCommand.execute();
         }
     };
 

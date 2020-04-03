@@ -3,6 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/View/View.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/AddGroupShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/AddGroupShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/AddShapeInGroupCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/AddShapeInGroupCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/ColorShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/ColorShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/DeGroupShapeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/DeGroupShapeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/DragAndDropEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/DragAndDropEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/GroupShapeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/GroupShapeEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/RightClick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/RightClick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/TranslateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/TranslateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +72,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -209,10 +222,10 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1584998297400">
+    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1585855915772">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584998297400" />
+    <state x="764" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1585855915772" />
     <state x="755" y="405" width="410" height="239" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1583088289892">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -229,22 +242,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585058826868" />
-    <state width="1875" height="278" key="GridCell.Tab.0.bottom" timestamp="1585004954825">
+    <state width="1875" height="177" key="GridCell.Tab.0.bottom" timestamp="1585929317930">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585004954825" />
-    <state width="1875" height="278" key="GridCell.Tab.0.center" timestamp="1585004954825">
+    <state width="1875" height="177" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585929317930" />
+    <state width="1875" height="177" key="GridCell.Tab.0.center" timestamp="1585929317929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585004954825" />
-    <state width="1875" height="278" key="GridCell.Tab.0.left" timestamp="1585004954824">
+    <state width="1875" height="177" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585929317929" />
+    <state width="1875" height="177" key="GridCell.Tab.0.left" timestamp="1585929317929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585004954824" />
-    <state width="1875" height="278" key="GridCell.Tab.0.right" timestamp="1585004954825">
+    <state width="1875" height="177" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585929317929" />
+    <state width="1875" height="177" key="GridCell.Tab.0.right" timestamp="1585929317929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585004954825" />
+    <state width="1875" height="177" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585929317929" />
     <state width="1875" height="347" key="GridCell.Tab.1.bottom" timestamp="1584457286498">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -273,10 +286,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="460" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583077018510" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1584968022610">
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1585914828823">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584968022610" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585914828823" />
     <state x="689" y="275" key="extract.method.dialog" timestamp="1583064970372">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

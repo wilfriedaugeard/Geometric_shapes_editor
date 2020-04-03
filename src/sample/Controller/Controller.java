@@ -23,6 +23,7 @@ public class Controller {
     private ShapeInter shapeGroupTmp;
 
     /* Pattern Command */
+    private int currentPosInCommands;
     private LinkedList<Command> commands;
 
     public Controller(View view) {
@@ -33,6 +34,7 @@ public class Controller {
         events = new ArrayList<>();
         commands = new LinkedList<>();
         shapeGroupTmp = new ShapeGroup();
+        currentPosInCommands = 0;
     }
 
     public void initializeView() {
@@ -89,6 +91,8 @@ public class Controller {
         events.add(new CreateShapeEvent(this));
         events.add(new SelectionShapeEvent(this));
         events.add(new GroupShapeEvent(this));
+        events.add(new RedoEvent(this));
+        events.add(new UndoEvent(this));
 
         for(Events event : events) {
             event.launchEvent();
@@ -126,6 +130,14 @@ public class Controller {
 
     public LinkedList<Command> getCommands() {
         return commands;
+    }
+
+    public int getCurrentPosInCommands() {
+        return currentPosInCommands;
+    }
+
+    public void setCurrentPosInCommands(int currentPosInCommands) {
+        this.currentPosInCommands = currentPosInCommands;
     }
 
     public void setShapeGroupTmp(ShapeInter shapeGroupTmp) {

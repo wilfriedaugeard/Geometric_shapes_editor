@@ -67,6 +67,7 @@ public class DragAndDropEvent implements Events {
                             translateCommand = new TranslateCommand(newXPosition, newYPosition, shapeMoved, controller);
                         //}
                         controller.getCommands().addLast(translateCommand);
+                        controller.setCurrentPosInCommands(controller.getCommands().size()-1);
                         translateCommand.execute();
                     }
                 }

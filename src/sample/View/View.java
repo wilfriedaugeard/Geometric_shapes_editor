@@ -340,4 +340,14 @@ public class View implements Serializable {
 		}
 	}
 
+	/*Undo-redo events*/
+
+	public void launch_undoEvent(EventHandler<ActionEvent> event){
+		undo.setOnAction(event);
+	}
+
+	public void launch_redoEvent(EventHandler<ActionEvent> event){
+		redo.setOnAction(event);
+	}
+
 }

@@ -14,5 +14,16 @@ public class AddGroupShapeCommand implements Command{
     @Override
     public void execute() {
         controller.getShapeGroups().add(shapeGroup);
+        controller.getShapeGroupTmp().getChildren().clear();
+    }
+
+    @Override
+    public void undo() {
+        controller.getShapeGroups().remove(shapeGroup);
+    }
+
+    @Override
+    public void redo() {
+        execute();
     }
 }

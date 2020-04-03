@@ -5,6 +5,7 @@ import sample.Model.ShapeInter;
 
 public class ColorShapeCommand implements Command{
         private RGB color;
+        private RGB oldColor;
         private ShapeInter shape;
         private Controller controller;
 
@@ -16,8 +17,20 @@ public class ColorShapeCommand implements Command{
 
         @Override
         public void execute() {
+            this.oldColor = shape.getRGB();
             shape.setRGB(color);
             controller.updateViewColor();
+        }
+
+        @Override
+        public void undo() {
+            shape.setRGB(oldColor);
+            controller.updateViewColor();
+        }
+
+        @Override
+        public void redo() {
+            execute();
         }
 
 }

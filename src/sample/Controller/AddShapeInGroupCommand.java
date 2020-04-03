@@ -15,4 +15,14 @@ public class AddShapeInGroupCommand implements Command {
     public void execute() {
         shapeGroup.add(shapeToAdd);
     }
+
+    @Override
+    public void undo() {
+        shapeGroup.remove(shapeToAdd);
+    }
+
+    @Override
+    public void redo() {
+        execute();
+    }
 }
