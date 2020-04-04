@@ -17,10 +17,10 @@ public class TranslateCommand implements Command{
 
     @Override
     public void execute() {
-        oldPosX = shape.getPos().getX();
-        oldPosY = shape.getPos().getY();
+//        oldPosX = shape.getPos().getX();
+ //       oldPosY = shape.getPos().getY();
         shape.translate(newPosX, newPosY);
-        //controller.updateViewTranslate(newPosX,newPosY);
+        //controller.updateViewTranslate(newPosX,newPosY,shape);
     }
 
     @Override

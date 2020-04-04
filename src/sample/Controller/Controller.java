@@ -60,7 +60,6 @@ public class Controller {
         for(ShapeInter shapeModel : shapesInCanvas) {
             for(Shape shapeView : view.getShapesInCanvas()) {
                 if(shapeModel.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shapeModel.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
-                    System.out.println("LAAAAAAAAAAAAAAAAA " + shapeModel.getClass());
                     double red = shapeModel.getRGB().getR();
                     double blue = shapeModel.getRGB().getB();
                     double green = shapeModel.getRGB().getG();
@@ -70,21 +69,22 @@ public class Controller {
         }
     }
 /*
-    public void updateViewTranslate(double newPosX, double newPosY) {
-        for(int i = 0; i < view.getShapesInCanvas().size(); i++){
-            for(int j = 0; j < getShapesInCanvas().size(); j++){
-                Shape ShapeInView = view.getShapesInCanvas().get(i);
-                ShapeInter ShapeInCtrller = getShapesInCanvas().get(i);
-                if(ShapeInCtrller.getPos().getX() != view.getShapeXPositionInToolBar(ShapeInView) &&
-                        ShapeInCtrller.getPos().getY() != view.getShapeYPositionInToolBar(ShapeInView)){
-                    ShapeInView.setTranslateX(newPosX);
-                    ShapeInView.setTranslateY(newPosY);
-                }
+    public void updateViewTranslate(double x, double y, ShapeInter shape) {
+        if (shape instanceof ShapeGroup) {
+            for(ShapeInter shapeChild : shape.getChildren()){
+                int indexOfShape = getShapesInCanvas().indexOf(shapeChild);
+                Shape ShapeInView = view.getShapesInCanvas().get(indexOfShape);
+                ShapeInView.setTranslateX(x);
+                ShapeInView.setTranslateY(y);
             }
+        } else {
+            int indexOfShape = getShapesInCanvas().indexOf(shape);
+            Shape ShapeInView = view.getShapesInCanvas().get(indexOfShape);
+            ShapeInView.setTranslateX(x);
+            ShapeInView.setTranslateY(y);
         }
     }
 */
-
     public void initEvents() {
 
         events.add(new RightClick(this));
