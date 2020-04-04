@@ -60,6 +60,7 @@ public class Controller {
         for(ShapeInter shapeModel : shapesInCanvas) {
             for(Shape shapeView : view.getShapesInCanvas()) {
                 if(shapeModel.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shapeModel.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
+                    System.out.println("LAAAAAAAAAAAAAAAAA " + shapeModel.getClass());
                     double red = shapeModel.getRGB().getR();
                     double blue = shapeModel.getRGB().getB();
                     double green = shapeModel.getRGB().getG();

@@ -8,8 +8,8 @@ public class DeGroupShapeCommand implements Command{
 
     protected Controller controller;
     private ShapeInter shapeGroupTmp;
-    ArrayList<ShapeInter> shapeGroupsModified;
-    ArrayList<ShapeInter> shapesDeleted;
+    private ArrayList<ShapeInter> shapeGroupsModified;
+    private ArrayList<ShapeInter> shapesDeleted;
 
     public DeGroupShapeCommand(Controller controller, ShapeInter shapeGroup){
         this.controller = controller;
@@ -20,12 +20,18 @@ public class DeGroupShapeCommand implements Command{
 
     @Override
     public void execute() {
+        boolean hasNeverBeenExecuted = false;
+        if(shapeGroupsModified.isEmpty()){
+            hasNeverBeenExecuted = true;
+        }
         for(ShapeInter shapeGroup : controller.getShapeGroups()){
             for(ShapeInter shape : shapeGroup.getChildren()){
                 for(ShapeInter shapetoDegroup : shapeGroupTmp.getChildren()){
                     if(shape.equals(shapetoDegroup)){
-                        shapeGroupsModified.add(shapeGroup);
-                        shapesDeleted.add(shape);
+                        if(hasNeverBeenExecuted==true) {
+                            shapeGroupsModified.add(shapeGroup);
+                            shapesDeleted.add(shape);
+                        }
                         shapeGroup.remove(shape);
                     }
                 }
@@ -36,7 +42,8 @@ public class DeGroupShapeCommand implements Command{
     @Override
     public void undo() {
         for(int i = 0; i < shapeGroupsModified.size(); i++){
-            shapeGroupsModified.get(i).add(shapesDeleted.get(i));
+            ShapeInter shapePreviouslyDeleted = shapesDeleted.get(i);
+            shapeGroupsModified.get(i).add(shapePreviouslyDeleted);
         }
     }
 

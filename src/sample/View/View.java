@@ -264,8 +264,6 @@ public class View implements Serializable {
 
 	/*Events*/
 
-
-
 	public void launch_overTrash(EventHandler<MouseEvent> event) {
 		for (Shape item : shapesInCanvas) {
 			item.setOnMouseReleased(event);
