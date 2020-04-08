@@ -33,7 +33,7 @@ public class RectangleDrawerJavaFX extends ShapeDrawerJavaFX  {
 		rectangle.setFill(color);
 		rectangle.setArcHeight(arrondi);
 		rectangle.setArcWidth(arrondi);
-		
+
 		view.getToolBar().getItems().add(rectangle);
 		view.getShapesInToolBar().add(rectangle);
 		

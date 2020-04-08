@@ -44,8 +44,8 @@ public class Controller {
 
         shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(1, 0, 0)));
         shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(0, 1, 0)));
-        shapesInToolBar.add(new Polygon(5, 25, new Point(20,0), new RGB(0, 0, 1)));
-        shapesInToolBar.add(new Polygon(7, 35, new Point(20,0), new RGB(1, 1, 0)));
+        shapesInToolBar.add(new Polygon(5, 25, new Point(0,20), new RGB(0, 0, 1)));
+        shapesInToolBar.add(new Polygon(7, 35, new Point(0,20), new RGB(1, 1, 0)));
 
         for(ShapeInter shape : shapesInToolBar) {
            ShapeDrawer drawer = shape.createShapeDrawer(this);
@@ -68,23 +68,18 @@ public class Controller {
             }
         }
     }
-/*
-    public void updateViewTranslate(double x, double y, ShapeInter shape) {
-        if (shape instanceof ShapeGroup) {
-            for(ShapeInter shapeChild : shape.getChildren()){
-                int indexOfShape = getShapesInCanvas().indexOf(shapeChild);
-                Shape ShapeInView = view.getShapesInCanvas().get(indexOfShape);
-                ShapeInView.setTranslateX(x);
-                ShapeInView.setTranslateY(y);
+
+    public void updateViewTranslate(double dragX, double dragY){
+        for(int i = 0; i < shapesInCanvas.size(); i++){
+            ShapeInter shapeModel = shapesInCanvas.get(i);
+            Shape shapeView = view.getShapesInCanvas().get(i);
+            if(shapeModel.getPos().getX() != view.getShapeXPositionInToolBar(shapeView) || shapeModel.getPos().getY() != view.getShapeYPositionInToolBar(shapeView)){
+                shapeView.setTranslateX(shapeView.getTranslateX() + dragX);
+                shapeView.setTranslateY(shapeView.getTranslateY() + dragY);
             }
-        } else {
-            int indexOfShape = getShapesInCanvas().indexOf(shape);
-            Shape ShapeInView = view.getShapesInCanvas().get(indexOfShape);
-            ShapeInView.setTranslateX(x);
-            ShapeInView.setTranslateY(y);
         }
     }
-*/
+
     public void initEvents() {
 
         events.add(new RightClick(this));

@@ -33,6 +33,7 @@ public class CreateShapeEvent implements Events {
                 for(int i = 0 ; i < shapes.size(); i++) {
                     shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
                     shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
+
                     if(shapeX == x && shapeY == y) {
                         controller.getShapesInToolBar().get(i).setPos(new Point(x, y));
                     }

@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
+import sample.Factory.PointFactory;
 import sample.Model.Point;
 import sample.Model.ShapeInter;
 import sample.View.ShapeDrawer;
@@ -13,10 +14,18 @@ import java.util.ArrayList;
 
 public class DragAndDropEvent implements Events {
 
-    private double shapeX, shapeY;
+    /*No shape group case*/
+    private ShapeInter shapeToTranslate;
+
+    /*Shape group case*/
+    private ShapeInter shapeGroupToModify;
+    private boolean isInShapeGroup;
+
+    /*General cases*/
+    private Shape shapeInView;
     private Point MousePos;
-    private ShapeInter model;
     protected Controller controller;
+    private ShapeInter model;
 
     public DragAndDropEvent(Controller controller) {
         this.controller = controller;
@@ -25,57 +34,30 @@ public class DragAndDropEvent implements Events {
     EventHandler<MouseEvent> finalShapeToCanvas = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            if(mouseEvent.getButton() != MouseButton.PRIMARY){
+            if (mouseEvent.getButton() != MouseButton.PRIMARY) {
                 mouseEvent.consume();
                 return;
             }
 
-            Shape shape = (Shape) mouseEvent.getSource();
-
-            double x = controller.getView().getShapeXPositionInToolBar(shape);
-            double y = controller.getView().getShapeYPositionInToolBar(shape);
-
             double dragX = mouseEvent.getSceneX() - MousePos.getX();
             double dragY = mouseEvent.getSceneY() - MousePos.getY();
-            //calculate new position
-            double newXPosition = shapeX + dragX;
-            double newYPosition = shapeY + dragY;
 
-            ArrayList<Shape> shapes = controller.getView().getShapesInCanvas();
-            if(shapes.size() == controller.getShapesInCanvas().size()) {
-                double shapeX, shapeY;
-                for(int i = 0 ; i < shapes.size(); i++) {
-                    shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
-                    shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
-                    if(shapeX == x && shapeY == y) {
+            Command translateCommand = null;
 
-                        //boolean isShapeInGroup = false;
-                        ShapeInter shapeMoved = controller.getShapesInCanvas().get(i);
-                        Command translateCommand = null;
-
-                        //for (ShapeInter shapeGroup : controller.getShapeGroups()){
-                        //    if(shapeGroup.getChildren().contains(shapeMoved)){
-                                //isShapeInGroup = true;
-                        //        translateCommand = new TranslateCommand(newXPosition, newYPosition, shapeGroup, controller);
-                        //        controller.getCommands().addLast(translateCommand);
-                        //        controller.setCurrentPosInCommands(controller.getCommands().size()-1);
-                        //        translateCommand.execute();
-                        //        return;
-                        //    }
-                        //}
-                        //if(isShapeInGroup == false) {
-                            translateCommand = new TranslateCommand(newXPosition, newYPosition, shapeMoved, controller);
-                        //}
-                        controller.addLastCommand(translateCommand);
-                        controller.setCurrentPosInCommands(controller.getNbCommands());
-                        translateCommand.execute();
-                    }
-                }
+            if(isInShapeGroup == true){
+                translateCommand = new TranslateCommand(dragX,dragY, shapeGroupToModify, controller);
+            }else {
+                translateCommand = new TranslateCommand(dragX, dragY, shapeToTranslate, controller);
             }
-            shape.setTranslateX(newXPosition);
-            shape.setTranslateY(newYPosition);
-            mouseEvent.consume();
 
+            controller.addLastCommand(translateCommand);
+            controller.setCurrentPosInCommands(controller.getNbCommands());
+            translateCommand.execute();
+
+            MousePos.setX(mouseEvent.getSceneX());
+            MousePos.setY(mouseEvent.getSceneY());
+
+            mouseEvent.consume();
         }
     };
 
@@ -86,6 +68,7 @@ public class DragAndDropEvent implements Events {
                 return;
             }
             Shape shape = (Shape) mouseEvent.getSource();
+
             shape.toFront();
         }
     };
@@ -96,11 +79,22 @@ public class DragAndDropEvent implements Events {
                 mouseEvent.consume();
                 return;
             }
-            Shape shape = (Shape) mouseEvent.getSource();
 
-            shapeX = shape.getTranslateX();
-            shapeY = shape.getTranslateY();
-            MousePos = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
+            shapeInView = (Shape) mouseEvent.getSource();
+
+            int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
+            shapeToTranslate = controller.getShapesInCanvas().get(indexOfShape);
+            isInShapeGroup = false;
+
+            //Get the shape's group if it is in a ShapeGroup
+            for(ShapeInter shapeGroup : controller.getShapeGroups()){
+                if(shapeGroup.getChildren().contains(shapeToTranslate)){
+                    shapeGroupToModify = shapeGroup;
+                    isInShapeGroup = true;
+                }
+            }
+
+            MousePos = PointFactory.getPoint(mouseEvent.getSceneX(), mouseEvent.getSceneY());
 
            mouseEvent.consume();
         }
@@ -122,7 +116,7 @@ public class DragAndDropEvent implements Events {
                     shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
                     shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
                     if (shapeX == x && shapeY == y) {
-                        controller.getShapesInCanvas().get(i).setPos(new Point(shapeX, shapeY));
+                        controller.getShapesInCanvas().get(i).setPos(PointFactory.getPoint(shapeX, shapeY));
                     }
                 }
             }
@@ -130,7 +124,7 @@ public class DragAndDropEvent implements Events {
             for (ShapeInter model : controller.getShapesInCanvas()) {
                 if (model.getPos().getX() == x && model.getPos().getY() == y) {
                     // Test if the released shape is on the trash
-                    if (controller.getView().isOnNode(controller.getView().getTrash(), new Point(x, y))) {
+                    if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y))) {
                         if (!controller.getView().getShapesInCanvas().remove(shape)) {
                             System.out.println("Shape in view.getShapesCanvas not find");
                         }
@@ -141,7 +135,7 @@ public class DragAndDropEvent implements Events {
                         return;
                     }else{
                         // Test if the released shape is on Toolbar and if has been modify
-                        if (controller.getView().isOnNode(controller.getView().getToolBar(),new Point(x,y)) && !sameShapeInToolBar(model)){
+                        if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(model)){
                             // View
                             int pos = controller.getView().getToolBar().getItems().size();
                             controller.getView().getToolBar().getItems().add(pos-1, shape);
@@ -168,7 +162,6 @@ public class DragAndDropEvent implements Events {
             }
         }
     };
-
 
     /**
      * Check if the shapeInCanvas has a same shape in toolbar
