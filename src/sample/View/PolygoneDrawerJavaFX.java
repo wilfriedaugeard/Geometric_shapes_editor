@@ -6,8 +6,8 @@ import javafx.scene.shape.Polygon;
 public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX  {
 	private Double[] points;
 	
-	public PolygoneDrawerJavaFX(Double[] points, View view, Color color) {
-		super(view, color);
+	public PolygoneDrawerJavaFX(Double[] points, View view, Double[] rgb) {
+		super(view, Color.color(rgb[0],rgb[1],rgb[2]));
 		this.points = points;
 	}
 

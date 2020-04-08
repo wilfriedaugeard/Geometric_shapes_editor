@@ -2,10 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/Polygon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Model/Polygon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/PolygoneDrawerJavaFX.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/View/PolygoneDrawerJavaFX.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/RectangleDrawerJavaFX.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/View/RectangleDrawerJavaFX.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/View/View.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controller/DragAndDropEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/DragAndDropEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/TranslateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/TranslateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/GroupShapeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/GroupShapeEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/RedoEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/RedoEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/RightClick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/RightClick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/SelectionShapeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/SelectionShapeEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/Polygon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/RectangleNoJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/RectangleNoJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeInter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeInter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/PolygoneDrawerJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/PolygoneDrawerJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/RectangleDrawerJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/RectangleDrawerJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +112,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sample/ressources" />
@@ -228,26 +244,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="689" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585065153976" />
-    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1585058826868">
+    <state x="739" y="275" key="FileChooserDialogImpl" timestamp="1586092760822">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585058826868" />
-    <state width="1875" height="177" key="GridCell.Tab.0.bottom" timestamp="1586030606866">
+    <state x="739" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586092760822" />
+    <state width="1875" height="136" key="GridCell.Tab.0.bottom" timestamp="1586292140168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="177" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586030606866" />
-    <state width="1875" height="177" key="GridCell.Tab.0.center" timestamp="1586030606866">
+    <state width="1875" height="136" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586292140168" />
+    <state width="1875" height="136" key="GridCell.Tab.0.center" timestamp="1586292140168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="177" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586030606866" />
-    <state width="1875" height="177" key="GridCell.Tab.0.left" timestamp="1586030606865">
+    <state width="1875" height="136" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586292140168" />
+    <state width="1875" height="136" key="GridCell.Tab.0.left" timestamp="1586292140168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="177" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586030606865" />
-    <state width="1875" height="177" key="GridCell.Tab.0.right" timestamp="1586030606866">
+    <state width="1875" height="136" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586292140168" />
+    <state width="1875" height="136" key="GridCell.Tab.0.right" timestamp="1586292140168">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="177" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586030606866" />
+    <state width="1875" height="136" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586292140168" />
     <state width="1875" height="347" key="GridCell.Tab.1.bottom" timestamp="1584457286498">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -264,10 +280,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1875" height="347" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584457286498" />
-    <state x="624" y="219" width="678" height="602" key="NewModule_or_Project.wizard" timestamp="1585058833019">
+    <state x="624" y="219" width="694" height="602" key="NewModule_or_Project.wizard" timestamp="1586092769862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="624" y="219" width="678" height="602" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1585058833019" />
+    <state x="624" y="219" width="694" height="602" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1586092769862" />
     <state x="636" y="231" key="RollbackChangesDialog" timestamp="1584798475352">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -276,10 +292,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="460" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583077018510" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1585914828823">
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1586349196734">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585914828823" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586349196734" />
     <state x="689" y="275" key="extract.method.dialog" timestamp="1583064970372">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

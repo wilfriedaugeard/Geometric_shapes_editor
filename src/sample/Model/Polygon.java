@@ -1,6 +1,5 @@
 package sample.Model;
 
-import javafx.scene.paint.Color;
 import sample.Controller.Controller;
 import sample.View.PolygoneDrawerJavaFX;
 import sample.View.ShapeDrawer;
@@ -85,11 +84,15 @@ public class Polygon extends ShapeNoJavaFX {
 	public ShapeDrawer createShapeDrawer(Controller controller) {
 		RGB rgb = this.getRGB();
 		double red = rgb.getR();
-		double blue = rgb.getB();
 		double green = rgb.getG();
+		double blue = rgb.getB();
+
+		Double[] rgbTab = new Double[3];
+		rgbTab[0] = red; rgbTab[1] = green; rgbTab[2] = blue;
+
 		Double[] points = this.getPoints(this.getNbEdges(), this.getLength());
 
-		return new PolygoneDrawerJavaFX(points, controller.getView(), Color.color(red, green, blue));
+		return new PolygoneDrawerJavaFX(points, controller.getView(), rgbTab);
 	}
     
     

@@ -121,10 +121,6 @@ public class SelectionShapeEvent implements Events{
         }
     };
 
-    public ShapeInter getShapeGroup() {
-        return shapeGroup;
-    }
-
     @Override
     public void launchEvent() {
         controller.getView().launch_CTRLAndMouseOnClickShapeGroup(CTRLAndMouseOnClickShapeGroup);

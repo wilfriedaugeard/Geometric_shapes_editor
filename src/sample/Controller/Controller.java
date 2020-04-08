@@ -133,6 +133,14 @@ public class Controller {
         return commands;
     }
 
+    public void addLastCommand(Command command){
+        commands.addLast(command);
+    }
+
+    public int getNbCommands(){
+        return commands.size()-1;
+    }
+
     public int getCurrentPosInCommands() {
         return currentPosInCommands;
     }

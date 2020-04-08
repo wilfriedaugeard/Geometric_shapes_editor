@@ -3,16 +3,10 @@ package sample.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
-import javafx.stage.Stage;
 import sample.Model.RGB;
 import sample.Model.ShapeInter;
 
@@ -77,21 +71,20 @@ public class RightClick implements Events {
                         ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
 
                         Command colorShapeCommand = null;
-                        System.out.println(controller.getShapeGroups().size() + "ize");
                         for (ShapeInter shapeGroup : controller.getShapeGroups()){
                             System.out.println("SHAPEGROUP : " + shapeGroup.getChildren().size());
                             System.out.println("SHAPEGROUP : " + shapeGroup);
                             if(shapeGroup.getChildren().contains(shapeSelected)){
                                 colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeGroup, controller);
-                                controller.getCommands().addLast(colorShapeCommand);
-                                controller.setCurrentPosInCommands(controller.getCommands().size()-1);
+                                controller.addLastCommand(colorShapeCommand);
+                                controller.setCurrentPosInCommands(controller.getNbCommands());
                                 colorShapeCommand.execute();
                                 return;
                             }
                         }
                         colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeSelected, controller);
-                        controller.getCommands().addLast(colorShapeCommand);
-                        controller.setCurrentPosInCommands(controller.getCommands().size()-1);
+                        controller.addLastCommand(colorShapeCommand);
+                        controller.setCurrentPosInCommands(controller.getNbCommands());
                         colorShapeCommand.execute();
                     }
                 }

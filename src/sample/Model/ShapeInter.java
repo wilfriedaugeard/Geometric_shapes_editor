@@ -20,19 +20,17 @@ public interface ShapeInter extends Cloneable {
     //void removeObserver(ShapeObserver obs);
     //void notifyObservers();
 
-    /* Simple shape methods */
+    /* Bridge */
     public ShapeDrawer createShapeDrawer(Controller controller);
 
+    /* Simple methods */
     public Point getPos();
     public void setPos(Point p);
     public void translate(double dx, double dy);
-
     public int getRotation();
     public void setRotation(int r);
-
     public Point getRotationCenter();
     public void setRotationCenter(Point p);
-
     public RGB getRGB();
     public void setRGB(RGB rgb);
 }

@@ -14,7 +14,7 @@ public class RedoEvent implements Events{
     EventHandler<ActionEvent> redoEvent = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {
-            if(controller.getCurrentPosInCommands() < controller.getCommands().size()-1) {
+            if(controller.getCurrentPosInCommands() < controller.getNbCommands()) {
                 int currentPos = controller.getCurrentPosInCommands() + 1;
                 controller.setCurrentPosInCommands(currentPos);
                 controller.getCommands().get(currentPos).redo();

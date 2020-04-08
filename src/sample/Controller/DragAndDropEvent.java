@@ -1,15 +1,11 @@
 package sample.Controller;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Point2D;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Model.Point;
-import sample.Model.RGB;
 import sample.Model.ShapeInter;
-import javafx.scene.shape.MoveTo;
 import sample.View.ShapeDrawer;
 
 import java.util.ArrayList;
@@ -70,8 +66,8 @@ public class DragAndDropEvent implements Events {
                         //if(isShapeInGroup == false) {
                             translateCommand = new TranslateCommand(newXPosition, newYPosition, shapeMoved, controller);
                         //}
-                        controller.getCommands().addLast(translateCommand);
-                        controller.setCurrentPosInCommands(controller.getCommands().size()-1);
+                        controller.addLastCommand(translateCommand);
+                        controller.setCurrentPosInCommands(controller.getNbCommands());
                         translateCommand.execute();
                     }
                 }
@@ -109,7 +105,6 @@ public class DragAndDropEvent implements Events {
            mouseEvent.consume();
         }
     };
-
 
     EventHandler<MouseEvent> overTrash = new EventHandler<MouseEvent>() {
         @Override

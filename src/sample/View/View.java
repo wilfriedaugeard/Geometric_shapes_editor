@@ -90,7 +90,6 @@ public class View implements Serializable {
         redo = new Button("Redo");
 
         trash = new Button();
-		//System.out.println(System.getProperty("user.dir"));
 
 		Image image;
 		try {
