@@ -155,6 +155,8 @@ public class DragAndDropEvent implements Events {
             if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(shapeToTranslate))
                 addToToolbar();
 
+
+
             mouseEvent.consume();
         }
     };

@@ -124,6 +124,14 @@ public class Controller {
         }
     }
 
+
+    public void updateEvents(){
+        for(Events event : getEvents()) {
+            event.launchEvent();
+        }
+    }
+
+
     public void initEvents() {
 
         events.add(new RightClick(this));
@@ -134,9 +142,7 @@ public class Controller {
         events.add(new RedoEvent(this));
         events.add(new UndoEvent(this));
 
-        for(Events event : events) {
-            event.launchEvent();
-        }
+        updateEvents();
     }
 
     public ShapeInter getShapeGroupTmp(){

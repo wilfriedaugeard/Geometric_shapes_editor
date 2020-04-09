@@ -1,6 +1,7 @@
 package sample.Controller;
 
 import sample.Model.ShapeInter;
+import sample.View.ShapeDrawer;
 
 import java.util.ArrayList;
 
@@ -19,16 +20,50 @@ public class RemoveCommand implements Command{
 
     @Override
     public void execute() {
+        for(ShapeInter shapeGroup : controller.getShapeGroups()) {
+            if (shape.equals(shapeGroup)) {
+                listOfShape.add(shapeGroup);
+            }
+        }
         controller.updateViewRemove(shape);
+    }
+
+    /**
+     * Create a shape
+     * @param shape
+     */
+    private void createShape(ShapeInter shape){
+        ShapeInter copy = shape.clone();
+        ShapeDrawer drawer = copy.createShapeDrawer(controller);
+        drawer.drawShape();
+        controller.getShapesInCanvas().add(copy);
+    }
+
+    /**
+     * Create a group shape
+     * @param shape
+     */
+    private void createGroupShape(ShapeInter shape){
+        controller.getShapeGroups().add(shape);
+        for(int i = 0; i < shape.getChildren().size(); i++){
+            createShape(shape.getChild(i));
+        }
+
     }
 
     @Override
     public void undo() {
+        if(listOfShape.isEmpty()){
+            createShape(shape);
+        }else{
+            createGroupShape(shape);
+        }
+        controller.updateEvents();
 
     }
 
     @Override
     public void redo() {
-
+        execute();
     }
 }
