@@ -103,12 +103,11 @@ public class DragAndDropEvent implements Events {
         @Override
         public void handle(MouseEvent mouseEvent) {
 
-            double x = shapeToTranslate.getPos().getX();
-            double y = shapeToTranslate.getPos().getY();
+            double x = MousePos.getX();
+            double y = MousePos.getY();
 
             // Test if the released shape is on the trash
             if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y))) {
-                System.out.println(controller.getView().getShapesInCanvas());
                 if (!controller.getView().getShapesInCanvas().remove(shapeInView)) {
                     System.out.println("Shape in view.getShapesCanvas not find");
                 }
@@ -116,7 +115,6 @@ public class DragAndDropEvent implements Events {
                     System.out.println("model in getShapesInCanvas not find");
                 }
                 controller.getView().getRoot().getChildren().remove(shapeInView);
-                return;
             }else{
                 // Test if the released shape is on Toolbar and if has been modify
                 if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(shapeToTranslate)){
