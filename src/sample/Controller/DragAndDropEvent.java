@@ -106,6 +106,9 @@ public class DragAndDropEvent implements Events {
             double x = MousePos.getX();
             double y = MousePos.getY();
 
+            double shapeY = controller.getView().getShapeYPositionInToolBar(shapeInView);
+            double shapeX = controller.getView().getShapeXPositionInToolBar(shapeInView);
+            shapeToTranslate.setPos(PointFactory.getPoint(shapeX, shapeY));
             // Test if the released shape is on the trash
             if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y))) {
                 if (!controller.getView().getShapesInCanvas().remove(shapeInView)) {
@@ -127,6 +130,7 @@ public class DragAndDropEvent implements Events {
                     controller.getShapesInCanvas().remove(shapeToTranslate);
                 }
             }
+            mouseEvent.consume();
         }
     };
 
