@@ -80,6 +80,50 @@ public class Controller {
         }
     }
 
+    /**
+     * Remove a shape in view and controller
+     */
+    public void removeShape(ShapeInter shapeModel, Shape shapeView){
+        if (!getView().getShapesInCanvas().remove(shapeView)) {
+            System.out.println("Shape in view.getShapesCanvas not find");
+        }
+        if (!getShapesInCanvas().remove(shapeModel)) {
+            System.out.println("model in getShapesInCanvas not find");
+        }
+        getView().getRoot().getChildren().remove(shapeView);
+    }
+
+    /**
+     * Update view after removing shape(s)
+     */
+    public void updateViewRemove(ShapeInter shape){
+        boolean noGroup = true;
+        // Range shape group in order to find the corresponding shape in view
+        for(ShapeInter shapeGroup : getShapeGroups()) {
+            if(shape.equals(shapeGroup)){
+                for(int nChild =0; nChild < shapeGroup.getChildren().size(); nChild++){
+                    for(int i =0; i < view.getShapesInCanvas().size(); i++) {
+                        ShapeInter shapeModel = shapeGroup.getChild(nChild);
+                        Shape shapeView = view.getShapesInCanvas().get(i);
+                        if (shapeModel.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shapeModel.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
+                            removeShape(shapeModel, shapeView);
+                            noGroup = false;
+                        }
+                    }
+                }
+            }
+        }
+        // if the shape doesn't belong to a group
+        if(noGroup){
+            for(int i =0; i < view.getShapesInCanvas().size(); i++) {
+                Shape shapeView = view.getShapesInCanvas().get(i);
+                if (shape.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shape.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
+                    removeShape(shape, shapeView);
+                }
+            }
+        }
+    }
+
     public void initEvents() {
 
         events.add(new RightClick(this));

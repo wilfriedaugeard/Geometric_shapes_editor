@@ -26,6 +26,8 @@ public class DragAndDropEvent implements Events {
     private Point MousePos;
     protected Controller controller;
 
+    private Point BeginPos;
+
     public DragAndDropEvent(Controller controller) {
         this.controller = controller;
     }
@@ -43,7 +45,7 @@ public class DragAndDropEvent implements Events {
 
             Command translateCommand = null;
 
-            if(isInShapeGroup == true){
+            if(isInShapeGroup){
                 translateCommand = new TranslateCommand(dragX,dragY, shapeGroupToModify, controller);
             }else {
                 translateCommand = new TranslateCommand(dragX, dragY, shapeToTranslate, controller);
@@ -59,6 +61,8 @@ public class DragAndDropEvent implements Events {
             mouseEvent.consume();
         }
     };
+
+
 
     EventHandler<MouseEvent> moveShapeOnPressingMouse = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
@@ -94,10 +98,44 @@ public class DragAndDropEvent implements Events {
             }
 
             MousePos = PointFactory.getPoint(mouseEvent.getSceneX(), mouseEvent.getSceneY());
-
+            BeginPos = PointFactory.getPoint(mouseEvent.getSceneX(), mouseEvent.getSceneY());
            mouseEvent.consume();
         }
     };
+
+
+    public void onTrash(){
+        /*if (!controller.getView().getShapesInCanvas().remove(shapeInView)) {
+            System.out.println("Shape in view.getShapesCanvas not find");
+        }
+        if (!controller.getShapesInCanvas().remove(shapeToTranslate)) {
+            System.out.println("model in getShapesInCanvas not find");
+        }
+        controller.getView().getRoot().getChildren().remove(shapeInView);*/
+        Command removeCommand = null;
+
+        if(isInShapeGroup){
+            removeCommand = new RemoveCommand(shapeGroupToModify, controller);
+        }else {
+            removeCommand = new RemoveCommand(shapeToTranslate, controller);
+        }
+
+        controller.addLastCommand(removeCommand);
+        controller.setCurrentPosInCommands(controller.getNbCommands());
+        removeCommand.execute();
+
+    }
+
+    public void addToToolbar(){
+            // View
+            int pos = controller.getView().getToolBar().getItems().size();
+            controller.getView().getToolBar().getItems().add(pos - 1, shapeInView);
+            controller.getView().getShapesInCanvas().remove(shapeInView);
+            // Controller
+            controller.getShapesInToolBar().add(shapeToTranslate);
+            controller.getShapesInCanvas().remove(shapeToTranslate);
+
+    }
 
     EventHandler<MouseEvent> overToolbar = new EventHandler<MouseEvent>() {
         @Override
@@ -109,27 +147,14 @@ public class DragAndDropEvent implements Events {
             double shapeY = controller.getView().getShapeYPositionInToolBar(shapeInView);
             double shapeX = controller.getView().getShapeXPositionInToolBar(shapeInView);
             shapeToTranslate.setPos(PointFactory.getPoint(shapeX, shapeY));
+
             // Test if the released shape is on the trash
-            if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y))) {
-                if (!controller.getView().getShapesInCanvas().remove(shapeInView)) {
-                    System.out.println("Shape in view.getShapesCanvas not find");
-                }
-                if (!controller.getShapesInCanvas().remove(shapeToTranslate)) {
-                    System.out.println("model in getShapesInCanvas not find");
-                }
-                controller.getView().getRoot().getChildren().remove(shapeInView);
-            }else{
-                // Test if the released shape is on Toolbar and if has been modify
-                if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(shapeToTranslate)){
-                    // View
-                    int pos = controller.getView().getToolBar().getItems().size();
-                    controller.getView().getToolBar().getItems().add(pos-1, shapeInView);
-                    controller.getView().getShapesInCanvas().remove(shapeInView);
-                    // Controller
-                    controller.getShapesInToolBar().add(shapeToTranslate);
-                    controller.getShapesInCanvas().remove(shapeToTranslate);
-                }
-            }
+            if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y)))
+                onTrash();
+            // Test if the released shape is on Toolbar and if has been modify
+            if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(shapeToTranslate))
+                addToToolbar();
+
             mouseEvent.consume();
         }
     };
