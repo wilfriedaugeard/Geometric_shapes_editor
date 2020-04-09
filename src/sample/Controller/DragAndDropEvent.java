@@ -25,7 +25,6 @@ public class DragAndDropEvent implements Events {
     private Shape shapeInView;
     private Point MousePos;
     protected Controller controller;
-    private ShapeInter model;
 
     public DragAndDropEvent(Controller controller) {
         this.controller = controller;
@@ -100,65 +99,33 @@ public class DragAndDropEvent implements Events {
         }
     };
 
-    EventHandler<MouseEvent> overTrash = new EventHandler<MouseEvent>() {
+    EventHandler<MouseEvent> overToolbar = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
 
-            Shape shape = (Shape) mouseEvent.getSource();
+            double x = MousePos.getX();
+            double y = MousePos.getY();
 
-            double x = controller.getView().getShapeXPositionInToolBar(shape);
-            double y = controller.getView().getShapeYPositionInToolBar(shape);
-
-            ArrayList<Shape> shapes = controller.getView().getShapesInCanvas();
-            if (shapes.size() == controller.getShapesInCanvas().size()) {
-                double shapeX, shapeY;
-                for (int i = 0; i < shapes.size(); i++) {
-                    shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
-                    shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
-                    if (shapeX == x && shapeY == y) {
-                        controller.getShapesInCanvas().get(i).setPos(PointFactory.getPoint(shapeX, shapeY));
-                    }
+            // Test if the released shape is on the trash
+            if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y))) {
+                if (!controller.getView().getShapesInCanvas().remove(shapeInView)) {
+                    System.out.println("Shape in view.getShapesCanvas not find");
                 }
-            }
-            ArrayList<ShapeInter> shapeOnToolbar = new ArrayList<>();
-            for (ShapeInter model : controller.getShapesInCanvas()) {
-                if (model.getPos().getX() == x && model.getPos().getY() == y) {
-                    // Test if the released shape is on the trash
-                    if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y))) {
-                        if (!controller.getView().getShapesInCanvas().remove(shape)) {
-                            System.out.println("Shape in view.getShapesCanvas not find");
-                        }
-                        if (!controller.getShapesInCanvas().remove(model)) {
-                            System.out.println("model in getShapesInCanvas not find");
-                        }
-                        controller.getView().getRoot().getChildren().remove(shape);
-                        return;
-                    }else{
-                        // Test if the released shape is on Toolbar and if has been modify
-                        if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(model)){
-                            // View
-                            int pos = controller.getView().getToolBar().getItems().size();
-                            controller.getView().getToolBar().getItems().add(pos-1, shape);
-                            controller.getView().getShapesInCanvas().remove(shape);
-                            // Add shape on the list
-                            shapeOnToolbar.add(model);
-                        }
-                    }
+                if (!controller.getShapesInCanvas().remove(shapeToTranslate)) {
+                    System.out.println("model in getShapesInCanvas not find");
                 }
-            }
-            // Controller modification
-            if(shapeOnToolbar.size() != 0){
-                // Draw shape
-                for(ShapeInter modelToDraw : shapeOnToolbar) {
-                    controller.getShapesInToolBar().add(model);
-                    ShapeDrawer drawer = modelToDraw.createShapeDrawer(controller);
-                    drawer.drawShapeInToolBar();
+                controller.getView().getRoot().getChildren().remove(shapeInView);
+            }else{
+                // Test if the released shape is on Toolbar and if has been modify
+                if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(shapeToTranslate)){
+                    // View
+                    int pos = controller.getView().getToolBar().getItems().size();
+                    controller.getView().getToolBar().getItems().add(pos-1, shapeInView);
+                    controller.getView().getShapesInCanvas().remove(shapeInView);
+                    // Controller
+                    controller.getShapesInToolBar().add(shapeToTranslate);
+                    controller.getShapesInCanvas().remove(shapeToTranslate);
                 }
-                // Remove shape in Canvas Controller
-                for(ShapeInter modelToRemove : shapeOnToolbar){
-                    controller.getShapesInCanvas().remove(modelToRemove);
-                }
-
             }
         }
     };
@@ -180,7 +147,7 @@ public class DragAndDropEvent implements Events {
         controller.getView().launch_finalShapeToCanvas(finalShapeToCanvas);
         controller.getView().launch_moveShapeOnPressingMouse(moveShapeOnPressingMouse);
         controller.getView().launch_getShapeOnMousePressed(getShapeOnMousePressed);
-        controller.getView().launch_overTrash(overTrash);
+        controller.getView().launch_overToolbar(overToolbar);
     }
 
 }
