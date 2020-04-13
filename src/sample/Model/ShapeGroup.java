@@ -3,9 +3,10 @@ package sample.Model;
 import sample.Controller.Controller;
 import sample.View.ShapeDrawer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ShapeGroup implements ShapeInter {
+public class ShapeGroup implements ShapeInter, Serializable {
 
     private ArrayList<ShapeInter> group;
 

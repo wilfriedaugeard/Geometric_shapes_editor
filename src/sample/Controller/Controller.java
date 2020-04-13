@@ -7,24 +7,25 @@ import sample.Model.*;
 import sample.View.ShapeDrawer;
 import sample.View.View;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Controller {
-
+public class Controller implements Serializable {
+    private static final long serialVersionUID = 1L;
     /* View */
-    private View view;
+    private transient View view;
 
     /* Model */
     private ArrayList<ShapeInter> shapesInToolBar;
     private ArrayList<ShapeInter> shapesInCanvas;
-    private ArrayList<Events> events;
+    private transient ArrayList<Events> events;
     private ArrayList<ShapeInter> shapeGroups;
     private ShapeInter shapeGroupTmp;
 
     /* Pattern Command */
-    private int currentPosInCommands;
-    private LinkedList<Command> commands;
+    private transient int currentPosInCommands;
+    private transient LinkedList<Command> commands;
 
     public Controller(View view) {
         this.view = view;
@@ -141,7 +142,8 @@ public class Controller {
         events.add(new GroupShapeEvent(this));
         events.add(new RedoEvent(this));
         events.add(new UndoEvent(this));
-
+        events.add(new SaveEvent(this));
+        events.add(new LoadEvent(this));
         updateEvents();
     }
 
@@ -149,6 +151,9 @@ public class Controller {
         return shapeGroupTmp;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public ArrayList<Events> getEvents() {
         return events;

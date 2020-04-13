@@ -27,9 +27,9 @@ import javafx.scene.Scene;
 import sample.Model.Point;
 
 
-public class View implements Serializable {
+public class View {
 	
-	private static final long serialVersionUID = 1L;
+
 	private Pane canvas;
 	private ToolBar menuBar;
 	private ToolBar toolBar;
@@ -201,9 +201,7 @@ public class View implements Serializable {
 		return scene;
 	}
 
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
-	}
+
 
 	public Pane getCanvas() {
 		return canvas;
@@ -272,6 +270,8 @@ public class View implements Serializable {
 
 
 	/*Events*/
+
+
 
 	public void launch_overToolbar(EventHandler<MouseEvent> event) {
 		for (Shape item : shapesInCanvas) {
@@ -355,6 +355,16 @@ public class View implements Serializable {
 
 	public void launch_redoEvent(EventHandler<ActionEvent> event){
 		redo.setOnAction(event);
+	}
+
+	/*Save events*/
+
+	public void launch_saveEvent(EventHandler<ActionEvent> event){
+		save_as.setOnAction(event);
+	}
+
+	public void  launch_loadEvent(EventHandler<ActionEvent> event){
+		load.setOnAction(event);
 	}
 
 }

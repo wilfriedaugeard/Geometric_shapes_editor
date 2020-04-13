@@ -4,7 +4,9 @@ import sample.Controller.Controller;
 import sample.View.RectangleDrawerJavaFX;
 import sample.View.ShapeDrawer;
 
-public class RectangleNoJavaFX extends ShapeNoJavaFX {
+import java.io.Serializable;
+
+public class RectangleNoJavaFX extends ShapeNoJavaFX implements Serializable {
 	private double width;
     private double height;
     private double arrondi;

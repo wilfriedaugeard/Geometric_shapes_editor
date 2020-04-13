@@ -3,9 +3,10 @@ package sample.Model;
 import sample.Controller.Controller;
 import sample.View.ShapeDrawer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class ShapeNoJavaFX implements ShapeInter{
+public abstract class ShapeNoJavaFX implements ShapeInter, Serializable {
 	private int rotation;
     private Point pos;
     private RGB RGB;
