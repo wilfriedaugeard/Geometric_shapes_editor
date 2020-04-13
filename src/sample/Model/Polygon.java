@@ -4,10 +4,12 @@ import sample.Controller.Controller;
 import sample.View.PolygoneDrawerJavaFX;
 import sample.View.ShapeDrawer;
 
+import java.io.Serializable;
+
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
-public class Polygon extends ShapeNoJavaFX {
+public class Polygon extends ShapeNoJavaFX implements Serializable {
 	private int nbEdges;
     private double length;
 	private Point rotationCenter;

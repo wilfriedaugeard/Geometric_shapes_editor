@@ -1,6 +1,8 @@
 package sample.Model;
 
-public class RGB {
+import java.io.Serializable;
+
+public class RGB implements Serializable {
 	  private double r;
 	  private double g;
 	  private double b;
