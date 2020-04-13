@@ -42,6 +42,7 @@ public class Controller {
         view.addCanvas();
         view.addShapeMenu();
 
+
         shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(1, 0, 0)));
         shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(0, 1, 0)));
         shapesInToolBar.add(new Polygon(5, 25, new Point(0,20), new RGB(0, 0, 1)));
@@ -52,8 +53,7 @@ public class Controller {
            drawer.drawShapeInToolBar();
         }
 
-        view.getToolBar().getItems().add(view.getTrash());
-
+        view.addTrash();
     }
 
     public void updateViewColor() {

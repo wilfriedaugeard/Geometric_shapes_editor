@@ -1,5 +1,6 @@
 package sample.View;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -9,9 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Shape;
 
 import java.awt.*;
@@ -91,6 +90,7 @@ public class View implements Serializable {
 
         trash = new Button();
 
+
 		Image image;
 		try {
 			image = new Image(new FileInputStream("src/sample/ressources/trash.png"),30,30,true, false);
@@ -102,6 +102,16 @@ public class View implements Serializable {
 
 
 	}
+
+	public void addTrash(){
+		final Pane leftSpacer = new Pane();
+		VBox.setVgrow(
+				leftSpacer,
+				Priority.SOMETIMES
+		);
+		toolBar.getItems().addAll(leftSpacer, trash);
+	}
+
 
 	public void addMenuBar() {
 		menuBar.getItems().add(save_as);
