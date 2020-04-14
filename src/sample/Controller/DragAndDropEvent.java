@@ -32,7 +32,7 @@ public class DragAndDropEvent implements Events {
         this.controller = controller;
     }
 
-    EventHandler<MouseEvent> finalShapeToCanvas = new EventHandler<MouseEvent>() {
+    EventHandler<MouseEvent> finalShapeToCanvas = new EventHandler<>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
             if (mouseEvent.getButton() != MouseButton.PRIMARY) {
@@ -43,11 +43,11 @@ public class DragAndDropEvent implements Events {
             double dragX = mouseEvent.getSceneX() - MousePos.getX();
             double dragY = mouseEvent.getSceneY() - MousePos.getY();
 
-            Command translateCommand = null;
+            Command translateCommand;
 
-            if(isInShapeGroup){
-                translateCommand = new TranslateCommand(dragX,dragY, shapeGroupToModify, controller);
-            }else {
+            if (isInShapeGroup) {
+                translateCommand = new TranslateCommand(dragX, dragY, shapeGroupToModify, controller);
+            } else {
                 translateCommand = new TranslateCommand(dragX, dragY, shapeToTranslate, controller);
             }
 
@@ -64,16 +64,14 @@ public class DragAndDropEvent implements Events {
 
 
 
-    EventHandler<MouseEvent> moveShapeOnPressingMouse = new EventHandler<MouseEvent>() {
-        public void handle(MouseEvent mouseEvent) {
-            if(mouseEvent.getButton() != MouseButton.PRIMARY){
-                mouseEvent.consume();
-                return;
-            }
-            Shape shape = (Shape) mouseEvent.getSource();
-
-            shape.toFront();
+    EventHandler<MouseEvent> moveShapeOnPressingMouse = mouseEvent -> {
+        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
+            mouseEvent.consume();
+            return;
         }
+        Shape shape = (Shape) mouseEvent.getSource();
+
+        shape.toFront();
     };
 
     EventHandler<MouseEvent> getShapeOnMousePressed = new EventHandler<MouseEvent>() {
@@ -126,23 +124,21 @@ public class DragAndDropEvent implements Events {
         // View
         controller.getView().getToolBar().getItems().add(itemPos, shapeInView);
         controller.getView().getShapesInToolBar().add(shapePos, shapeInView);
-        controller.getView().getShapesInCanvas().remove(shapeInView);
-
-        // Controller
-        controller.getShapesInToolBar().add(shapeToTranslate);
-        controller.getShapesInCanvas().remove(shapeToTranslate);
-
         controller.getView().getShapesInToolBar().get(shapePos).setTranslateX(0);
         controller.getView().getShapesInToolBar().get(shapePos).setTranslateY(0);
 
+        // Controller
+        controller.getShapesInToolBar().add(shapeToTranslate);
+
+        controller.removeShape(shapeToTranslate, shapeInView);
         controller.updateEvents();
 
     }
 
-    EventHandler<MouseEvent> overToolbar = new EventHandler<MouseEvent>() {
+    EventHandler<MouseEvent> overToolbar = new EventHandler<>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
-            if(mouseEvent.getButton() != MouseButton.PRIMARY){
+            if (mouseEvent.getButton() != MouseButton.PRIMARY) {
                 mouseEvent.consume();
                 return;
             }
@@ -157,9 +153,9 @@ public class DragAndDropEvent implements Events {
             // Test if the released shape is on the trash
             if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y)))
                 onTrash();
-            // Test if the released shape is on Toolbar and if has been modify
-            else{
-                if (controller.getView().isOnNode(controller.getView().getToolBar(),PointFactory.getPoint(x,y)) && !sameShapeInToolBar(shapeToTranslate))
+                // Test if the released shape is on Toolbar and if has been modify
+            else {
+                if (controller.getView().isOnNode(controller.getView().getToolBar(), PointFactory.getPoint(x, y)) && !sameShapeInToolBar(shapeToTranslate))
                     addToToolbar();
             }
 
