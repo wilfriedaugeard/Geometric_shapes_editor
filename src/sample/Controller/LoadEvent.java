@@ -3,6 +3,7 @@ package sample.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.shape.Shape;
+import javafx.stage.FileChooser;
 import sample.Model.ShapeGroup;
 import sample.Model.ShapeInter;
 import sample.View.ShapeDrawer;
@@ -19,9 +20,21 @@ public class LoadEvent implements Events{
 
     EventHandler<ActionEvent> loadButton = new EventHandler<>() {
         public void handle(ActionEvent actionEvent) {
+
+            FileChooser fileChooser = new FileChooser();
+            File selectedFile = fileChooser.showOpenDialog(null);
+            String filename = null;
+            if (selectedFile != null) {
+
+                filename = selectedFile.getName();
+            }
+            else {
+                System.out.println("File selection cancelled.");
+            }
+
             ObjectInput ois = null;
             try {
-                final FileInputStream file = new FileInputStream("save.ser");
+                final FileInputStream file = new FileInputStream(filename);
                 ois = new ObjectInputStream(file);
                 final Controller controller_load = (Controller) ois.readObject();
 

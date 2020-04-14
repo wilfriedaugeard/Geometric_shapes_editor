@@ -2,6 +2,7 @@ package sample.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,9 +19,19 @@ public class SaveEvent implements Events {
 
     EventHandler<ActionEvent> saveButton = new EventHandler<>() {
         public void handle(ActionEvent actionEvent) {
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialFileName("save.ser");
+            File savedFile = fileChooser.showSaveDialog(null);
+            String filename = null;
+            if (savedFile != null) {
+                filename = savedFile.getName();
+            }
+
+
             ObjectOutputStream oos = null;
             try {
-                File file = new File("save.ser");
+                File file = new File(filename);
                 oos = new ObjectOutputStream(new FileOutputStream(file));
                 oos.writeObject(controller);
                 oos.flush();
