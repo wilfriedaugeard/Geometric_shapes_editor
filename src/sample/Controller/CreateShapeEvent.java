@@ -51,8 +51,6 @@ public class CreateShapeEvent implements Events {
             }
 
             controller.updateEvents();
-            //System.out.println("test size : " + controller.getView().getShapesInCanvas().size());
-
             mouseEvent.consume();
         }
     };
