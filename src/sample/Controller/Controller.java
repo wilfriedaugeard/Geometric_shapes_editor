@@ -144,6 +144,7 @@ public class Controller implements Serializable {
         events.add(new UndoEvent(this));
         events.add(new SaveEvent(this));
         events.add(new LoadEvent(this));
+        events.add(new EditShapeEvent(this));
         updateEvents();
     }
 

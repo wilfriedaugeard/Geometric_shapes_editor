@@ -4,12 +4,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Shape;
 
@@ -41,7 +40,9 @@ public class View {
 	private MenuItem group;
 	private MenuItem deGroup;
 	private MenuItem color;
+	private Menu edit;
 	private ColorPicker colorPicker;
+	private MenuItem edit_shape;
 
 	private Button save_as;
 	private Button load;
@@ -76,12 +77,15 @@ public class View {
 		shapeMenu = new ContextMenu();
 		group = new MenuItem("Group");
 		deGroup = new MenuItem("De-group");
+		edit = new Menu("Edit");
+
 		colorPicker = new ColorPicker();
-		color = new MenuItem("Edit Color", colorPicker);
+		color = new MenuItem("Edit color", colorPicker);
+		edit_shape = new MenuItem("Edit shape");
+
+		edit.getItems().addAll(edit_shape, color);
 		
 		scene = new Scene(root, WIDTH, HEIGHT);
-
-		
 
         save_as = new Button("Save");
         load = new Button("Load");
@@ -194,7 +198,7 @@ public class View {
 	}
 
 	public void addShapeMenu() {
-		shapeMenu.getItems().addAll(group, deGroup, color);
+		shapeMenu.getItems().addAll(group, deGroup, edit);
 	}
 
 	public Scene getScene() {
@@ -357,7 +361,7 @@ public class View {
 		redo.setOnAction(event);
 	}
 
-	/*Save events*/
+	/*Save-load events*/
 
 	public void launch_saveEvent(EventHandler<ActionEvent> event){
 		save_as.setOnAction(event);
@@ -365,6 +369,12 @@ public class View {
 
 	public void  launch_loadEvent(EventHandler<ActionEvent> event){
 		load.setOnAction(event);
+	}
+
+	/*Edit events*/
+
+	public void  launch_editShape(EventHandler<ActionEvent> event){
+		edit_shape.setOnAction(event);
 	}
 
 }
