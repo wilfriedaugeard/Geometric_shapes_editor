@@ -31,6 +31,8 @@ public class ShapeGroup implements ShapeInter, Serializable {
         return this;
     }
 
+    /*Pattern composite methods*/
+
     @Override
     public void add(ShapeInter shapeInter){
         group.add(shapeInter);

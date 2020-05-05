@@ -6,20 +6,20 @@ import sample.View.ShapeDrawer;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class ShapeNoJavaFX implements ShapeInter, Serializable {
+public abstract class ShapeModel implements ShapeInter, Serializable {
 	private int rotation;
     private Point pos;
     private RGB RGB;
     
-	public ShapeNoJavaFX(Point pos, RGB RGB) {
+	public ShapeModel(Point pos, RGB RGB) {
 		super();
 		this.pos = pos;
 		this.RGB = RGB;
 	}
 
-	public ShapeNoJavaFX clone() {
+	public ShapeModel clone() {
 		try {
-			return (ShapeNoJavaFX) super.clone();
+			return (ShapeModel) super.clone();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -60,6 +60,9 @@ public abstract class ShapeNoJavaFX implements ShapeInter, Serializable {
 	public abstract Point getRotationCenter();
     public abstract void setRotationCenter(Point rotationCenter);
 	public abstract ShapeDrawer createShapeDrawer(Controller controller);
+
+
+	/* Pattern composite methods*/
 
 	@Override
 	public void add(ShapeInter shapeInter){

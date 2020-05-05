@@ -7,9 +7,6 @@ import javafx.scene.shape.Shape;
 import sample.Factory.PointFactory;
 import sample.Model.Point;
 import sample.Model.ShapeInter;
-import sample.View.ShapeDrawer;
-
-import java.util.ArrayList;
 
 
 public class DragAndDropEvent implements Events {

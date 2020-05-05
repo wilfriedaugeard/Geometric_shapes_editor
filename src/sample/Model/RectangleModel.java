@@ -6,13 +6,13 @@ import sample.View.ShapeDrawer;
 
 import java.io.Serializable;
 
-public class RectangleNoJavaFX extends ShapeNoJavaFX implements Serializable {
+public abstract class RectangleModel extends ShapeModel implements Serializable {
 	private double width;
     private double height;
     private double arrondi;
 	private Point rotationCenter;
 
-	public RectangleNoJavaFX(double width, double height, Point pos, RGB rgb) {
+	public RectangleModel(double width, double height, Point pos, RGB rgb) {
 		super(pos, rgb);
 		this.width = width;
 		this.height = height;
@@ -61,18 +61,7 @@ public class RectangleNoJavaFX extends ShapeNoJavaFX implements Serializable {
 	}
 
 	@Override
-	public ShapeDrawer createShapeDrawer(Controller controller) {
-		RGB rgb = this.getRGB();
-		double red = rgb.getR();
-		double green = rgb.getG();
-		double blue = rgb.getB();
-
-		Double[] rgbTab = new Double[3];
-		rgbTab[0] = red; rgbTab[1] = green; rgbTab[2] = blue;
-
-		return new RectangleDrawerJavaFX(this.getPos().getX(), this.getPos().getY(), this.getWidth(), this.getHeight(),
-				rgbTab,  controller.getView(), this.getArrondi());
-	}
+	public abstract ShapeDrawer createShapeDrawer(Controller controller);
 
 }
 

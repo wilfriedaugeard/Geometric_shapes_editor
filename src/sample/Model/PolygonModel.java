@@ -1,7 +1,6 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.View.PolygoneDrawerJavaFX;
 import sample.View.ShapeDrawer;
 
 import java.io.Serializable;
@@ -9,12 +8,12 @@ import java.io.Serializable;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
-public class Polygon extends ShapeNoJavaFX implements Serializable {
+public abstract class PolygonModel extends ShapeModel implements Serializable {
 	private int nbEdges;
     private double length;
 	private Point rotationCenter;
 
-	public Polygon(int nbEdges, double length, Point pos, RGB rgb) {
+	public PolygonModel(int nbEdges, double length, Point pos, RGB rgb) {
 		super(pos, rgb);
 		this.nbEdges = nbEdges;
 		this.length = length;
@@ -83,19 +82,7 @@ public class Polygon extends ShapeNoJavaFX implements Serializable {
 		this.rotationCenter.setY(center.getY());
 	}
 
-	public ShapeDrawer createShapeDrawer(Controller controller) {
-		RGB rgb = this.getRGB();
-		double red = rgb.getR();
-		double green = rgb.getG();
-		double blue = rgb.getB();
-
-		Double[] rgbTab = new Double[3];
-		rgbTab[0] = red; rgbTab[1] = green; rgbTab[2] = blue;
-
-		Double[] points = this.getPoints(this.getNbEdges(), this.getLength());
-
-		return new PolygoneDrawerJavaFX(points, controller.getView(), rgbTab);
-	}
+	public abstract ShapeDrawer createShapeDrawer(Controller controller);
     
     
 }

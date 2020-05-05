@@ -44,10 +44,10 @@ public class Controller implements Serializable {
         view.addShapeMenu();
 
 
-        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(1, 0, 0)));
-        shapesInToolBar.add(new RectangleNoJavaFX(50, 25, new Point(0,0), new RGB(0, 1, 0)));
-        shapesInToolBar.add(new Polygon(5, 25, new Point(0,20), new RGB(0, 0, 1)));
-        shapesInToolBar.add(new Polygon(7, 35, new Point(0,20), new RGB(1, 1, 0)));
+        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0,0), new RGB(1, 0, 0)));
+        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0,0), new RGB(0, 1, 0)));
+        shapesInToolBar.add(new PolygonJavaFX(5, 25, new Point(0,20), new RGB(0, 0, 1)));
+        shapesInToolBar.add(new PolygonJavaFX(7, 35, new Point(0,20), new RGB(1, 1, 0)));
 
         for(ShapeInter shape : shapesInToolBar) {
            ShapeDrawer drawer = shape.createShapeDrawer(this);
@@ -144,7 +144,6 @@ public class Controller implements Serializable {
         events.add(new UndoEvent(this));
         events.add(new SaveEvent(this));
         events.add(new LoadEvent(this));
-        events.add(new EditShapeEvent(this));
         updateEvents();
     }
 
