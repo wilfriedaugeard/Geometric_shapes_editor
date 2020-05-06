@@ -47,13 +47,13 @@ public class ViewJavaFXAdaptee implements IView, IViewGetters{
 
     /* Position */
     @Override
-    public double getShapeXPositionInToolBar(Shape shape) {
-        return this.viewJavaFX.getShapeXPositionInToolBar(shape);
+    public double getShapeXPositionInToolBar(Object shape) {
+        return this.viewJavaFX.getShapeXPositionInToolBar((Shape)shape);
     }
 
     @Override
-    public double getShapeYPositionInToolBar(Shape shape) {
-        return this.viewJavaFX.getShapeYPositionInToolBar(shape);
+    public double getShapeYPositionInToolBar(Object shape) {
+        return this.viewJavaFX.getShapeYPositionInToolBar((Shape) shape);
     }
 
     @Override
