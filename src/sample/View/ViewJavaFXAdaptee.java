@@ -6,8 +6,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import sample.Model.Point;
 import sample.Model.ShapeInter;
+
+import java.util.ArrayList;
 
 /**
  * Pattern Adapter
@@ -43,13 +47,13 @@ public class ViewJavaFXAdaptee implements IView, IViewGetters{
 
     /* Position */
     @Override
-    public double getShapeXPositionInToolBar(ShapeInter shape) {
-        return 0;
+    public double getShapeXPositionInToolBar(Shape shape) {
+        return this.viewJavaFX.getShapeXPositionInToolBar(shape);
     }
 
     @Override
-    public double getShapeYPositionInToolBar(ShapeInter shape) {
-        return 0;
+    public double getShapeYPositionInToolBar(Shape shape) {
+        return this.viewJavaFX.getShapeYPositionInToolBar(shape);
     }
 
     @Override
@@ -162,6 +166,16 @@ public class ViewJavaFXAdaptee implements IView, IViewGetters{
     @Override
     public void onTrashInfo(Point point) {
         this.viewJavaFX.onTrashInfo(point);
+    }
+
+    @Override
+    public ArrayList<Shape> getShapesInToolBar() {
+        return this.viewJavaFX.getShapesInToolBar();
+    }
+
+    @Override
+    public ArrayList<Shape> getShapesInCanvas() {
+        return this.viewJavaFX.getShapesInCanvas();
     }
 
     /* Getters */

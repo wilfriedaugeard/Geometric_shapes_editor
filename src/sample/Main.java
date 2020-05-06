@@ -7,10 +7,10 @@ import sample.Factory.ControllerFactory;
 
 public class Main extends Application {
 
-    private ControllerFactory controllerFactory = new ControllerFactory();
+    private final ControllerFactory controllerFactory = new ControllerFactory();
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         Controller controller = controllerFactory.createController();
         controller.initializeView();
         controller.initEvents();

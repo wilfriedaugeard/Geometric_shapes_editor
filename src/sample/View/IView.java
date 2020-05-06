@@ -1,7 +1,7 @@
 package sample.View;
 
+import javafx.scene.shape.Shape;
 import sample.Model.Point;
-import sample.Model.ShapeInter;
 
 public interface IView {
     /* UI */
@@ -11,8 +11,8 @@ public interface IView {
     void addShapeMenu();
 
     /* Position */
-    double getShapeXPositionInToolBar(ShapeInter shape);
-    double getShapeYPositionInToolBar(ShapeInter shape);
+    double getShapeXPositionInToolBar(Shape shape);
+    double getShapeYPositionInToolBar(Shape shape);
     double getXPosition(Object node);
     double getYPosition(Object node);
     boolean isOn(Object node, Point point);

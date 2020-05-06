@@ -1,11 +1,14 @@
 package sample.Controller;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import sample.Model.*;
 import sample.View.IShapeDrawer;
 import sample.View.View;
+import sample.View.ViewJavaFXAdaptee;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +17,7 @@ import java.util.LinkedList;
 public class Controller implements Serializable {
     private static final long serialVersionUID = 1L;
     /* View */
-    private transient View view;
+    private transient ViewJavaFXAdaptee view;
 
     /* Model */
     private ArrayList<ShapeInter> shapesInToolBar;
@@ -27,7 +30,7 @@ public class Controller implements Serializable {
     private transient int currentPosInCommands;
     private transient LinkedList<Command> commands;
 
-    public Controller(View view) {
+    public Controller(ViewJavaFXAdaptee view) {
         this.view = view;
         shapesInCanvas = new ArrayList<>();
         shapesInToolBar = new ArrayList<>();
@@ -91,7 +94,8 @@ public class Controller implements Serializable {
         if (!getShapesInCanvas().remove(shapeModel)) {
             System.out.println("model in getShapesInCanvas not find");
         }
-        getView().getRoot().getChildren().remove(shapeView);
+        BorderPane bp = (BorderPane) getView().getRoot();
+        bp.getChildren().remove(shapeView);
     }
 
     /**
@@ -160,10 +164,10 @@ public class Controller implements Serializable {
     }
 
     public Scene getScene() {
-        return view.getScene();
+        return (Scene) view.getScene();
     }
 
-    public View getView() {
+    public ViewJavaFXAdaptee getView() {
         return this.view;
     }
 

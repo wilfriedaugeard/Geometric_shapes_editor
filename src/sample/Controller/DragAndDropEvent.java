@@ -1,6 +1,7 @@
 package sample.Controller;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
@@ -116,10 +117,11 @@ public class DragAndDropEvent implements Events {
     }
 
     public void addToToolbar(){
-        int itemPos = controller.getView().getToolBar().getItems().size()-2;
+        ToolBar toolbar = (ToolBar) controller.getView().getToolBar();
+        int itemPos = toolbar.getItems().size()-2;
         int shapePos = controller.getShapesInToolBar().size();
         // View
-        controller.getView().getToolBar().getItems().add(itemPos, shapeInView);
+        toolbar.getItems().add(itemPos, shapeInView);
         controller.getView().getShapesInToolBar().add(shapePos, shapeInView);
         controller.getView().getShapesInToolBar().get(shapePos).setTranslateX(0);
         controller.getView().getShapesInToolBar().get(shapePos).setTranslateY(0);
@@ -148,11 +150,11 @@ public class DragAndDropEvent implements Events {
             shapeToTranslate.setPos(PointFactory.getPoint(shapeX, shapeY));
 
             // Test if the released shape is on the trash
-            if (controller.getView().isOnNode(controller.getView().getTrash(), PointFactory.getPoint(x, y)))
+            if (controller.getView().isOn(controller.getView().getTrash(), PointFactory.getPoint(x, y)))
                 onTrash();
                 // Test if the released shape is on Toolbar and if has been modify
             else {
-                if (controller.getView().isOnNode(controller.getView().getToolBar(), PointFactory.getPoint(x, y)) && !sameShapeInToolBar(shapeToTranslate))
+                if (controller.getView().isOn(controller.getView().getToolBar(), PointFactory.getPoint(x, y)) && !sameShapeInToolBar(shapeToTranslate))
                     addToToolbar();
             }
 

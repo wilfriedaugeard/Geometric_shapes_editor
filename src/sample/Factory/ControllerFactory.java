@@ -2,13 +2,14 @@ package sample.Factory;
 
 import sample.Controller.Controller;
 import sample.View.View;
+import sample.View.ViewJavaFXAdaptee;
 
 public class ControllerFactory {
 
-    private View view;
+    private ViewJavaFXAdaptee view;
 
     public ControllerFactory() {
-        view = new View();
+        view = new ViewJavaFXAdaptee(new View());
     }
 
     public Controller createController(){

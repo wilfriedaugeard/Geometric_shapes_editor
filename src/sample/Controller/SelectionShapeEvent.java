@@ -1,8 +1,10 @@
 package sample.Controller;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -23,15 +25,17 @@ public class SelectionShapeEvent implements Events{
 
 
     public boolean isOnToolbar(double x){
-        return x <= controller.getView().getToolBar().getWidth();
+        ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
+        return x <= toolBar.getWidth();
     }
 
     EventHandler<MouseEvent> createSelectionRectangleOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
+            BorderPane bp = (BorderPane) controller.getView().getRoot();
             for(Shape item : controller.getView().getShapesInCanvas()){
                 double x2 = controller.getView().getShapeXPositionInToolBar(item);
                 double y2 = controller.getView().getShapeYPositionInToolBar(item);
-                int i = controller.getView().getRoot().getChildren().indexOf(item);
+                int i = bp.getChildren().indexOf(item);
                 if(item.contains(mouseEvent.getX(),mouseEvent.getY())){
                     return;
                 }
@@ -39,7 +43,7 @@ public class SelectionShapeEvent implements Events{
             if(mouseEvent.getSource() == controller.getView().getRoot() && !isOnToolbar(mouseEvent.getX())) {
                 mousePosStart = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
                 selectionRectangle = new Rectangle(mousePosStart.getX(), mousePosStart.getY(), 0, 0);
-                controller.getView().getRoot().getChildren().add(selectionRectangle);
+                bp.getChildren().add(selectionRectangle);
 
                 /* CSS */
                 selectionRectangle.setFill(Color.rgb(133,213,243));
@@ -67,7 +71,8 @@ public class SelectionShapeEvent implements Events{
         public void handle(MouseEvent mouseEvent) {
             if(selectionRectangle!=null) {
                 Point MousePosEnd = new Point(mouseEvent.getSceneX(), mouseEvent.getSceneY());
-                controller.getView().getRoot().getChildren().remove(selectionRectangle);
+                BorderPane bp = (BorderPane) controller.getView().getRoot();
+                bp.getChildren().remove(selectionRectangle);
                 selectionRectangle = null;
                 for (ShapeInter s : controller.getShapesInCanvas()) {
                     Point rotationCenter = s.getRotationCenter();

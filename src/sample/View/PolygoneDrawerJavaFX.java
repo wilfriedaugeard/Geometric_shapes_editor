@@ -1,12 +1,16 @@
 package sample.View;
 
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+
+import javax.tools.Tool;
 
 public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX  {
 	private Double[] points;
 	
-	public PolygoneDrawerJavaFX(Double[] points, View view, Double[] rgb) {
+	public PolygoneDrawerJavaFX(Double[] points, ViewJavaFXAdaptee view, Double[] rgb) {
 		super(view, Color.color(rgb[0],rgb[1],rgb[2]));
 		this.points = points;
 	}
@@ -16,8 +20,8 @@ public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX  {
 		Polygon polygon = new Polygon();
 		polygon.getPoints().addAll(points);
 		polygon.setFill(color);
-		
-		view.getRoot().getChildren().add(polygon);
+		BorderPane bp = (BorderPane) view.getRoot();
+		bp.getChildren().add(polygon);
 		view.getShapesInCanvas().add(polygon);
 	}
 
@@ -26,8 +30,8 @@ public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX  {
 		Polygon polygon = new Polygon();
 		polygon.getPoints().addAll(points);
 		polygon.setFill(color);
-		
-		view.getToolBar().getItems().add(polygon);
+		ToolBar toolBar = (ToolBar) view.getToolBar();
+		toolBar.getItems().add(polygon);
 		view.getShapesInToolBar().add(polygon);
 	}
 

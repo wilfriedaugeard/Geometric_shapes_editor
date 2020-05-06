@@ -2,11 +2,13 @@ package sample.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 import sample.Model.ShapeInter;
 import sample.View.IShapeDrawer;
 
+import javax.swing.border.Border;
 import java.io.*;
 
 public class LoadEvent implements Events{
@@ -40,7 +42,8 @@ public class LoadEvent implements Events{
                 controller.getShapesInToolBar().addAll(controller_load.getShapesInToolBar());
 
                 for(Shape shapeView : controller.getView().getShapesInCanvas()){
-                    controller.getView().getRoot().getChildren().remove(shapeView);
+                    BorderPane bp = (BorderPane) controller.getView().getRoot();
+                    bp.getChildren().remove(shapeView);
                 }
                 controller.getView().getShapesInCanvas().clear();
 

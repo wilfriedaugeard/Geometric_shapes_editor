@@ -1,6 +1,12 @@
 package sample.View;
 
+import javafx.scene.shape.Shape;
+
+import java.util.ArrayList;
+
 public interface IViewGetters {
+    ArrayList<Shape> getShapesInToolBar();
+    ArrayList<Shape> getShapesInCanvas();
     Object getScene();
     Object getCanvas();
     Object getMenuBar();
