@@ -2,7 +2,7 @@ package sample.Model;
 
 import sample.Controller.Controller;
 import sample.View.PolygoneDrawerJavaFX;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 public class PolygonJavaFX extends PolygonModel {
 
@@ -11,7 +11,7 @@ public class PolygonJavaFX extends PolygonModel {
     }
 
     @Override
-    public ShapeDrawer createShapeDrawer(Controller controller) {
+    public IShapeDrawer createShapeDrawer(Controller controller) {
         RGB rgb = this.getRGB();
         double red = rgb.getR();
         double green = rgb.getG();

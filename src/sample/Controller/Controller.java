@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import sample.Model.*;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 import sample.View.View;
 
 import java.io.Serializable;
@@ -50,7 +50,7 @@ public class Controller implements Serializable {
         shapesInToolBar.add(new PolygonJavaFX(7, 35, new Point(0,20), new RGB(1, 1, 0)));
 
         for(ShapeInter shape : shapesInToolBar) {
-           ShapeDrawer drawer = shape.createShapeDrawer(this);
+           IShapeDrawer drawer = shape.createShapeDrawer(this);
            drawer.drawShapeInToolBar();
         }
 

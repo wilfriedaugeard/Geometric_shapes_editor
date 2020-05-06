@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Model.Point;
 import sample.Model.ShapeInter;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 public class CreateShapeEvent implements Events {
     protected Controller controller;
@@ -43,7 +43,7 @@ public class CreateShapeEvent implements Events {
             for(ShapeInter model : controller.getShapesInToolBar()) {
                 if(model.getPos().getX() == x && model.getPos().getY() == y) {
                     ShapeInter copy = model.clone();
-                    ShapeDrawer drawer = copy.createShapeDrawer(controller);
+                    IShapeDrawer drawer = copy.createShapeDrawer(controller);
                     drawer.drawShape();
                     controller.getShapesInCanvas().add(copy);
 

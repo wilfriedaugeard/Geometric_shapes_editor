@@ -4,11 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
-import sample.Model.ShapeGroup;
 import sample.Model.ShapeInter;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
-import java.awt.*;
 import java.io.*;
 
 public class LoadEvent implements Events{
@@ -57,7 +55,7 @@ public class LoadEvent implements Events{
                 controller.setCurrentPosInCommands(0);
                 
                 for (ShapeInter shape : controller.getShapesInCanvas()) {
-                    ShapeDrawer drawer = shape.createShapeDrawer(controller);
+                    IShapeDrawer drawer = shape.createShapeDrawer(controller);
                     drawer.drawShape();
                 }
                 controller.updateEvents();

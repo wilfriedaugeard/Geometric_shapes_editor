@@ -1,8 +1,7 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.View.RectangleDrawerJavaFX;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
 
@@ -61,7 +60,7 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 	}
 
 	@Override
-	public abstract ShapeDrawer createShapeDrawer(Controller controller);
+	public abstract IShapeDrawer createShapeDrawer(Controller controller);
 
 }
 

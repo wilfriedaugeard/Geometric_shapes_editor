@@ -1,6 +1,6 @@
 package sample.View;
 
-public interface ShapeDrawer {
+public interface IShapeDrawer {
 	public void drawShape();
 	public void drawShapeInToolBar();
 }

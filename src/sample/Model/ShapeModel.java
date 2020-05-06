@@ -1,7 +1,7 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 
 	public abstract Point getRotationCenter();
     public abstract void setRotationCenter(Point rotationCenter);
-	public abstract ShapeDrawer createShapeDrawer(Controller controller);
+	public abstract IShapeDrawer createShapeDrawer(Controller controller);
 
 
 	/* Pattern composite methods*/

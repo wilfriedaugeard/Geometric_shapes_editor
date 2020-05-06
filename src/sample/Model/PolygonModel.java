@@ -1,7 +1,7 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
 
@@ -82,7 +82,7 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		this.rotationCenter.setY(center.getY());
 	}
 
-	public abstract ShapeDrawer createShapeDrawer(Controller controller);
+	public abstract IShapeDrawer createShapeDrawer(Controller controller);
     
     
 }

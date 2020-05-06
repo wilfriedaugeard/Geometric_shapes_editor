@@ -1,7 +1,7 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     }
 
     @Override
-    public ShapeDrawer createShapeDrawer(Controller controller) {
+    public IShapeDrawer createShapeDrawer(Controller controller) {
         return null;
     }
 

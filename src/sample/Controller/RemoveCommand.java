@@ -1,7 +1,7 @@
 package sample.Controller;
 
 import sample.Model.ShapeInter;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class RemoveCommand implements Command{
      */
     private void createShape(ShapeInter shape){
         ShapeInter copy = shape.clone();
-        ShapeDrawer drawer = copy.createShapeDrawer(controller);
+        IShapeDrawer drawer = copy.createShapeDrawer(controller);
         drawer.drawShape();
         controller.getShapesInCanvas().add(copy);
     }

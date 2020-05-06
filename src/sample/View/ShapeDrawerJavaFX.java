@@ -2,7 +2,7 @@ package sample.View;
 
 import javafx.scene.paint.Color;
 
-public abstract class ShapeDrawerJavaFX implements ShapeDrawer {
+public abstract class ShapeDrawerJavaFX implements IShapeDrawer {
 	protected View view;
 	protected Color color;
 	

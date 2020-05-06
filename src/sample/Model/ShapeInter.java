@@ -1,7 +1,7 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.View.ShapeDrawer;
+import sample.View.IShapeDrawer;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public interface ShapeInter extends Cloneable {
     //void notifyObservers();
 
     /* Bridge */
-    public ShapeDrawer createShapeDrawer(Controller controller);
+    public IShapeDrawer createShapeDrawer(Controller controller);
 
     /* Simple methods */
     public Point getPos();
