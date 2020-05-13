@@ -8,7 +8,6 @@ import javafx.stage.FileChooser;
 import sample.Model.ShapeInter;
 import sample.View.IShapeDrawer;
 
-import javax.swing.border.Border;
 import java.io.*;
 
 public class LoadEvent implements Events{
@@ -36,7 +35,7 @@ public class LoadEvent implements Events{
             try {
                 final FileInputStream file = new FileInputStream(filename);
                 ois = new ObjectInputStream(file);
-                final Controller controller_load = (Controller) ois.readObject();
+                final ControllerJavaFXAdaptee controller_load = (ControllerJavaFXAdaptee) ois.readObject();
 
                 controller.getShapesInToolBar().clear();
                 controller.getShapesInToolBar().addAll(controller_load.getShapesInToolBar());

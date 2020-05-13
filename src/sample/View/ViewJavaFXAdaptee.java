@@ -6,10 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import sample.Model.Point;
-import sample.Model.ShapeInter;
 
 import java.util.ArrayList;
 
@@ -17,10 +15,10 @@ import java.util.ArrayList;
  * Pattern Adapter
  */
 
-public class ViewJavaFXAdaptee implements IView, IViewGetters{
-    private final View viewJavaFX;
+public class ViewJavaFXAdaptee implements IView{
+    private final ViewJavaFX viewJavaFX;
 
-    public ViewJavaFXAdaptee(View viewJavaFX) {
+    public ViewJavaFXAdaptee(ViewJavaFX viewJavaFX) {
         this.viewJavaFX = viewJavaFX;
     }
 

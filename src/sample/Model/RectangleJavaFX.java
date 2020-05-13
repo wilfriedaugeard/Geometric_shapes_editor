@@ -1,12 +1,13 @@
 package sample.Model;
 
 import sample.Controller.Controller;
+import sample.Controller.ControllerJavaFX;
 import sample.View.RectangleDrawerJavaFX;
 import sample.View.IShapeDrawer;
 
 public class RectangleJavaFX extends RectangleModel {
 
-    public RectangleJavaFX(double width, double height, Point pos, sample.Model.RGB rgb) {
+    public RectangleJavaFX(double width, double height, Point pos, RGB rgb) {
         super(width, height, pos, rgb);
     }
 

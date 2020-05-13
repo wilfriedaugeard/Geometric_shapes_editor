@@ -9,7 +9,7 @@ public class RectangleDrawerJavaFX extends ShapeDrawerJavaFX  {
 	private double x, y, width, height;
 	private double arrondi;
 	
-	public RectangleDrawerJavaFX(double x, double y, double width, double height, Double[] rgb, ViewJavaFXAdaptee view, double arrondi) {
+	public RectangleDrawerJavaFX(double x, double y, double width, double height, Double[] rgb, IView view, double arrondi) {
 		super(view, Color.color(rgb[0],rgb[1],rgb[2]));
 		this.x = x;
 		this.y = y;

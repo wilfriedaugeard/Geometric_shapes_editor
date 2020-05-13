@@ -1,6 +1,7 @@
 package sample.Model;
 
 import sample.Controller.Controller;
+import sample.Controller.ControllerJavaFX;
 import sample.View.PolygoneDrawerJavaFX;
 import sample.View.IShapeDrawer;
 

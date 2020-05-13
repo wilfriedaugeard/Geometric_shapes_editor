@@ -3,10 +3,10 @@ package sample.View;
 import javafx.scene.paint.Color;
 
 public abstract class ShapeDrawerJavaFX implements IShapeDrawer {
-	protected ViewJavaFXAdaptee view;
+	protected IView view;
 	protected Color color;
 	
-	public ShapeDrawerJavaFX(ViewJavaFXAdaptee view, Color color) {
+	public ShapeDrawerJavaFX(IView view, Color color) {
 		this.view = view;
 		this.color = color;
 	}

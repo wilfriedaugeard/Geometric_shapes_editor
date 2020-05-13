@@ -10,7 +10,7 @@ import javax.tools.Tool;
 public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX  {
 	private Double[] points;
 	
-	public PolygoneDrawerJavaFX(Double[] points, ViewJavaFXAdaptee view, Double[] rgb) {
+	public PolygoneDrawerJavaFX(Double[] points, IView view, Double[] rgb) {
 		super(view, Color.color(rgb[0],rgb[1],rgb[2]));
 		this.points = points;
 	}

@@ -10,12 +10,14 @@ import sample.Model.Point;
 import sample.Model.ShapeInter;
 import sample.View.IShapeDrawer;
 
-public class CreateShapeEvent implements Events {
+public class CreateShapeEvent implements Events{
+
     protected Controller controller;
 
     public CreateShapeEvent(Controller controller) {
         this.controller = controller;
     }
+
     EventHandler<MouseEvent> createShapeInToolBarOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             if(mouseEvent.getButton() != MouseButton.PRIMARY){
@@ -57,6 +59,7 @@ public class CreateShapeEvent implements Events {
 
     @Override
     public void launchEvent() {
+        System.out.println(controller.getView());
         controller.getView().launch_createShapeInToolBarOnClick(createShapeInToolBarOnClick);
     }
 }

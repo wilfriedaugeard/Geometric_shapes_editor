@@ -1,6 +1,7 @@
 package sample.Model;
 
 import sample.Controller.Controller;
+import sample.Controller.ControllerJavaFX;
 import sample.View.IShapeDrawer;
 
 import java.util.ArrayList;

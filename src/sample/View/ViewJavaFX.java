@@ -26,7 +26,7 @@ import javafx.scene.Scene;
 import sample.Model.Point;
 
 
-public class View {
+public class ViewJavaFX {
 	
 
 	private Pane canvas;
@@ -63,7 +63,7 @@ public class View {
 	 */
 	private final static int HEIGHT = 600;
 
-	public View() {
+	public ViewJavaFX() {
 		canvas = new Pane();
 		menuBar = new ToolBar();
 

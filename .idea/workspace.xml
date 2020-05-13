@@ -20,33 +20,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="364c66bd-d328-4f52-976f-612b3286a5d7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/sample/Model/PolygonModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Model/RectangleModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/CreateShapeEvent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/CreateShapeEvent$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/CreateShapeEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/CreateShapeEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Model/Point.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/Polygon.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/RGB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Model/RGB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/ShapeNoJavaFX.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/Model/ShapeNoJavaFX.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AL M1/sample/View/View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/AddShapeInGroupCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/DragAndDropEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/DragAndDropEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Factory/EventFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Factory/EventFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/Polygon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/RectangleNoJavaFX.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/CreateShapeEvent$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/CreateShapeEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Controller/Events.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Factory/AbstractEventFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Factory/ControllerFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Factory/EventFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/Point.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/RGB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/ShapeInter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/Model/ShapeNoJavaFX.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/PolygoneDrawerJavaFX.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/RectangleDrawerJavaFX.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/ShapeDrawer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/ShapeDrawerJavaFX.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AL M1/sample/View/View.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/save.ser" beforeDir="false" afterPath="$PROJECT_DIR$/save.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/ControllerJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/CreateShapeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/CreateShapeEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/EventJavaFX.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller/LoadEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/LoadEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Factory/ControllerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Factory/ControllerJavaFXFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/PolygonJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/PolygonJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/PolygonModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/PolygonModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/RectangleJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/RectangleJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/RectangleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/RectangleModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeNoJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeInter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeInter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/IView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/IView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/IViewGetters.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/PolygoneDrawerJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/PolygoneDrawerJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/RectangleDrawerJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/RectangleDrawerJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/ShapeDrawerJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/ShapeDrawerJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/ViewJavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/View/ViewJavaFXAdaptee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/ViewJavaFXAdaptee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/sample.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +130,7 @@
       <updated>1588437100481</updated>
       <workItem from="1588437105406" duration="10000" />
       <workItem from="1588622349863" duration="299000" />
+      <workItem from="1589379671515" duration="6729000" />
     </task>
     <servers />
   </component>
@@ -133,36 +147,49 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="764" y="225" key="#com.intellij.ide.util.MemberChooser" timestamp="1588711959434">
+    <state x="689" y="274" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1589380740095">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="764" y="225" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1588711959434" />
+    <state x="689" y="274" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589380740095" />
+    <state x="764" y="225" key="#com.intellij.ide.util.MemberChooser" timestamp="1589380325967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="764" y="225" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1589380325967" />
     <state x="589" y="208" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1588711185130">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="589" y="208" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588711185130" />
+    <state x="388" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589377393729">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="388" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589377393729" />
+    <state x="689" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589380145501">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589380145501" />
     <state x="1037" y="244" key="FileChooserDialogImpl" timestamp="1588711530528">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1037" y="244" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1588711530528" />
-    <state width="1875" height="121" key="GridCell.Tab.0.bottom" timestamp="1588712028244">
+    <state width="1875" height="240" key="GridCell.Tab.0.bottom" timestamp="1589386387219">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="121" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588712028244" />
-    <state width="1875" height="121" key="GridCell.Tab.0.center" timestamp="1588712028244">
+    <state width="1875" height="240" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1589386387219" />
+    <state width="1875" height="240" key="GridCell.Tab.0.center" timestamp="1589386387219">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="121" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588712028244" />
-    <state width="1875" height="121" key="GridCell.Tab.0.left" timestamp="1588712028244">
+    <state width="1875" height="240" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1589386387219" />
+    <state width="1875" height="240" key="GridCell.Tab.0.left" timestamp="1589386387218">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="121" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588712028244" />
-    <state width="1875" height="121" key="GridCell.Tab.0.right" timestamp="1588712028244">
+    <state width="1875" height="240" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1589386387218" />
+    <state width="1875" height="240" key="GridCell.Tab.0.right" timestamp="1589386387219">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1875" height="121" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588712028244" />
+    <state width="1875" height="240" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1589386387219" />
     <state x="624" y="223" width="673" height="593" key="NewModule_or_Project.wizard" timestamp="1588711537809">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
