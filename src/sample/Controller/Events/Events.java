@@ -1,4 +1,4 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 public interface Events {
 

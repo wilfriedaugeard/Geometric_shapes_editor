@@ -1,10 +1,14 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
+import sample.Controller.Command.Command;
+import sample.Controller.Controller;
+import sample.Controller.Command.RemoveCommand;
+import sample.Controller.Command.TranslateCommand;
 import sample.Factory.PointFactory;
 import sample.Model.Point;
 import sample.Model.ShapeInter;

@@ -1,7 +1,8 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import sample.Controller.Controller;
 
 public class UndoEvent implements Events {
 

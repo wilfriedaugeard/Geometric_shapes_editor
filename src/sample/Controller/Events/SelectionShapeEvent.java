@@ -1,4 +1,4 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.ToolBar;
@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import sample.Controller.Controller;
 import sample.Model.*;
 
 import java.util.ArrayList;

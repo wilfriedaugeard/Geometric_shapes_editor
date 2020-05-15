@@ -1,10 +1,12 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
+import sample.Controller.Controller;
+import sample.Controller.ControllerJavaFXAdaptee;
 import sample.Model.ShapeInter;
 import sample.View.IShapeDrawer;
 

@@ -1,4 +1,4 @@
-package sample.Controller;
+package sample.Controller.Command;
 
 public interface Command {
     /**

@@ -1,8 +1,9 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
+import sample.Controller.Controller;
 
 import java.io.File;
 import java.io.FileOutputStream;

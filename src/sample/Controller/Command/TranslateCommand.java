@@ -1,5 +1,6 @@
-package sample.Controller;
+package sample.Controller.Command;
 
+import sample.Controller.Controller;
 import sample.Model.ShapeInter;
 
 public class TranslateCommand implements Command{

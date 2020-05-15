@@ -1,5 +1,6 @@
-package sample.Controller;
+package sample.Controller.Command;
 
+import sample.Controller.Controller;
 import sample.Model.RGB;
 import sample.Model.ShapeGroup;
 import sample.Model.ShapeInter;

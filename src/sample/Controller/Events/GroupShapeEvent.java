@@ -1,7 +1,11 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import sample.Controller.Command.AddGroupShapeCommand;
+import sample.Controller.Command.Command;
+import sample.Controller.Controller;
+import sample.Controller.Command.DeGroupShapeCommand;
 import sample.Model.ShapeInter;
 
 public class GroupShapeEvent implements Events{

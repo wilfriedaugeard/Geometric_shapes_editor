@@ -1,4 +1,4 @@
-package sample.Controller;
+package sample.Controller.Events;
 
 
 import javafx.event.ActionEvent;
@@ -8,7 +8,10 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
-import javafx.scene.transform.Rotate;
+import sample.Controller.*;
+import sample.Controller.Command.ColorShapeCommand;
+import sample.Controller.Command.Command;
+import sample.Controller.Command.RotateCommand;
 import sample.Model.RGB;
 import sample.Model.ShapeInter;
 
