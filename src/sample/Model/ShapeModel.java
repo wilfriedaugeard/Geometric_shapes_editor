@@ -5,6 +5,7 @@ import sample.Controller.ControllerJavaFX;
 import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class ShapeModel implements ShapeInter, Serializable {
@@ -69,7 +70,9 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 	public abstract Point getRotationCenter();
     public abstract void setRotationCenter(Point rotationCenter);
 	public abstract IShapeDrawer createShapeDrawer(Controller controller);
-
+	public abstract ArrayList<Double> getVector();
+	public abstract void setVector(ArrayList<Double> vector);
+	public abstract Double[] getPoints(int n, double l);
 
 	/* Pattern composite methods*/
 

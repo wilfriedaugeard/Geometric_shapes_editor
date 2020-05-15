@@ -11,6 +11,7 @@ import javafx.scene.shape.Shape;
 import sample.Controller.*;
 import sample.Controller.Command.ColorShapeCommand;
 import sample.Controller.Command.Command;
+import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Command.RotateCommand;
 import sample.Model.RGB;
 import sample.Model.ShapeInter;
@@ -146,7 +147,7 @@ public class RightClick implements Events {
             }
         }
     };
-/*En cours
+
     EventHandler<ActionEvent> resize = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
@@ -166,14 +167,14 @@ public class RightClick implements Events {
                     double value = Double.parseDouble(strValue);
                     for (ShapeInter shapeGroup : controller.getShapeGroups()) {
                         if (shapeGroup.getChildren().contains(shapeSelected)) {
-                            resizeCommand = new RotateCommand(controller, shapeGroup, value, true);
+                            resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
                             controller.addLastCommand(resizeCommand);
                             controller.setCurrentPosInCommands(controller.getNbCommands());
                             resizeCommand.execute();
                             return;
                         }
                     }
-                    resizeCommand = new RotateCommand(controller, shapeSelected, value, false);
+                    resizeCommand = new ResizeCommand(controller, shapeSelected, value, false);
                     controller.addLastCommand(resizeCommand);
                     controller.setCurrentPosInCommands(controller.getNbCommands());
                     resizeCommand.execute();
@@ -181,12 +182,12 @@ public class RightClick implements Events {
             }
         }
     };
-*/
+
     @Override
     public void launchEvent() {
         controller.getView().launch_rightClick(getShapeOnMousePressed);
         controller.getView().launch_colorPickerHandler(colorPickerEv);
         controller.getView().launch_editShape(rotate);
-        //controller.getView().launch_resizeShape(resize);
+        controller.getView().launch_resizeShape(resize);
     }
 }

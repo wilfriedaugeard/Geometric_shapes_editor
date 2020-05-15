@@ -47,6 +47,11 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
+    public void updateViewResize(ShapeInter shape) {
+        controllerJavaFX.updateViewResize(shape);
+    }
+
+    @Override
     public void updateEvents() {
         controllerJavaFX.updateEvents();
     }

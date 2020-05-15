@@ -111,6 +111,20 @@ public class ShapeGroup implements ShapeInter, Serializable {
         }
     }
 
+    @Override
+    public ArrayList<Double> getVector() {
+        return null;
+    }
+
+    @Override
+    public void setVector(ArrayList<Double> vector) {
+        return;
+    }
+
+    @Override
+    public Double[] getPoints(int n, double l) {
+        return null;
+    }
 
 
 }

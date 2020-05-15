@@ -18,6 +18,7 @@ public interface Controller extends Serializable {
     public void removeShape(ShapeInter shapeModel, Object shapeView); //ToAdapt
     public void updateViewRemove(ShapeInter shape);
     public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup);
+    public void updateViewResize(ShapeInter shape);
 
     /*Events*/
     public void initEvents();

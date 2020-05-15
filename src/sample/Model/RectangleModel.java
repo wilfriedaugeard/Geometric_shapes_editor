@@ -5,12 +5,14 @@ import sample.Controller.ControllerJavaFX;
 import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class RectangleModel extends ShapeModel implements Serializable {
 	private double width;
     private double height;
     private double arrondi;
 	private Point rotationCenter;
+	private ArrayList<Double> vector;
 
 	public RectangleModel(double width, double height, Point pos, RGB rgb) {
 		super(pos, rgb);
@@ -18,6 +20,7 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 		this.height = height;
 		rotationCenter = new Point();
 		this.arrondi = 0.0;
+		vector = new ArrayList<>();
 	}
 
 	public double getWidth() {
@@ -62,6 +65,27 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 
 	@Override
 	public abstract IShapeDrawer createShapeDrawer(Controller controller);
+
+	@Override
+	public ArrayList<Double> getVector(){
+		vector.clear();
+		vector.add(width);
+		vector.add(height);
+		return vector;
+	}
+
+	@Override
+	public void setVector(ArrayList<Double> vector){
+		if(vector.size() == 2){
+			width = vector.get(0);
+			height = vector.get(1);
+		}
+	}
+
+	@Override
+	public Double[] getPoints(int n, double l){
+		throw new UnsupportedOperationException();
+	}
 
 }
 

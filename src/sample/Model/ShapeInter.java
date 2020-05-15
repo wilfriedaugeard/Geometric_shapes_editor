@@ -34,4 +34,7 @@ public interface ShapeInter extends Cloneable {
     public void setRotationCenter(Point p);
     public RGB getRGB();
     public void setRGB(RGB rgb);
+    public ArrayList<Double> getVector();
+    public void setVector(ArrayList<Double> vector);
+    public Double[] getPoints(int n, double l);
 }

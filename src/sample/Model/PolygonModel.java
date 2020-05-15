@@ -5,6 +5,7 @@ import sample.Controller.ControllerJavaFX;
 import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -13,12 +14,14 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 	private int nbEdges;
     private double length;
 	private Point rotationCenter;
+	private ArrayList<Double> vector;
 
 	public PolygonModel(int nbEdges, double length, Point pos, RGB rgb) {
 		super(pos, rgb);
 		this.nbEdges = nbEdges;
 		this.length = length;
 		rotationCenter = new Point();
+		vector = new ArrayList<>();
 	}
 
 	public int getNbEdges() {
@@ -37,6 +40,7 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		this.length = length;
 	}
 
+	@Override
 	public Double[] getPoints(int n, double l) {
 		Double[] tmp = new Double[n*2];
 		if(this.getPos() == null) {
@@ -84,6 +88,19 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 	}
 
 	public abstract IShapeDrawer createShapeDrawer(Controller controller);
-    
-    
+
+	@Override
+	public ArrayList<Double> getVector(){
+		vector.clear();
+		vector.add(length);
+		return vector;
+	}
+
+	@Override
+	public void setVector(ArrayList<Double> vector){
+		if(vector.size() == 1){
+			length = vector.get(0);
+		}
+	}
+
 }
