@@ -40,12 +40,13 @@ public class RotateCommand implements Command{
         if(isShapeGroup == true){
             for(int i = 0; i < oldvalues.size(); i++){
                 double oldVal = oldvalues.get(i);
-                shape.getChild(i).setRotation(-oldVal);
-                controller.updateViewRotate(shape.getChild(i), -oldVal, false);
+                ShapeInter currentChild = shape.getChild(i);
+                currentChild.setRotation(-oldVal);
+                controller.updateViewRotate(shape.getChild(i), currentChild.getRotation(), false);
             }
         }else{
             shape.setRotation(-oldValue);
-            controller.updateViewRotate(shape, -value, false);
+            controller.updateViewRotate(shape, shape.getRotation(), false);
         }
     }
 

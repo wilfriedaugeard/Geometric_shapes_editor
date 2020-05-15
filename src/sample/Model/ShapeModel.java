@@ -47,14 +47,14 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 	}
 	
 	public void setRotation(double rotation) {
-		if(getRotation() + rotation < -360.0){
+		if(rotation < -360.0){
 			this.rotation = -360.0;
 		}
-		if(getRotation() + rotation > 360.0){
+		if(rotation > 360.0){
 			this.rotation = 360.0;
 		}
-		if(getRotation() + rotation >= -360.0 && getRotation() + rotation <= 360.0) {
-			this.rotation = getRotation() + rotation;
+		if(rotation >= -360.0 && rotation <= 360.0) {
+			this.rotation = rotation;
 		}
 	}
 	
