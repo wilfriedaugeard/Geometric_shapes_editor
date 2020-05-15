@@ -142,8 +142,11 @@ public class ControllerJavaFX implements Serializable {
                 int shapeIndex = shapesInCanvas.indexOf(child);
                 Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
                 Point rotationCenter = child.getRotationCenter();
-                Rotate newRotation = new Rotate(value, 0, 0);
+                Point oldPt = PointFactory.getPoint(view.getXPosition(shapeView), view.getYPosition(shapeView));
+                Rotate newRotation = new Rotate(value, rotationCenter.getX(),rotationCenter.getY());
                 shapeView.getTransforms().add(newRotation);
+                shapeView.setTranslateX(shapeView.getTranslateX() + (oldPt.getX() - view.getXPosition(shapeView)));
+                shapeView.setTranslateY(shapeView.getTranslateY() + (oldPt.getY() - view.getYPosition(shapeView)));
             }
         }else{
             int shapeIndex = shapesInCanvas.indexOf(shape);
