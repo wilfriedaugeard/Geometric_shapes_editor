@@ -48,7 +48,6 @@ public class RemoveCommand implements Command{
         for(int i = 0; i < shape.getChildren().size(); i++){
             createShape(shape.getChild(i));
         }
-
     }
 
     @Override

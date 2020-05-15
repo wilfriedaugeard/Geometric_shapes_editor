@@ -1,10 +1,12 @@
 package sample.Controller;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
+import sample.Factory.PointFactory;
 import sample.Model.*;
 import sample.View.IShapeDrawer;
 import sample.View.ViewJavaFXAdaptee;
@@ -140,15 +142,18 @@ public class ControllerJavaFX implements Serializable {
                 int shapeIndex = shapesInCanvas.indexOf(child);
                 Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
                 Point rotationCenter = child.getRotationCenter();
-                Rotate newRotation = new Rotate(value, rotationCenter.getX(), rotationCenter.getY());
+                Rotate newRotation = new Rotate(value, 0, 0);
                 shapeView.getTransforms().add(newRotation);
             }
         }else{
             int shapeIndex = shapesInCanvas.indexOf(shape);
             Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
             Point rotationCenter = shape.getRotationCenter();
-            Rotate newRotation = new Rotate(value, rotationCenter.getX(), rotationCenter.getY());
+            Point oldPt = PointFactory.getPoint(view.getXPosition(shapeView), view.getYPosition(shapeView));
+            Rotate newRotation = new Rotate(value, rotationCenter.getX(),rotationCenter.getY());
             shapeView.getTransforms().add(newRotation);
+            shapeView.setTranslateX(shapeView.getTranslateX() + (oldPt.getX() - view.getXPosition(shapeView)));
+            shapeView.setTranslateY(shapeView.getTranslateY() + (oldPt.getY() - view.getYPosition(shapeView)));
 
         }
     }
