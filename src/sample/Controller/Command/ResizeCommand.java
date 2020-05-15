@@ -20,6 +20,7 @@ public class ResizeCommand implements Command {
         this.shape = shape;
         this.coeff = value/100;
         this.isShapeGroup = isShapeGroup;
+        oldVectors = new ArrayList<>();
     }
 
     @Override

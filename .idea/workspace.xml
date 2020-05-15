@@ -19,20 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="364c66bd-d328-4f52-976f-612b3286a5d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/ControllerJavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/ControllerJavaFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/ControllerJavaFXAdaptee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/ControllerJavaFXAdaptee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Events/CreateShapeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Events/CreateShapeEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Events/DragAndDropEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Events/DragAndDropEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/Events/RightClick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/Events/RightClick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/PolygonModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/PolygonModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/RectangleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/RectangleModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeInter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeInter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Model/ShapeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Model/ShapeModel.java" afterDir="false" />
-    </list>
+    <list default="true" id="364c66bd-d328-4f52-976f-612b3286a5d7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +91,7 @@
       <workItem from="1588622349863" duration="299000" />
       <workItem from="1589379671515" duration="19084000" />
       <workItem from="1589463691088" duration="22570000" />
-      <workItem from="1589545888712" duration="28337000" />
+      <workItem from="1589545888712" duration="29220000" />
     </task>
     <servers />
   </component>
