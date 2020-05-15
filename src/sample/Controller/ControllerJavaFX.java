@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
 import sample.Model.*;
 import sample.View.IShapeDrawer;
 import sample.View.ViewJavaFXAdaptee;
@@ -71,14 +72,19 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
-    public void updateViewTranslate(double dragX, double dragY){
-        for(int i = 0; i < shapesInCanvas.size(); i++){
-            ShapeInter shapeModel = shapesInCanvas.get(i);
-            Shape shapeView = view.getShapesInCanvas().get(i);
-            if(shapeModel.getPos().getX() != view.getShapeXPositionInToolBar(shapeView) || shapeModel.getPos().getY() != view.getShapeYPositionInToolBar(shapeView)){
+    public void updateViewTranslate(ShapeInter shape, double dragX, double dragY, boolean isShapeGroup){
+        if(isShapeGroup == true){
+            for(ShapeInter child : shape.getChildren()){
+                int shapeIndex = shapesInCanvas.indexOf(child);
+                Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
                 shapeView.setTranslateX(shapeView.getTranslateX() + dragX);
                 shapeView.setTranslateY(shapeView.getTranslateY() + dragY);
             }
+        }else{
+            int shapeIndex = shapesInCanvas.indexOf(shape);
+            Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
+            shapeView.setTranslateX(shapeView.getTranslateX() + dragX);
+            shapeView.setTranslateY(shapeView.getTranslateY() + dragY);
         }
     }
 
@@ -94,6 +100,7 @@ public class ControllerJavaFX implements Serializable {
         }
         BorderPane bp = (BorderPane) getView().getRoot();
         bp.getChildren().remove(shapeView);
+        //shapesInCanvas.remove(shapeModel);
     }
 
     /**
@@ -127,6 +134,24 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
+    public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup) {
+        if(isShapeGroup == true){
+            for(ShapeInter child : shape.getChildren()){
+                int shapeIndex = shapesInCanvas.indexOf(child);
+                Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
+                Point rotationCenter = child.getRotationCenter();
+                Rotate newRotation = new Rotate(value, rotationCenter.getX(), rotationCenter.getY());
+                shapeView.getTransforms().add(newRotation);
+            }
+        }else{
+            int shapeIndex = shapesInCanvas.indexOf(shape);
+            Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
+            Point rotationCenter = shape.getRotationCenter();
+            Rotate newRotation = new Rotate(value, rotationCenter.getX(), rotationCenter.getY());
+            shapeView.getTransforms().add(newRotation);
+
+        }
+    }
 
     public void updateEvents(){
         for(Events event : getEvents()) {

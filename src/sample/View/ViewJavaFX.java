@@ -43,6 +43,7 @@ public class ViewJavaFX {
 	private Menu edit;
 	private ColorPicker colorPicker;
 	private MenuItem edit_shape;
+	private MenuItem resize_shape;
 
 	private Button save_as;
 	private Button load;
@@ -56,12 +57,12 @@ public class ViewJavaFX {
 	/**
 	 * Width of the window
 	 */
-	private final static int WIDTH = 600;
+	private final int WIDTH = 600;
 
 	/**
 	 * Height of the window
 	 */
-	private final static int HEIGHT = 600;
+	private final int HEIGHT = 600;
 
 	public ViewJavaFX() {
 		canvas = new Pane();
@@ -81,9 +82,10 @@ public class ViewJavaFX {
 
 		colorPicker = new ColorPicker();
 		color = new MenuItem("Edit color", colorPicker);
-		edit_shape = new MenuItem("Edit shape");
+		edit_shape = new MenuItem("Rotate shape");
+		resize_shape = new MenuItem("Resize shape");
 
-		edit.getItems().addAll(edit_shape, color);
+		edit.getItems().addAll(resize_shape, edit_shape, color);
 		
 		scene = new Scene(root, WIDTH, HEIGHT);
 
@@ -271,10 +273,15 @@ public class ViewJavaFX {
 		return shapesInCanvas;
 	}
 
+	public int getWIDTH() {
+		return WIDTH;
+	}
+
+	public int getHEIGHT() {
+		return HEIGHT;
+	}
 
 	/*Events*/
-
-
 
 	public void launch_overToolbar(EventHandler<MouseEvent> event) {
 		for (Shape item : shapesInCanvas) {
@@ -374,6 +381,10 @@ public class ViewJavaFX {
 
 	public void  launch_editShape(EventHandler<ActionEvent> event){
 		edit_shape.setOnAction(event);
+	}
+
+	public void  launch_resizeShape(EventHandler<ActionEvent> event){
+		resize_shape.setOnAction(event);
 	}
 
 }

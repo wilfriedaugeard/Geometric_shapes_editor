@@ -15,9 +15,10 @@ public interface Controller extends Serializable {
     /*Init and update for View*/
     public void initializeView();
     public void updateViewColor();
-    public void updateViewTranslate(double dragX, double dragY);
+    public void updateViewTranslate(ShapeInter shape, double dragX, double dragY, boolean isShapeGroup);
     public void removeShape(ShapeInter shapeModel, Object shapeView); //ToAdapt
     public void updateViewRemove(ShapeInter shape);
+    public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup);
 
     /*Events*/
     public void initEvents();

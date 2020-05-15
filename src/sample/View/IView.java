@@ -37,6 +37,7 @@ public interface IView {
     void launch_saveEvent(Object event);
     void launch_loadEvent(Object event);
     void launch_editShape(Object event);
+    void launch_resizeShape(Object event);
 
     /*Getters*/
 
@@ -57,6 +58,8 @@ public interface IView {
     Object getUndo();
     Object getRedo();
     Object getTrash();
+    int getWIDTH();
+    int getHEIGHT();
 
     /* Other */
     void onTrashInfo(Point point);

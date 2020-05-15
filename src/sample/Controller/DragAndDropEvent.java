@@ -44,9 +44,9 @@ public class DragAndDropEvent implements Events {
             Command translateCommand;
 
             if (isInShapeGroup) {
-                translateCommand = new TranslateCommand(dragX, dragY, shapeGroupToModify, controller);
+                translateCommand = new TranslateCommand(dragX, dragY, shapeGroupToModify, controller, isInShapeGroup);
             } else {
-                translateCommand = new TranslateCommand(dragX, dragY, shapeToTranslate, controller);
+                translateCommand = new TranslateCommand(dragX, dragY, shapeToTranslate, controller, isInShapeGroup);
             }
 
             controller.addLastCommand(translateCommand);
@@ -59,8 +59,6 @@ public class DragAndDropEvent implements Events {
             mouseEvent.consume();
         }
     };
-
-
 
     EventHandler<MouseEvent> moveShapeOnPressingMouse = mouseEvent -> {
         if (mouseEvent.getButton() != MouseButton.PRIMARY) {
@@ -82,7 +80,6 @@ public class DragAndDropEvent implements Events {
             shapeInView = (Shape) mouseEvent.getSource();
 
             int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
-
             shapeToTranslate = controller.getShapesInCanvas().get(indexOfShape);
             isInShapeGroup = false;
 
@@ -101,7 +98,7 @@ public class DragAndDropEvent implements Events {
     };
 
 
-    public void onTrash(){
+    private void onTrash(){
         Command removeCommand;
 
         if(isInShapeGroup){

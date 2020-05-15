@@ -50,7 +50,7 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		// angle intérieur en radian
 		double angle =  (n - 2) * 3.14 / n;
 
-		// Calcul des coordonées des points
+		// Calcul des coordonnées des points
 		for (int i = 2; i < n * 2; i+=2) {
 			double tmp_angle = angle - ((i/2 * 360/n) * 3.14 / 180);
 			tmp[i] = tmp[i - 2] + l * cos(tmp_angle);

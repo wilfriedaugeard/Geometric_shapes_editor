@@ -78,13 +78,15 @@ public class ShapeGroup implements ShapeInter, Serializable {
     }
 
     @Override
-    public int getRotation() {
+    public double getRotation() {
         return 0;
     }
 
     @Override
-    public void setRotation(int r) {
-
+    public void setRotation(double r) {
+        for(ShapeInter shape : group){
+            shape.setRotation(r);
+        }
     }
 
     @Override

@@ -26,8 +26,8 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
-    public void updateViewTranslate(double dragX, double dragY) {
-        controllerJavaFX.updateViewTranslate(dragX, dragY);
+    public void updateViewTranslate(ShapeInter shape, double dragX, double dragY, boolean isShapeGroup) {
+        controllerJavaFX.updateViewTranslate(shape, dragX, dragY, isShapeGroup);
     }
 
     @Override
@@ -38,6 +38,11 @@ public class ControllerJavaFXAdaptee implements Controller {
     @Override
     public void updateViewRemove(ShapeInter shape) {
         controllerJavaFX.updateViewRemove(shape);
+    }
+
+    @Override
+    public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup) {
+        controllerJavaFX.updateViewRotate(shape, value, isShapeGroup);
     }
 
     @Override

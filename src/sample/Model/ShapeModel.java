@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class ShapeModel implements ShapeInter, Serializable {
-	private int rotation;
+	private double rotation;
     private Point pos;
     private RGB RGB;
     
@@ -42,12 +42,20 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 		this.pos = pos;
 	}
 
-	public int getRotation() {
+	public double getRotation() {
 		return rotation;
 	}
 	
-	public void setRotation(int rotation) {
-		this.rotation = rotation;
+	public void setRotation(double rotation) {
+		if(getRotation() + rotation < -360.0){
+			this.rotation = -360.0;
+		}
+		if(getRotation() + rotation > 360.0){
+			this.rotation = 360.0;
+		}
+		if(getRotation() + rotation >= -360.0 && getRotation() + rotation <= 360.0) {
+			this.rotation = getRotation() + rotation;
+		}
 	}
 	
 	public RGB getRGB() {

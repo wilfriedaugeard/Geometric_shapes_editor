@@ -8,10 +8,12 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
 import sample.Model.RGB;
 import sample.Model.ShapeInter;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class RightClick implements Events {
     private final Controller controller;
@@ -97,9 +99,91 @@ public class RightClick implements Events {
         }
     };
 
+    private boolean containsOnlyDigits(String s){
+        int len = s.length();
+        for (int i = 0; i < len-1; i++) {
+            if ((Character.isDigit(s.charAt(i)) == false)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    EventHandler<ActionEvent> rotate = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            int index = controller.getView().getShapesInCanvas().indexOf(shapeInCanvas);
+            ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
+
+            TxtCapture dialog = new TxtCapture(controller, "Modification de la rotation d'une forme");
+            dialog.setGraphic(null);
+            dialog.setHeaderText(null);
+
+            Optional result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                String strValue = result.get().toString();
+                if(containsOnlyDigits(strValue) == true){
+                    Command rotateCommand = null;
+                    double value = Double.parseDouble(strValue);
+                    for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+                        if (shapeGroup.getChildren().contains(shapeSelected)) {
+                            rotateCommand = new RotateCommand(controller, shapeGroup, value, true);
+                            controller.addLastCommand(rotateCommand);
+                            controller.setCurrentPosInCommands(controller.getNbCommands());
+                            rotateCommand.execute();
+                            return;
+                        }
+                    }
+                    rotateCommand = new RotateCommand(controller, shapeSelected, value, false);
+                    controller.addLastCommand(rotateCommand);
+                    controller.setCurrentPosInCommands(controller.getNbCommands());
+                    rotateCommand.execute();
+                }
+            }
+        }
+    };
+/*En cours
+    EventHandler<ActionEvent> resize = new EventHandler<>() {
+        @Override
+        public void handle(ActionEvent event) {
+            int index = controller.getView().getShapesInCanvas().indexOf(shapeInCanvas);
+            ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
+
+            TxtCapture dialog = new TxtCapture(controller, "Resize d'une forme par pourcentage");
+            dialog.setGraphic(null);
+            dialog.setHeaderText(null);
+
+            Optional result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                String strValue = result.get().toString();
+                if (containsOnlyDigits(strValue) == true) {
+                    Command resizeCommand = null;
+                    double value = Double.parseDouble(strValue);
+                    for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+                        if (shapeGroup.getChildren().contains(shapeSelected)) {
+                            resizeCommand = new RotateCommand(controller, shapeGroup, value, true);
+                            controller.addLastCommand(resizeCommand);
+                            controller.setCurrentPosInCommands(controller.getNbCommands());
+                            resizeCommand.execute();
+                            return;
+                        }
+                    }
+                    resizeCommand = new RotateCommand(controller, shapeSelected, value, false);
+                    controller.addLastCommand(resizeCommand);
+                    controller.setCurrentPosInCommands(controller.getNbCommands());
+                    resizeCommand.execute();
+                }
+            }
+        }
+    };
+*/
     @Override
     public void launchEvent() {
         controller.getView().launch_rightClick(getShapeOnMousePressed);
         controller.getView().launch_colorPickerHandler(colorPickerEv);
+        controller.getView().launch_editShape(rotate);
+        //controller.getView().launch_resizeShape(resize);
     }
 }

@@ -28,8 +28,8 @@ public interface ShapeInter extends Cloneable {
     public Point getPos();
     public void setPos(Point p);
     public void translate(double dx, double dy);
-    public int getRotation();
-    public void setRotation(int r);
+    public double getRotation();
+    public void setRotation(double r);
     public Point getRotationCenter();
     public void setRotationCenter(Point p);
     public RGB getRGB();

@@ -160,6 +160,11 @@ public class ViewJavaFXAdaptee implements IView{
         this.viewJavaFX.launch_editShape((EventHandler<ActionEvent>) event);
     }
 
+    @Override
+    public void launch_resizeShape(Object event) {
+        this.viewJavaFX.launch_resizeShape((EventHandler<ActionEvent>) event);
+    }
+
     /* Other */
     @Override
     public void onTrashInfo(Point point) {
@@ -251,4 +256,15 @@ public class ViewJavaFXAdaptee implements IView{
     public Object getTrash() {
         return this.viewJavaFX.getTrash();
     }
+
+    @Override
+    public int getWIDTH() {
+        return viewJavaFX.getWIDTH();
+    }
+
+    @Override
+    public int getHEIGHT() {
+        return viewJavaFX.getHEIGHT();
+    }
+
 }
