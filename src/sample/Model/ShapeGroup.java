@@ -1,7 +1,6 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.Controller.ControllerJavaFX;
 import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
@@ -113,7 +112,13 @@ public class ShapeGroup implements ShapeInter, Serializable {
 
     @Override
     public ArrayList<Double> getVector() {
-        return null;
+        Double size = 0.0;
+        for(ShapeInter shape : getChildren()){
+            size += shape.getVector().get(0);
+        }
+        ArrayList<Double> vector = new ArrayList<>();
+        vector.add(size);
+        return vector;
     }
 
     @Override

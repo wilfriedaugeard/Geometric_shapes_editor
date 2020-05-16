@@ -6,6 +6,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Controller.Command.Command;
+import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Controller;
 import sample.Controller.Command.RemoveCommand;
 import sample.Controller.Command.TranslateCommand;
@@ -80,7 +81,7 @@ public class DragAndDropEvent implements Events {
                 mouseEvent.consume();
                 return;
             }
-
+            System.out.println(mouseEvent.getEventType());
             shapeInView = (Shape) mouseEvent.getSource();
             double x = controller.getView().getShapeXPositionInToolBar(shapeInView);
             double y = controller.getView().getShapeYPositionInToolBar(shapeInView);
@@ -123,6 +124,28 @@ public class DragAndDropEvent implements Events {
         ToolBar toolbar = (ToolBar) controller.getView().getToolBar();
         int itemPos = toolbar.getItems().size()-2;
         int shapePos = controller.getShapesInToolBar().size();
+
+        Double toolbar_w = ((ToolBar) controller.getView().getToolBar()).getWidth();
+        // Resize shape
+        if(shapeToTranslate.getVector().get(0) >= toolbar_w){
+            Command resizeCommand;
+            int margin = 5;
+            double value = (toolbar_w*100)/shapeToTranslate.getVector().get(0)-margin;
+            for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+                if (shapeGroup.getChildren().contains(shapeToTranslate)) {
+                    resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
+                    controller.addLastCommand(resizeCommand);
+                    controller.setCurrentPosInCommands(controller.getNbCommands());
+                    resizeCommand.execute();
+                    return;
+                }
+            }
+            resizeCommand = new ResizeCommand(controller, shapeToTranslate, value, false);
+            controller.addLastCommand(resizeCommand);
+            controller.setCurrentPosInCommands(controller.getNbCommands());
+            resizeCommand.execute();
+        }
+
         // View
         toolbar.getItems().add(itemPos, shapeInView);
         controller.getView().getShapesInToolBar().add(shapePos, shapeInView);
@@ -159,24 +182,48 @@ public class DragAndDropEvent implements Events {
             else {
                 if (controller.getView().isOn(controller.getView().getToolBar(), PointFactory.getPoint(x, y)) && !sameShapeInToolBar(shapeToTranslate))
                     addToToolbar();
+                    mouseEvent.consume();
             }
 
             mouseEvent.consume();
         }
     };
 
-    /**
-     * Check if the shapeInCanvas has a same shape in toolbar
-     */
-    public boolean sameShapeInToolBar(ShapeInter shapeInCanvas) {
+
+    public boolean sameShapeGroupInToolBar(ShapeInter shapeGroupInToolbar){
+        for (ShapeInter group : controller.getShapeGroups()){
+            if(group.getChildren().contains(shapeGroupInToolbar)){
+                for (ShapeInter shape : group.getChildren()){
+                    if(!shapeExisted(shape)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean shapeExisted(ShapeInter shapeExisted){
         for (ShapeInter shapeInToolBar : controller.getShapesInToolBar()) {
-            if (shapeInCanvas.getRGB() == shapeInToolBar.getRGB()
-            && shapeInCanvas.getRotation() == shapeInToolBar.getRotation()
-            && shapeInCanvas.getVector().get(0).equals(shapeInToolBar.getVector().get(0))) {
+            if (shapeExisted.getRGB() == shapeInToolBar.getRGB()
+                    && shapeExisted.getRotation() == shapeInToolBar.getRotation()
+                    && shapeExisted.getVector().get(0).equals(shapeInToolBar.getVector().get(0))) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Check if the shapeInCanvas has a same shape in toolbar
+     */
+    public boolean sameShapeInToolBar(ShapeInter shapeInCanvas) {
+        if(isInShapeGroup){
+            return sameShapeGroupInToolBar(shapeInCanvas);
+        }
+        else{
+            return  shapeExisted(shapeInCanvas);
+        }
     }
 
     @Override
