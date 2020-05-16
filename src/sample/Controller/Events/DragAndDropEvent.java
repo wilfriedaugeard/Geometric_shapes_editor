@@ -170,7 +170,9 @@ public class DragAndDropEvent implements Events {
      */
     public boolean sameShapeInToolBar(ShapeInter shapeInCanvas) {
         for (ShapeInter shapeInToolBar : controller.getShapesInToolBar()) {
-            if (shapeInCanvas.getRGB() == shapeInToolBar.getRGB()) {
+            if (shapeInCanvas.getRGB() == shapeInToolBar.getRGB()
+            && shapeInCanvas.getRotation() == shapeInToolBar.getRotation()
+            && shapeInCanvas.getVector().get(0).equals(shapeInToolBar.getVector().get(0))) {
                 return true;
             }
         }
