@@ -2,6 +2,7 @@ package sample.Model;
 
 import sample.Controller.Controller;
 import sample.Controller.ControllerJavaFX;
+import sample.Factory.PointFactory;
 import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 		super(pos, rgb);
 		this.width = width;
 		this.height = height;
-		rotationCenter = new Point();
+		rotationCenter = PointFactory.getPoint(0,0);
 		this.arrondi = 0.0;
 		vector = new ArrayList<>();
 	}

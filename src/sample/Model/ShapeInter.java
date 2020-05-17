@@ -16,11 +16,6 @@ public interface ShapeInter extends Cloneable {
     ArrayList<ShapeInter> getChildren();
     ShapeInter getChild(int n);
 
-    /* Pattern Observer */
-    //void addObserver(ShapeObserver obs);
-    //void removeObserver(ShapeObserver obs);
-    //void notifyObservers();
-
     /* Bridge */
     public IShapeDrawer createShapeDrawer(Controller controller);
 

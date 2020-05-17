@@ -2,6 +2,7 @@ package sample.Model;
 
 import sample.Controller.Controller;
 import sample.Controller.ControllerJavaFX;
+import sample.Factory.PointFactory;
 import sample.View.IShapeDrawer;
 
 import java.io.Serializable;
@@ -20,7 +21,7 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		super(pos, rgb);
 		this.nbEdges = nbEdges;
 		this.length = length;
-		rotationCenter = new Point();
+		rotationCenter = PointFactory.getPoint(0,0);
 		vector = new ArrayList<>();
 	}
 
