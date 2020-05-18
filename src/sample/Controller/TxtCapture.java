@@ -1,24 +1,17 @@
 package sample.Controller;
 
-import javafx.application.Platform;
-import javafx.beans.NamedArg;
+
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import sample.View.ViewJavaFX;
 
 public class TxtCapture extends Dialog<String> {
-    private Controller controller;
-    private String title;
     private final TextField resize;
     private final TextField rotation;
 
@@ -30,9 +23,7 @@ public class TxtCapture extends Dialog<String> {
 
 
 
-    public TxtCapture(Controller controller, String title) {
-        this.controller = controller;
-        this.title = title;
+    public TxtCapture() {
         grid = new GridPane();
 
         resize = new TextField();

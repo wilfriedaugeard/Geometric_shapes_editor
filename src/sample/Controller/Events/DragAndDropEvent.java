@@ -81,7 +81,6 @@ public class DragAndDropEvent implements Event {
                 mouseEvent.consume();
                 return;
             }
-            System.out.println(mouseEvent.getEventType());
             shapeInView = (Shape) mouseEvent.getSource();
             double x = controller.getView().getShapeXPositionInToolBar(shapeInView);
             double y = controller.getView().getShapeYPositionInToolBar(shapeInView);
@@ -133,24 +132,34 @@ public class DragAndDropEvent implements Event {
         // Resize shape
         System.out.println(shapeToTranslate.getWidth());
         if(shapeToTranslate.getWidth() >= toolbar_w){
-            Command resizeCommand;
             double margin_left = toolbar.getPadding().getLeft();
             double margin_right = toolbar.getPadding().getRight();
             double value = (toolbar_w-margin_left-margin_right)/shapeToTranslate.getWidth();
             value *= 100;
-            for (ShapeInter shapeGroup : controller.getShapeGroups()) {
-                if (shapeGroup.getChildren().contains(shapeToTranslate)) {
-                    resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
+            Command resizeCommand;
+            if(isInShapeGroup){
+                for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+                    if (shapeGroup.getChildren().contains(shapeToTranslate)) {
+                        System.out.println("Group size: "+shapeGroup.getWidth());
+                        if(shapeGroup.getWidth() >= toolbar_w) {
+                            value = (toolbar_w-margin_left-margin_right)/shapeGroup.getWidth();
+                            value *= 100;
+                            resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
+                            controller.addLastCommand(resizeCommand);
+                            controller.setCurrentPosInCommands(controller.getNbCommands());
+                            resizeCommand.execute();
+                            return;
+                        }
+                    }
+                }
+            }else{
+                if(shapeToTranslate.getWidth() >= toolbar_w) {
+                    resizeCommand = new ResizeCommand(controller, shapeToTranslate, value, false);
                     controller.addLastCommand(resizeCommand);
                     controller.setCurrentPosInCommands(controller.getNbCommands());
                     resizeCommand.execute();
-                    return;
                 }
             }
-            resizeCommand = new ResizeCommand(controller, shapeToTranslate, value, false);
-            controller.addLastCommand(resizeCommand);
-            controller.setCurrentPosInCommands(controller.getNbCommands());
-            resizeCommand.execute();
         }
 
         // View

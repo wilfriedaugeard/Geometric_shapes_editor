@@ -134,7 +134,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
         double max = Double.MIN_VALUE;
         for (ShapeInter shape : getChildren()){
             min = Double.min(shape.getPos().getX(),min);
-            max = Double.max(shape.getPos().getX(),max);
+            max = Double.max(shape.getPos().getX()+shape.getWidth(),max);
         }
         return max-min;
     }

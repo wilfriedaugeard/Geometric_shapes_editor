@@ -197,8 +197,7 @@ public class RightClick implements Event {
             tmp_rotate = 0;
             rotate_saved = 0;
 
-
-            TxtCapture dialog = new TxtCapture(controller,"SHAPE EDITOR");
+            TxtCapture dialog = new TxtCapture();
 
             // BUTTON EVENTS
             dialog.getSubmit().setOnAction(e -> {
@@ -221,6 +220,8 @@ public class RightClick implements Event {
                     tmp_rotate = 0;
                     rotate_saved = 0;
                 }
+                last_rotate = 0;
+                last_size = 0;
             });
 
 
