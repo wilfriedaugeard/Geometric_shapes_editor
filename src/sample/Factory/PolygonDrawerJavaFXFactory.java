@@ -7,7 +7,7 @@ import sample.View.PolygoneDrawerJavaFX;
 public class PolygonDrawerJavaFXFactory implements IPolygonDrawerFactory{
 
     @Override
-    public IShapeDrawer createPolygonDrawer(Double[] points, IView view, Double[] rgb) {
+    public IShapeDrawer createPolygonDrawer(Double[] points, IView view, int[] rgb) {
         return new PolygoneDrawerJavaFX(points, view, rgb);
     }
 }
