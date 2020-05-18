@@ -160,6 +160,10 @@ public class ViewJavaFXAdaptee implements IView{
         this.viewJavaFX.launch_editShape((EventHandler<ActionEvent>) event);
     }
 
+    @Override
+    public void launch_dragInToolBar(Object event) {
+        this.viewJavaFX.launch_dragInToolBar((EventHandler<MouseEvent>) event);
+    }
 
     /* Other */
     @Override

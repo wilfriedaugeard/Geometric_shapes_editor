@@ -384,4 +384,10 @@ public class ViewJavaFX {
 	}
 
 
+	public void launch_dragInToolBar(EventHandler<MouseEvent> event){
+		for(Shape item : shapesInToolBar){
+			item.setOnMousePressed(event);
+		}
+	}
+
 }

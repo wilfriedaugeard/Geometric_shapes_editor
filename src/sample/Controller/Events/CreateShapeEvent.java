@@ -38,6 +38,10 @@ public class CreateShapeEvent implements Event {
             }
             copy.setVector(vector);
             copy.setPos(PointFactory.getPoint(x,y));
+            System.out.println(copy.getRGB().getR());
+            System.out.println(copy.getRGB().getG());
+            System.out.println(copy.getRGB().getB());
+            copy.setRGB(shapeModel.getRGB());
             IShapeDrawer drawer = copy.createShapeDrawer(controller);
             drawer.drawShape();
             controller.getShapesInCanvas().add(copy);

@@ -96,7 +96,7 @@ public class ControllerJavaFX implements Serializable {
                     double red = shapeModel.getRGB().getR();
                     double blue = shapeModel.getRGB().getB();
                     double green = shapeModel.getRGB().getG();
-                    shapeView.setFill(Color.color(red, green, blue));
+                    shapeView.setFill(Color.rgb((int) red, (int) green,(int) blue));
                 }
             }
         }
