@@ -129,8 +129,10 @@ public class DragAndDropEvent implements Events {
         // Resize shape
         if(shapeToTranslate.getVector().get(0) >= toolbar_w){
             Command resizeCommand;
-            int margin = 5;
-            double value = (toolbar_w*100)/shapeToTranslate.getVector().get(0)-margin;
+            double margin_left =((ToolBar) controller.getView().getToolBar()).getPadding().getLeft()+1;
+            double margin_right = ((ToolBar) controller.getView().getToolBar()).getPadding().getRight()+1;
+            System.out.println(margin_right);
+            double value = ((toolbar_w*100)/shapeToTranslate.getVector().get(0))-(margin_right+margin_left);
             for (ShapeInter shapeGroup : controller.getShapeGroups()) {
                 if (shapeGroup.getChildren().contains(shapeToTranslate)) {
                     resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);

@@ -50,10 +50,10 @@ public class ControllerJavaFX implements Serializable {
         view.addCanvas();
         view.addShapeMenu();
 
-        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(1, 0, 0)));
-        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(0, 1, 0)));
-        shapesInToolBar.add(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(0, 0, 1)));
-        shapesInToolBar.add(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(1, 1, 0)));
+        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)));
+        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170)));
+        shapesInToolBar.add(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233)));
+        shapesInToolBar.add(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167)));
 
         for (ShapeInter shape : shapesInToolBar) {
             IShapeDrawer drawer = shape.createShapeDrawer(controller);

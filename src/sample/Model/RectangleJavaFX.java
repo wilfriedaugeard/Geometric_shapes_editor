@@ -18,8 +18,8 @@ public class RectangleJavaFX extends RectangleModel {
         double green = rgb.getG();
         double blue = rgb.getB();
 
-        Double[] rgbTab = new Double[3];
-        rgbTab[0] = red; rgbTab[1] = green; rgbTab[2] = blue;
+        int[] rgbTab = new int[3];
+        rgbTab[0] = (int) red; rgbTab[1] = (int) green; rgbTab[2] = (int) blue;
 
         return new RectangleDrawerJavaFX(this.getPos().getX(), this.getPos().getY(), this.getWidth(), this.getHeight(),
                 rgbTab,  controller.getView(), this.getArrondi());
