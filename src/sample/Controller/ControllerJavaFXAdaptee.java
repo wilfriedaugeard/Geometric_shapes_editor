@@ -2,7 +2,7 @@ package sample.Controller;
 
 import javafx.scene.shape.Shape;
 import sample.Controller.Command.Command;
-import sample.Controller.Events.Events;
+import sample.Controller.Events.Event;
 import sample.Model.ShapeInter;
 import sample.View.IView;
 
@@ -62,7 +62,7 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
-    public ArrayList<Events> getEvents() {
+    public ArrayList<Event> getEvents() {
         return controllerJavaFX.getEvents();
     }
 

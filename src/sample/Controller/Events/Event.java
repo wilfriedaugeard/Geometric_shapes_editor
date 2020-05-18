@@ -1,6 +1,6 @@
 package sample.Controller.Events;
 
-public interface Events {
+public interface Event {
 
     public void launchEvent();
 }

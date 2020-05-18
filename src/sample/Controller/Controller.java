@@ -1,7 +1,7 @@
 package sample.Controller;
 
 import sample.Controller.Command.Command;
-import sample.Controller.Events.Events;
+import sample.Controller.Events.Event;
 import sample.Model.ShapeInter;
 import sample.View.IView;
 
@@ -23,7 +23,7 @@ public interface Controller extends Serializable {
     /*Events*/
     public void initEvents();
     public void updateEvents();
-    public ArrayList<Events> getEvents();
+    public ArrayList<Event> getEvents();
 
     /*Pattern Composite*/
     public ShapeInter getShapeGroupTmp();

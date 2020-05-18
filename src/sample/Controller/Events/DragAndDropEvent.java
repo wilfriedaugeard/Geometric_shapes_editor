@@ -15,7 +15,7 @@ import sample.Model.Point;
 import sample.Model.ShapeInter;
 
 
-public class DragAndDropEvent implements Events {
+public class DragAndDropEvent implements Event {
 
     /*No shape group case*/
     private ShapeInter shapeToTranslate;

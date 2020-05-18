@@ -9,8 +9,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import sample.Controller.Command.Command;
-import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Events.*;
+import sample.Factory.AbstractEventFactory;
 import sample.Factory.PointFactory;
 import sample.Model.*;
 import sample.View.IShapeDrawer;
@@ -28,7 +28,7 @@ public class ControllerJavaFX implements Serializable {
     /* Model */
     private ArrayList<ShapeInter> shapesInToolBar;
     private ArrayList<ShapeInter> shapesInCanvas;
-    private transient ArrayList<Events> events;
+    private transient ArrayList<Event> events;
     private ArrayList<ShapeInter> shapeGroups;
     private ShapeInter shapeGroupTmp;
 
@@ -213,7 +213,7 @@ public class ControllerJavaFX implements Serializable {
     }
 
     public void updateEvents(){
-        for(Events event : getEvents()) {
+        for(Event event : getEvents()) {
             event.launchEvent();
         }
     }
@@ -221,15 +221,15 @@ public class ControllerJavaFX implements Serializable {
 
     public void initEvents(Controller controller) {
 
-        events.add(new RightClick(controller));
-        events.add(new DragAndDropEvent(controller));
-        events.add(new CreateShapeEvent(controller));
-        events.add(new SelectionShapeEvent(controller));
-        events.add(new GroupShapeEvent(controller));
-        events.add(new RedoEvent(controller));
-        events.add(new UndoEvent(controller));
-        events.add(new SaveEvent(controller));
-        events.add(new LoadEvent(controller));
+        events.add(AbstractEventFactory.getEvent("RightClick",controller));
+        events.add(AbstractEventFactory.getEvent("DragAndDropEvent",controller));
+        events.add(AbstractEventFactory.getEvent("CreateShapeEvent",controller));
+        events.add(AbstractEventFactory.getEvent("SelectionShapeEvent",controller));
+        events.add(AbstractEventFactory.getEvent("GroupShapeEvent",controller));
+        events.add(AbstractEventFactory.getEvent("RedoEvent",controller));
+        events.add(AbstractEventFactory.getEvent("UndoEvent",controller));
+        events.add(AbstractEventFactory.getEvent("SaveEvent",controller));
+        events.add(AbstractEventFactory.getEvent("LoadEvent",controller));
         updateEvents();
     }
 
@@ -241,7 +241,7 @@ public class ControllerJavaFX implements Serializable {
         return serialVersionUID;
     }
 
-    public ArrayList<Events> getEvents() {
+    public ArrayList<Event> getEvents() {
         return events;
     }
 

@@ -16,9 +16,8 @@ import sample.Model.RGB;
 import sample.Model.ShapeInter;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
-public class RightClick implements Events {
+public class RightClick implements Event {
     private final Controller controller;
     private Shape shapeInCanvas;
     private ColorPicker colorPicker;

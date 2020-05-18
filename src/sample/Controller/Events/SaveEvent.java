@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 
-public class SaveEvent implements Events {
+public class SaveEvent implements Event {
     private final Controller controller;
 
     public SaveEvent(Controller controller) {

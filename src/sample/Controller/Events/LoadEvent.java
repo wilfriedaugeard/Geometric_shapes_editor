@@ -12,7 +12,7 @@ import sample.View.IShapeDrawer;
 
 import java.io.*;
 
-public class LoadEvent implements Events{
+public class LoadEvent implements Event {
     private final Controller controller;
 
     public LoadEvent(Controller controller) {

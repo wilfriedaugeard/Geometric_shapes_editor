@@ -13,7 +13,7 @@ import sample.Model.*;
 
 import java.util.ArrayList;
 
-public class SelectionShapeEvent implements Events{
+public class SelectionShapeEvent implements Event {
     protected Controller controller;
     private Point mousePosStart;
     private Rectangle selectionRectangle;

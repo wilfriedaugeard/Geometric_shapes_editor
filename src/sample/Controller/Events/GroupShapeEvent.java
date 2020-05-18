@@ -8,7 +8,7 @@ import sample.Controller.Controller;
 import sample.Controller.Command.DeGroupShapeCommand;
 import sample.Model.ShapeInter;
 
-public class GroupShapeEvent implements Events{
+public class GroupShapeEvent implements Event {
     private Controller controller;
 
     public GroupShapeEvent(Controller controller){

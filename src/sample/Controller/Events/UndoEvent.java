@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import sample.Controller.Controller;
 
-public class UndoEvent implements Events {
+public class UndoEvent implements Event {
 
     protected Controller controller;
 

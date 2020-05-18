@@ -3,18 +3,15 @@ package sample.Controller.Events;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
-import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import sample.Controller.Controller;
 import sample.Factory.PointFactory;
-import sample.Model.Point;
 import sample.Model.ShapeInter;
 import sample.View.IShapeDrawer;
 
-public class CreateShapeEvent implements Events{
+public class CreateShapeEvent implements Event {
 
     protected Controller controller;
 
