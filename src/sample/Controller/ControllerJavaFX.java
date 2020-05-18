@@ -84,11 +84,6 @@ public class ControllerJavaFX implements Serializable {
         addShapeInToolbar(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170)),controller);
         addShapeInToolbar(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233)),controller);
         addShapeInToolbar(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167)),controller);
-        /*
-        for (ShapeInter shape : shapesInToolBar) {
-            IShapeDrawer drawer = shape.createShapeDrawer(controller);
-            drawer.drawShapeInToolBar();
-        }*/
 
         view.addTrash();
     }
@@ -169,7 +164,7 @@ public class ControllerJavaFX implements Serializable {
     }
 
     public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup) {
-        if (isShapeGroup == true) {
+        if (isShapeGroup) {
             for (ShapeInter child : shape.getChildren()) {
                 int shapeIndex = shapesInCanvas.indexOf(child);
                 Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
@@ -209,6 +204,7 @@ public class ControllerJavaFX implements Serializable {
         }
         //Rectangle
         if(vector.size() == 2){
+            assert shapeView instanceof Rectangle;
             Rectangle rectangle = (Rectangle) shapeView;
             rectangle.setWidth(vector.get(0));
             rectangle.setHeight(vector.get(1));
