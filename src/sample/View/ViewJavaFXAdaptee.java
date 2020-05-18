@@ -160,10 +160,6 @@ public class ViewJavaFXAdaptee implements IView{
         this.viewJavaFX.launch_editShape((EventHandler<ActionEvent>) event);
     }
 
-    @Override
-    public void launch_resizeShape(Object event) {
-        this.viewJavaFX.launch_resizeShape((EventHandler<ActionEvent>) event);
-    }
 
     /* Other */
     @Override

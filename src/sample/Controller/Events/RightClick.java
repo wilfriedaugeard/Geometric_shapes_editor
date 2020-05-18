@@ -3,8 +3,7 @@ package sample.Controller.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ContextMenu;
+import javafx.scene.control.*;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -24,6 +23,8 @@ public class RightClick implements Events {
     private Shape shapeInCanvas;
     private ColorPicker colorPicker;
     private final ContextMenu shapeMenu;
+    private double tmp_rotate;
+    private double rotate_saved;
 
 
     public RightClick(Controller controller){
@@ -106,88 +107,122 @@ public class RightClick implements Events {
     private boolean containsOnlyDigits(String s){
         int len = s.length();
         for (int i = 0; i < len-1; i++) {
-            if ((Character.isDigit(s.charAt(i)) == false)) {
+            if ((!Character.isDigit(s.charAt(i)))) {
                 return false;
             }
         }
         return true;
     }
 
-    EventHandler<ActionEvent> rotate = new EventHandler<>() {
+
+    // Resize a shape
+    public void resizeShape(ShapeInter shape, double value){
+        Command resizeCommand;
+        for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+            if (shapeGroup.getChildren().contains(shape)) {
+                resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
+                controller.addLastCommand(resizeCommand);
+                controller.setCurrentPosInCommands(controller.getNbCommands());
+                resizeCommand.execute();
+                return;
+            }
+        }
+        resizeCommand = new ResizeCommand(controller, shape, value, false);
+        controller.addLastCommand(resizeCommand);
+        controller.setCurrentPosInCommands(controller.getNbCommands());
+        resizeCommand.execute();
+    }
+
+    // Verify string before resize a shape
+    public void resizeTreatment(String strValue, ShapeInter shapeSelected){
+        if (containsOnlyDigits(strValue)) {
+            double value = Double.parseDouble(strValue);
+            resizeShape(shapeSelected,value);
+        }
+    }
+
+    // Rotate a shape
+    public void rotateShape(ShapeInter shape, double value){
+        Command rotateCommand;
+        for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+            if (shapeGroup.getChildren().contains(shape)) {
+                rotateCommand = new RotateCommand(controller, shapeGroup, value, true);
+                controller.addLastCommand(rotateCommand);
+                controller.setCurrentPosInCommands(controller.getNbCommands());
+                rotateCommand.execute();
+                return;
+            }
+        }
+        rotateCommand = new RotateCommand(controller, shape, value, false);
+        controller.addLastCommand(rotateCommand);
+        controller.setCurrentPosInCommands(controller.getNbCommands());
+        rotateCommand.execute();
+    }
+
+    // Verify string before rotate a shape
+    public void rotateTreatment(String strValue, ShapeInter shape){
+        if(containsOnlyDigits(strValue)) {
+            double value = Double.parseDouble(strValue);
+            tmp_rotate += value;
+            rotateShape(shape, value);
+        }
+    }
+
+
+    EventHandler<ActionEvent> edit = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             int index = controller.getView().getShapesInCanvas().indexOf(shapeInCanvas);
             ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
+            double size_saved = shapeSelected.getWidth();
 
-            TxtCapture dialog = new TxtCapture(controller, "Modification de la rotation d'une forme");
-            dialog.setGraphic(null);
-            dialog.setHeaderText(null);
+            tmp_rotate = 0;
+            rotate_saved = 0;
 
-            Optional result = dialog.showAndWait();
+            TxtCapture dialog = new TxtCapture(controller,"SHAPE EDITOR");
 
-            if (result.isPresent()) {
-                String strValue = result.get().toString();
-                if(containsOnlyDigits(strValue) == true){
-                    Command rotateCommand = null;
-                    double value = Double.parseDouble(strValue);
-                    for (ShapeInter shapeGroup : controller.getShapeGroups()) {
-                        if (shapeGroup.getChildren().contains(shapeSelected)) {
-                            rotateCommand = new RotateCommand(controller, shapeGroup, value, true);
-                            controller.addLastCommand(rotateCommand);
-                            controller.setCurrentPosInCommands(controller.getNbCommands());
-                            rotateCommand.execute();
-                            return;
-                        }
-                    }
-                    rotateCommand = new RotateCommand(controller, shapeSelected, value, false);
-                    controller.addLastCommand(rotateCommand);
-                    controller.setCurrentPosInCommands(controller.getNbCommands());
-                    rotateCommand.execute();
+            // BUTTON EVENTS
+            dialog.getSubmit().setOnAction(e -> {
+                if(!dialog.getResize().getText().isEmpty())
+                    resizeTreatment(dialog.getResize().getText(), shapeSelected);
+                if(!dialog.getRotation().getText().isEmpty()){
+                    rotateTreatment(dialog.getRotation().getText(),shapeSelected);
                 }
-            }
+                dialog.closeWindow();
+            });
+
+            dialog.getApply().setOnAction(e -> {
+                if(!dialog.getResize().getText().isEmpty())
+                    resizeTreatment(dialog.getResize().getText(), shapeSelected);
+                if(!dialog.getRotation().getText().isEmpty()){
+                    rotateTreatment(dialog.getRotation().getText(),shapeSelected);
+                }
+            });
+
+            dialog.getClear().setOnAction(e->{
+                dialog.getResize().clear();
+                dialog.getRotation().clear();
+
+                double value = (size_saved*100)/shapeSelected.getWidth();
+                resizeShape(shapeSelected, value);
+                System.out.println(shapeSelected.getRotation());
+                if(tmp_rotate != 0){
+                    rotateShape(shapeSelected,-tmp_rotate);
+                    tmp_rotate = 0;
+                    rotate_saved = 0;
+                }
+            });
+
+
         }
     };
 
-    EventHandler<ActionEvent> resize = new EventHandler<>() {
-        @Override
-        public void handle(ActionEvent event) {
-            int index = controller.getView().getShapesInCanvas().indexOf(shapeInCanvas);
-            ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
 
-            TxtCapture dialog = new TxtCapture(controller, "Resize d'une forme par pourcentage");
-            dialog.setGraphic(null);
-            dialog.setHeaderText(null);
-
-            Optional result = dialog.showAndWait();
-
-            if (result.isPresent()) {
-                String strValue = result.get().toString();
-                if (containsOnlyDigits(strValue) == true) {
-                    Command resizeCommand = null;
-                    double value = Double.parseDouble(strValue);
-                    for (ShapeInter shapeGroup : controller.getShapeGroups()) {
-                        if (shapeGroup.getChildren().contains(shapeSelected)) {
-                            resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
-                            controller.addLastCommand(resizeCommand);
-                            controller.setCurrentPosInCommands(controller.getNbCommands());
-                            resizeCommand.execute();
-                            return;
-                        }
-                    }
-                    resizeCommand = new ResizeCommand(controller, shapeSelected, value, false);
-                    controller.addLastCommand(resizeCommand);
-                    controller.setCurrentPosInCommands(controller.getNbCommands());
-                    resizeCommand.execute();
-                }
-            }
-        }
-    };
 
     @Override
     public void launchEvent() {
         controller.getView().launch_rightClick(getShapeOnMousePressed);
         controller.getView().launch_colorPickerHandler(colorPickerEv);
-        controller.getView().launch_editShape(rotate);
-        controller.getView().launch_resizeShape(resize);
+        controller.getView().launch_editShape(edit);
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
@@ -33,8 +34,12 @@ public class CreateShapeEvent implements Events{
 
             double x = controller.getView().getShapeXPositionInToolBar(shape);
             double y = controller.getView().getShapeYPositionInToolBar(shape);
-
             ShapeInter copy = shapeModel.clone();
+            ArrayList<Double> vector = copy.getVector();
+            for (int i = 0; i < vector.size(); i++) {
+                vector.set(i, vector.get(i) / copy.getCoeff());
+            }
+            copy.setVector(vector);
             copy.setPos(PointFactory.getPoint(x,y));
             IShapeDrawer drawer = copy.createShapeDrawer(controller);
             drawer.drawShape();

@@ -73,6 +73,9 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 	public abstract ArrayList<Double> getVector();
 	public abstract void setVector(ArrayList<Double> vector);
 	public abstract Double[] getPoints(int n, double l);
+	public abstract double getWidth();
+	public abstract void setCoeff(double coeff);
+	public abstract double getCoeff();
 
 	/* Pattern composite methods*/
 
