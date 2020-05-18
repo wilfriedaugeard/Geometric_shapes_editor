@@ -1,6 +1,7 @@
 package sample.Controller;
 
 import javafx.scene.Scene;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -8,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import sample.Controller.Command.Command;
+import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Events.*;
 import sample.Factory.PointFactory;
 import sample.Model.*;
@@ -45,20 +47,48 @@ public class ControllerJavaFX implements Serializable {
         currentPosInCommands = 0;
     }
 
+    /**
+     * Add shape in toolbar and resize it if it's too big
+     * @param shape
+     * @param controller
+     */
+    public void addShapeInToolbar(ShapeInter shape, Controller controller){
+        ToolBar toolbar = (ToolBar) view.getToolBar();
+        double toolbar_w = toolbar.getPrefWidth();
+        // Resize shape
+        if(shape.getWidth() >= toolbar_w) {
+            double margin_left = toolbar.getPadding().getLeft();
+            double margin_right = toolbar.getPadding().getRight();
+            double value = (toolbar_w - margin_left - margin_right) / shape.getWidth();
+            ArrayList<Double> vector = shape.getVector();
+            for (int i = 0; i < vector.size(); i++) {
+                vector.set(i, vector.get(i) * value);
+            }
+            shape.setVector(vector);
+        }
+        shapesInToolBar.add(shape);
+        IShapeDrawer drawer = shape.createShapeDrawer(controller);
+        drawer.drawShapeInToolBar();
+    }
+
+
     public void initializeView(Controller controller) {
         view.addMenuBar();
         view.addCanvas();
         view.addShapeMenu();
 
-        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)));
-        shapesInToolBar.add(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170)));
-        shapesInToolBar.add(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233)));
-        shapesInToolBar.add(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167)));
+        ToolBar toolBar = (ToolBar) view.getToolBar();
+        toolBar.setPrefWidth(50);
 
+        addShapeInToolbar(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)),controller);
+        addShapeInToolbar(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170)),controller);
+        addShapeInToolbar(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233)),controller);
+        addShapeInToolbar(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167)),controller);
+        /*
         for (ShapeInter shape : shapesInToolBar) {
             IShapeDrawer drawer = shape.createShapeDrawer(controller);
             drawer.drawShapeInToolBar();
-        }
+        }*/
 
         view.addTrash();
     }
@@ -77,7 +107,7 @@ public class ControllerJavaFX implements Serializable {
     }
 
     public void updateViewTranslate(ShapeInter shape, double dragX, double dragY, boolean isShapeGroup) {
-        if (isShapeGroup == true) {
+        if (isShapeGroup) {
             for (ShapeInter child : shape.getChildren()) {
                 int shapeIndex = shapesInCanvas.indexOf(child);
                 Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
