@@ -103,5 +103,10 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 			length = vector.get(0);
 		}
 	}
+	@Override
+	public double getWidth(){
+		double rayon = this.length/(2*Math.sin(Math.PI/this.nbEdges));
+		return 2*rayon;
+	}
 
 }

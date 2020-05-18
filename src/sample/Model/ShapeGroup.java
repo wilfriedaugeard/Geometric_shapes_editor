@@ -32,7 +32,6 @@ public class ShapeGroup implements ShapeInter, Serializable {
     }
 
     /*Pattern composite methods*/
-
     @Override
     public void add(ShapeInter shapeInter){
         group.add(shapeInter);
@@ -129,6 +128,17 @@ public class ShapeGroup implements ShapeInter, Serializable {
     @Override
     public Double[] getPoints(int n, double l) {
         return null;
+    }
+
+    @Override
+    public double getWidth() {
+        double min = Double.MAX_VALUE;
+        double max = Double.MIN_VALUE;
+        for (ShapeInter shape : getChildren()){
+            min = Double.min(shape.getPos().getX(),min);
+            max = Double.max(shape.getPos().getX(),max);
+        }
+        return max-min;
     }
 
 
