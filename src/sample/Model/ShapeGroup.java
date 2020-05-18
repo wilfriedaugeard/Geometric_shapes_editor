@@ -9,18 +9,16 @@ import java.util.ArrayList;
 public class ShapeGroup implements ShapeInter, Serializable {
 
     private ArrayList<ShapeInter> group;
-
+    private double coeff;
     public ShapeGroup (){
-        group = new ArrayList<ShapeInter>();
+        group = new ArrayList<>();
     }
 
     @Override
     public ShapeGroup clone() {
         try {
             ArrayList<ShapeInter> groupCloned = new ArrayList<>(group.size());
-            for(ShapeInter shape : group){
-                groupCloned.add(shape);
-            }
+            groupCloned.addAll(group);
             ShapeGroup clone = (ShapeGroup) super.clone();
             clone.group = groupCloned;
             return clone;
@@ -141,5 +139,14 @@ public class ShapeGroup implements ShapeInter, Serializable {
         return max-min;
     }
 
+    @Override
+    public void setCoeff(double coeff) {
+        this.coeff = coeff;
+    }
+
+    @Override
+    public double getCoeff() {
+        return coeff;
+    }
 
 }

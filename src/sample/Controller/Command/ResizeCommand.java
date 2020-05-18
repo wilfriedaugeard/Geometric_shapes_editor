@@ -11,6 +11,7 @@ public class ResizeCommand implements Command {
     private ShapeInter shape;
     private boolean isShapeGroup;
     private double coeff;
+    private double oldCoeff;
 
     private ArrayList<Double> oldVector;
     private ArrayList<ArrayList<Double>> oldVectors;
@@ -19,6 +20,8 @@ public class ResizeCommand implements Command {
         this.controller = controller;
         this.shape = shape;
         this.coeff = value/100;
+        this.oldCoeff = shape.getCoeff();
+        shape.setCoeff(coeff);
         this.isShapeGroup = isShapeGroup;
         oldVectors = new ArrayList<>();
     }
@@ -33,6 +36,7 @@ public class ResizeCommand implements Command {
                     oldVecChild.add(vector.get(i));
                     vector.set(i, vector.get(i) * coeff);
                 }
+                shapeChild.setCoeff(coeff);
                 oldVectors.add(oldVecChild);
                 shapeChild.setVector(vector);
                 controller.updateViewResize(shapeChild);
@@ -44,6 +48,7 @@ public class ResizeCommand implements Command {
                 oldVector.add(vector.get(i));
                 vector.set(i, vector.get(i) * coeff);
             }
+            shape.setCoeff(coeff);
             shape.setVector(vector);
             controller.updateViewResize(shape);
         }
@@ -54,10 +59,12 @@ public class ResizeCommand implements Command {
         if(isShapeGroup){
             for(int i = 0; i < shape.getChildren().size(); i++){
                 shape.getChild(i).setVector(oldVectors.get(i));
+                shape.getChild(i).setCoeff(oldCoeff);
                 controller.updateViewResize(shape.getChild(i));
             }
         }else{
             shape.setVector(oldVector);
+            shape.setCoeff(oldCoeff);
             controller.updateViewResize(shape);
         }
     }
@@ -71,6 +78,7 @@ public class ResizeCommand implements Command {
                     vector.set(i, vector.get(i) * coeff);
                 }
                 shapeChild.setVector(vector);
+                shapeChild.setCoeff(coeff);
                 controller.updateViewResize(shapeChild);
             }
         }else{
@@ -79,6 +87,7 @@ public class ResizeCommand implements Command {
                 vector.set(i, vector.get(i) * coeff);
             }
             shape.setVector(vector);
+            shape.setCoeff(coeff);
             controller.updateViewResize(shape);
         }
     }

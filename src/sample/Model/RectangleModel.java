@@ -14,6 +14,8 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
     private double arrondi;
 	private Point rotationCenter;
 	private ArrayList<Double> vector;
+	private ArrayList<Double> tmpWidth;
+	private double coeff;
 
 	public RectangleModel(double width, double height, Point pos, RGB rgb) {
 		super(pos, rgb);
@@ -22,6 +24,8 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 		rotationCenter = PointFactory.getPoint(0,0);
 		this.arrondi = 0.0;
 		vector = new ArrayList<>();
+		this.tmpWidth = getVector();
+		this.coeff = 1;
 	}
 
 	public double getWidth() {
@@ -88,6 +92,15 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public double getCoeff() {
+		return coeff;
+	}
+
+	@Override
+	public void setCoeff(double coeff) {
+		this.coeff = coeff;
+	}
 }
 
 

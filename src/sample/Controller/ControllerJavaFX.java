@@ -65,6 +65,7 @@ public class ControllerJavaFX implements Serializable {
                 vector.set(i, vector.get(i) * value);
             }
             shape.setVector(vector);
+            shape.setCoeff(value);
         }
         shapesInToolBar.add(shape);
         IShapeDrawer drawer = shape.createShapeDrawer(controller);

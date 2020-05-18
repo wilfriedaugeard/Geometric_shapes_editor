@@ -16,6 +16,8 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
     private double length;
 	private Point rotationCenter;
 	private ArrayList<Double> vector;
+	private ArrayList<Double> tmpWidth;
+	private double coeff;
 
 	public PolygonModel(int nbEdges, double length, Point pos, RGB rgb) {
 		super(pos, rgb);
@@ -23,6 +25,8 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		this.length = length;
 		rotationCenter = PointFactory.getPoint(0,0);
 		vector = new ArrayList<>();
+		this.tmpWidth = getVector();
+		this.coeff = 1;
 	}
 
 	public int getNbEdges() {
@@ -109,4 +113,13 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		return 2*rayon;
 	}
 
+	@Override
+	public void setCoeff(double coeff) {
+		this.coeff = coeff;
+	}
+
+	@Override
+	public double getCoeff() {
+		return this.coeff;
+	}
 }

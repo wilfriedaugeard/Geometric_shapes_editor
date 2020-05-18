@@ -33,4 +33,6 @@ public interface ShapeInter extends Cloneable {
     public void setVector(ArrayList<Double> vector);
     public Double[] getPoints(int n, double l);
     public double getWidth();
+    public void setCoeff(double coeff);
+    public double getCoeff();
 }

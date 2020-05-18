@@ -87,6 +87,9 @@ public class DragAndDropEvent implements Events {
             double y = controller.getView().getShapeYPositionInToolBar(shapeInView);
 
             int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
+            if(indexOfShape < 0){
+                mouseEvent.consume();
+            }
             shapeToTranslate = controller.getShapesInCanvas().get(indexOfShape);
             isInShapeGroup = false;
 
