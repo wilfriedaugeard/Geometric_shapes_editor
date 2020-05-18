@@ -24,6 +24,8 @@ public class RightClick implements Event {
     private final ContextMenu shapeMenu;
     private double tmp_rotate;
     private double rotate_saved;
+    private double last_size;
+    private double last_rotate;
 
 
     public RightClick(Controller controller){
@@ -136,7 +138,11 @@ public class RightClick implements Event {
     public void resizeTreatment(String strValue, ShapeInter shapeSelected){
         if (containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);
-            resizeShape(shapeSelected,value);
+            if(last_size != value){
+                resizeShape(shapeSelected,value);
+                last_size = value;
+            }
+
         }
     }
 
@@ -162,8 +168,20 @@ public class RightClick implements Event {
     public void rotateTreatment(String strValue, ShapeInter shape){
         if(containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);
-            tmp_rotate += value;
-            rotateShape(shape, value);
+            if(last_rotate != value){
+                tmp_rotate += value;
+                rotateShape(shape, value);
+                last_rotate = value;
+            }
+        }
+    }
+
+    public void treatments(ShapeInter shape, TxtCapture dialog){
+        if(!dialog.getResize().getText().isEmpty()){
+            resizeTreatment(dialog.getResize().getText(), shape);
+        }
+        if(!dialog.getRotation().getText().isEmpty()){
+            rotateTreatment(dialog.getRotation().getText(),shape);
         }
     }
 
@@ -175,27 +193,21 @@ public class RightClick implements Event {
             ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
             double size_saved = shapeSelected.getWidth();
 
+            last_size = 0;
             tmp_rotate = 0;
             rotate_saved = 0;
+
 
             TxtCapture dialog = new TxtCapture(controller,"SHAPE EDITOR");
 
             // BUTTON EVENTS
             dialog.getSubmit().setOnAction(e -> {
-                if(!dialog.getResize().getText().isEmpty())
-                    resizeTreatment(dialog.getResize().getText(), shapeSelected);
-                if(!dialog.getRotation().getText().isEmpty()){
-                    rotateTreatment(dialog.getRotation().getText(),shapeSelected);
-                }
+                treatments(shapeSelected, dialog);
                 dialog.closeWindow();
             });
 
             dialog.getApply().setOnAction(e -> {
-                if(!dialog.getResize().getText().isEmpty())
-                    resizeTreatment(dialog.getResize().getText(), shapeSelected);
-                if(!dialog.getRotation().getText().isEmpty()){
-                    rotateTreatment(dialog.getRotation().getText(),shapeSelected);
-                }
+                treatments(shapeSelected, dialog);
             });
 
             dialog.getClear().setOnAction(e->{
@@ -204,7 +216,6 @@ public class RightClick implements Event {
 
                 double value = (size_saved*100)/shapeSelected.getWidth();
                 resizeShape(shapeSelected, value);
-                System.out.println(shapeSelected.getRotation());
                 if(tmp_rotate != 0){
                     rotateShape(shapeSelected,-tmp_rotate);
                     tmp_rotate = 0;
