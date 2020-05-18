@@ -2,6 +2,8 @@ package sample.Model;
 
 import sample.Controller.Controller;
 import sample.Controller.ControllerJavaFX;
+import sample.Factory.IPolygonDrawerFactory;
+import sample.Factory.PolygonDrawerJavaFXFactory;
 import sample.View.PolygoneDrawerJavaFX;
 import sample.View.IShapeDrawer;
 
@@ -13,6 +15,7 @@ public class PolygonJavaFX extends PolygonModel {
 
     @Override
     public IShapeDrawer createShapeDrawer(Controller controller) {
+        IPolygonDrawerFactory polygonDrawerFactory = new PolygonDrawerJavaFXFactory();
         RGB rgb = this.getRGB();
         double red = rgb.getR();
         double green = rgb.getG();
@@ -23,7 +26,7 @@ public class PolygonJavaFX extends PolygonModel {
 
         Double[] points = this.getPoints(this.getNbEdges(), this.getLength());
 
-        return new PolygoneDrawerJavaFX(points, controller.getView(), rgbTab);
+        return polygonDrawerFactory.createPolygonDrawer(points, controller.getView(), rgbTab);
     }
 
 
