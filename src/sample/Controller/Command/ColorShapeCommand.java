@@ -15,7 +15,7 @@ public class ColorShapeCommand implements Command{
         private Controller controller;
 
         public ColorShapeCommand(RGB color, ShapeInter shape, Controller controller) {
-            this.color = new RGB( (int)(color.getR()*255) ,(int) color.getG()*255,(int) color.getB()*255);
+            this.color = new RGB( (int)(color.getR()*255) ,(int) (color.getG()*255),(int) (color.getB()*255));
             this.shape = shape;
             this.controller = controller;
             this.oldColors = new ArrayList<>();
