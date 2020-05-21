@@ -108,7 +108,7 @@ public class RightClick implements Event {
     private boolean containsOnlyDigits(String s){
         int len = s.length();
         for (int i = 0; i < len-1; i++) {
-            if ((!Character.isDigit(s.charAt(i)))) {
+            if ((!Character.isDigit(s.charAt(i))) && (i == 0 && !(s.charAt(i) == '-'))) {
                 return false;
             }
         }
@@ -168,6 +168,7 @@ public class RightClick implements Event {
     public void rotateTreatment(String strValue, ShapeInter shape){
         if(containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);
+            System.out.println(value);
             if(last_rotate != value){
                 tmp_rotate += value;
                 rotateShape(shape, value);
