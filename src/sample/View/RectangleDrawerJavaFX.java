@@ -31,14 +31,14 @@ public class RectangleDrawerJavaFX extends ShapeDrawerJavaFX  {
 	}
 
 	@Override
-	public void drawShapeInToolBar() {
+	public void drawShapeInToolBar(int itemPos, int shapePos) {
 		Rectangle rectangle = new Rectangle(x, y, width, height);
 		rectangle.setFill(color);
 		rectangle.setArcHeight(arrondi);
 		rectangle.setArcWidth(arrondi);
 		ToolBar toolBar = (ToolBar) view.getToolBar();
-		toolBar.getItems().add(rectangle);
-		view.getShapesInToolBar().add(rectangle);
+		toolBar.getItems().add(itemPos,rectangle);
+		view.getShapesInToolBar().add(shapePos, rectangle);
 		
 	}
 }

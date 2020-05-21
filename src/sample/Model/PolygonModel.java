@@ -114,6 +114,11 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 	}
 
 	@Override
+	public double getHeight() {
+		return getWidth();
+	}
+
+	@Override
 	public void setCoeff(double coeff) {
 		this.coeff = coeff;
 	}

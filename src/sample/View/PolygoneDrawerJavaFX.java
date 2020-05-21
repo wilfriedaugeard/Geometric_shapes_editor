@@ -26,13 +26,13 @@ public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX  {
 	}
 
 	@Override
-	public void drawShapeInToolBar() {
+	public void drawShapeInToolBar(int itemPos, int shapePos) {
 		Polygon polygon = new Polygon();
 		polygon.getPoints().addAll(points);
 		polygon.setFill(color);
 		ToolBar toolBar = (ToolBar) view.getToolBar();
-		toolBar.getItems().add(polygon);
-		view.getShapesInToolBar().add(polygon);
+		toolBar.getItems().add(itemPos, polygon);
+		view.getShapesInToolBar().add(shapePos, polygon);
 	}
 
 }

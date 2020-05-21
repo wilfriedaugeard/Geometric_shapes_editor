@@ -1,9 +1,11 @@
 package sample.Controller.Events;
 
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Shape;
 import sample.Controller.Command.Command;
 import sample.Controller.Command.ResizeCommand;
@@ -13,6 +15,7 @@ import sample.Controller.Command.TranslateCommand;
 import sample.Factory.PointFactory;
 import sample.Model.Point;
 import sample.Model.ShapeInter;
+import sample.View.IShapeDrawer;
 
 
 public class DragAndDropEvent implements Event {
@@ -90,6 +93,7 @@ public class DragAndDropEvent implements Event {
                 mouseEvent.consume();
                 return;
             }
+
             shapeToTranslate = controller.getShapesInCanvas().get(indexOfShape);
             isInShapeGroup = false;
 
@@ -130,7 +134,6 @@ public class DragAndDropEvent implements Event {
 
         double toolbar_w = toolbar.getWidth();
         // Resize shape
-        System.out.println(shapeToTranslate.getWidth());
         if(shapeToTranslate.getWidth() >= toolbar_w){
             double margin_left = toolbar.getPadding().getLeft();
             double margin_right = toolbar.getPadding().getRight();
@@ -140,7 +143,6 @@ public class DragAndDropEvent implements Event {
             if(isInShapeGroup){
                 for (ShapeInter shapeGroup : controller.getShapeGroups()) {
                     if (shapeGroup.getChildren().contains(shapeToTranslate)) {
-                        System.out.println("Group size: "+shapeGroup.getWidth());
                         if(shapeGroup.getWidth() >= toolbar_w) {
                             value = (toolbar_w-margin_left-margin_right)/shapeGroup.getWidth();
                             value *= 100;
@@ -148,8 +150,15 @@ public class DragAndDropEvent implements Event {
                             controller.addLastCommand(resizeCommand);
                             controller.setCurrentPosInCommands(controller.getNbCommands());
                             resizeCommand.execute();
-                            return;
                         }
+                        controller.addShapeInToolbar(shapeGroup, controller, itemPos,shapePos);
+                        int index;
+                        for(ShapeInter child : shapeGroup.getChildren()){
+                            index = controller.getShapesInCanvas().indexOf(child);
+                            controller.removeShape(child, controller.getView().getShapesInCanvas().get(index));
+                        }
+                        controller.updateEvents();
+                        return;
                     }
                 }
             }else{
@@ -163,14 +172,12 @@ public class DragAndDropEvent implements Event {
         }
 
         // View
-        toolbar.getItems().add(itemPos, shapeInView);
-        controller.getView().getShapesInToolBar().add(shapePos, shapeInView);
-        controller.getView().getShapesInToolBar().get(shapePos).setTranslateX(0);
-        controller.getView().getShapesInToolBar().get(shapePos).setTranslateY(0);
+        //toolbar.getItems().add(itemPos, shapeInView);
+        //controller.getView().getShapesInToolBar().add(shapePos, shapeInView);
 
         // Controller
         controller.getShapesInToolBar().add(shapeToTranslate);
-
+        controller.addShapeInToolbar(shapeToTranslate, controller, itemPos,shapePos);
         controller.removeShape(shapeToTranslate, shapeInView);
         controller.updateEvents();
 
@@ -209,10 +216,14 @@ public class DragAndDropEvent implements Event {
     public boolean sameShapeGroupInToolBar(ShapeInter shapeGroupInToolbar){
         for (ShapeInter group : controller.getShapeGroups()){
             if(group.getChildren().contains(shapeGroupInToolbar)){
+                System.out.println(group);
                 for (ShapeInter shape : group.getChildren()){
                     if(!shapeExisted(shape)){
                         return false;
                     }
+                }
+                if(group.getWidth()/group.getCoeff() != shapeGroupInToolbar.getWidth()){
+                    return false;
                 }
             }
         }
@@ -223,7 +234,7 @@ public class DragAndDropEvent implements Event {
         for (ShapeInter shapeInToolBar : controller.getShapesInToolBar()) {
             if (shapeExisted.getRGB() == shapeInToolBar.getRGB()
                     && shapeExisted.getRotation() == shapeInToolBar.getRotation()
-                    && shapeExisted.getVector().get(0).equals(shapeInToolBar.getVector().get(0))) {
+                    && shapeExisted.getWidth() == shapeInToolBar.getWidth()/shapeInToolBar.getCoeff()) {
                 return true;
             }
         }

@@ -30,6 +30,7 @@ public class ControllerJavaFX implements Serializable {
     private ArrayList<ShapeInter> shapesInCanvas;
     private transient ArrayList<Event> events;
     private ArrayList<ShapeInter> shapeGroups;
+    private ArrayList<ShapeInter> shapeGroupsInToolBar;
     private ShapeInter shapeGroupTmp;
 
     /* Pattern Command */
@@ -41,6 +42,7 @@ public class ControllerJavaFX implements Serializable {
         shapesInCanvas = new ArrayList<>();
         shapesInToolBar = new ArrayList<>();
         shapeGroups = new ArrayList<>();
+        shapeGroupsInToolBar = new ArrayList<>();
         events = new ArrayList<>();
         commands = new LinkedList<>();
         shapeGroupTmp = new ShapeGroup();
@@ -48,11 +50,10 @@ public class ControllerJavaFX implements Serializable {
     }
 
     /**
-     * Add shape in toolbar and resize it if it's too big
+     * Resize a shape
      * @param shape
-     * @param controller
      */
-    public void addShapeInToolbar(ShapeInter shape, Controller controller){
+    public void resizeShape(ShapeInter shape){
         ToolBar toolbar = (ToolBar) view.getToolBar();
         double toolbar_w = toolbar.getPrefWidth();
         // Resize shape
@@ -67,9 +68,32 @@ public class ControllerJavaFX implements Serializable {
             shape.setVector(vector);
             shape.setCoeff(value);
         }
-        shapesInToolBar.add(shape);
+    }
+
+    public ArrayList<ShapeInter> getShapeGroupsInToolBar(){
+        return shapeGroupsInToolBar;
+    }
+
+    /**
+     * Add shape in toolbar
+     * @param shape
+     * @param controller
+     */
+    public void addShapeInToolbar(ShapeInter shape, Controller controller, int itemPos, int shapePos){
+        if(shape.getChildren().isEmpty()){
+            System.out.println("Empty case in addShapeInToolBar function");
+            shapesInToolBar.add(itemPos, shape);
+        }
+        else{
+            int pos = shapePos;
+            for (ShapeInter child : shape.getChildren()){
+                shapesInToolBar.add(pos, child);
+                pos++;
+            }
+            shapeGroupsInToolBar.add(shape);
+        }
         IShapeDrawer drawer = shape.createShapeDrawer(controller);
-        drawer.drawShapeInToolBar();
+        drawer.drawShapeInToolBar(itemPos, shapePos);
     }
 
 
@@ -81,10 +105,20 @@ public class ControllerJavaFX implements Serializable {
         ToolBar toolBar = (ToolBar) view.getToolBar();
         toolBar.setPrefWidth(50);
 
-        addShapeInToolbar(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)),controller);
-        addShapeInToolbar(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170)),controller);
-        addShapeInToolbar(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233)),controller);
-        addShapeInToolbar(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167)),controller);
+        RectangleJavaFX rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+        RectangleJavaFX rec2 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170));
+        PolygonJavaFX  poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
+        PolygonJavaFX  poly2 = new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167));
+
+        resizeShape(rec1);
+        resizeShape(rec2);
+        resizeShape(poly1);
+        resizeShape(poly2);
+
+        addShapeInToolbar(rec1, controller, toolBar.getItems().size(), toolBar.getItems().size());
+        addShapeInToolbar(rec2, controller, toolBar.getItems().size(), toolBar.getItems().size());
+        addShapeInToolbar(poly1,controller, toolBar.getItems().size(), toolBar.getItems().size());
+        addShapeInToolbar(poly2,controller, toolBar.getItems().size(), toolBar.getItems().size());
 
         view.addTrash();
     }
@@ -112,6 +146,8 @@ public class ControllerJavaFX implements Serializable {
             }
         } else {
             int shapeIndex = shapesInCanvas.indexOf(shape);
+            if(shapeIndex < 0)
+                return;
             Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
             shapeView.setTranslateX(shapeView.getTranslateX() + dragX);
             shapeView.setTranslateY(shapeView.getTranslateY() + dragY);
@@ -130,7 +166,6 @@ public class ControllerJavaFX implements Serializable {
         }
         BorderPane bp = (BorderPane) getView().getRoot();
         bp.getChildren().remove(shapeView);
-        //shapesInCanvas.remove(shapeModel);
     }
 
     /**

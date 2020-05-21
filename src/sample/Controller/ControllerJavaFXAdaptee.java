@@ -52,6 +52,11 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
+    public void addShapeInToolbar(ShapeInter shape, Controller controller, int itemPos, int shapePos) {
+        controllerJavaFX.addShapeInToolbar(shape,controller,itemPos, shapePos);
+    }
+
+    @Override
     public void updateEvents() {
         controllerJavaFX.updateEvents();
     }
@@ -124,5 +129,10 @@ public class ControllerJavaFXAdaptee implements Controller {
     @Override
     public void setCurrentPosInCommands(int currentPosInCommands) {
         controllerJavaFX.setCurrentPosInCommands(currentPosInCommands);
+    }
+
+    @Override
+    public ArrayList<ShapeInter> getShapeGroupsInToolBar() {
+        return controllerJavaFX.getShapeGroupsInToolBar();
     }
 }

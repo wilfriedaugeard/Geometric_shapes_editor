@@ -19,6 +19,7 @@ public interface Controller extends Serializable {
     public void updateViewRemove(ShapeInter shape);
     public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup);
     public void updateViewResize(ShapeInter shape);
+    public void addShapeInToolbar(ShapeInter shape, Controller controller, int itemPos, int shapePos);
 
     /*Events*/
     public void initEvents();
@@ -37,6 +38,7 @@ public interface Controller extends Serializable {
     public ArrayList<ShapeInter> getShapesInToolBar();
     public ArrayList<ShapeInter> getShapesInCanvas();
     public ArrayList<ShapeInter> getShapeGroups();
+    public ArrayList<ShapeInter> getShapeGroupsInToolBar();
 
     /*Pattern Command*/
     public LinkedList<Command> getCommands();
