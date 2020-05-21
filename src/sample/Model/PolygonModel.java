@@ -29,18 +29,30 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		this.coeff = 1;
 	}
 
+	/**
+	 * @return The number of edges of the polygon
+	 */
 	public int getNbEdges() {
 		return nbEdges;
 	}
 
+	/**
+	 * @param nbEdges Value to replace the current number of edges of the polygon
+	 */
 	public void setNbEdges(int nbEdges) {
 		this.nbEdges = nbEdges;
 	}
 
+	/**
+	 * @return The length of the polygon
+	 */
 	public double getLength() {
 		return length;
 	}
 
+	/**
+	 * @param length Value to replace the current length of the polygon
+	 */
 	public void setLength(double length) {
 		this.length = length;
 	}

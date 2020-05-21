@@ -10,7 +10,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import sample.Controller.Command.Command;
 import sample.Controller.Events.*;
-import sample.Factory.AbstractEventFactory;
+import sample.Factory.EventFactory;
 import sample.Factory.PointFactory;
 import sample.Model.*;
 import sample.View.IShapeDrawer;
@@ -50,8 +50,8 @@ public class ControllerJavaFX implements Serializable {
     }
 
     /**
-     * Resize a shape
-     * @param shape
+     * Resize a shape.
+     * @param shape The ShapeInter to resize.
      */
     public void resizeShape(ShapeInter shape){
         ToolBar toolbar = (ToolBar) view.getToolBar();
@@ -70,14 +70,12 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
-    public ArrayList<ShapeInter> getShapeGroupsInToolBar(){
-        return shapeGroupsInToolBar;
-    }
-
     /**
-     * Add shape in toolbar
-     * @param shape
-     * @param controller
+     * Add ShapeInter in ToolBar, and draw it in View.
+     * @param shape The ShapeInter to add in the Toolbar's list
+     * @param controller The Controller used for drawing
+     * @param itemPos Index in the Toolbar's list
+     * @param shapePos Index in the Toolbar's list in the View
      */
     public void addShapeInToolbar(ShapeInter shape, Controller controller, int itemPos, int shapePos){
         if(shape.getChildren().isEmpty()){
@@ -97,6 +95,10 @@ public class ControllerJavaFX implements Serializable {
     }
 
 
+    /**
+     * Initialize every part of the View, by calling it's methods and by drawing the first Toolbar's elements.
+     * @param controller Controller used to initialize view
+     */
     public void initializeView(Controller controller) {
         view.addMenuBar();
         view.addCanvas();
@@ -123,6 +125,10 @@ public class ControllerJavaFX implements Serializable {
         view.addTrash();
     }
 
+
+    /**
+     * Update View after a ShapeInter, or a group of ShapeInter have been modified on their RGB color.
+     */
     public void updateViewColor() {
         for (ShapeInter shapeModel : shapesInCanvas) {
             for (Shape shapeView : view.getShapesInCanvas()) {
@@ -136,6 +142,13 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
+    /**
+     * Update View after a ShapeInter or a group of ShapeInter have been modified with their translate method.
+     * @param shape The Shapeinter translated
+     * @param dragX Value to translate shapeView in X coordinate
+     * @param dragY Value to translate shapeView in Y coordinate
+     * @param isShapeGroup true if param shape is a ShapeGroup
+     */
     public void updateViewTranslate(ShapeInter shape, double dragX, double dragY, boolean isShapeGroup) {
         if (isShapeGroup) {
             for (ShapeInter child : shape.getChildren()) {
@@ -155,7 +168,9 @@ public class ControllerJavaFX implements Serializable {
     }
 
     /**
-     * Remove a shape in view and controller
+     * Remove a shape in both sides : View and Controller.
+     * @param shapeModel ShapeInter to remove
+     * @param shapeView Shape to remove
      */
     public void removeShape(ShapeInter shapeModel, Shape shapeView) {
         if (!getView().getShapesInCanvas().remove(shapeView)) {
@@ -169,7 +184,8 @@ public class ControllerJavaFX implements Serializable {
     }
 
     /**
-     * Update view after removing shape(s)
+     * Update view after removing shape(s).
+     * @param shape ShapeInter removed
      */
     public void updateViewRemove(ShapeInter shape) {
         boolean noGroup = true;
@@ -199,6 +215,12 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
+    /**
+     * Update View after a ShapeInter, or a group of ShapeInter have been modified on their rotation value.
+     * @param shape ShapeInter rotated
+     * @param value Value in degree of the rotation
+     * @param isShapeGroup true if param shape is a ShapeGroup
+     */
     public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup) {
         if (isShapeGroup) {
             for (ShapeInter child : shape.getChildren()) {
@@ -223,6 +245,10 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
+    /**
+     * Update View after a ShapeInter, or a group of ShapeInter have been modified on their size.
+     * @param shape ShapeInter rezised
+     */
     public void updateViewResize(ShapeInter shape){
         int shapeIndex = shapesInCanvas.indexOf(shape);
         Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
@@ -247,79 +273,140 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
+    /**
+     * Method used to relaunch every events initialized.
+     */
     public void updateEvents(){
         for(Event event : getEvents()) {
             event.launchEvent();
         }
     }
 
-
+    /**
+     * Initialize every event and add them to the Event's list.
+     * After that, launch every event with updateEvents method.
+     * @param controller Controller where events are added
+     */
     public void initEvents(Controller controller) {
 
-        events.add(AbstractEventFactory.getEvent("RightClick",controller));
-        events.add(AbstractEventFactory.getEvent("DragAndDropEvent",controller));
-        events.add(AbstractEventFactory.getEvent("CreateShapeEvent",controller));
-        events.add(AbstractEventFactory.getEvent("SelectionShapeEvent",controller));
-        events.add(AbstractEventFactory.getEvent("GroupShapeEvent",controller));
-        events.add(AbstractEventFactory.getEvent("RedoEvent",controller));
-        events.add(AbstractEventFactory.getEvent("UndoEvent",controller));
-        events.add(AbstractEventFactory.getEvent("SaveEvent",controller));
-        events.add(AbstractEventFactory.getEvent("LoadEvent",controller));
+        events.add(EventFactory.getEvent("RightClick",controller));
+        events.add(EventFactory.getEvent("DragAndDropEvent",controller));
+        events.add(EventFactory.getEvent("CreateShapeEvent",controller));
+        events.add(EventFactory.getEvent("SelectionShapeEvent",controller));
+        events.add(EventFactory.getEvent("GroupShapeEvent",controller));
+        events.add(EventFactory.getEvent("RedoEvent",controller));
+        events.add(EventFactory.getEvent("UndoEvent",controller));
+        events.add(EventFactory.getEvent("SaveEvent",controller));
+        events.add(EventFactory.getEvent("LoadEvent",controller));
         updateEvents();
     }
 
+    /**
+     * @return Temporary group of ShapeInter selected
+     */
     public ShapeInter getShapeGroupTmp(){
         return shapeGroupTmp;
     }
 
+    /**
+     * @return ID for serializable
+     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
+    /**
+     * @return The list of events in the Controller
+     */
     public ArrayList<Event> getEvents() {
         return events;
     }
 
+    /**
+     * @return The list of ShapeInter groups in the ToolBar
+     */
+    public ArrayList<ShapeInter> getShapeGroupsInToolBar(){
+        return shapeGroupsInToolBar;
+    }
+
+    /**
+     * @return The scene initialized with JavaFX
+     */
     public Scene getScene() {
         return (Scene) view.getScene();
     }
 
+    /**
+     * @return The View used by the software
+     */
     public ViewJavaFXAdaptee getView() {
         return view;
     }
 
+    /**
+     * @return The list of ShapeInter in the ToolBar
+     */
     public ArrayList<ShapeInter> getShapesInToolBar() {
         return shapesInToolBar;
     }
 
+    /**
+     * @return The list of ShapeInter groups in the Canvas
+     */
     public ArrayList<ShapeInter> getShapesInCanvas() {
         return shapesInCanvas;
     }
 
+    /**
+     * @return The list of ShapeInter groups in the Canvas
+     */
     public ArrayList<ShapeInter> getShapeGroups() {
         return shapeGroups;
     }
 
+    /**
+     * @return The list of Commands executed
+     */
     public LinkedList<Command> getCommands() {
         return commands;
     }
 
+    /**
+     * Add in the last position a Command object in the Command's list.
+     * @param command The object Command to add
+     */
     public void addLastCommand(Command command){
         commands.addLast(command);
     }
 
+
+    /**
+     * @return The number of elements in the Command's list
+     */
     public int getNbCommands(){
         return commands.size()-1;
     }
 
+
+    /**
+     * @return The current position pointed in the Command's list
+     */
     public int getCurrentPosInCommands() {
         return currentPosInCommands;
     }
 
+
+    /**
+     * @param currentPosInCommands The current position in the Command's list wanted
+     */
     public void setCurrentPosInCommands(int currentPosInCommands) {
         this.currentPosInCommands = currentPosInCommands;
     }
 
+
+    /**
+     * @param shapeGroupTmp The temporary ShapeGroup
+     */
     public void setShapeGroupTmp(ShapeInter shapeGroupTmp) {
         this.shapeGroupTmp = shapeGroupTmp;
     }

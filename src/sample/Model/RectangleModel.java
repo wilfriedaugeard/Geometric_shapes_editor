@@ -28,16 +28,8 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 		this.coeff = 1;
 	}
 
-	public double getWidth() {
-		return width;
-	}
-
 	public void setWidth(double width) {
 		this.width = width;
-	}
-
-	public double getHeight() {
-		return height;
 	}
 
 	public void setHeight(double height) {
@@ -52,6 +44,15 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 		this.arrondi = arrondi;
 	}
 
+	@Override
+	public double getWidth() {
+		return width;
+	}
+
+	@Override
+	public double getHeight() {
+		return height;
+	}
 
 	@Override
 	public Point getRotationCenter() {

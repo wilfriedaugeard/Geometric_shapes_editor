@@ -3,7 +3,12 @@ package sample.Factory;
 import sample.Controller.Controller;
 import sample.Controller.Events.*;
 
-public class AbstractEventFactory {
+public class EventFactory {
+    /**
+     * @param name The class name to create
+     * @param controller Controller used as parameter to create event object
+     * @return Event object
+     */
     public static Event getEvent(String name, Controller controller){
         if(name.equals("RightClick")){
             return new RightClick(controller);

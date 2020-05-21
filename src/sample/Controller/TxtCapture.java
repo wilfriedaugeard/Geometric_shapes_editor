@@ -21,8 +21,6 @@ public class TxtCapture extends Dialog<String> {
     private GridPane grid;
     private Stage stage;
 
-
-
     public TxtCapture() {
         grid = new GridPane();
 
@@ -40,11 +38,17 @@ public class TxtCapture extends Dialog<String> {
         stage.show();
     }
 
+    /**
+     * Close the current stage of the window.
+     */
     public void closeWindow(){
         stage.close();
     }
 
 
+    /**
+     *
+     */
     public void ui(){
 
         //Creating a GridPane container
