@@ -24,6 +24,7 @@ public class RightClick implements Event {
     private final ContextMenu shapeMenu;
     private double tmp_rotate;
     private double rotate_saved;
+    private double size_saved;
     private double last_size;
     private double last_rotate;
 
@@ -119,6 +120,7 @@ public class RightClick implements Event {
     // Resize a shape
     public void resizeShape(ShapeInter shape, double value){
         Command resizeCommand;
+        System.out.println(shape.getWidth());
         for (ShapeInter shapeGroup : controller.getShapeGroups()) {
             if (shapeGroup.getChildren().contains(shape)) {
                 resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
@@ -132,17 +134,15 @@ public class RightClick implements Event {
         controller.addLastCommand(resizeCommand);
         controller.setCurrentPosInCommands(controller.getNbCommands());
         resizeCommand.execute();
+        System.out.println(shape.getWidth());
     }
 
     // Verify string before resize a shape
     public void resizeTreatment(String strValue, ShapeInter shapeSelected){
         if (containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);
-            if(last_size != value){
-                resizeShape(shapeSelected,value);
-                last_size = value;
-            }
-
+            resizeShape(shapeSelected,value);
+            System.out.println(value);
         }
     }
 
@@ -186,13 +186,26 @@ public class RightClick implements Event {
         }
     }
 
+    public void clearField(ShapeInter shapeSelected){
+
+        double value = (size_saved*100)/shapeSelected.getWidth();
+        resizeShape(shapeSelected, value);
+        if(tmp_rotate != 0){
+            rotateShape(shapeSelected,-tmp_rotate);
+            tmp_rotate = 0;
+            rotate_saved = 0;
+        }
+        last_rotate = 0;
+        last_size = 0;
+    }
+
 
     EventHandler<ActionEvent> edit = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             int index = controller.getView().getShapesInCanvas().indexOf(shapeInCanvas);
             ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
-            double size_saved = shapeSelected.getWidth();
+            size_saved = shapeSelected.getWidth();
 
             last_size = 0;
             tmp_rotate = 0;
@@ -207,22 +220,15 @@ public class RightClick implements Event {
             });
 
             dialog.getApply().setOnAction(e -> {
+                clearField(shapeSelected);
                 treatments(shapeSelected, dialog);
+
             });
 
             dialog.getClear().setOnAction(e->{
                 dialog.getResize().clear();
                 dialog.getRotation().clear();
-
-                double value = (size_saved*100)/shapeSelected.getWidth();
-                resizeShape(shapeSelected, value);
-                if(tmp_rotate != 0){
-                    rotateShape(shapeSelected,-tmp_rotate);
-                    tmp_rotate = 0;
-                    rotate_saved = 0;
-                }
-                last_rotate = 0;
-                last_size = 0;
+                clearField(shapeSelected);
             });
 
 
