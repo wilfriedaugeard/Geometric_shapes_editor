@@ -107,8 +107,12 @@ public class RightClick implements Event {
 
     private boolean containsOnlyDigits(String s){
         int len = s.length();
-        for (int i = 0; i < len-1; i++) {
-            if ((!Character.isDigit(s.charAt(i))) && (i == 0 && !(s.charAt(i) == '-'))) {
+        int start = 0;
+        if((s.charAt(0) == '-')){
+            start = 1;
+        }
+        for (int i = start; i < len; i++) {
+            if ((!Character.isDigit(s.charAt(i)))) {
                 return false;
             }
         }
