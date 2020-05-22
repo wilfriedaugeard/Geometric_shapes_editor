@@ -298,12 +298,21 @@ public class DragAndDropEvent implements Event {
             // Test if the released shape is on the trash
             if (controller.getView().isOn(controller.getView().getTrash(), PointFactory.getPoint(x, y))){
                 if(toolbarShapeMove){
-                    // Controller delete
-                    controller.getShapesInToolBar().remove(shapeToTranslate);
-                    // View delete
                     ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
-                    toolBar.getItems().remove(shapeInView);
-                    controller.getView().getShapesInToolBar().remove(shapeInView);
+                    if(isInShapeGroup){
+                        for(ShapeInter child : shapeGroupToModify.getChildren()){
+                            // View delete
+                            int i = controller.getShapesInToolBar().indexOf(child);
+                            shapeInView = controller.getView().getShapesInToolBar().get(i);
+                            toolBar.getItems().remove(shapeInView);
+                            controller.getView().getShapesInToolBar().remove(shapeInView);
+                            controller.getShapesInToolBar().remove(child);
+                        }
+                    }else{
+                        controller.getShapesInToolBar().remove(shapeToTranslate);
+                        toolBar.getItems().remove(shapeInView);
+                        controller.getView().getShapesInToolBar().remove(shapeInView);
+                    }
                     mouseEvent.consume();
                     controller.saveState();
                     return;
