@@ -27,7 +27,7 @@ public class PolygonJavaFX extends PolygonModel {
 
         Double[] points = this.getPoints(this.getNbEdges(), this.getLength());
 
-        return polygonDrawerFactory.createPolygonDrawer(points, controller.getView(), rgbTab);
+        return polygonDrawerFactory.createPolygonDrawer(points, controller.getView(), rgbTab, this.getRotation());
     }
 
 

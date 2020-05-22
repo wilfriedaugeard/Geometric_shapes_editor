@@ -10,7 +10,7 @@ public abstract class ShapeDrawerJavaFX implements IShapeDrawer {
 		this.view = view;
 		this.color = color;
 	}
-			
+
 	public abstract void drawShape();
 	public abstract void drawShapeInToolBar(int itemPos, int shapePos);
 	
