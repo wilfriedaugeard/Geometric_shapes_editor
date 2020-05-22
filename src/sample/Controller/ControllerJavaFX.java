@@ -334,7 +334,7 @@ public class ControllerJavaFX implements Serializable {
             ois = new ObjectInputStream(file);
             final ControllerJavaFX controller_load = (ControllerJavaFX) ois.readObject();
 
-            //controller.getShapesInToolBar().addAll(controller_load.getShapesInToolBar());
+            controller.getShapeGroupsInToolBar().addAll(controller_load.getShapeGroupsInToolBar());
             ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
             for (ShapeInter shape : controller_load.getShapesInToolBar()) {
                 addShapeInToolbar(shape, controller, toolBar.getItems().size(), toolBar.getItems().size());
