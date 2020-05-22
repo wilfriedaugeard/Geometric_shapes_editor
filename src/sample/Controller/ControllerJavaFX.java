@@ -142,15 +142,13 @@ public class ControllerJavaFX implements Serializable {
      * Update View after a ShapeInter, or a group of ShapeInter have been modified on their RGB color.
      */
     public void updateViewColor() {
-        for (ShapeInter shapeModel : shapesInCanvas) {
-            for (Shape shapeView : view.getShapesInCanvas()) {
-                if (shapeModel.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shapeModel.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
-                    double red = shapeModel.getRGB().getR();
-                    double blue = shapeModel.getRGB().getB();
-                    double green = shapeModel.getRGB().getG();
-                    shapeView.setFill(Color.rgb((int) red, (int) green,(int) blue));
-                }
-            }
+        for(int i=0; i<getShapesInCanvas().size(); i++){
+            ShapeInter shapeModel = getShapesInCanvas().get(i);
+            Shape shapeView = getView().getShapesInCanvas().get(i);
+            double red = shapeModel.getRGB().getR();
+            double blue = shapeModel.getRGB().getB();
+            double green = shapeModel.getRGB().getG();
+            shapeView.setFill(Color.rgb((int) red, (int) green,(int) blue));
         }
     }
 
