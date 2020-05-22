@@ -16,6 +16,8 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 	private ArrayList<Double> vector;
 	private ArrayList<Double> tmpWidth;
 	private double coeff;
+	private double deltaX;
+	private double deltaY;
 
 	public RectangleModel(double width, double height, Point pos, RGB rgb) {
 		super(pos, rgb);
@@ -101,6 +103,26 @@ public abstract class RectangleModel extends ShapeModel implements Serializable 
 	@Override
 	public void setCoeff(double coeff) {
 		this.coeff = coeff;
+	}
+
+	@Override
+	public double getDeltaX() {
+		return deltaX;
+	}
+
+	@Override
+	public void setDeltaX(double deltaX) {
+		this.deltaX = deltaX;
+	}
+
+	@Override
+	public double getDeltaY() {
+		return deltaY;
+	}
+
+	@Override
+	public void setDeltaY(double deltaY) {
+		this.deltaY = deltaY;
 	}
 }
 

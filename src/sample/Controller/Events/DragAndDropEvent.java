@@ -98,30 +98,22 @@ public class DragAndDropEvent implements Event {
             for (ShapeInter group : controller.getShapeGroupsInToolBar()) {
                 if (group.getChildren().contains(shapeModel)) {
                     ShapeInter copy = group.clone();
-                    copy.setPos(PointFactory.getPoint(x, y));
-                    double delta = 0;
-                    for (ShapeInter shapeChild : copy.getChildren()) {
-                        double x1 = shapeChild.getPos().getX();
-                        double y1 = shapeChild.getPos().getY();
-                        if (x1 < 0) {
-                            delta = Math.min(delta, x1);
-                        }
-                    }
-                    for (ShapeInter shapeInter : copy.getChildren()) {
-                        Point p = PointFactory.getPoint((shapeInter.getPos().getX() + delta) * shapeInter.getCoeff(), shapeInter.getPos().getY() * shapeInter.getCoeff());
-                        shapeInter.setPos(p);
-                    }
-                    for (ShapeInter shapeInter : copy.getChildren()) {
+
+                    for(int i = 0; i<group.getChildren().size(); i++){
+                        ShapeInter shapeInter = copy.getChild(i);
                         ArrayList<Double> vector = shapeInter.getVector();
-                        for (int i = 0; i < vector.size(); i++) {
-                            vector.set(i, vector.get(i) / group.getCoeff());
+                        for (int j = 0; j < vector.size(); j++) {
+                            vector.set(j, vector.get(j) / shapeInter.getCoeff());
                         }
                         shapeInter.setVector(vector);
                         controller.getShapesInCanvas().add(shapeInter);
+
+                        Point p = PointFactory.getPoint(x + copy.getChild(i).getDeltaX() , y+copy.getChild(i).getDeltaY());
+                        shapeInter.setPos(p);
                     }
+
                     IShapeDrawer drawer = copy.createShapeDrawer(controller);
                     drawer.drawShape();
-                    System.out.println("group :"+copy.getChildren());
                     controller.getShapeGroups().add(copy);
                     controller.updateEvents();
                     return;
@@ -149,13 +141,10 @@ public class DragAndDropEvent implements Event {
         shapeSavedInToolbar = shapeInToolbar;
         posInTolbar = controller.getShapesInToolBar().indexOf(shapeInToolbar);
         shapeToTranslate = shapeInToolbar;
-        System.out.println("moveShapeInToolbar called");
-        System.out.println("Group: "+controller.getShapeGroupsInToolBar());
         for(ShapeInter group : controller.getShapeGroupsInToolBar()){
             if (group.getChildren().contains(shapeToTranslate)){
                 isInShapeGroup = true;
                 shapeGroupToModify = group;
-                System.out.println("Group find! : "+group);
             }
         }
         toolbarShapeMove = true;
@@ -178,7 +167,6 @@ public class DragAndDropEvent implements Event {
             int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
             // shape in toolbar bar selected
             if(indexOfShape < 0){
-                System.out.println("toolbar drag");
                 shapeInToolBarTmp = new ArrayList<>();
                 shapeInToolBarTmp.addAll(controller.getShapesInToolBar());
 
@@ -212,7 +200,6 @@ public class DragAndDropEvent implements Event {
         Command removeCommand;
 
         if(isInShapeGroup){
-            System.out.println("Remove: "+shapeGroupToModify);
             removeCommand = new RemoveCommand(shapeGroupToModify, controller);
         }else {
             removeCommand = new RemoveCommand(shapeToTranslate, controller);
@@ -232,47 +219,41 @@ public class DragAndDropEvent implements Event {
 
         double toolbar_w = toolbar.getWidth();
         // Resize shape
-        if(shapeToTranslate.getWidth() >= toolbar_w){
-            double margin_left = toolbar.getPadding().getLeft();
-            double margin_right = toolbar.getPadding().getRight();
-            double value = (toolbar_w-margin_left-margin_right)/shapeToTranslate.getWidth();
-            value *= 100;
-            Command resizeCommand;
-            if(isInShapeGroup){
-                for (ShapeInter shapeGroup : controller.getShapeGroups()) {
-                    if (shapeGroup.getChildren().contains(shapeToTranslate)) {
-                        if(shapeGroup.getWidth() >= toolbar_w) {
-                            value = (toolbar_w-margin_left-margin_right)/shapeGroup.getWidth();
-                            value *= 100;
-                            resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
-                            controller.addLastCommand(resizeCommand);
-                            controller.setCurrentPosInCommands(controller.getNbCommands());
-                            resizeCommand.execute();
-                        }
-                        int index;
-                        for(ShapeInter child : shapeGroup.getChildren()){
-                            controller.addShapeInToolbar(child, controller, itemPos,shapePos);
-                            index = controller.getShapesInCanvas().indexOf(child);
-                            controller.removeShape(child, controller.getView().getShapesInCanvas().get(index));
-                            itemPos++;
-                            shapePos++;
-                        }
-                        controller.getShapeGroupsInToolBar().add(shapeGroup);
-                        controller.updateEvents();
-                        controller.saveState();
-                        return;
-                    }
-                }
-            }else{
-                if(shapeToTranslate.getWidth() >= toolbar_w) {
-                    resizeCommand = new ResizeCommand(controller, shapeToTranslate, value, false);
+        double margin_left = toolbar.getPadding().getLeft();
+        double margin_right = toolbar.getPadding().getRight();
+        double value = (toolbar_w-margin_left-margin_right)/shapeToTranslate.getWidth();
+        value *= 100;
+        Command resizeCommand;
+        if(isInShapeGroup){
+            for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+                if (shapeGroup.getChildren().contains(shapeToTranslate)) {
+                    value = (toolbar_w-margin_left-margin_right)/shapeGroup.getWidth();
+                    value *= 100;
+                    resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
                     controller.addLastCommand(resizeCommand);
                     controller.setCurrentPosInCommands(controller.getNbCommands());
                     resizeCommand.execute();
+
+                    int index;
+                    for(ShapeInter child : shapeGroup.getChildren()){
+                        controller.addShapeInToolbar(child, controller, itemPos,shapePos);
+                        index = controller.getShapesInCanvas().indexOf(child);
+                        controller.removeShape(child, controller.getView().getShapesInCanvas().get(index));
+                        itemPos++;
+                        shapePos++;
+                    }
+                    controller.getShapeGroupsInToolBar().add(shapeGroup);
+                    controller.updateEvents();
+                    controller.saveState();
+                    return;
                 }
             }
         }
 
+        resizeCommand = new ResizeCommand(controller, shapeToTranslate, value, false);
+        controller.addLastCommand(resizeCommand);
+        controller.setCurrentPosInCommands(controller.getNbCommands());
+        resizeCommand.execute();
         // Controller
         controller.addShapeInToolbar(shapeToTranslate, controller, itemPos,shapePos);
         controller.removeShape(shapeToTranslate, shapeInView);

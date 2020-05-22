@@ -32,15 +32,23 @@ public class ResizeCommand implements Command {
     @Override
     public void execute() {
         if(isShapeGroup){
-            double delta = 0;
+            // Take the y min
+            double min = Double.POSITIVE_INFINITY;
+            ShapeInter shapeRef = shape;
             for(ShapeInter shapeChild : shape.getChildren()){
-                double x = shapeChild.getPos().getX();
-                double y = shapeChild.getPos().getY();
-                if(x<0){
-                    delta = Math.min(delta, x);
-                }
+                min = Math.min(min, shapeChild.getPos().getY());
+                shapeRef = shapeChild;
             }
+            shapeRef.setDeltaX(0);
+            shapeRef.setDeltaY(0);
+
             for(ShapeInter shapeChild : shape.getChildren()){
+                if(!shapeChild.equals(shapeRef)){
+                    double x = shapeChild.getPos().getX()-shapeRef.getPos().getX();
+                    double y = shapeChild.getPos().getY()-shapeRef.getPos().getY();
+                    shapeChild.setDeltaX(x);
+                    shapeChild.setDeltaY(y);
+                }
                 ArrayList<Double> vector = shapeChild.getVector();
                 ArrayList<Double> oldVecChild = new ArrayList<>();
                 for(int i = 0; i < vector.size(); i++){
@@ -50,10 +58,8 @@ public class ResizeCommand implements Command {
                 shapeChild.setCoeff(coeff);
                 oldVectors.add(oldVecChild);
                 shapeChild.setVector(vector);
-
-                Point p = PointFactory.getPoint((shapeChild.getPos().getX()-delta)*coeff, shapeChild.getPos().getY()*coeff);
-                shapeChild.setPos(p);
                 controller.updateViewResize(shapeChild);
+
             }
         }else{
             ArrayList<Double> vector = shape.getVector();

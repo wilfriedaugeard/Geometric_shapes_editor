@@ -15,6 +15,8 @@ public class ShapeGroup implements ShapeInter, Serializable {
     public ShapeGroup (){
         group = new ArrayList<>();
     }
+    private double deltaX = 0;
+    private double deltaY = 0;
 
     @Override
     public ShapeGroup clone() {
@@ -186,4 +188,30 @@ public class ShapeGroup implements ShapeInter, Serializable {
         return coeff;
     }
 
+    @Override
+    public double getDeltaX() {
+        System.out.println("getD ShapeGroup");
+        return deltaX;
+    }
+
+    @Override
+    public void setDeltaX(double d) {
+        deltaX = d;
+        for(ShapeInter child : getChildren()){
+            child.setDeltaX(d);
+        }
+    }
+
+    @Override
+    public double getDeltaY() {
+        return deltaY;
+    }
+
+    @Override
+    public void setDeltaY(double d) {
+        deltaY = d;
+        for(ShapeInter child : getChildren()){
+            child.setDeltaY(d);
+        }
+    }
 }

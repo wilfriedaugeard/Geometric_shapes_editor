@@ -12,11 +12,15 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 	private double rotation;
     private Point pos;
     private RGB RGB;
+    private double deltaX;
+    private double deltaY;
     
 	public ShapeModel(Point pos, RGB RGB) {
 		super();
 		this.pos = pos;
 		this.RGB = RGB;
+		this.deltaX = 0;
+		this.deltaY = 0;
 	}
 
 	public ShapeModel clone() {
@@ -67,6 +71,7 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 		this.RGB = RGB;
 	}
 
+
 	public abstract Point getRotationCenter();
     public abstract void setRotationCenter(Point rotationCenter);
 	public abstract IShapeDrawer createShapeDrawer(Controller controller);
@@ -98,6 +103,26 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 	@Override
 	public ShapeInter getChild(int n){
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getDeltaX() {
+		return deltaX;
+	}
+
+	@Override
+	public void setDeltaX(double deltaX) {
+		this.deltaX = deltaX;
+	}
+
+	@Override
+	public double getDeltaY() {
+		return deltaY;
+	}
+
+	@Override
+	public void setDeltaY(double deltaY) {
+		this.deltaY = deltaY;
 	}
 
 }

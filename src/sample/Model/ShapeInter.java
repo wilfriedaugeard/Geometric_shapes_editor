@@ -125,12 +125,20 @@ public interface ShapeInter extends Cloneable {
     public double getHeight();
 
     /**
-     * @param coeff
+     * @param coeff The coefficient size of the ShapeInter
      */
     public void setCoeff(double coeff);
 
     /**
-     * @return
+     * @return The coefficient size of the ShapeInter
      */
     public double getCoeff();
+
+    public double getDeltaX();
+
+    public void setDeltaX(double d);
+
+    public double getDeltaY();
+
+    public void setDeltaY(double d);
 }

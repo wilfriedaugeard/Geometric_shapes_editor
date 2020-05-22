@@ -11,6 +11,18 @@ public class RectangleJavaFX extends RectangleModel {
         super(width, height, pos, rgb);
     }
 
+
+    @Override
+    public void setDeltaX(double deltaX) {
+        super.setDeltaX(deltaX);
+    }
+
+
+    @Override
+    public void setDeltaY(double deltaY) {
+        super.setDeltaY(deltaY);
+    }
+
     @Override
     public IShapeDrawer createShapeDrawer(Controller controller) {
         IRectangleDrawerFactory rectangleDrawerFactory = new RectangleDrawerJavaFXFactory();

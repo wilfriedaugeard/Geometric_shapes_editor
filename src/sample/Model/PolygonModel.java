@@ -19,6 +19,7 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 	private ArrayList<Double> tmpWidth;
 	private double coeff;
 
+
 	public PolygonModel(int nbEdges, double length, Point pos, RGB rgb) {
 		super(pos, rgb);
 		this.nbEdges = nbEdges;
@@ -139,4 +140,5 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 	public double getCoeff() {
 		return this.coeff;
 	}
+
 }
