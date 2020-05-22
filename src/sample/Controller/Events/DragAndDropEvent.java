@@ -121,6 +121,7 @@ public class DragAndDropEvent implements Event {
                     }
                     IShapeDrawer drawer = copy.createShapeDrawer(controller);
                     drawer.drawShape();
+                    System.out.println("group :"+copy.getChildren());
                     controller.getShapeGroups().add(copy);
                     controller.updateEvents();
                     return;
@@ -148,6 +149,15 @@ public class DragAndDropEvent implements Event {
         shapeSavedInToolbar = shapeInToolbar;
         posInTolbar = controller.getShapesInToolBar().indexOf(shapeInToolbar);
         shapeToTranslate = shapeInToolbar;
+        System.out.println("moveShapeInToolbar called");
+        System.out.println("Group: "+controller.getShapeGroupsInToolBar());
+        for(ShapeInter group : controller.getShapeGroupsInToolBar()){
+            if (group.getChildren().contains(shapeToTranslate)){
+                isInShapeGroup = true;
+                shapeGroupToModify = group;
+                System.out.println("Group find! : "+group);
+            }
+        }
         toolbarShapeMove = true;
         controller.updateEvents();
     }
@@ -168,6 +178,7 @@ public class DragAndDropEvent implements Event {
             int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
             // shape in toolbar bar selected
             if(indexOfShape < 0){
+                System.out.println("toolbar drag");
                 shapeInToolBarTmp = new ArrayList<>();
                 shapeInToolBarTmp.addAll(controller.getShapesInToolBar());
 
@@ -201,6 +212,7 @@ public class DragAndDropEvent implements Event {
         Command removeCommand;
 
         if(isInShapeGroup){
+            System.out.println("Remove: "+shapeGroupToModify);
             removeCommand = new RemoveCommand(shapeGroupToModify, controller);
         }else {
             removeCommand = new RemoveCommand(shapeToTranslate, controller);
@@ -237,12 +249,15 @@ public class DragAndDropEvent implements Event {
                             controller.setCurrentPosInCommands(controller.getNbCommands());
                             resizeCommand.execute();
                         }
-                        controller.addShapeInToolbar(shapeGroup, controller, itemPos,shapePos);
                         int index;
                         for(ShapeInter child : shapeGroup.getChildren()){
+                            controller.addShapeInToolbar(child, controller, itemPos,shapePos);
                             index = controller.getShapesInCanvas().indexOf(child);
                             controller.removeShape(child, controller.getView().getShapesInCanvas().get(index));
+                            itemPos++;
+                            shapePos++;
                         }
+                        controller.getShapeGroupsInToolBar().add(shapeGroup);
                         controller.updateEvents();
                         controller.saveState();
                         return;
@@ -310,17 +325,6 @@ public class DragAndDropEvent implements Event {
         }
     };
 
-
-    public boolean toolbarUnchanged(){
-        if(controller.getShapesInToolBar().size() != shapeInToolBarTmp.size())
-            return false;
-        for(ShapeInter shape : controller.getShapesInToolBar()){
-            if(!shapeInToolBarTmp.contains(shape)){
-                return false;
-            }
-        }
-        return true;
-    }
 
     public boolean sameShapeGroupInToolBar(ShapeInter shapeGroupInToolbar){
         for (ShapeInter group : controller.getShapeGroups()){

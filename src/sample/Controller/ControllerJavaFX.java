@@ -19,6 +19,7 @@ import sample.View.ViewJavaFXAdaptee;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class ControllerJavaFX implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -83,7 +84,6 @@ public class ControllerJavaFX implements Serializable {
      */
     public void addShapeInToolbar(ShapeInter shape, Controller controller, int itemPos, int shapePos){
         if(shape.getChildren().isEmpty()){
-            System.out.println("Empty case in addShapeInToolBar function");
             shapesInToolBar.add(itemPos, shape);
         }
         else{
@@ -165,6 +165,8 @@ public class ControllerJavaFX implements Serializable {
         if (isShapeGroup) {
             for (ShapeInter child : shape.getChildren()) {
                 int shapeIndex = shapesInCanvas.indexOf(child);
+                if(shapeIndex < 0)
+                    return;
                 Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
                 shapeView.setTranslateX(shapeView.getTranslateX() + dragX);
                 shapeView.setTranslateY(shapeView.getTranslateY() + dragY);
@@ -205,14 +207,11 @@ public class ControllerJavaFX implements Serializable {
         for (ShapeInter shapeGroup : getShapeGroups()) {
             if (shape.equals(shapeGroup)) {
                 for (int nChild = 0; nChild < shapeGroup.getChildren().size(); nChild++) {
-                    for (int i = 0; i < view.getShapesInCanvas().size(); i++) {
-                        ShapeInter shapeModel = shapeGroup.getChild(nChild);
-                        Shape shapeView = view.getShapesInCanvas().get(i);
-                        if (shapeModel.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shapeModel.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
-                            removeShape(shapeModel, shapeView);
-                            noGroup = false;
-                        }
-                    }
+                    ShapeInter shapeModel = shapeGroup.getChild(nChild);
+                    int i = getShapesInCanvas().indexOf(shapeModel);
+                    Shape shapeView = view.getShapesInCanvas().get(i);
+                    removeShape(shapeModel, shapeView);
+                    noGroup = false;
                 }
             }
         }
