@@ -158,6 +158,7 @@ public class DragAndDropEvent implements Event {
                             controller.removeShape(child, controller.getView().getShapesInCanvas().get(index));
                         }
                         controller.updateEvents();
+                        controller.saveState();
                         return;
                     }
                 }
@@ -176,11 +177,10 @@ public class DragAndDropEvent implements Event {
         //controller.getView().getShapesInToolBar().add(shapePos, shapeInView);
 
         // Controller
-        controller.getShapesInToolBar().add(shapeToTranslate);
         controller.addShapeInToolbar(shapeToTranslate, controller, itemPos,shapePos);
         controller.removeShape(shapeToTranslate, shapeInView);
         controller.updateEvents();
-
+        controller.saveState();
     }
 
     EventHandler<MouseEvent> overToolbar = new EventHandler<>() {

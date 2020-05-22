@@ -16,7 +16,7 @@ import sample.Model.*;
 import sample.View.IShapeDrawer;
 import sample.View.ViewJavaFXAdaptee;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -37,7 +37,11 @@ public class ControllerJavaFX implements Serializable {
     private transient int currentPosInCommands;
     private transient LinkedList<Command> commands;
 
+    /* State */
+    private boolean existState;
+
     public ControllerJavaFX(ViewJavaFXAdaptee view) {
+
         this.view = view;
         shapesInCanvas = new ArrayList<>();
         shapesInToolBar = new ArrayList<>();
@@ -104,23 +108,31 @@ public class ControllerJavaFX implements Serializable {
         view.addCanvas();
         view.addShapeMenu();
 
-        ToolBar toolBar = (ToolBar) view.getToolBar();
-        toolBar.setPrefWidth(50);
+        setState();
+        if(!isExistState()){
+            ToolBar toolBar = (ToolBar) view.getToolBar();
+            toolBar.setPrefWidth(50);
 
-        RectangleJavaFX rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
-        RectangleJavaFX rec2 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170));
-        PolygonJavaFX  poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
-        PolygonJavaFX  poly2 = new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167));
+            RectangleJavaFX rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+            RectangleJavaFX rec2 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170));
+            PolygonJavaFX  poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
+            PolygonJavaFX  poly2 = new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167));
 
-        resizeShape(rec1);
-        resizeShape(rec2);
-        resizeShape(poly1);
-        resizeShape(poly2);
+            resizeShape(rec1);
+            resizeShape(rec2);
+            resizeShape(poly1);
+            resizeShape(poly2);
 
-        addShapeInToolbar(rec1, controller, toolBar.getItems().size(), toolBar.getItems().size());
-        addShapeInToolbar(rec2, controller, toolBar.getItems().size(), toolBar.getItems().size());
-        addShapeInToolbar(poly1,controller, toolBar.getItems().size(), toolBar.getItems().size());
-        addShapeInToolbar(poly2,controller, toolBar.getItems().size(), toolBar.getItems().size());
+            addShapeInToolbar(rec1, controller, toolBar.getItems().size(), toolBar.getItems().size());
+            addShapeInToolbar(rec2, controller, toolBar.getItems().size(), toolBar.getItems().size());
+            addShapeInToolbar(poly1,controller, toolBar.getItems().size(), toolBar.getItems().size());
+            addShapeInToolbar(poly2,controller, toolBar.getItems().size(), toolBar.getItems().size());
+        }
+        else{
+            loadState(controller);
+        }
+
+
 
         view.addTrash();
     }
@@ -282,6 +294,82 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
+
+    /**
+     * Save the state of the toolbar
+     */
+    public void saveState() {
+        System.out.println("SAVE STATE");
+        setExistState(true);
+        String filename = "state.ctrl";
+        ObjectOutputStream oos = null;
+        try {
+            File file = new File(filename);
+            oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(this);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (oos != null) {
+                    oos.flush();
+                    oos.close();
+                }
+            } catch (final IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Load toolbar state
+     * @param controller The controller to load
+     */
+    public void loadState(Controller controller){
+        String filename = "state.ctrl";
+        ObjectInput ois = null;
+        try {
+            final FileInputStream file = new FileInputStream(filename);
+            ois = new ObjectInputStream(file);
+            final ControllerJavaFX controller_load = (ControllerJavaFX) ois.readObject();
+
+            //controller.getShapesInToolBar().addAll(controller_load.getShapesInToolBar());
+            ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
+            for (ShapeInter shape : controller_load.getShapesInToolBar()) {
+                addShapeInToolbar(shape, controller, toolBar.getItems().size(), toolBar.getItems().size());
+            }
+            controller.updateEvents();
+
+        } catch (final IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+            } catch (final IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Verify if a state is saved and set the state boolean value
+     */
+    public void setState(){
+        String filename = "state.ctrl";
+        ObjectInput ois = null;
+        try{
+            final FileInputStream file = new FileInputStream(filename);
+            ois = new ObjectInputStream(file);
+            final ControllerJavaFX controller_load = (ControllerJavaFX) ois.readObject();
+            setExistState(true);
+        } catch (IOException | ClassNotFoundException e){
+            setExistState(false);
+        }
+    }
+
     /**
      * Initialize every event and add them to the Event's list.
      * After that, launch every event with updateEvents method.
@@ -409,5 +497,19 @@ public class ControllerJavaFX implements Serializable {
      */
     public void setShapeGroupTmp(ShapeInter shapeGroupTmp) {
         this.shapeGroupTmp = shapeGroupTmp;
+    }
+
+    /**
+     * @return The existState
+     */
+    public boolean isExistState() {
+        return existState;
+    }
+
+    /**
+     * @param existState Boolean to ckeck if a save of the soft state exist
+     */
+    public void setExistState(boolean existState) {
+        this.existState = existState;
     }
 }

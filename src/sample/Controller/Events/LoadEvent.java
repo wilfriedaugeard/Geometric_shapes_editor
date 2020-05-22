@@ -26,7 +26,6 @@ public class LoadEvent implements Event {
             File selectedFile = fileChooser.showOpenDialog(null);
             String filename = null;
             if (selectedFile != null) {
-
                 filename = selectedFile.getName();
             }
             else {

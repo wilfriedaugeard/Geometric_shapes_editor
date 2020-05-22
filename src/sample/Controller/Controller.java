@@ -47,4 +47,9 @@ public interface Controller extends Serializable {
     public int getCurrentPosInCommands();
     public void setCurrentPosInCommands(int currentPosInCommands);
 
+    /* Controller state */
+    public void saveState();
+    public void loadState(Controller controller);
+    public boolean isExistState();
+    public void setExistState(boolean existState);
 }

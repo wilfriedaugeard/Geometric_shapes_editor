@@ -132,6 +132,26 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
+    public void saveState() {
+        controllerJavaFX.saveState();
+    }
+
+    @Override
+    public void loadState(Controller controller) {
+        controllerJavaFX.loadState(controller);
+    }
+
+    @Override
+    public boolean isExistState() {
+        return controllerJavaFX.isExistState();
+    }
+
+    @Override
+    public void setExistState(boolean existState) {
+        controllerJavaFX.setExistState(existState);
+    }
+
+    @Override
     public ArrayList<ShapeInter> getShapeGroupsInToolBar() {
         return controllerJavaFX.getShapeGroupsInToolBar();
     }
