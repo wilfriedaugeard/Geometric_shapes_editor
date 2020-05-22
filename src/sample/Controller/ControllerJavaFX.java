@@ -362,10 +362,8 @@ public class ControllerJavaFX implements Serializable {
         ObjectInput ois = null;
         try{
             final FileInputStream file = new FileInputStream(filename);
-            ois = new ObjectInputStream(file);
-            final ControllerJavaFX controller_load = (ControllerJavaFX) ois.readObject();
             setExistState(true);
-        } catch (IOException | ClassNotFoundException e){
+        } catch (IOException e){
             setExistState(false);
         }
     }
@@ -379,7 +377,6 @@ public class ControllerJavaFX implements Serializable {
 
         events.add(EventFactory.getEvent("RightClick",controller));
         events.add(EventFactory.getEvent("DragAndDropEvent",controller));
-        events.add(EventFactory.getEvent("CreateShapeEvent",controller));
         events.add(EventFactory.getEvent("SelectionShapeEvent",controller));
         events.add(EventFactory.getEvent("GroupShapeEvent",controller));
         events.add(EventFactory.getEvent("RedoEvent",controller));

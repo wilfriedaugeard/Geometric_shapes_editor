@@ -90,10 +90,6 @@ public class ViewJavaFXAdaptee implements IView{
         this.viewJavaFX.launch_getShapeOnMousePressed((EventHandler<MouseEvent>) event);
     }
 
-    @Override
-    public void launch_createShapeInToolBarOnClick(Object event) {
-        this.viewJavaFX.launch_createShapeInToolBarOnClick((EventHandler<MouseEvent>) event);
-    }
 
     @Override
     public void launch_createSelectionRectangleOnClick(Object event) {

@@ -20,9 +20,10 @@ public class PolygonJavaFX extends PolygonModel {
         double red = rgb.getR();
         double green = rgb.getG();
         double blue = rgb.getB();
+        double alpha = rgb.getA();
 
-        int[] rgbTab = new int[3];
-        rgbTab[0] = (int) red; rgbTab[1] = (int) green; rgbTab[2] = (int) blue;
+        int[] rgbTab = new int[4];
+        rgbTab[0] = (int) red; rgbTab[1] = (int) green; rgbTab[2] = (int) blue; rgbTab[3] = (int) alpha;
 
         Double[] points = this.getPoints(this.getNbEdges(), this.getLength());
 

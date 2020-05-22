@@ -284,15 +284,22 @@ public class ViewJavaFX {
 	/*Events*/
 
 	public void launch_overToolbar(EventHandler<MouseEvent> event) {
-		for (Shape item : shapesInCanvas) {
+		for (Shape shape : shapesInCanvas) {
+			shape.setOnMouseReleased(event);
+		}
+		for (Shape item : shapesInToolBar) {
 			item.setOnMouseReleased(event);
 		}
 	}
 
 	public void launch_finalShapeToCanvas(EventHandler<MouseEvent> event) {
-		for(Shape item : shapesInCanvas) {
+		for(Shape shape : shapesInCanvas) {
+			shape.setOnMouseDragged(event);
+		}
+		for (Shape item : shapesInToolBar){
 			item.setOnMouseDragged(event);
 		}
+
 	}
 
 	public void launch_moveShapeOnPressingMouse(EventHandler<MouseEvent> event) {
@@ -302,16 +309,14 @@ public class ViewJavaFX {
 	}
 
 	public void launch_getShapeOnMousePressed(EventHandler<MouseEvent> event) {
-		for(Shape item : shapesInCanvas) {
+		for(Shape shape : shapesInCanvas) {
+			shape.setOnMousePressed(event);
+		}
+		for(Shape item : shapesInToolBar){
 			item.setOnMousePressed(event);
 		}
 	}
 
-	public void launch_createShapeInToolBarOnClick(EventHandler<MouseEvent> event) {
-		for(Shape item : shapesInToolBar) {
-			item.setOnMouseClicked(event);
-		}
-	}
 
 	/*Rectangle selection events on canvas*/
 

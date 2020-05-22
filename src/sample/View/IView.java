@@ -23,7 +23,6 @@ public interface IView {
     void launch_finalShapeToCanvas(Object event);
     void launch_moveShapeOnPressingMouse(Object event);
     void launch_getShapeOnMousePressed(Object event);
-    void launch_createShapeInToolBarOnClick(Object event);
     void launch_createSelectionRectangleOnClick(Object event);
     void launch_rectangleSelectionReleased(Object event);
     void launch_selectionRectangleDraggedInCanvas(Object event);

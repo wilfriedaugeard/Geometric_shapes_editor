@@ -6,11 +6,13 @@ public class RGB implements Serializable {
 	  private double r;
 	  private double g;
 	  private double b;
+	  private double a;
 
 	   public RGB(double r, double g, double b) {
 	        this.r = r;
 	        this.g = g;
 	        this.b = b;
+	        this.a = 1;
 	    }
 
 	    public double getR() {
@@ -36,5 +38,13 @@ public class RGB implements Serializable {
 	    public void setB(int b) {
 	        this.b = b;
 	    }
+
+	    public double getA(){
+	   		return this.a;
+		}
+
+	    public void setA(int a){
+	   		this.a = a;
+		}
 
 }

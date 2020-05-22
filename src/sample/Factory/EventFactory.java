@@ -16,9 +16,6 @@ public class EventFactory {
         if(name.equals("DragAndDropEvent")){
             return new DragAndDropEvent(controller);
         }
-        if(name.equals("CreateShapeEvent")){
-            return new CreateShapeEvent(controller);
-        }
         if(name.equals("SelectionShapeEvent")){
             return new SelectionShapeEvent(controller);
         }
