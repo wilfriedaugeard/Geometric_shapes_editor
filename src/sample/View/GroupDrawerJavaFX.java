@@ -9,7 +9,7 @@ public class GroupDrawerJavaFX extends ShapeDrawerJavaFX {
     private ArrayList<IShapeDrawer> shapeDrawerList;
 
     public GroupDrawerJavaFX(IView view, double x, double y, double width, double height, ArrayList<IShapeDrawer> shapeDrawerList) {
-        super(view, Color.rgb(0,0,0, 255));
+        super(view, Color.rgb(0,0,0, 1));
         this.x = x;
         this.y = y;
         this.width = width;
