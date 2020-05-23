@@ -35,11 +35,6 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
 	}
 	
 	public void translate(double dx, double dy) {
-
-		for(IShapeInter shape : group) {
-			shape.getPos().setX(shape.getPos().getX() + dx);
-			shape.getPos().setY(shape.getPos().getY() + dy);
-		}
         pos.setX(pos.getX() + dx);
         pos.setY(pos.getY() + dy);
     }
@@ -85,22 +80,22 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
 
 	@Override
 	public void add(IShapeInter shapeInter){
-		group.add(shapeInter);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void remove(IShapeInter shapeInter){
-		group.remove(shapeInter);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ArrayList<IShapeInter> getChildren(){
-		return group;
+		return new ArrayList<>();
 	}
 
 	@Override
 	public IShapeInter getChild(int n){
-		return group.get(n);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
