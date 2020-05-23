@@ -1,6 +1,7 @@
 package sample.Controller.Command;
 
 import sample.Controller.IController;
+import sample.Factory.RGBFactory;
 import sample.Model.RGB;
 import sample.Model.ShapeGroup;
 import sample.Model.IShapeInter;
@@ -15,7 +16,7 @@ public class ColorShapeCommand implements ICommand {
         private IController controller;
 
         public ColorShapeCommand(RGB color, IShapeInter shape, IController controller) {
-            this.color = new RGB( (int)(color.getR()*255) ,(int) (color.getG()*255),(int) (color.getB()*255));
+            this.color = RGBFactory.getRGB( (int)(color.getR()*255) ,(int) (color.getG()*255),(int) (color.getB()*255));
             this.shape = shape;
             this.controller = controller;
             this.oldColors = new ArrayList<>();

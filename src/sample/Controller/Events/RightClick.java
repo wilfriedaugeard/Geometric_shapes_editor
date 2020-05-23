@@ -12,7 +12,7 @@ import sample.Controller.Command.ColorShapeCommand;
 import sample.Controller.Command.ICommand;
 import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Command.RotateCommand;
-import sample.Model.RGB;
+import sample.Factory.RGBFactory;
 import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
@@ -86,14 +86,14 @@ public class RightClick implements Event {
                         ICommand colorShapeCommand = null;
                         for (IShapeInter shapeGroup : controller.getShapeGroups()) {
                             if (shapeGroup.getChildren().contains(shapeSelected)) {
-                                colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeGroup, controller);
+                                colorShapeCommand = new ColorShapeCommand(RGBFactory.getRGB(red, green, blue), shapeGroup, controller);
                                 controller.addLastCommand(colorShapeCommand);
                                 controller.setCurrentPosInCommands(controller.getNbCommands());
                                 colorShapeCommand.execute();
                                 return;
                             }
                         }
-                        colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeSelected, controller);
+                        colorShapeCommand = new ColorShapeCommand(RGBFactory.getRGB(red, green, blue), shapeSelected, controller);
                         controller.addLastCommand(colorShapeCommand);
                         controller.setCurrentPosInCommands(controller.getNbCommands());
                         colorShapeCommand.execute();

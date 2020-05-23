@@ -4,6 +4,7 @@ import sample.Controller.IController;
 import sample.Factory.IControllerFactory;
 import sample.Factory.ControllerJavaFXFactory;
 import sample.Factory.PointFactory;
+import sample.Factory.RGBFactory;
 import sample.Model.*;
 import sample.Model.Decorator.BornedRotate;
 import sample.Model.Decorator.DecoratorShapeInter;
@@ -17,8 +18,8 @@ class IShapeInterTest {
 
     @org.junit.jupiter.api.Test
     void testClone() {
-        IShapeInter rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
-        IShapeInter poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
+        IShapeInter rec1 = new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111));
+        IShapeInter poly1 = new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), RGBFactory.getRGB(133, 193, 233));
 
         IShapeInter cloneRec1 = rec1.clone();
         IShapeInter clonePoly1 = poly1.clone();
@@ -50,14 +51,14 @@ class IShapeInterTest {
     @org.junit.jupiter.api.Test
     void add() {
         IShapeInter shapeGroup = new ShapeGroup();
-        IShapeInter rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+        IShapeInter rec1 = new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111));
 
         shapeGroup.add(rec1);
 
         //Should work on shape groups
         assertEquals(rec1, shapeGroup.getChild(0));
 
-        IShapeInter poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
+        IShapeInter poly1 = new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20),RGBFactory.getRGB(133, 193, 233));
 
         //Should not work because it's not a shape group
         assertThrows(UnsupportedOperationException.class, () -> rec1.add(poly1));
@@ -67,7 +68,7 @@ class IShapeInterTest {
     @org.junit.jupiter.api.Test
     void remove() {
         IShapeInter shapeGroup = new ShapeGroup();
-        IShapeInter rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+        IShapeInter rec1 = new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111));
 
         shapeGroup.add(rec1);
 
@@ -75,7 +76,7 @@ class IShapeInterTest {
         shapeGroup.remove(rec1);
         assertEquals(0, shapeGroup.getChildren().size());
 
-        IShapeInter poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
+        IShapeInter poly1 = new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), RGBFactory.getRGB(133, 193, 233));
 
         //Should not work because it's not a shape group
         assertThrows(UnsupportedOperationException.class, () -> rec1.remove(poly1));
@@ -84,7 +85,7 @@ class IShapeInterTest {
     @org.junit.jupiter.api.Test
     void getChildren() {
         IShapeInter shapeGroup = new ShapeGroup();
-        IShapeInter rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+        IShapeInter rec1 = new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111));
 
         shapeGroup.add(rec1);
 
@@ -94,7 +95,7 @@ class IShapeInterTest {
         //Should work on shape groups
         assertEquals(testList.get(0), shapeGroup.getChildren().get(0));
 
-        IShapeInter poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
+        IShapeInter poly1 = new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), RGBFactory.getRGB(133, 193, 233));
 
         assert(poly1.getChildren() != null);
         assertEquals(0, poly1.getChildren().size());
@@ -103,14 +104,14 @@ class IShapeInterTest {
     @org.junit.jupiter.api.Test
     void getChild() {
         IShapeInter shapeGroup = new ShapeGroup();
-        IShapeInter rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+        IShapeInter rec1 = new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111));
 
         shapeGroup.add(rec1);
 
         //Should work on shape groups
         assertEquals(rec1, shapeGroup.getChild(0));
 
-        IShapeInter poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
+        IShapeInter poly1 = new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), RGBFactory.getRGB(133, 193, 233));
 
         //Should not work because it's not a shape group
         assertThrows(UnsupportedOperationException.class, () -> poly1.getChild(0));
@@ -119,7 +120,7 @@ class IShapeInterTest {
 
     @org.junit.jupiter.api.Test
     void translate() {
-        IShapeInter rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+        IShapeInter rec1 = new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111));
         rec1.translate(20, 20);
         assertEquals(20, rec1.getPos().getX());
         assertEquals(20, rec1.getPos().getY());
@@ -127,7 +128,7 @@ class IShapeInterTest {
 
     @org.junit.jupiter.api.Test
     void getAndSetRotation() {
-        IShapeInter rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+        IShapeInter rec1 = new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111));
         rec1.setRotation(20);
         assertEquals(20, rec1.getRotation());
 
@@ -141,7 +142,7 @@ class IShapeInterTest {
         assertEquals(-4500, rec1.getRotation());
 
         // Borned rotation
-        DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)));
+        DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111)));
         rec2.setRotation(20);
         assertEquals(20, rec2.getRotation());
 

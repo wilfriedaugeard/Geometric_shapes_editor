@@ -12,6 +12,7 @@ import sample.Controller.Command.ICommand;
 import sample.Controller.Events.*;
 import sample.Factory.EventFactory;
 import sample.Factory.PointFactory;
+import sample.Factory.RGBFactory;
 import sample.Model.*;
 import sample.Model.Decorator.BornedRotate;
 import sample.Model.Decorator.DecoratorShapeInter;
@@ -114,10 +115,10 @@ public class ControllerJavaFX implements Serializable {
             ToolBar toolBar = (ToolBar) view.getToolBar();
             toolBar.setPrefWidth(50);
 
-            DecoratorShapeInter rec1 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), new RGB(247, 220, 111)));
-            DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), new RGB(130, 224, 170)));
-            DecoratorShapeInter  poly1 = new BornedRotate(new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), new RGB(133, 193, 233)));
-            DecoratorShapeInter poly2 =new BornedRotate(new PolygonJavaFX(7, 35, PointFactory.getPoint(0, 20), new RGB(245, 203, 167)));
+            DecoratorShapeInter rec1 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111)));
+            DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(130, 224, 170)));
+            DecoratorShapeInter  poly1 = new BornedRotate(new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), RGBFactory.getRGB(133, 193, 233)));
+            DecoratorShapeInter poly2 =new BornedRotate(new PolygonJavaFX(7, 35, PointFactory.getPoint(0, 20), RGBFactory.getRGB(245, 203, 167)));
 
             resizeShape(rec1);
             resizeShape(rec2);
