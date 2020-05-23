@@ -1,7 +1,7 @@
 package sample.Controller.Command;
 
 import sample.Controller.IController;
-import sample.Factory.RGBFactory;
+import sample.Factory.ModelFactory.RGBFactory;
 import sample.Model.RGB;
 import sample.Model.ShapeGroup;
 import sample.Model.IShapeInter;

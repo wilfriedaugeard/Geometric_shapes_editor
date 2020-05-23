@@ -1,4 +1,4 @@
-package sample.Factory;
+package sample.Factory.DrawerFactory;
 
 import sample.View.Drawer.GroupDrawerJavaFX;
 import sample.View.Drawer.IShapeDrawer;

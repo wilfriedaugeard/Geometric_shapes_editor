@@ -4,8 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.Controller.IController;
-import sample.Factory.IControllerFactory;
-import sample.Factory.ControllerJavaFXFactory;
+import sample.Factory.ControllerFactory.IControllerFactory;
+import sample.Factory.ControllerFactory.ControllerJavaFXFactory;
 
 public class Main extends Application {
 

@@ -1,10 +1,7 @@
 package sample.test;
 
-import sample.Controller.IController;
-import sample.Factory.IControllerFactory;
-import sample.Factory.ControllerJavaFXFactory;
-import sample.Factory.PointFactory;
-import sample.Factory.RGBFactory;
+import sample.Factory.ModelFactory.PointFactory;
+import sample.Factory.ModelFactory.RGBFactory;
 import sample.Model.*;
 import sample.Model.Decorator.BornedRotate;
 import sample.Model.Decorator.DecoratorShapeInter;

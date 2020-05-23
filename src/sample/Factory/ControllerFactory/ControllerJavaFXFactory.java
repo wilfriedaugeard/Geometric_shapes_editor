@@ -1,4 +1,4 @@
-package sample.Factory;
+package sample.Factory.ControllerFactory;
 
 import sample.Controller.IController;
 import sample.Controller.ControllerJavaFX;

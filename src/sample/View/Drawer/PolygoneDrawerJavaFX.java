@@ -5,7 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.transform.Rotate;
-import sample.Factory.PointFactory;
+import sample.Factory.ModelFactory.PointFactory;
 import sample.Model.Point;
 import sample.View.IView;
 

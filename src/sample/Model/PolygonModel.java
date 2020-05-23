@@ -1,7 +1,7 @@
 package sample.Model;
 
 import sample.Controller.IController;
-import sample.Factory.PointFactory;
+import sample.Factory.ModelFactory.PointFactory;
 import sample.View.Drawer.IShapeDrawer;
 
 import java.io.Serializable;

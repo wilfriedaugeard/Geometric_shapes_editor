@@ -12,7 +12,7 @@ import sample.Controller.Command.ColorShapeCommand;
 import sample.Controller.Command.ICommand;
 import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Command.RotateCommand;
-import sample.Factory.RGBFactory;
+import sample.Factory.ModelFactory.RGBFactory;
 import sample.Model.IShapeInter;
 
 import java.util.ArrayList;

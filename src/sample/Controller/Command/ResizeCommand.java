@@ -1,7 +1,7 @@
 package sample.Controller.Command;
 
 import sample.Controller.IController;
-import sample.Factory.PointFactory;
+import sample.Factory.ModelFactory.PointFactory;
 import sample.Model.Point;
 import sample.Model.IShapeInter;
 

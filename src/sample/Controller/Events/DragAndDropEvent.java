@@ -10,7 +10,7 @@ import sample.Controller.Command.ResizeCommand;
 import sample.Controller.IController;
 import sample.Controller.Command.RemoveCommand;
 import sample.Controller.Command.TranslateCommand;
-import sample.Factory.PointFactory;
+import sample.Factory.ModelFactory.PointFactory;
 import sample.Model.Point;
 import sample.Model.IShapeInter;
 import sample.View.Drawer.IShapeDrawer;

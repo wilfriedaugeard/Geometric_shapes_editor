@@ -1,4 +1,4 @@
-package sample.Factory;
+package sample.Factory.ModelFactory;
 
 import sample.Model.RGB;
 

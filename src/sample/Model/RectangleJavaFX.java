@@ -1,8 +1,8 @@
 package sample.Model;
 
 import sample.Controller.IController;
-import sample.Factory.IRectangleDrawerFactory;
-import sample.Factory.RectangleDrawerJavaFXFactory;
+import sample.Factory.DrawerFactory.IRectangleDrawerFactory;
+import sample.Factory.DrawerFactory.RectangleDrawerJavaFXFactory;
 import sample.View.Drawer.IShapeDrawer;
 
 public class RectangleJavaFX extends RectangleModel {
