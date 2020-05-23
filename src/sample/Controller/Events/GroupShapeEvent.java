@@ -19,7 +19,6 @@ public class GroupShapeEvent implements Event {
         @Override
         public void handle(ActionEvent event) {
             IShapeInter shapeGroupTmp = controller.getShapeGroupTmp().clone();
-            System.out.println("TMP: "+shapeGroupTmp.getChildren());
             ICommand addGroupShapeCommand = new AddGroupShapeCommand(shapeGroupTmp,controller);
             controller.addLastCommand(addGroupShapeCommand);
             controller.setCurrentPosInCommands(controller.getNbCommands());
@@ -31,10 +30,6 @@ public class GroupShapeEvent implements Event {
         @Override
         public void handle(ActionEvent event) {
             IShapeInter shapeGroupTmp = controller.getShapeGroupTmp();
-            System.out.println("TMP: "+shapeGroupTmp.getChildren());
-            System.out.println("GROUP: "+controller.getShapeGroups().toString());
-            System.out.println("DeGROUP: "+controller.getShapeGroups().toString());
-
             DeGroupShapeCommand deGroupShapeCommand = new DeGroupShapeCommand(controller, shapeGroupTmp);
             controller.addLastCommand(deGroupShapeCommand);
             controller.setCurrentPosInCommands(controller.getNbCommands());

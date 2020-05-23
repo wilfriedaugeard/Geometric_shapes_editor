@@ -14,11 +14,13 @@ public class ShapeGroup implements IShapeInter, Serializable {
     private ArrayList<IShapeInter> group;
     private double coeff;
     private Point pos;
+    private double deltaX = 0;
+    private double deltaY = 0;
+
     public ShapeGroup (){
         group = new ArrayList<>();
     }
-    private double deltaX = 0;
-    private double deltaY = 0;
+
 
     @Override
     public ShapeGroup clone() {
@@ -192,7 +194,6 @@ public class ShapeGroup implements IShapeInter, Serializable {
 
     @Override
     public double getDeltaX() {
-        System.out.println("getD ShapeGroup");
         return deltaX;
     }
 

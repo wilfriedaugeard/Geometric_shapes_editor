@@ -79,10 +79,8 @@ public class SelectionShapeEvent implements Event {
                     Point rotationCenter = s.getRotationCenter();
                     if (rotationCenter.getX() >= mousePosStart.getX() && rotationCenter.getX() <= MousePosEnd.getX()
                             && rotationCenter.getY() >= mousePosStart.getY() && rotationCenter.getY() <= MousePosEnd.getY()) {
-                        if (!shapeGroup.getChildren().contains(s)) {
-
-                            System.out.println("add + " + s.getClass().toString());
-                            shapeGroup.add(s);
+                            if (!shapeGroup.getChildren().contains(s)) {
+                                shapeGroup.add(s);
                         }
                     }
                 }

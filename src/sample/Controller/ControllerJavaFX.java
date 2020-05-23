@@ -11,8 +11,7 @@ import javafx.scene.transform.Rotate;
 import sample.Controller.Command.ICommand;
 import sample.Controller.Events.*;
 import sample.Factory.ControllerFactory.EventFactory;
-import sample.Factory.ModelFactory.PointFactory;
-import sample.Factory.ModelFactory.RGBFactory;
+import sample.Factory.ModelFactory.*;
 import sample.Model.*;
 import sample.Model.Decorator.BornedRotate;
 import sample.Model.Decorator.DecoratorShapeInter;
@@ -52,7 +51,7 @@ public class ControllerJavaFX implements Serializable {
         shapeGroupsInToolBar = new ArrayList<>();
         events = new ArrayList<>();
         commands = new LinkedList<>();
-        shapeGroupTmp = new ShapeGroup();
+        shapeGroupTmp = ShapeGroupFactory.createGroup();
         currentPosInCommands = 0;
     }
 
@@ -115,10 +114,12 @@ public class ControllerJavaFX implements Serializable {
             ToolBar toolBar = (ToolBar) view.getToolBar();
             toolBar.setPrefWidth(50);
 
-            DecoratorShapeInter rec1 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111)));
-            DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(130, 224, 170)));
-            DecoratorShapeInter  poly1 = new BornedRotate(new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), RGBFactory.getRGB(133, 193, 233)));
-            DecoratorShapeInter poly2 =new BornedRotate(new PolygonJavaFX(7, 35, PointFactory.getPoint(0, 20), RGBFactory.getRGB(245, 203, 167)));
+            IBornedRotateFactory bornedRotateFactory = new BornedRotateFactory();
+
+            IShapeInter rec1 = bornedRotateFactory.createShape(ShapeModelFactory.createShape("Rectangle", 50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(247, 220, 111)));
+            IShapeInter rec2 = bornedRotateFactory.createShape(ShapeModelFactory.createShape("Rectangle", 50, 25, PointFactory.getPoint(0, 0), RGBFactory.getRGB(130, 224, 170)));
+            IShapeInter poly1 = bornedRotateFactory.createShape(ShapeModelFactory.createShape("Polygon", 5, 25, PointFactory.getPoint(0, 20), RGBFactory.getRGB(133, 193, 233)));
+            IShapeInter poly2 = bornedRotateFactory.createShape(ShapeModelFactory.createShape("Polygon",  7, 35, PointFactory.getPoint(0, 20), RGBFactory.getRGB(245, 203, 167)));
 
             resizeShape(rec1);
             resizeShape(rec2);

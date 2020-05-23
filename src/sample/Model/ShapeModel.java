@@ -12,6 +12,7 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
     private RGB RGB;
     private double deltaX;
     private double deltaY;
+    private ArrayList<IShapeInter> group;
     
 	public ShapeModel(Point pos, RGB RGB) {
 		super();
@@ -19,6 +20,7 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
 		this.RGB = RGB;
 		this.deltaX = 0;
 		this.deltaY = 0;
+		this.group = new ArrayList<>();
 	}
 
 	public ShapeModel clone() {
@@ -33,6 +35,11 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
 	}
 	
 	public void translate(double dx, double dy) {
+
+		for(IShapeInter shape : group) {
+			shape.getPos().setX(shape.getPos().getX() + dx);
+			shape.getPos().setY(shape.getPos().getY() + dy);
+		}
         pos.setX(pos.getX() + dx);
         pos.setY(pos.getY() + dy);
     }
@@ -78,22 +85,22 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
 
 	@Override
 	public void add(IShapeInter shapeInter){
-		throw new UnsupportedOperationException();
+		group.add(shapeInter);
 	}
 
 	@Override
 	public void remove(IShapeInter shapeInter){
-		throw new UnsupportedOperationException();
+		group.remove(shapeInter);
 	}
 
 	@Override
 	public ArrayList<IShapeInter> getChildren(){
-		return new ArrayList<>();
+		return group;
 	}
 
 	@Override
 	public IShapeInter getChild(int n){
-		throw new UnsupportedOperationException();
+		return group.get(n);
 	}
 
 	@Override
