@@ -1,7 +1,7 @@
 package sample.Factory;
 
-import sample.View.GroupDrawerJavaFX;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.GroupDrawerJavaFX;
+import sample.View.Drawer.IShapeDrawer;
 import sample.View.IView;
 
 import java.util.ArrayList;

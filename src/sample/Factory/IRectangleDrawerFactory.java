@@ -1,7 +1,6 @@
 package sample.Factory;
 
-import sample.Controller.Controller;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 import sample.View.IView;
 
 public interface IRectangleDrawerFactory {

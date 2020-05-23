@@ -8,7 +8,7 @@ import javafx.stage.FileChooser;
 import sample.Controller.Controller;
 import sample.Controller.ControllerJavaFXAdaptee;
 import sample.Model.ShapeInter;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 import java.io.*;
 

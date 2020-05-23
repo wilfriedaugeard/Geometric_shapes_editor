@@ -1,11 +1,9 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.Controller.ControllerJavaFX;
 import sample.Factory.IPolygonDrawerFactory;
 import sample.Factory.PolygonDrawerJavaFXFactory;
-import sample.View.PolygoneDrawerJavaFX;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 public class PolygonJavaFX extends PolygonModel {
 

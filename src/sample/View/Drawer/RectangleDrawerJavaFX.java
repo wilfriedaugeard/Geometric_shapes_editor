@@ -1,15 +1,15 @@
-package sample.View;
+package sample.View.Drawer;
 
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import sample.Factory.PointFactory;
 import sample.Model.Point;
+import sample.View.IView;
 
-public class RectangleDrawerJavaFX extends ShapeDrawerJavaFX  {
+public class RectangleDrawerJavaFX extends ShapeDrawerJavaFX {
 	private double x, y, width, height;
 	private double arrondi;
 	private double rotation;

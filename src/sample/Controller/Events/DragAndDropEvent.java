@@ -1,12 +1,9 @@
 package sample.Controller.Events;
 
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Shape;
 import sample.Controller.Command.Command;
 import sample.Controller.Command.ResizeCommand;
@@ -15,9 +12,8 @@ import sample.Controller.Command.RemoveCommand;
 import sample.Controller.Command.TranslateCommand;
 import sample.Factory.PointFactory;
 import sample.Model.Point;
-import sample.Model.RGB;
 import sample.Model.ShapeInter;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 import java.util.ArrayList;
 

@@ -75,7 +75,6 @@ public class RightClick implements Event {
                     shapeY = controller.getView().getShapeYPositionInToolBar(value);
                     if (shapeX == x && shapeY == y) {
                         colorPicker = (ColorPicker) controller.getView().getColorPicker();
-                        //shapeInCanvas.setFill(colorPicker.getValue());
 
                         double red = colorPicker.getValue().getRed();
                         double green = colorPicker.getValue().getGreen();
@@ -86,8 +85,6 @@ public class RightClick implements Event {
 
                         Command colorShapeCommand = null;
                         for (ShapeInter shapeGroup : controller.getShapeGroups()) {
-                            System.out.println("SHAPEGROUP : " + shapeGroup.getChildren().size());
-                            System.out.println("SHAPEGROUP : " + shapeGroup);
                             if (shapeGroup.getChildren().contains(shapeSelected)) {
                                 colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeGroup, controller);
                                 controller.addLastCommand(colorShapeCommand);
@@ -226,6 +223,7 @@ public class RightClick implements Event {
             dialog.getApply().setOnAction(e -> {
                 clearField(shapeSelected);
                 treatments(shapeSelected, dialog);
+                System.out.println(shapeSelected.getRotation());
 
             });
 

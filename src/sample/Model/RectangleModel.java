@@ -1,9 +1,8 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.Controller.ControllerJavaFX;
 import sample.Factory.PointFactory;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 import java.io.Serializable;
 import java.util.ArrayList;

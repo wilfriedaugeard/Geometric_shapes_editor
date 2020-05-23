@@ -1,8 +1,8 @@
 package sample.Factory;
 
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 import sample.View.IView;
-import sample.View.RectangleDrawerJavaFX;
+import sample.View.Drawer.RectangleDrawerJavaFX;
 
 public class RectangleDrawerJavaFXFactory implements IRectangleDrawerFactory{
 

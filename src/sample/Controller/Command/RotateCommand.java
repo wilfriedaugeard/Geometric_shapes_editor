@@ -26,19 +26,19 @@ public class RotateCommand implements Command{
     @Override
     public void execute() {
         shape.setRotation(value);
-        if(isShapeGroup == true){
+        if(isShapeGroup){
             for(ShapeInter child : shape.getChildren()){
                 oldvalues.add(child.getRotation());
             }
         }else{
             oldValue = shape.getRotation();
         }
-        controller.updateViewRotate(shape, value, isShapeGroup);
+        controller.updateViewRotate(shape, shape.getRotation(), isShapeGroup);
     }
 
     @Override
     public void undo() {
-        if(isShapeGroup == true){
+        if(isShapeGroup){
             for(int i = 0; i < oldvalues.size(); i++){
                 double oldVal = oldvalues.get(i);
                 ShapeInter currentChild = shape.getChild(i);

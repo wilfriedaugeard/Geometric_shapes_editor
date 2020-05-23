@@ -3,7 +3,7 @@ package sample.Model;
 import sample.Controller.Controller;
 import sample.Factory.IRectangleDrawerFactory;
 import sample.Factory.RectangleDrawerJavaFXFactory;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 public class RectangleJavaFX extends RectangleModel {
 

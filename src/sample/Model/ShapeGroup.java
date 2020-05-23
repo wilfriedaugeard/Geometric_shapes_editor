@@ -2,7 +2,7 @@ package sample.Model;
 
 import sample.Controller.Controller;
 import sample.Factory.*;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 import java.io.Serializable;
 import java.util.ArrayList;

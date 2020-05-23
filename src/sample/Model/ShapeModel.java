@@ -1,11 +1,9 @@
 package sample.Model;
 
 import sample.Controller.Controller;
-import sample.Controller.ControllerJavaFX;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class ShapeModel implements ShapeInter, Serializable {
@@ -47,20 +45,13 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 		this.pos = pos;
 	}
 
+
 	public double getRotation() {
 		return rotation;
 	}
-	
+
 	public void setRotation(double rotation) {
-		if(rotation < -360.0){
-			this.rotation = -360.0;
-		}
-		if(rotation > 360.0){
-			this.rotation = 360.0;
-		}
-		if(rotation >= -360.0 && rotation <= 360.0) {
-			this.rotation = rotation;
-		}
+		this.rotation = rotation;
 	}
 	
 	public RGB getRGB() {

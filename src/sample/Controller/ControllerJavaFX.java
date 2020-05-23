@@ -13,13 +13,14 @@ import sample.Controller.Events.*;
 import sample.Factory.EventFactory;
 import sample.Factory.PointFactory;
 import sample.Model.*;
-import sample.View.IShapeDrawer;
+import sample.Model.Decorator.BornedRotate;
+import sample.Model.Decorator.DecoratorShapeInter;
+import sample.View.Drawer.IShapeDrawer;
 import sample.View.ViewJavaFXAdaptee;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public class ControllerJavaFX implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -113,11 +114,12 @@ public class ControllerJavaFX implements Serializable {
             ToolBar toolBar = (ToolBar) view.getToolBar();
             toolBar.setPrefWidth(50);
 
-            RectangleJavaFX rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
+            //RectangleJavaFX rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
             RectangleJavaFX rec2 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170));
             PolygonJavaFX  poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
             PolygonJavaFX  poly2 = new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167));
 
+            DecoratorShapeInter rec1 = new BornedRotate(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)));
             resizeShape(rec1);
             resizeShape(rec2);
             resizeShape(poly1);

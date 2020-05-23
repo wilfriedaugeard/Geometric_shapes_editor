@@ -1,8 +1,8 @@
 package sample.Factory;
 
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 import sample.View.IView;
-import sample.View.PolygoneDrawerJavaFX;
+import sample.View.Drawer.PolygoneDrawerJavaFX;
 
 public class PolygonDrawerJavaFXFactory implements IPolygonDrawerFactory{
 

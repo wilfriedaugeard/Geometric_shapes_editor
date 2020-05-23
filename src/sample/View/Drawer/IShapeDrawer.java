@@ -1,4 +1,4 @@
-package sample.View;
+package sample.View.Drawer;
 
 public interface IShapeDrawer {
 	/**

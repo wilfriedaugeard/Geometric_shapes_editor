@@ -1,18 +1,15 @@
-package sample.View;
+package sample.View.Drawer;
 
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import sample.Factory.PointFactory;
 import sample.Model.Point;
+import sample.View.IView;
 
-import javax.tools.Tool;
-
-public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX  {
+public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX {
 	private Double[] points;
 	private double rotation;
 	

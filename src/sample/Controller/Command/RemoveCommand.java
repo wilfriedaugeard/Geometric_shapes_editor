@@ -2,7 +2,7 @@ package sample.Controller.Command;
 
 import sample.Controller.Controller;
 import sample.Model.ShapeInter;
-import sample.View.IShapeDrawer;
+import sample.View.Drawer.IShapeDrawer;
 
 import java.util.ArrayList;
 

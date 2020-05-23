@@ -1,6 +1,7 @@
-package sample.View;
+package sample.View.Drawer;
 
 import javafx.scene.paint.Color;
+import sample.View.IView;
 
 public abstract class ShapeDrawerJavaFX implements IShapeDrawer {
 	protected IView view;
