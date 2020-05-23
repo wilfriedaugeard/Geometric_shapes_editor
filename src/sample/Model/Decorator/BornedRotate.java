@@ -23,11 +23,6 @@ public class BornedRotate extends DecoratorShapeInter{
 
     @Override
     public void setRotation(double rotation) {
-        if(!super.shape.getChildren().isEmpty()){
-            for(IShapeInter child : super.shape.getChildren()){
-                computeRotate(child);
-            }
-        }
         if(rotation < -360.0){
             super.shape.setRotation(-360.0);
         }

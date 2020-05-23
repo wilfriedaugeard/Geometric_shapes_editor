@@ -13,9 +13,11 @@ public class DecoratorShapeInter implements IShapeInter, Serializable {
     protected IShapeInter shape;
 
     @Override
-    public IShapeInter clone() {
+    public DecoratorShapeInter clone() {
         try {
-            return (DecoratorShapeInter) super.clone();
+            DecoratorShapeInter cloneShape = (DecoratorShapeInter) super.clone();
+            cloneShape.shape = this.shape.clone();
+            return cloneShape;
         }
         catch(Exception e) {
             e.printStackTrace();

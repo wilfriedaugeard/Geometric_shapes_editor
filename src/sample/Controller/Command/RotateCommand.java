@@ -25,6 +25,8 @@ public class RotateCommand implements ICommand {
 
     @Override
     public void execute() {
+        System.out.println(shape);
+        System.out.println(shape.getChildren());
         shape.setRotation(value);
         if(isShapeGroup){
             for(IShapeInter child : shape.getChildren()){
