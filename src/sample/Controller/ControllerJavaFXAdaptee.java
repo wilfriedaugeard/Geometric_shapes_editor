@@ -1,15 +1,15 @@
 package sample.Controller;
 
 import javafx.scene.shape.Shape;
-import sample.Controller.Command.Command;
+import sample.Controller.Command.ICommand;
 import sample.Controller.Events.Event;
-import sample.Model.ShapeInter;
+import sample.Model.IShapeInter;
 import sample.View.IView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ControllerJavaFXAdaptee implements Controller {
+public class ControllerJavaFXAdaptee implements IController {
     private ControllerJavaFX controllerJavaFX;
 
     public ControllerJavaFXAdaptee(ControllerJavaFX controllerJavaFX){
@@ -27,32 +27,32 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
-    public void updateViewTranslate(ShapeInter shape, double dragX, double dragY, boolean isShapeGroup) {
+    public void updateViewTranslate(IShapeInter shape, double dragX, double dragY, boolean isShapeGroup) {
         controllerJavaFX.updateViewTranslate(shape, dragX, dragY, isShapeGroup);
     }
 
     @Override
-    public void removeShape(ShapeInter shapeModel, Object shapeView) {
+    public void removeShape(IShapeInter shapeModel, Object shapeView) {
         controllerJavaFX.removeShape(shapeModel, (Shape) shapeView);
     }
 
     @Override
-    public void updateViewRemove(ShapeInter shape) {
+    public void updateViewRemove(IShapeInter shape) {
         controllerJavaFX.updateViewRemove(shape);
     }
 
     @Override
-    public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup) {
+    public void updateViewRotate(IShapeInter shape, double value, boolean isShapeGroup) {
         controllerJavaFX.updateViewRotate(shape, value, isShapeGroup);
     }
 
     @Override
-    public void updateViewResize(ShapeInter shape) {
+    public void updateViewResize(IShapeInter shape) {
         controllerJavaFX.updateViewResize(shape);
     }
 
     @Override
-    public void addShapeInToolbar(ShapeInter shape, Controller controller, int itemPos, int shapePos) {
+    public void addShapeInToolbar(IShapeInter shape, IController controller, int itemPos, int shapePos) {
         controllerJavaFX.addShapeInToolbar(shape,controller,itemPos, shapePos);
     }
 
@@ -72,12 +72,12 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
-    public ShapeInter getShapeGroupTmp() {
+    public IShapeInter getShapeGroupTmp() {
         return controllerJavaFX.getShapeGroupTmp();
     }
 
     @Override
-    public void setShapeGroupTmp(ShapeInter shapeGroupTmp) {
+    public void setShapeGroupTmp(IShapeInter shapeGroupTmp) {
         controllerJavaFX.setShapeGroupTmp(shapeGroupTmp);
     }
 
@@ -92,27 +92,27 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
-    public ArrayList<ShapeInter> getShapesInToolBar() {
+    public ArrayList<IShapeInter> getShapesInToolBar() {
         return controllerJavaFX.getShapesInToolBar();
     }
 
     @Override
-    public ArrayList<ShapeInter> getShapesInCanvas() {
+    public ArrayList<IShapeInter> getShapesInCanvas() {
         return controllerJavaFX.getShapesInCanvas();
     }
 
     @Override
-    public ArrayList<ShapeInter> getShapeGroups() {
+    public ArrayList<IShapeInter> getShapeGroups() {
         return controllerJavaFX.getShapeGroups();
     }
 
     @Override
-    public LinkedList<Command> getCommands() {
+    public LinkedList<ICommand> getCommands() {
         return controllerJavaFX.getCommands();
     }
 
     @Override
-    public void addLastCommand(Command command) {
+    public void addLastCommand(ICommand command) {
         controllerJavaFX.addLastCommand(command);
     }
 
@@ -137,7 +137,7 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
-    public void loadState(Controller controller) {
+    public void loadState(IController controller) {
         controllerJavaFX.loadState(controller);
     }
 
@@ -152,7 +152,7 @@ public class ControllerJavaFXAdaptee implements Controller {
     }
 
     @Override
-    public ArrayList<ShapeInter> getShapeGroupsInToolBar() {
+    public ArrayList<IShapeInter> getShapeGroupsInToolBar() {
         return controllerJavaFX.getShapeGroupsInToolBar();
     }
 }

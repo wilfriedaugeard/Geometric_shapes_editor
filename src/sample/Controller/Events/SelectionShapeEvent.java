@@ -8,18 +8,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Model.*;
 
 import java.util.ArrayList;
 
 public class SelectionShapeEvent implements Event {
-    protected Controller controller;
+    protected IController controller;
     private Point mousePosStart;
     private Rectangle selectionRectangle;
-    private ShapeInter shapeGroup;
+    private IShapeInter shapeGroup;
 
-    public SelectionShapeEvent(Controller controller) {
+    public SelectionShapeEvent(IController controller) {
         this.controller = controller;
         shapeGroup = controller.getShapeGroupTmp();
     }
@@ -75,7 +75,7 @@ public class SelectionShapeEvent implements Event {
                 BorderPane bp = (BorderPane) controller.getView().getRoot();
                 bp.getChildren().remove(selectionRectangle);
                 selectionRectangle = null;
-                for (ShapeInter s : controller.getShapesInCanvas()) {
+                for (IShapeInter s : controller.getShapesInCanvas()) {
                     Point rotationCenter = s.getRotationCenter();
                     if (rotationCenter.getX() >= mousePosStart.getX() && rotationCenter.getX() <= MousePosEnd.getX()
                             && rotationCenter.getY() >= mousePosStart.getY() && rotationCenter.getY() <= MousePosEnd.getY()) {
@@ -107,9 +107,9 @@ public class SelectionShapeEvent implements Event {
                         shapeX = controller.getView().getShapeXPositionInToolBar(shapes.get(i));
                         shapeY = controller.getView().getShapeYPositionInToolBar(shapes.get(i));
                         if (shapeX == x && shapeY == y) {
-                            ShapeInter shapetoAdd = controller.getShapesInCanvas().get(i);
+                            IShapeInter shapetoAdd = controller.getShapesInCanvas().get(i);
                             if (!shapeGroup.getChildren().contains(shapetoAdd)) {
-                                for(ShapeInter shapeGroup : controller.getShapeGroups()){
+                                for(IShapeInter shapeGroup : controller.getShapeGroups()){
                                     if(shapeGroup.getChildren().contains(shapetoAdd)){
                                         return;
                                     }

@@ -1,13 +1,13 @@
 package sample.Controller.Command;
 
-import sample.Controller.Controller;
-import sample.Model.ShapeInter;
+import sample.Controller.IController;
+import sample.Model.IShapeInter;
 
-public class AddGroupShapeCommand implements Command{
-    ShapeInter shapeGroup;
-    Controller controller;
+public class AddGroupShapeCommand implements ICommand {
+    IShapeInter shapeGroup;
+    IController controller;
 
-    public AddGroupShapeCommand(ShapeInter shapeGroup, Controller controller){
+    public AddGroupShapeCommand(IShapeInter shapeGroup, IController controller){
         this.shapeGroup = shapeGroup;
         this.controller = controller;
     }

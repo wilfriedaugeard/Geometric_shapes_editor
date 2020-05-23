@@ -1,6 +1,6 @@
 package sample.Model;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Factory.IPolygonDrawerFactory;
 import sample.Factory.PolygonDrawerJavaFXFactory;
 import sample.View.Drawer.IShapeDrawer;
@@ -23,7 +23,7 @@ public class PolygonJavaFX extends PolygonModel {
         super.setDeltaY(deltaY);
     }
     @Override
-    public IShapeDrawer createShapeDrawer(Controller controller) {
+    public IShapeDrawer createShapeDrawer(IController controller) {
         IPolygonDrawerFactory polygonDrawerFactory = new PolygonDrawerJavaFXFactory();
         RGB rgb = this.getRGB();
         double red = rgb.getR();

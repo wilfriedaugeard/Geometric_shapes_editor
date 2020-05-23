@@ -2,13 +2,13 @@ package sample.Controller.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import sample.Controller.Controller;
+import sample.Controller.IController;
 
 public class RedoEvent implements Event {
 
-    protected Controller controller;
+    protected IController controller;
 
-    public RedoEvent(Controller controller) {
+    public RedoEvent(IController controller) {
         this.controller = controller;
     }
 

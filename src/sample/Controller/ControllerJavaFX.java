@@ -8,7 +8,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
-import sample.Controller.Command.Command;
+import sample.Controller.Command.ICommand;
 import sample.Controller.Events.*;
 import sample.Factory.EventFactory;
 import sample.Factory.PointFactory;
@@ -28,16 +28,16 @@ public class ControllerJavaFX implements Serializable {
     private transient ViewJavaFXAdaptee view;
 
     /* Model */
-    private ArrayList<ShapeInter> shapesInToolBar;
-    private ArrayList<ShapeInter> shapesInCanvas;
+    private ArrayList<IShapeInter> shapesInToolBar;
+    private ArrayList<IShapeInter> shapesInCanvas;
     private transient ArrayList<Event> events;
-    private ArrayList<ShapeInter> shapeGroups;
-    private ArrayList<ShapeInter> shapeGroupsInToolBar;
-    private ShapeInter shapeGroupTmp;
+    private ArrayList<IShapeInter> shapeGroups;
+    private ArrayList<IShapeInter> shapeGroupsInToolBar;
+    private IShapeInter shapeGroupTmp;
 
     /* Pattern Command */
     private transient int currentPosInCommands;
-    private transient LinkedList<Command> commands;
+    private transient LinkedList<ICommand> commands;
 
     /* State */
     private boolean existState;
@@ -59,7 +59,7 @@ public class ControllerJavaFX implements Serializable {
      * Resize a shape.
      * @param shape The ShapeInter to resize.
      */
-    public void resizeShape(ShapeInter shape){
+    public void resizeShape(IShapeInter shape){
         ToolBar toolbar = (ToolBar) view.getToolBar();
         double toolbar_w = toolbar.getPrefWidth();
         // Resize shape
@@ -83,13 +83,13 @@ public class ControllerJavaFX implements Serializable {
      * @param itemPos Index in the Toolbar's list
      * @param shapePos Index in the Toolbar's list in the View
      */
-    public void addShapeInToolbar(ShapeInter shape, Controller controller, int itemPos, int shapePos){
+    public void addShapeInToolbar(IShapeInter shape, IController controller, int itemPos, int shapePos){
         if(shape.getChildren().isEmpty()){
             shapesInToolBar.add(itemPos, shape);
         }
         else{
             int pos = shapePos;
-            for (ShapeInter child : shape.getChildren()){
+            for (IShapeInter child : shape.getChildren()){
                 shapesInToolBar.add(pos, child);
                 pos++;
             }
@@ -104,7 +104,7 @@ public class ControllerJavaFX implements Serializable {
      * Initialize every part of the View, by calling it's methods and by drawing the first Toolbar's elements.
      * @param controller Controller used to initialize view
      */
-    public void initializeView(Controller controller) {
+    public void initializeView(IController controller) {
         view.addMenuBar();
         view.addCanvas();
         view.addShapeMenu();
@@ -114,11 +114,11 @@ public class ControllerJavaFX implements Serializable {
             ToolBar toolBar = (ToolBar) view.getToolBar();
             toolBar.setPrefWidth(50);
 
-            DecoratorShapeInter rec1 = new BornedRotate(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)));
-            DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170)));
-            DecoratorShapeInter  poly1 = new BornedRotate(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233)));
-            DecoratorShapeInter poly2 =new BornedRotate(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167)));
-            
+            DecoratorShapeInter rec1 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), new RGB(247, 220, 111)));
+            DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, PointFactory.getPoint(0, 0), new RGB(130, 224, 170)));
+            DecoratorShapeInter  poly1 = new BornedRotate(new PolygonJavaFX(5, 25, PointFactory.getPoint(0, 20), new RGB(133, 193, 233)));
+            DecoratorShapeInter poly2 =new BornedRotate(new PolygonJavaFX(7, 35, PointFactory.getPoint(0, 20), new RGB(245, 203, 167)));
+
             resizeShape(rec1);
             resizeShape(rec2);
             resizeShape(poly1);
@@ -144,7 +144,7 @@ public class ControllerJavaFX implements Serializable {
      */
     public void updateViewColor() {
         for(int i=0; i<getShapesInCanvas().size(); i++){
-            ShapeInter shapeModel = getShapesInCanvas().get(i);
+            IShapeInter shapeModel = getShapesInCanvas().get(i);
             Shape shapeView = getView().getShapesInCanvas().get(i);
             double red = shapeModel.getRGB().getR();
             double blue = shapeModel.getRGB().getB();
@@ -160,9 +160,9 @@ public class ControllerJavaFX implements Serializable {
      * @param dragY Value to translate shapeView in Y coordinate
      * @param isShapeGroup true if param shape is a ShapeGroup
      */
-    public void updateViewTranslate(ShapeInter shape, double dragX, double dragY, boolean isShapeGroup) {
+    public void updateViewTranslate(IShapeInter shape, double dragX, double dragY, boolean isShapeGroup) {
         if (isShapeGroup) {
-            for (ShapeInter child : shape.getChildren()) {
+            for (IShapeInter child : shape.getChildren()) {
                 int shapeIndex = shapesInCanvas.indexOf(child);
                 if(shapeIndex < 0)
                     return;
@@ -185,7 +185,7 @@ public class ControllerJavaFX implements Serializable {
      * @param shapeModel ShapeInter to remove
      * @param shapeView Shape to remove
      */
-    public void removeShape(ShapeInter shapeModel, Shape shapeView) {
+    public void removeShape(IShapeInter shapeModel, Shape shapeView) {
         if (!getView().getShapesInCanvas().remove(shapeView)) {
             System.out.println("Shape in view.getShapesCanvas not find");
         }
@@ -200,13 +200,13 @@ public class ControllerJavaFX implements Serializable {
      * Update view after removing shape(s).
      * @param shape ShapeInter removed
      */
-    public void updateViewRemove(ShapeInter shape) {
+    public void updateViewRemove(IShapeInter shape) {
         boolean noGroup = true;
         // Range shape group in order to find the corresponding shape in view
-        for (ShapeInter shapeGroup : getShapeGroups()) {
+        for (IShapeInter shapeGroup : getShapeGroups()) {
             if (shape.equals(shapeGroup)) {
                 for (int nChild = 0; nChild < shapeGroup.getChildren().size(); nChild++) {
-                    ShapeInter shapeModel = shapeGroup.getChild(nChild);
+                    IShapeInter shapeModel = shapeGroup.getChild(nChild);
                     int i = getShapesInCanvas().indexOf(shapeModel);
                     Shape shapeView = view.getShapesInCanvas().get(i);
                     removeShape(shapeModel, shapeView);
@@ -231,9 +231,9 @@ public class ControllerJavaFX implements Serializable {
      * @param value Value in degree of the rotation
      * @param isShapeGroup true if param shape is a ShapeGroup
      */
-    public void updateViewRotate(ShapeInter shape, double value, boolean isShapeGroup) {
+    public void updateViewRotate(IShapeInter shape, double value, boolean isShapeGroup) {
         if (isShapeGroup) {
-            for (ShapeInter child : shape.getChildren()) {
+            for (IShapeInter child : shape.getChildren()) {
                 int shapeIndex = shapesInCanvas.indexOf(child);
                 Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
                 Point rotationCenter = child.getRotationCenter();
@@ -259,7 +259,7 @@ public class ControllerJavaFX implements Serializable {
      * Update View after a ShapeInter, or a group of ShapeInter have been modified on their size.
      * @param shape ShapeInter rezised
      */
-    public void updateViewResize(ShapeInter shape){
+    public void updateViewResize(IShapeInter shape){
         int shapeIndex = shapesInCanvas.indexOf(shape);
         Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
         ArrayList<Double> vector = shape.getVector();
@@ -324,7 +324,7 @@ public class ControllerJavaFX implements Serializable {
      * Load toolbar state
      * @param controller The controller to load
      */
-    public void loadState(Controller controller){
+    public void loadState(IController controller){
         String filename = "state.ctrl";
         ObjectInput ois = null;
         try {
@@ -334,7 +334,7 @@ public class ControllerJavaFX implements Serializable {
 
             controller.getShapeGroupsInToolBar().addAll(controller_load.getShapeGroupsInToolBar());
             ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
-            for (ShapeInter shape : controller_load.getShapesInToolBar()) {
+            for (IShapeInter shape : controller_load.getShapesInToolBar()) {
                 addShapeInToolbar(shape, controller, toolBar.getItems().size(), toolBar.getItems().size());
             }
             controller.updateEvents();
@@ -371,7 +371,7 @@ public class ControllerJavaFX implements Serializable {
      * After that, launch every event with updateEvents method.
      * @param controller Controller where events are added
      */
-    public void initEvents(Controller controller) {
+    public void initEvents(IController controller) {
 
         events.add(EventFactory.getEvent("RightClick",controller));
         events.add(EventFactory.getEvent("DragAndDropEvent",controller));
@@ -387,7 +387,7 @@ public class ControllerJavaFX implements Serializable {
     /**
      * @return Temporary group of ShapeInter selected
      */
-    public ShapeInter getShapeGroupTmp(){
+    public IShapeInter getShapeGroupTmp(){
         return shapeGroupTmp;
     }
 
@@ -408,7 +408,7 @@ public class ControllerJavaFX implements Serializable {
     /**
      * @return The list of ShapeInter groups in the ToolBar
      */
-    public ArrayList<ShapeInter> getShapeGroupsInToolBar(){
+    public ArrayList<IShapeInter> getShapeGroupsInToolBar(){
         return shapeGroupsInToolBar;
     }
 
@@ -429,28 +429,28 @@ public class ControllerJavaFX implements Serializable {
     /**
      * @return The list of ShapeInter in the ToolBar
      */
-    public ArrayList<ShapeInter> getShapesInToolBar() {
+    public ArrayList<IShapeInter> getShapesInToolBar() {
         return shapesInToolBar;
     }
 
     /**
      * @return The list of ShapeInter groups in the Canvas
      */
-    public ArrayList<ShapeInter> getShapesInCanvas() {
+    public ArrayList<IShapeInter> getShapesInCanvas() {
         return shapesInCanvas;
     }
 
     /**
      * @return The list of ShapeInter groups in the Canvas
      */
-    public ArrayList<ShapeInter> getShapeGroups() {
+    public ArrayList<IShapeInter> getShapeGroups() {
         return shapeGroups;
     }
 
     /**
      * @return The list of Commands executed
      */
-    public LinkedList<Command> getCommands() {
+    public LinkedList<ICommand> getCommands() {
         return commands;
     }
 
@@ -458,7 +458,7 @@ public class ControllerJavaFX implements Serializable {
      * Add in the last position a Command object in the Command's list.
      * @param command The object Command to add
      */
-    public void addLastCommand(Command command){
+    public void addLastCommand(ICommand command){
         commands.addLast(command);
     }
 
@@ -490,7 +490,7 @@ public class ControllerJavaFX implements Serializable {
     /**
      * @param shapeGroupTmp The temporary ShapeGroup
      */
-    public void setShapeGroupTmp(ShapeInter shapeGroupTmp) {
+    public void setShapeGroupTmp(IShapeInter shapeGroupTmp) {
         this.shapeGroupTmp = shapeGroupTmp;
     }
 

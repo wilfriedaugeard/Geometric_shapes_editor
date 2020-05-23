@@ -1,16 +1,16 @@
 package sample.Controller.Command;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Factory.PointFactory;
 import sample.Model.Point;
-import sample.Model.ShapeInter;
+import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
-public class ResizeCommand implements Command {
+public class ResizeCommand implements ICommand {
 
-    private Controller controller;
-    private ShapeInter shape;
+    private IController controller;
+    private IShapeInter shape;
     private boolean isShapeGroup;
     private double coeff;
     private double oldCoeff;
@@ -19,7 +19,7 @@ public class ResizeCommand implements Command {
     private ArrayList<Double> oldVector;
     private ArrayList<ArrayList<Double>> oldVectors;
 
-    public ResizeCommand(Controller controller, ShapeInter shape, double value, boolean isShapeGroup){
+    public ResizeCommand(IController controller, IShapeInter shape, double value, boolean isShapeGroup){
         this.controller = controller;
         this.shape = shape;
         this.coeff = value/100;
@@ -34,15 +34,15 @@ public class ResizeCommand implements Command {
         if(isShapeGroup){
             // Take the y min
             double min = Double.POSITIVE_INFINITY;
-            ShapeInter shapeRef = shape;
-            for(ShapeInter shapeChild : shape.getChildren()){
+            IShapeInter shapeRef = shape;
+            for(IShapeInter shapeChild : shape.getChildren()){
                 min = Math.min(min, shapeChild.getPos().getY());
                 shapeRef = shapeChild;
             }
             shapeRef.setDeltaX(0);
             shapeRef.setDeltaY(0);
 
-            for(ShapeInter shapeChild : shape.getChildren()){
+            for(IShapeInter shapeChild : shape.getChildren()){
                 if(!shapeChild.equals(shapeRef)){
                     double x = shapeChild.getPos().getX()-shapeRef.getPos().getX();
                     double y = shapeChild.getPos().getY()-shapeRef.getPos().getY();
@@ -94,7 +94,7 @@ public class ResizeCommand implements Command {
     @Override
     public void redo() {
         if(isShapeGroup){
-            for(ShapeInter shapeChild : shape.getChildren()){
+            for(IShapeInter shapeChild : shape.getChildren()){
                 ArrayList<Double> vector = shapeChild.getVector();
                 for(int i = 0; i < vector.size(); i++){
                     vector.set(i, vector.get(i) * coeff);

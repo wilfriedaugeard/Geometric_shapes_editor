@@ -1,6 +1,6 @@
 package sample.Controller.Command;
 
-public interface Command {
+public interface ICommand {
     /**
      * Execute an action as an object Command, so we can undo or redo this action.
      */

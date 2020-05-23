@@ -1,6 +1,6 @@
 package sample.Factory;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Controller.Events.*;
 
 public class EventFactory {
@@ -9,7 +9,7 @@ public class EventFactory {
      * @param controller Controller used as parameter to create event object
      * @return Event object
      */
-    public static Event getEvent(String name, Controller controller){
+    public static Event getEvent(String name, IController controller){
         if(name.equals("RightClick")){
             return new RightClick(controller);
         }

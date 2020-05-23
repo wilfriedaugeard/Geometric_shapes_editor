@@ -9,16 +9,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 import sample.Controller.*;
 import sample.Controller.Command.ColorShapeCommand;
-import sample.Controller.Command.Command;
+import sample.Controller.Command.ICommand;
 import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Command.RotateCommand;
 import sample.Model.RGB;
-import sample.Model.ShapeInter;
+import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
 public class RightClick implements Event {
-    private final Controller controller;
+    private final IController controller;
     private Shape shapeInCanvas;
     private ColorPicker colorPicker;
     private final ContextMenu shapeMenu;
@@ -29,7 +29,7 @@ public class RightClick implements Event {
     private double last_rotate;
 
 
-    public RightClick(Controller controller){
+    public RightClick(IController controller){
         this.controller = controller;
         this.colorPicker = (ColorPicker) controller.getView().getColorPicker();
         this.shapeMenu = (ContextMenu) controller.getView().getShapeMenu();
@@ -81,10 +81,10 @@ public class RightClick implements Event {
                         double blue = colorPicker.getValue().getBlue();
 
                         int index = controller.getView().getShapesInCanvas().indexOf(value);
-                        ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
+                        IShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
 
-                        Command colorShapeCommand = null;
-                        for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+                        ICommand colorShapeCommand = null;
+                        for (IShapeInter shapeGroup : controller.getShapeGroups()) {
                             if (shapeGroup.getChildren().contains(shapeSelected)) {
                                 colorShapeCommand = new ColorShapeCommand(new RGB(red, green, blue), shapeGroup, controller);
                                 controller.addLastCommand(colorShapeCommand);
@@ -119,10 +119,10 @@ public class RightClick implements Event {
 
 
     // Resize a shape
-    public void resizeShape(ShapeInter shape, double value){
-        Command resizeCommand;
+    public void resizeShape(IShapeInter shape, double value){
+        ICommand resizeCommand;
         System.out.println(shape.getWidth());
-        for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+        for (IShapeInter shapeGroup : controller.getShapeGroups()) {
             if (shapeGroup.getChildren().contains(shape)) {
                 resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
                 controller.addLastCommand(resizeCommand);
@@ -139,7 +139,7 @@ public class RightClick implements Event {
     }
 
     // Verify string before resize a shape
-    public void resizeTreatment(String strValue, ShapeInter shapeSelected){
+    public void resizeTreatment(String strValue, IShapeInter shapeSelected){
         if (containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);
             resizeShape(shapeSelected,value);
@@ -148,9 +148,9 @@ public class RightClick implements Event {
     }
 
     // Rotate a shape
-    public void rotateShape(ShapeInter shape, double value){
-        Command rotateCommand;
-        for (ShapeInter shapeGroup : controller.getShapeGroups()) {
+    public void rotateShape(IShapeInter shape, double value){
+        ICommand rotateCommand;
+        for (IShapeInter shapeGroup : controller.getShapeGroups()) {
             if (shapeGroup.getChildren().contains(shape)) {
                 rotateCommand = new RotateCommand(controller, shapeGroup, value, true);
                 controller.addLastCommand(rotateCommand);
@@ -166,7 +166,7 @@ public class RightClick implements Event {
     }
 
     // Verify string before rotate a shape
-    public void rotateTreatment(String strValue, ShapeInter shape){
+    public void rotateTreatment(String strValue, IShapeInter shape){
         if(containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);
             System.out.println(value);
@@ -178,7 +178,7 @@ public class RightClick implements Event {
         }
     }
 
-    public void treatments(ShapeInter shape, TxtCapture dialog){
+    public void treatments(IShapeInter shape, TxtCapture dialog){
         if(!dialog.getResize().getText().isEmpty()){
             resizeTreatment(dialog.getResize().getText(), shape);
         }
@@ -187,7 +187,7 @@ public class RightClick implements Event {
         }
     }
 
-    public void clearField(ShapeInter shapeSelected){
+    public void clearField(IShapeInter shapeSelected){
 
         double value = (size_saved*100)/shapeSelected.getWidth();
         resizeShape(shapeSelected, value);
@@ -205,7 +205,7 @@ public class RightClick implements Event {
         @Override
         public void handle(ActionEvent event) {
             int index = controller.getView().getShapesInCanvas().indexOf(shapeInCanvas);
-            ShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
+            IShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
             size_saved = shapeSelected.getWidth();
 
             last_size = 0;

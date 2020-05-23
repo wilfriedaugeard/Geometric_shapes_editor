@@ -1,12 +1,12 @@
 package sample.Model;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.View.Drawer.IShapeDrawer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class ShapeModel implements ShapeInter, Serializable {
+public abstract class ShapeModel implements IShapeInter, Serializable {
 	private double rotation;
     private Point pos;
     private RGB RGB;
@@ -65,7 +65,7 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 
 	public abstract Point getRotationCenter();
     public abstract void setRotationCenter(Point rotationCenter);
-	public abstract IShapeDrawer createShapeDrawer(Controller controller);
+	public abstract IShapeDrawer createShapeDrawer(IController controller);
 	public abstract ArrayList<Double> getVector();
 	public abstract void setVector(ArrayList<Double> vector);
 	public abstract Double[] getPoints(int n, double l);
@@ -77,22 +77,22 @@ public abstract class ShapeModel implements ShapeInter, Serializable {
 	/* Pattern composite methods*/
 
 	@Override
-	public void add(ShapeInter shapeInter){
+	public void add(IShapeInter shapeInter){
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void remove(ShapeInter shapeInter){
+	public void remove(IShapeInter shapeInter){
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public ArrayList<ShapeInter> getChildren(){
+	public ArrayList<IShapeInter> getChildren(){
 		return new ArrayList<>();
 	}
 
 	@Override
-	public ShapeInter getChild(int n){
+	public IShapeInter getChild(int n){
 		throw new UnsupportedOperationException();
 	}
 

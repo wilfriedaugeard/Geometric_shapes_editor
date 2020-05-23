@@ -1,14 +1,14 @@
 package sample.Model.Decorator;
 
-import sample.Model.ShapeInter;
+import sample.Model.IShapeInter;
 
 public class BornedRotate extends DecoratorShapeInter{
 
-    public BornedRotate(ShapeInter shapeInter) {
+    public BornedRotate(IShapeInter shapeInter) {
         shape = shapeInter;
     }
 
-    private void computeRotate(ShapeInter s){
+    private void computeRotate(IShapeInter s){
         double rotation = s.getRotation();
         if(rotation < -360.0){
             s.setRotation(-360.0);
@@ -24,7 +24,7 @@ public class BornedRotate extends DecoratorShapeInter{
     @Override
     public void setRotation(double rotation) {
         if(!super.shape.getChildren().isEmpty()){
-            for(ShapeInter child : super.shape.getChildren()){
+            for(IShapeInter child : super.shape.getChildren()){
                 computeRotate(child);
             }
         }

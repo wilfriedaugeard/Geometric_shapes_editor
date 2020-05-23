@@ -3,7 +3,7 @@ package sample.Controller.Events;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
-import sample.Controller.Controller;
+import sample.Controller.IController;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,9 +12,9 @@ import java.io.ObjectOutputStream;
 
 
 public class SaveEvent implements Event {
-    private final Controller controller;
+    private final IController controller;
 
-    public SaveEvent(Controller controller) {
+    public SaveEvent(IController controller) {
         this.controller = controller;
     }
 

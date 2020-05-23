@@ -1,19 +1,19 @@
 package sample.Controller.Command;
 
-import sample.Controller.Controller;
-import sample.Model.ShapeInter;
+import sample.Controller.IController;
+import sample.Model.IShapeInter;
 import sample.View.Drawer.IShapeDrawer;
 
 import java.util.ArrayList;
 
 
-public class RemoveCommand implements Command{
-    private ShapeInter shape;
-    private Controller controller;
-    private ArrayList<ShapeInter> listOfShape;
+public class RemoveCommand implements ICommand {
+    private IShapeInter shape;
+    private IController controller;
+    private ArrayList<IShapeInter> listOfShape;
 
 
-    public RemoveCommand(ShapeInter shape, Controller controller) {
+    public RemoveCommand(IShapeInter shape, IController controller) {
         this.shape = shape;
         this.controller = controller;
         this.listOfShape = new ArrayList<>();
@@ -21,7 +21,7 @@ public class RemoveCommand implements Command{
 
     @Override
     public void execute() {
-        for(ShapeInter shapeGroup : controller.getShapeGroups()) {
+        for(IShapeInter shapeGroup : controller.getShapeGroups()) {
             if (shape.equals(shapeGroup)) {
                 listOfShape.add(shapeGroup);
             }
@@ -33,8 +33,8 @@ public class RemoveCommand implements Command{
      * Create a shape
      * @param shape
      */
-    private void createShape(ShapeInter shape){
-        ShapeInter copy = shape.clone();
+    private void createShape(IShapeInter shape){
+        IShapeInter copy = shape.clone();
         IShapeDrawer drawer = copy.createShapeDrawer(controller);
         drawer.drawShape();
         controller.getShapesInCanvas().add(copy);
@@ -44,7 +44,7 @@ public class RemoveCommand implements Command{
      * Create a group shape
      * @param shape
      */
-    private void createGroupShape(ShapeInter shape){
+    private void createGroupShape(IShapeInter shape){
         controller.getShapeGroups().add(shape);
         for(int i = 0; i < shape.getChildren().size(); i++){
             createShape(shape.getChild(i));

@@ -1,21 +1,21 @@
 package sample.Controller.Command;
 
-import sample.Controller.Controller;
-import sample.Model.ShapeInter;
+import sample.Controller.IController;
+import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
-public class RotateCommand implements Command{
+public class RotateCommand implements ICommand {
 
-    private Controller controller;
-    private ShapeInter shape;
+    private IController controller;
+    private IShapeInter shape;
     private boolean isShapeGroup;
     private double value;
 
     private double oldValue;
     private ArrayList<Double> oldvalues;
 
-    public RotateCommand(Controller controller, ShapeInter shape, double value, boolean isShapeGroup){
+    public RotateCommand(IController controller, IShapeInter shape, double value, boolean isShapeGroup){
         this.controller = controller;
         this.shape = shape;
         this.value = value;
@@ -27,7 +27,7 @@ public class RotateCommand implements Command{
     public void execute() {
         shape.setRotation(value);
         if(isShapeGroup){
-            for(ShapeInter child : shape.getChildren()){
+            for(IShapeInter child : shape.getChildren()){
                 oldvalues.add(child.getRotation());
             }
         }else{
@@ -41,7 +41,7 @@ public class RotateCommand implements Command{
         if(isShapeGroup){
             for(int i = 0; i < oldvalues.size(); i++){
                 double oldVal = oldvalues.get(i);
-                ShapeInter currentChild = shape.getChild(i);
+                IShapeInter currentChild = shape.getChild(i);
                 currentChild.setRotation(-oldVal);
                 controller.updateViewRotate(shape.getChild(i), currentChild.getRotation(), false);
             }

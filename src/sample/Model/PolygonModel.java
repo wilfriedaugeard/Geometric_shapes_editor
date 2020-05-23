@@ -1,6 +1,6 @@
 package sample.Model;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Factory.PointFactory;
 import sample.View.Drawer.IShapeDrawer;
 
@@ -104,7 +104,7 @@ public abstract class PolygonModel extends ShapeModel implements Serializable {
 		this.rotationCenter.setY(center.getY());
 	}
 
-	public abstract IShapeDrawer createShapeDrawer(Controller controller);
+	public abstract IShapeDrawer createShapeDrawer(IController controller);
 
 	@Override
 	public ArrayList<Double> getVector(){

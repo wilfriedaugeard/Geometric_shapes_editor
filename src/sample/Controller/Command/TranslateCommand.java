@@ -1,15 +1,15 @@
 package sample.Controller.Command;
 
-import sample.Controller.Controller;
-import sample.Model.ShapeInter;
+import sample.Controller.IController;
+import sample.Model.IShapeInter;
 
-public class TranslateCommand implements Command{
+public class TranslateCommand implements ICommand {
     private double dragX, dragY;
-    private ShapeInter shape;
-    private Controller controller;
+    private IShapeInter shape;
+    private IController controller;
     private boolean isShapeGroup;
 
-    public TranslateCommand(double dragX, double dragY, ShapeInter shape, Controller controller, boolean isShapeGroup) {
+    public TranslateCommand(double dragX, double dragY, IShapeInter shape, IController controller, boolean isShapeGroup) {
         this.dragX = dragX;
         this.dragY = dragY;
         this.shape = shape;

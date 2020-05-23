@@ -1,15 +1,15 @@
 package sample.Model;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Factory.*;
 import sample.View.Drawer.IShapeDrawer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ShapeGroup implements ShapeInter, Serializable {
+public class ShapeGroup implements IShapeInter, Serializable {
 
-    private ArrayList<ShapeInter> group;
+    private ArrayList<IShapeInter> group;
     private double coeff;
     private Point pos;
     public ShapeGroup (){
@@ -21,7 +21,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     @Override
     public ShapeGroup clone() {
         try {
-            ArrayList<ShapeInter> groupCloned = new ArrayList<>(group.size());
+            ArrayList<IShapeInter> groupCloned = new ArrayList<>(group.size());
             groupCloned.addAll(group);
             ShapeGroup clone = (ShapeGroup) super.clone();
             clone.group = groupCloned;
@@ -35,30 +35,30 @@ public class ShapeGroup implements ShapeInter, Serializable {
 
     /*Pattern composite methods*/
     @Override
-    public void add(ShapeInter shapeInter){
+    public void add(IShapeInter shapeInter){
         group.add(shapeInter);
     }
 
     @Override
-    public void remove(ShapeInter shapeInter){
+    public void remove(IShapeInter shapeInter){
         group.remove(shapeInter);
     }
 
     @Override
-    public ArrayList<ShapeInter> getChildren(){
+    public ArrayList<IShapeInter> getChildren(){
         return group;
     }
 
     @Override
-    public ShapeInter getChild(int n){
+    public IShapeInter getChild(int n){
         return group.get(n);
     }
 
     @Override
-    public IShapeDrawer createShapeDrawer(Controller controller) {
+    public IShapeDrawer createShapeDrawer(IController controller) {
         IGroupDrawerFactory groupDrawerFactory = new GroupDrawerJavaFXFactory();
         ArrayList<IShapeDrawer> drawerlist = new ArrayList<>();
-        for(ShapeInter shape : getChildren()){
+        for(IShapeInter shape : getChildren()){
             drawerlist.add(shape.createShapeDrawer(controller));
         }
         return groupDrawerFactory.createGroupDrawer(controller.getView(), getPos().getX(), getPos().getY(), getWidth(), getHeight(), drawerlist);
@@ -72,7 +72,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     public Point getPos() {
         double x = Double.MAX_VALUE;
         double y = Double.MAX_VALUE;
-        for (ShapeInter shape : getChildren()){
+        for (IShapeInter shape : getChildren()){
             x = Double.min(shape.getPos().getX(),x);
             y = Double.min(shape.getPos().getY(),y);
         }
@@ -87,14 +87,14 @@ public class ShapeGroup implements ShapeInter, Serializable {
     public void setPos(Point p) {
         double x = p.getX()-getPos().getX();
         double y = p.getY()-getPos().getY();
-        for(ShapeInter shape : group) {
+        for(IShapeInter shape : group) {
             translate(x, y);
         }
     }
 
     @Override
     public void translate(double dx, double dy) {
-        for(ShapeInter shape : group) {
+        for(IShapeInter shape : group) {
             shape.getPos().setX(shape.getPos().getX() + dx);
             shape.getPos().setY(shape.getPos().getY() + dy);
         }
@@ -107,7 +107,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
 
     @Override
     public void setRotation(double r) {
-        for(ShapeInter shape : group){
+        for(IShapeInter shape : group){
             shape.setRotation(r);
         }
     }
@@ -130,7 +130,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
 
     @Override
     public void setRGB(RGB rgb) {
-        for(ShapeInter shape : group){
+        for(IShapeInter shape : group){
             shape.setRGB(rgb);
         }
     }
@@ -138,7 +138,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     @Override
     public ArrayList<Double> getVector() {
         Double size = 0.0;
-        for(ShapeInter shape : getChildren()){
+        for(IShapeInter shape : getChildren()){
             size += shape.getVector().get(0);
         }
         ArrayList<Double> vector = new ArrayList<>();
@@ -160,7 +160,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     public double getWidth() {
         double min = Double.MAX_VALUE;
         double max = Double.MIN_VALUE;
-        for (ShapeInter shape : getChildren()){
+        for (IShapeInter shape : getChildren()){
             min = Double.min(shape.getPos().getX(),min);
             max = Double.max(shape.getPos().getX()+shape.getWidth(),max);
         }
@@ -171,7 +171,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     public double getHeight() {
         double min = Double.MAX_VALUE;
         double max = Double.MIN_VALUE;
-        for (ShapeInter shape : getChildren()){
+        for (IShapeInter shape : getChildren()){
             min = Double.min(shape.getPos().getY(),min);
             max = Double.max(shape.getPos().getY()+shape.getHeight(),max);
         }
@@ -197,7 +197,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     @Override
     public void setDeltaX(double d) {
         deltaX = d;
-        for(ShapeInter child : getChildren()){
+        for(IShapeInter child : getChildren()){
             child.setDeltaX(d);
         }
     }
@@ -210,7 +210,7 @@ public class ShapeGroup implements ShapeInter, Serializable {
     @Override
     public void setDeltaY(double d) {
         deltaY = d;
-        for(ShapeInter child : getChildren()){
+        for(IShapeInter child : getChildren()){
             child.setDeltaY(d);
         }
     }

@@ -1,18 +1,18 @@
 package sample.Controller.Command;
 
-import sample.Controller.Controller;
-import sample.Model.ShapeInter;
+import sample.Controller.IController;
+import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
-public class DeGroupShapeCommand implements Command{
+public class DeGroupShapeCommand implements ICommand {
 
-    protected Controller controller;
-    private ShapeInter shapeGroupTmp;
-    private ArrayList<ShapeInter> shapeGroupsModified;
-    private ArrayList<ShapeInter> shapesDeleted;
+    protected IController controller;
+    private IShapeInter shapeGroupTmp;
+    private ArrayList<IShapeInter> shapeGroupsModified;
+    private ArrayList<IShapeInter> shapesDeleted;
 
-    public DeGroupShapeCommand(Controller controller, ShapeInter shapeGroup){
+    public DeGroupShapeCommand(IController controller, IShapeInter shapeGroup){
         this.controller = controller;
         this.shapeGroupTmp = shapeGroup;
         this.shapeGroupsModified = new ArrayList<>();
@@ -25,9 +25,9 @@ public class DeGroupShapeCommand implements Command{
         if(shapeGroupsModified.isEmpty()){
             hasNeverBeenExecuted = true;
         }
-        for(ShapeInter shapeGroup : controller.getShapeGroups()){
-            for(ShapeInter shape : shapeGroup.getChildren()){
-                for(ShapeInter shapetoDegroup : shapeGroupTmp.getChildren()){
+        for(IShapeInter shapeGroup : controller.getShapeGroups()){
+            for(IShapeInter shape : shapeGroup.getChildren()){
+                for(IShapeInter shapetoDegroup : shapeGroupTmp.getChildren()){
                     if(shape.equals(shapetoDegroup)){
                         if(hasNeverBeenExecuted==true) {
                             shapeGroupsModified.add(shapeGroup);
@@ -43,7 +43,7 @@ public class DeGroupShapeCommand implements Command{
     @Override
     public void undo() {
         for(int i = 0; i < shapeGroupsModified.size(); i++){
-            ShapeInter shapePreviouslyDeleted = shapesDeleted.get(i);
+            IShapeInter shapePreviouslyDeleted = shapesDeleted.get(i);
             shapeGroupsModified.get(i).add(shapePreviouslyDeleted);
         }
     }

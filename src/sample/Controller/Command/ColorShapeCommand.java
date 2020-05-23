@@ -1,20 +1,20 @@
 package sample.Controller.Command;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Model.RGB;
 import sample.Model.ShapeGroup;
-import sample.Model.ShapeInter;
+import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
-public class ColorShapeCommand implements Command{
+public class ColorShapeCommand implements ICommand {
         private RGB color;
         private RGB oldColor;
         private ArrayList<RGB> oldColors;
-        private ShapeInter shape;
-        private Controller controller;
+        private IShapeInter shape;
+        private IController controller;
 
-        public ColorShapeCommand(RGB color, ShapeInter shape, Controller controller) {
+        public ColorShapeCommand(RGB color, IShapeInter shape, IController controller) {
             this.color = new RGB( (int)(color.getR()*255) ,(int) (color.getG()*255),(int) (color.getB()*255));
             this.shape = shape;
             this.controller = controller;
@@ -24,7 +24,7 @@ public class ColorShapeCommand implements Command{
         @Override
         public void execute() {
             if(shape instanceof ShapeGroup && oldColors.isEmpty()){
-                for(ShapeInter shapeChild : shape.getChildren()){
+                for(IShapeInter shapeChild : shape.getChildren()){
                     oldColors.add(shapeChild.getRGB());
                 }
             }else {

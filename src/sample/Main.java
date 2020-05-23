@@ -3,17 +3,17 @@ package sample;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.Controller.Controller;
-import sample.Factory.ControllerFactory;
+import sample.Controller.IController;
+import sample.Factory.IControllerFactory;
 import sample.Factory.ControllerJavaFXFactory;
 
 public class Main extends Application {
 
-    private final ControllerFactory controllerFactory = new ControllerJavaFXFactory();
+    private final IControllerFactory controllerFactory = new ControllerJavaFXFactory();
 
     @Override
     public void start(Stage primaryStage) {
-        Controller controller = controllerFactory.createController();
+        IController controller = controllerFactory.createController();
         controller.initializeView();
         controller.initEvents();
 

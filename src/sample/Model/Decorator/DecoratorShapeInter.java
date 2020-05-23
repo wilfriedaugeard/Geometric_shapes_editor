@@ -1,19 +1,19 @@
 package sample.Model.Decorator;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Model.Point;
 import sample.Model.RGB;
-import sample.Model.ShapeInter;
+import sample.Model.IShapeInter;
 import sample.View.Drawer.IShapeDrawer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DecoratorShapeInter implements ShapeInter, Serializable {
-    protected ShapeInter shape;
+public class DecoratorShapeInter implements IShapeInter, Serializable {
+    protected IShapeInter shape;
 
     @Override
-    public ShapeInter clone() {
+    public IShapeInter clone() {
         try {
             return (DecoratorShapeInter) super.clone();
         }
@@ -25,27 +25,27 @@ public class DecoratorShapeInter implements ShapeInter, Serializable {
     }
 
     @Override
-    public void add(ShapeInter shapeInter) {
+    public void add(IShapeInter shapeInter) {
         shape.add(shapeInter);
     }
 
     @Override
-    public void remove(ShapeInter shapeInter) {
+    public void remove(IShapeInter shapeInter) {
         shape.remove(shapeInter);
     }
 
     @Override
-    public ArrayList<ShapeInter> getChildren() {
+    public ArrayList<IShapeInter> getChildren() {
         return shape.getChildren();
     }
 
     @Override
-    public ShapeInter getChild(int n) {
+    public IShapeInter getChild(int n) {
         return shape.getChild(n);
     }
 
     @Override
-    public IShapeDrawer createShapeDrawer(Controller controller) {
+    public IShapeDrawer createShapeDrawer(IController controller) {
         return shape.createShapeDrawer(controller);
     }
 

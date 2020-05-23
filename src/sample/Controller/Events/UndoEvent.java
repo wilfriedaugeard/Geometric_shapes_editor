@@ -2,13 +2,13 @@ package sample.Controller.Events;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import sample.Controller.Controller;
+import sample.Controller.IController;
 
 public class UndoEvent implements Event {
 
-    protected Controller controller;
+    protected IController controller;
 
-    public UndoEvent(Controller controller){
+    public UndoEvent(IController controller){
         this.controller = controller;
     }
 

@@ -1,16 +1,16 @@
 package sample.Model;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.View.Drawer.IShapeDrawer;
 
 import java.util.ArrayList;
 
-public interface ShapeInter extends Cloneable {
+public interface IShapeInter extends Cloneable {
 
     /**
      * @return The clone of the ShapeInter
      */
-    public ShapeInter clone();
+    public IShapeInter clone();
 
     /* Pattern Composite methods */
 
@@ -18,26 +18,26 @@ public interface ShapeInter extends Cloneable {
      * Works only for a ShapeGroup. Throws an exception otherwise.
      * @param shapeInter The ShapeInter to add in the children's list
      */
-    void add(ShapeInter shapeInter);
+    void add(IShapeInter shapeInter);
 
     /**
      * Works only for a ShapeGroup. Throws an exception otherwise.
      * @param shapeInter The ShapeInter to remove in the children's list
      */
-    void remove(ShapeInter shapeInter);
+    void remove(IShapeInter shapeInter);
 
     /**
      * Works only for a ShapeGroup. Throws an exception otherwise.
      * @return The children of a ShapeInter group
      */
-    ArrayList<ShapeInter> getChildren();
+    ArrayList<IShapeInter> getChildren();
 
     /**
      * Works only for a ShapeGroup. Throws an exception otherwise.
      * @param n Index in the list of children
      * @return The ShapeInter child at index n
      */
-    ShapeInter getChild(int n);
+    IShapeInter getChild(int n);
 
     /* Bridge */
 
@@ -45,7 +45,7 @@ public interface ShapeInter extends Cloneable {
      * @param controller Controller used to get the View
      * @return An object IShapeDrawer
      */
-    public IShapeDrawer createShapeDrawer(Controller controller);
+    public IShapeDrawer createShapeDrawer(IController controller);
 
     /* Simple methods */
 

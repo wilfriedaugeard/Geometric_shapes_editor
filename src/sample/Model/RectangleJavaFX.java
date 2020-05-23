@@ -1,6 +1,6 @@
 package sample.Model;
 
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Factory.IRectangleDrawerFactory;
 import sample.Factory.RectangleDrawerJavaFXFactory;
 import sample.View.Drawer.IShapeDrawer;
@@ -24,7 +24,7 @@ public class RectangleJavaFX extends RectangleModel {
     }
 
     @Override
-    public IShapeDrawer createShapeDrawer(Controller controller) {
+    public IShapeDrawer createShapeDrawer(IController controller) {
         IRectangleDrawerFactory rectangleDrawerFactory = new RectangleDrawerJavaFXFactory();
 
         RGB rgb = this.getRGB();

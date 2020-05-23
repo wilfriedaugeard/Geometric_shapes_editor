@@ -5,17 +5,17 @@ import javafx.event.EventHandler;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
-import sample.Controller.Controller;
+import sample.Controller.IController;
 import sample.Controller.ControllerJavaFXAdaptee;
-import sample.Model.ShapeInter;
+import sample.Model.IShapeInter;
 import sample.View.Drawer.IShapeDrawer;
 
 import java.io.*;
 
 public class LoadEvent implements Event {
-    private final Controller controller;
+    private final IController controller;
 
-    public LoadEvent(Controller controller) {
+    public LoadEvent(IController controller) {
         this.controller = controller;
     }
 
@@ -57,7 +57,7 @@ public class LoadEvent implements Event {
 
                 controller.setCurrentPosInCommands(0);
                 
-                for (ShapeInter shape : controller.getShapesInCanvas()) {
+                for (IShapeInter shape : controller.getShapesInCanvas()) {
                     IShapeDrawer drawer = shape.createShapeDrawer(controller);
                     drawer.drawShape();
                 }
