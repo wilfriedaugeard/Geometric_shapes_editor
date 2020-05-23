@@ -6,9 +6,10 @@ import sample.Model.RGB;
 import sample.Model.ShapeInter;
 import sample.View.Drawer.IShapeDrawer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DecoratorShapeInter implements ShapeInter {
+public class DecoratorShapeInter implements ShapeInter, Serializable {
     protected ShapeInter shape;
 
     @Override

@@ -114,12 +114,11 @@ public class ControllerJavaFX implements Serializable {
             ToolBar toolBar = (ToolBar) view.getToolBar();
             toolBar.setPrefWidth(50);
 
-            //RectangleJavaFX rec1 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111));
-            RectangleJavaFX rec2 = new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170));
-            PolygonJavaFX  poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
-            PolygonJavaFX  poly2 = new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167));
-
             DecoratorShapeInter rec1 = new BornedRotate(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(247, 220, 111)));
+            DecoratorShapeInter rec2 = new BornedRotate(new RectangleJavaFX(50, 25, new Point(0, 0), new RGB(130, 224, 170)));
+            DecoratorShapeInter  poly1 = new BornedRotate(new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233)));
+            DecoratorShapeInter poly2 =new BornedRotate(new PolygonJavaFX(7, 35, new Point(0, 20), new RGB(245, 203, 167)));
+            
             resizeShape(rec1);
             resizeShape(rec2);
             resizeShape(poly1);
