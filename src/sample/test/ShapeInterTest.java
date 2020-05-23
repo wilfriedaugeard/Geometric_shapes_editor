@@ -94,8 +94,8 @@ class ShapeInterTest {
 
         ShapeInter poly1 = new PolygonJavaFX(5, 25, new Point(0, 20), new RGB(133, 193, 233));
 
-        //Should not work because it's not a shape group
-        assertThrows(UnsupportedOperationException.class, () -> poly1.getChildren());
+        assert(poly1.getChildren() != null);
+        assertEquals(0, poly1.getChildren().size());
     }
 
     @org.junit.jupiter.api.Test
