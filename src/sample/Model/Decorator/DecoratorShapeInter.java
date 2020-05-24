@@ -9,6 +9,9 @@ import sample.View.Drawer.IShapeDrawer;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * A shapeInter Decorator
+ */
 public class DecoratorShapeInter implements IShapeInter, Serializable {
     protected IShapeInter shape;
 

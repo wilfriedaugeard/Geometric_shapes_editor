@@ -23,6 +23,7 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
 		this.group = new ArrayList<>();
 	}
 
+
 	public ShapeModel clone() {
 		try {
 			return (ShapeModel) super.clone();
@@ -30,15 +31,19 @@ public abstract class ShapeModel implements IShapeInter, Serializable {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-
 		return this;
 	}
-	
+
+
 	public void translate(double dx, double dy) {
         pos.setX(pos.getX() + dx);
         pos.setY(pos.getY() + dy);
     }
-	
+
+	/**
+	 * Get the position of the shapeModel
+	 * @return the position
+	 */
 	public Point getPos() {
 		return pos;
 	}
