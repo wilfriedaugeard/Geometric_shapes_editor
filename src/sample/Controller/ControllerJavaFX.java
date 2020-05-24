@@ -502,11 +502,6 @@ public class ControllerJavaFX implements Serializable {
             for (IShapeInter shapeGroup : controller.getShapeGroups()) {
                 if (shapeGroup.getChildren().contains(shapeToTranslate)) {
                     value = (toolbar_w-margin_left-margin_right)/shapeGroup.getWidth();
-                    //value *= 100;
-                    /*resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
-                    controller.addLastCommand(resizeCommand);
-                    controller.setCurrentPosInCommands(controller.getNbCommands());
-                    resizeCommand.execute();*/
                     resizeInToolbar(isInShapeGroup, shapeGroup, value);
 
                     int index;

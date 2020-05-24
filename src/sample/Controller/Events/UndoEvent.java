@@ -18,9 +18,8 @@ public class UndoEvent implements Event {
     EventHandler<ActionEvent> undoEvent = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {
-            if(controller.getCurrentPosInCommands() > 0) {
+            if(controller.getCurrentPosInCommands() >= 0) {
                 int currentPos = controller.getCurrentPosInCommands();
-                System.out.println("index : " + currentPos);
                 controller.getCommands().get(currentPos).undo();
                 controller.setCurrentPosInCommands(currentPos-1);
             }

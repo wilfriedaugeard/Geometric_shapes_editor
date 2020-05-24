@@ -25,6 +25,7 @@ public class RotateCommand implements ICommand {
 
     @Override
     public void execute() {
+        System.out.println("execute ->"+shape);
         shape.setRotation(value);
         if(isShapeGroup){
             for(IShapeInter child : shape.getChildren()){
@@ -33,6 +34,7 @@ public class RotateCommand implements ICommand {
             }
         }else{
             oldValue = shape.getRotation();
+            controller.updateViewRotate(shape, shape.getRotation());
         }
     }
 

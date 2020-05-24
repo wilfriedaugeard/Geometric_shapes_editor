@@ -28,6 +28,6 @@ public class CreateShapeCommand implements ICommand{
 
     @Override
     public void redo() {
-        shapeCreated = controller.createShapeInCanvas(controller, shapeInToolbar, posX, posY, false);
+        shapeCreated = controller.createShapeInCanvas(controller, shapeInToolbar, posX, posY, true);
     }
 }

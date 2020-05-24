@@ -29,7 +29,7 @@ public class AddToToolbarCommand implements ICommand{
     @Override
     public void undo() {
         controller.removeShapeInToolbar(shapeInToolbar, isInShapeGroup);
-        shapeCreated = controller.createShapeInCanvas(controller, shapeInToolbar, posX, posY, false);
+        shapeCreated = controller.createShapeInCanvas(controller, shapeInToolbar, posX, posY, true);
     }
 
     @Override
