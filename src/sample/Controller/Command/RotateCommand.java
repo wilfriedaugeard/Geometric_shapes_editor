@@ -56,5 +56,12 @@ public class RotateCommand implements ICommand {
     @Override
     public void redo() {
         shape.setRotation(value);
+        if(isShapeGroup){
+            for(IShapeInter child : shape.getChildren()){
+                controller.updateViewRotate(child, child.getRotation());
+            }
+        }else{
+            controller.updateViewRotate(shape, shape.getRotation());
+        }
     }
 }
