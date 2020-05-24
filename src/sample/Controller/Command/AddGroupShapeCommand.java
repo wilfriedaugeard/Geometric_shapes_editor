@@ -3,6 +3,10 @@ package sample.Controller.Command;
 import sample.Controller.IController;
 import sample.Model.IShapeInter;
 
+
+/**
+ * Command to create a group of shape
+ */
 public class AddGroupShapeCommand implements ICommand {
     IShapeInter shapeGroup;
     IController controller;

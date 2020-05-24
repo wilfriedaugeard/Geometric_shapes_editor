@@ -8,6 +8,9 @@ import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
+/**
+ * Command to color a shape
+ */
 public class ColorShapeCommand implements ICommand {
         private RGB color;
         private RGB oldColor;

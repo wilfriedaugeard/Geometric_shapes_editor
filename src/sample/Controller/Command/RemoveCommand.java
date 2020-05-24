@@ -6,7 +6,9 @@ import sample.View.Drawer.IShapeDrawer;
 
 import java.util.ArrayList;
 
-
+/**
+ * Command to remove a shape
+ */
 public class RemoveCommand implements ICommand {
     private IShapeInter shape;
     private IController controller;
@@ -31,7 +33,7 @@ public class RemoveCommand implements ICommand {
 
     /**
      * Create a shape
-     * @param shape
+     * @param shape The shape to create
      */
     private void createShape(IShapeInter shape){
         IShapeInter copy = shape.clone();
@@ -43,7 +45,7 @@ public class RemoveCommand implements ICommand {
 
     /**
      * Create a group shape
-     * @param shape
+     * @param shape The group shape to create
      */
     private void createGroupShape(IShapeInter shape){
         ArrayList<IShapeInter> copyList = new ArrayList<>();
@@ -67,8 +69,6 @@ public class RemoveCommand implements ICommand {
             createGroupShape(shape);
         }
         controller.updateEvents();
-        //shapeBackUp = controller.createShapeInCanvas(controller, shape, shape.getPos().getX(), shape.getPos().getY(), false);
-
     }
 
     @Override

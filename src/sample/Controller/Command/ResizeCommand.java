@@ -7,6 +7,9 @@ import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
+/**
+ * Command to resize a shape
+ */
 public class ResizeCommand implements ICommand {
 
     private IController controller;
@@ -59,7 +62,6 @@ public class ResizeCommand implements ICommand {
                 oldVectors.add(oldVecChild);
                 shapeChild.setVector(vector);
                 controller.updateViewResize(shapeChild);
-
             }
         }else{
             ArrayList<Double> vector = shape.getVector();

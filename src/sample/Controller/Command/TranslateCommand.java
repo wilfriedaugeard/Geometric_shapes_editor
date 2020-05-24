@@ -3,6 +3,9 @@ package sample.Controller.Command;
 import sample.Controller.IController;
 import sample.Model.IShapeInter;
 
+/**
+ * Command to translate a shape
+ */
 public class TranslateCommand implements ICommand {
     private double dragX, dragY;
     private IShapeInter shape;
@@ -16,7 +19,6 @@ public class TranslateCommand implements ICommand {
         this.controller = controller;
         this.isShapeGroup = isShapeGroup;
     }
-
 
     @Override
     public void execute() {

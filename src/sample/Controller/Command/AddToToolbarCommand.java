@@ -3,15 +3,16 @@ package sample.Controller.Command;
 import sample.Controller.IController;
 import sample.Model.IShapeInter;
 
-import java.util.ArrayList;
 
+/**
+ * Command to add a shape to the toolbar
+ */
 public class AddToToolbarCommand implements ICommand{
     private IShapeInter shapeInToolbar;
     private IShapeInter shapeCreated;
     private IController controller;
     private double posX, posY;
     private Boolean isInShapeGroup;
-    private ArrayList<IShapeInter> copyList;
 
     public AddToToolbarCommand(IShapeInter shapeInToolbar, Boolean isInShapeGroup, IController controller) {
         this.shapeInToolbar = shapeInToolbar;

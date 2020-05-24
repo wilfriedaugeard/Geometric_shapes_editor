@@ -5,6 +5,9 @@ import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
+/**
+ * Command to set a rotation to a shape
+ */
 public class RotateCommand implements ICommand {
 
     private IController controller;
@@ -25,7 +28,6 @@ public class RotateCommand implements ICommand {
 
     @Override
     public void execute() {
-        System.out.println("execute ->"+shape);
         shape.setRotation(value);
         if(isShapeGroup){
             for(IShapeInter child : shape.getChildren()){

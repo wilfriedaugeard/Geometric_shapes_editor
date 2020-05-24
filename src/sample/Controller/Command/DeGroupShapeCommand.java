@@ -2,9 +2,11 @@ package sample.Controller.Command;
 
 import sample.Controller.IController;
 import sample.Model.IShapeInter;
-
 import java.util.ArrayList;
 
+/**
+ * Command to remove a group of shapes
+ */
 public class DeGroupShapeCommand implements ICommand {
 
     protected IController controller;

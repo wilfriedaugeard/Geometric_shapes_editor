@@ -3,6 +3,9 @@ package sample.Controller.Command;
 import sample.Controller.IController;
 import sample.Model.IShapeInter;
 
+/**
+ * Command to create a shape
+ */
 public class CreateShapeCommand implements ICommand{
     private IShapeInter shapeInToolbar;
     private IShapeInter shapeCreated;
