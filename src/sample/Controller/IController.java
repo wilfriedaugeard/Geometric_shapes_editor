@@ -189,7 +189,18 @@ public interface IController extends Serializable {
      */
     public IShapeInter createShapeInCanvas(IController controller, IShapeInter shapeModel, double x, double y, boolean applyCoeff);
 
+    /**
+     * A a shapeInter to the toolbar
+     * @param controller The controller
+     * @param shapeToTranslate The shape to add
+     * @param isInShapeGroup A boolean to tell if the shape is a group
+     */
     public void addToToolbar(IController controller, IShapeInter shapeToTranslate, boolean isInShapeGroup);
 
+    /**
+     * Remove a shape in toolbar
+     * @param shapeInToolbar The shape to remove
+     * @param isInShapeGroup A boolean to tell if the shape is a group
+     */
     public void removeShapeInToolbar(IShapeInter shapeInToolbar, Boolean isInShapeGroup);
 }

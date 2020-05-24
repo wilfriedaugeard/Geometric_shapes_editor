@@ -196,6 +196,11 @@ public class ControllerJavaFX implements Serializable {
         bp.getChildren().remove(shapeView);
     }
 
+    /**
+     * Remove a shape in toolbar
+     * @param shapeInToolbar The shape to remove
+     * @param isInShapeGroup A boolean to tell if the shape is a group
+     */
     public void removeShapeInToolbar(IShapeInter shapeInToolbar, Boolean isInShapeGroup){
         ToolBar toolBar = (ToolBar) getView().getToolBar();
         int index = getShapesInToolBar().indexOf(shapeInToolbar);
@@ -303,7 +308,6 @@ public class ControllerJavaFX implements Serializable {
      * Save the state of the toolbar
      */
     public void saveState() {
-        System.out.println("SAVE STATE");
         setExistState(true);
         String filename = "state.ctrl";
         ObjectOutputStream oos = null;
@@ -378,7 +382,6 @@ public class ControllerJavaFX implements Serializable {
      * @param controller Controller where events are added
      */
     public void initEvents(IController controller) {
-
         events.add(EventFactory.getEvent("RightClick",controller));
         events.add(EventFactory.getEvent("DragAndDropEvent",controller));
         events.add(EventFactory.getEvent("SelectionShapeEvent",controller));
@@ -445,7 +448,12 @@ public class ControllerJavaFX implements Serializable {
     }
 
 
-
+    /**
+     * Resize a shape in order to add it in the toolbar
+     * @param isShapeGroup A boolean to tell if the shape is a group
+     * @param shape The shape to resize
+     * @param coeff A resize coefficient
+     */
     public void resizeInToolbar(boolean isShapeGroup, IShapeInter shape, double coeff){
         if(isShapeGroup){
             // Take the y min
@@ -484,26 +492,26 @@ public class ControllerJavaFX implements Serializable {
         }
     }
 
-
+    /**
+     * A a shapeInter to the toolbar
+     * @param controller The controller
+     * @param shapeToTranslate The shape to add
+     * @param isInShapeGroup A boolean to tell if the shape is a group
+     */
     public void addToToolbar(IController controller, IShapeInter shapeToTranslate, boolean isInShapeGroup){
-
         ToolBar toolbar = (ToolBar) controller.getView().getToolBar();
         int itemPos = toolbar.getItems().size()-2;
         int shapePos = controller.getShapesInToolBar().size();
 
         double toolbar_w = toolbar.getWidth();
-        // Resize shape
         double margin_left = toolbar.getPadding().getLeft();
         double margin_right = toolbar.getPadding().getRight();
         double value = (toolbar_w-margin_left-margin_right)/shapeToTranslate.getWidth();
-        //value *= 100;
-        //ICommand resizeCommand;
         if(isInShapeGroup){
             for (IShapeInter shapeGroup : controller.getShapeGroups()) {
                 if (shapeGroup.getChildren().contains(shapeToTranslate)) {
                     value = (toolbar_w-margin_left-margin_right)/shapeGroup.getWidth();
                     resizeInToolbar(isInShapeGroup, shapeGroup, value);
-
                     int index;
                     for(IShapeInter child : shapeGroup.getChildren()){
                         controller.addShapeInToolbar(child, controller, itemPos,shapePos);
@@ -519,14 +527,7 @@ public class ControllerJavaFX implements Serializable {
                 }
             }
         }
-/*
-        resizeCommand = new ResizeCommand(controller, shapeToTranslate, value, false);
-        controller.addLastCommand(resizeCommand);
-        controller.setCurrentPosInCommands(controller.getNbCommands());
-        resizeCommand.execute();
-*/
         resizeInToolbar(isInShapeGroup, shapeToTranslate, value);
-        // Controller
         controller.addShapeInToolbar(shapeToTranslate, controller, itemPos,shapePos);
         int index = controller.getShapesInCanvas().indexOf(shapeToTranslate);
         controller.removeShape(shapeToTranslate, controller.getView().getShapesInCanvas().get(index));

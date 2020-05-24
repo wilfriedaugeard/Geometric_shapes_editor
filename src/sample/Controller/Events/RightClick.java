@@ -14,6 +14,7 @@ import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Command.RotateCommand;
 import sample.Factory.ModelFactory.RGBFactory;
 import sample.Model.IShapeInter;
+import sample.View.TxtCapture;
 
 import java.util.ArrayList;
 

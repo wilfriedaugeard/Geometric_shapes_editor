@@ -1,4 +1,4 @@
-package sample.Controller;
+package sample.View;
 
 
 import javafx.geometry.Insets;
