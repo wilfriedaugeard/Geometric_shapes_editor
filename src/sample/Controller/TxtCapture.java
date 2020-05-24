@@ -47,7 +47,7 @@ public class TxtCapture extends Dialog<String> {
 
 
     /**
-     *
+     * Graphic settings for edit window
      */
     public void ui(){
 

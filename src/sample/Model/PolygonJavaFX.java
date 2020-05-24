@@ -11,17 +11,16 @@ public class PolygonJavaFX extends PolygonModel {
         super(nbEdges, length, pos, rgb);
     }
 
-
     @Override
     public void setDeltaX(double deltaX) {
         super.setDeltaX(deltaX);
     }
 
-
     @Override
     public void setDeltaY(double deltaY) {
         super.setDeltaY(deltaY);
     }
+
     @Override
     public IShapeDrawer createShapeDrawer(IController controller) {
         IPolygonDrawerFactory polygonDrawerFactory = new PolygonDrawerJavaFXFactory();

@@ -12,6 +12,9 @@ public class UndoEvent implements Event {
         this.controller = controller;
     }
 
+    /**
+     * Undo a Command at the current position in the Command's list, then decrease the current position.
+     */
     EventHandler<ActionEvent> undoEvent = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {

@@ -8,8 +8,7 @@ public class BornedRotate extends DecoratorShapeInter{
         shape = shapeInter;
     }
 
-    private void computeRotate(IShapeInter s){
-        double rotation = s.getRotation();
+    private void computeRotate(IShapeInter s, double rotation){
         if(rotation < -360.0){
             s.setRotation(-360.0);
         }

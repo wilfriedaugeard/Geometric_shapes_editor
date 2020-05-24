@@ -19,6 +19,9 @@ public class PolygoneDrawerJavaFX extends ShapeDrawerJavaFX {
 		this.rotation = rotation;
 	}
 
+	/**
+	 * @param polygon Polygon to rotate
+	 */
 	private void rotatePolygon(Polygon polygon){
 		Point oldPt = PointFactory.getPoint(view.getXPosition(polygon), view.getYPosition(polygon));
 		Rotate rotateTransform = new Rotate(rotation);

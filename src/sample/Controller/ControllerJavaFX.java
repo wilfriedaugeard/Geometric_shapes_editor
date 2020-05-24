@@ -134,9 +134,6 @@ public class ControllerJavaFX implements Serializable {
         else{
             loadState(controller);
         }
-
-
-
         view.addTrash();
     }
 
@@ -231,30 +228,16 @@ public class ControllerJavaFX implements Serializable {
      * Update View after a ShapeInter, or a group of ShapeInter have been modified on their rotation value.
      * @param shape ShapeInter rotated
      * @param value Value in degree of the rotation
-     * @param isShapeGroup true if param shape is a ShapeGroup
      */
-    public void updateViewRotate(IShapeInter shape, double value, boolean isShapeGroup) {
-        if (isShapeGroup) {
-            for (IShapeInter child : shape.getChildren()) {
-                int shapeIndex = shapesInCanvas.indexOf(child);
-                Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
-                Point rotationCenter = child.getRotationCenter();
-                Point oldPt = PointFactory.getPoint(view.getXPosition(shapeView), view.getYPosition(shapeView));
-                Rotate newRotation = new Rotate(value, rotationCenter.getX(), rotationCenter.getY());
-                shapeView.getTransforms().add(newRotation);
-                shapeView.setTranslateX(shapeView.getTranslateX() + (oldPt.getX() - view.getXPosition(shapeView)));
-                shapeView.setTranslateY(shapeView.getTranslateY() + (oldPt.getY() - view.getYPosition(shapeView)));
-            }
-        } else {
-            int shapeIndex = shapesInCanvas.indexOf(shape);
-            Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
-            Point rotationCenter = shape.getRotationCenter();
-            Point oldPt = PointFactory.getPoint(view.getXPosition(shapeView), view.getYPosition(shapeView));
-            Rotate newRotation = new Rotate(value, rotationCenter.getX(), rotationCenter.getY());
-            shapeView.getTransforms().add(newRotation);
-            shapeView.setTranslateX(shapeView.getTranslateX() + (oldPt.getX() - view.getXPosition(shapeView)));
-            shapeView.setTranslateY(shapeView.getTranslateY() + (oldPt.getY() - view.getYPosition(shapeView)));
-        }
+    public void updateViewRotate(IShapeInter shape, double value) {
+        int shapeIndex = shapesInCanvas.indexOf(shape);
+        Shape shapeView = view.getShapesInCanvas().get(shapeIndex);
+        Point rotationCenter = shape.getRotationCenter();
+        Point oldPt = PointFactory.getPoint(view.getXPosition(shapeView), view.getYPosition(shapeView));
+        Rotate newRotation = new Rotate(value, rotationCenter.getX(), rotationCenter.getY());
+        shapeView.getTransforms().add(newRotation);
+        shapeView.setTranslateX(shapeView.getTranslateX() + (oldPt.getX() - view.getXPosition(shapeView)));
+        shapeView.setTranslateY(shapeView.getTranslateY() + (oldPt.getY() - view.getYPosition(shapeView)));
     }
 
     /**
@@ -479,7 +462,6 @@ public class ControllerJavaFX implements Serializable {
     public int getCurrentPosInCommands() {
         return currentPosInCommands;
     }
-
 
     /**
      * @param currentPosInCommands The current position in the Command's list wanted

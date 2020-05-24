@@ -19,6 +19,9 @@ public class LoadEvent implements Event {
         this.controller = controller;
     }
 
+    /**
+     * Load a .ser file
+     */
     EventHandler<ActionEvent> loadButton = new EventHandler<>() {
         public void handle(ActionEvent actionEvent) {
 

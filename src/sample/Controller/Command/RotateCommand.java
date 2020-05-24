@@ -25,17 +25,15 @@ public class RotateCommand implements ICommand {
 
     @Override
     public void execute() {
-        System.out.println(shape);
-        System.out.println(shape.getChildren());
         shape.setRotation(value);
         if(isShapeGroup){
             for(IShapeInter child : shape.getChildren()){
                 oldvalues.add(child.getRotation());
+                controller.updateViewRotate(child, child.getRotation());
             }
         }else{
             oldValue = shape.getRotation();
         }
-        controller.updateViewRotate(shape, shape.getRotation(), isShapeGroup);
     }
 
     @Override
@@ -45,11 +43,11 @@ public class RotateCommand implements ICommand {
                 double oldVal = oldvalues.get(i);
                 IShapeInter currentChild = shape.getChild(i);
                 currentChild.setRotation(-oldVal);
-                controller.updateViewRotate(shape.getChild(i), currentChild.getRotation(), false);
+                controller.updateViewRotate(shape.getChild(i), currentChild.getRotation());
             }
         }else{
             shape.setRotation(-oldValue);
-            controller.updateViewRotate(shape, shape.getRotation(), false);
+            controller.updateViewRotate(shape, shape.getRotation());
         }
     }
 

@@ -24,7 +24,6 @@ public class SelectionShapeEvent implements Event {
         shapeGroup = controller.getShapeGroupTmp();
     }
 
-
     public boolean isOnToolbar(double x){
         ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
         return x <= toolBar.getWidth();

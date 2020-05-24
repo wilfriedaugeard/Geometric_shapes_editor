@@ -28,13 +28,15 @@ public class RightClick implements Event {
     private double last_size;
     private double last_rotate;
 
-
     public RightClick(IController controller){
         this.controller = controller;
         this.colorPicker = (ColorPicker) controller.getView().getColorPicker();
         this.shapeMenu = (ContextMenu) controller.getView().getShapeMenu();
     }
 
+    /**
+     * Get shape infos on mouse pressed and show the menu.
+     */
     EventHandler<ContextMenuEvent> getShapeOnMousePressed = new EventHandler<>() {
         public void handle(ContextMenuEvent event) {
 
@@ -55,11 +57,15 @@ public class RightClick implements Event {
                     }
                 }
             }
+
             event.consume();
 
         }
     };
 
+    /**
+     * Event to get a color from colorPicker JavaFX.
+     */
     EventHandler<ActionEvent> colorPickerEv = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
@@ -103,6 +109,11 @@ public class RightClick implements Event {
         }
     };
 
+    /**
+     * Check if a String contains only digits, including the particular case of '-' at the start.
+     * @param s String to verify
+     * @return true if the String contains only digits
+     */
     private boolean containsOnlyDigits(String s){
         int len = s.length();
         int start = 0;
@@ -118,7 +129,11 @@ public class RightClick implements Event {
     }
 
 
-    // Resize a shape
+    /**
+     * Resize a given shape with percent value
+     * @param shape IShapeInter to be resized
+     * @param value Value for resize
+     */
     public void resizeShape(IShapeInter shape, double value){
         ICommand resizeCommand;
         System.out.println(shape.getWidth());
@@ -138,7 +153,11 @@ public class RightClick implements Event {
         System.out.println(shape.getWidth());
     }
 
-    // Verify string before resize a shape
+    /**
+     * Do the resize treatment only if the value is suitable for resize.
+     * @param strValue String checked by containsOnlyDigits
+     * @param shapeSelected IShapeInter to be resized if containsOnlyDigits returns true
+     */
     public void resizeTreatment(String strValue, IShapeInter shapeSelected){
         if (containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);
@@ -147,7 +166,11 @@ public class RightClick implements Event {
         }
     }
 
-    // Rotate a shape
+    /**
+     * Rotate a given shape.
+     * @param shape IShapeInter shape to rotate
+     * @param value Value supposed in degree for rotation
+     */
     public void rotateShape(IShapeInter shape, double value){
         ICommand rotateCommand;
         for (IShapeInter shapeGroup : controller.getShapeGroups()) {
@@ -165,7 +188,11 @@ public class RightClick implements Event {
         rotateCommand.execute();
     }
 
-    // Verify string before rotate a shape
+    /**
+     * Do the rotate treatment only if the value is suitable for rotate.
+     * @param strValue String checked by containsOnlyDigits
+     * @param shape IShapeInter to rotate if containsOnlyDigits returns true
+     */
     public void rotateTreatment(String strValue, IShapeInter shape){
         if(containsOnlyDigits(strValue)) {
             double value = Double.parseDouble(strValue);

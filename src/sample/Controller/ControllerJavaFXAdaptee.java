@@ -42,8 +42,8 @@ public class ControllerJavaFXAdaptee implements IController {
     }
 
     @Override
-    public void updateViewRotate(IShapeInter shape, double value, boolean isShapeGroup) {
-        controllerJavaFX.updateViewRotate(shape, value, isShapeGroup);
+    public void updateViewRotate(IShapeInter shape, double value) {
+        controllerJavaFX.updateViewRotate(shape, value);
     }
 
     @Override

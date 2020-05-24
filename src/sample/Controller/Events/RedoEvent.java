@@ -12,6 +12,9 @@ public class RedoEvent implements Event {
         this.controller = controller;
     }
 
+    /**
+     * Redo a Command at the next position after current position in the Command's list, then increase the current position.
+     */
     EventHandler<ActionEvent> redoEvent = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {

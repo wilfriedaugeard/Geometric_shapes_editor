@@ -18,6 +18,9 @@ public class SaveEvent implements Event {
         this.controller = controller;
     }
 
+    /**
+     * Create a file .ser
+     */
     EventHandler<ActionEvent> saveButton = new EventHandler<>() {
         public void handle(ActionEvent actionEvent) {
 

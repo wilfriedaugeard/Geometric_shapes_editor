@@ -24,6 +24,9 @@ public class RectangleDrawerJavaFX extends ShapeDrawerJavaFX {
 		this.rotation = rotation;
 	}
 
+	/**
+	 * @param rectangle Rectangle to rotate
+	 */
 	private void rotateRectangle(Rectangle rectangle){
 		Point oldPt = PointFactory.getPoint(view.getXPosition(rectangle), view.getYPosition(rectangle));
 		Rotate rotateTransform = new Rotate(rotation);
