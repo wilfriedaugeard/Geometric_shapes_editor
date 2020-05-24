@@ -116,9 +116,6 @@ public class DragAndDropEvent implements Event {
             int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
             // shape in toolbar bar selected
             if(indexOfShape < 0){
-                System.out.println("ShapeInview :"+shapeInView);
-                System.out.println("ShapeToTrabslate: "+shapeToTranslate);
-                System.out.println("ShapeToModify: "+shapeGroupToModify);
                 shapeInToolBarTmp = new ArrayList<>();
                 shapeInToolBarTmp.addAll(controller.getShapesInToolBar());
 
@@ -162,6 +159,7 @@ public class DragAndDropEvent implements Event {
         removeCommand.execute();
 
     }
+
 
     public void addToToolbar(){
 
@@ -255,15 +253,18 @@ public class DragAndDropEvent implements Event {
             // Test if the released shape is on Toolbar and if has been modify
             else {
                 if (controller.getView().isOn(controller.getView().getToolBar(), PointFactory.getPoint(x, y))){
-                    if(!sameShapeInToolBar(shapeToTranslate) && !toolbarShapeMove)
-                        addToToolbar();
+                    if(!sameShapeInToolBar(shapeToTranslate) && !toolbarShapeMove) {
+                        ICommand addToToolbar = new AddToToolbarCommand(shapeToTranslate, isInShapeGroup, controller);
+                        controller.addLastCommand(addToToolbar);
+                        controller.setCurrentPosInCommands(controller.getNbCommands());
+                        addToToolbar.execute();
+                    }
                 }else{
                     int shapeIndex = controller.getView().getShapesInToolBar().indexOf(shapeInView);
                     if(shapeIndex >= 0){
                         ICommand createShapeCommand = new CreateShapeCommand(shapeToTranslate, x, y, controller);
                         controller.addLastCommand(createShapeCommand);
                         controller.setCurrentPosInCommands(controller.getNbCommands());
-                        System.out.println("-> "+controller.getNbCommands());
                         createShapeCommand.execute();
                     }
 

@@ -9,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import sample.Controller.Command.ICommand;
+import sample.Controller.Command.ResizeCommand;
 import sample.Controller.Events.*;
 import sample.Factory.ControllerFactory.EventFactory;
 import sample.Factory.ModelFactory.*;
@@ -193,6 +194,26 @@ public class ControllerJavaFX implements Serializable {
         }
         BorderPane bp = (BorderPane) getView().getRoot();
         bp.getChildren().remove(shapeView);
+    }
+
+    public void removeShapeInToolbar(IShapeInter shapeInToolbar, Boolean isInShapeGroup){
+        ToolBar toolBar = (ToolBar) getView().getToolBar();
+        int index = getShapesInToolBar().indexOf(shapeInToolbar);
+        Shape shapeInView = getView().getShapesInToolBar().get(index);
+        if(isInShapeGroup){
+            for(IShapeInter child : shapeInToolbar.getChildren()){
+                // View delete
+                int i = getShapesInToolBar().indexOf(child);
+                shapeInView = getView().getShapesInToolBar().get(i);
+                toolBar.getItems().remove(shapeInView);
+                getView().getShapesInToolBar().remove(shapeInView);
+                getShapesInToolBar().remove(child);
+            }
+        }else{
+            getShapesInToolBar().remove(shapeInToolbar);
+            toolBar.getItems().remove(shapeInView);
+            getView().getShapesInToolBar().remove(shapeInView);
+        }
     }
 
     /**
@@ -419,11 +440,104 @@ public class ControllerJavaFX implements Serializable {
         drawer.drawShape();
         controller.getShapesInCanvas().add(copy);
         controller.updateEvents();
-        System.out.println("Solo: "+controller.getShapesInCanvas());
         return copy;
 
     }
 
+
+
+    public void resizeInToolbar(boolean isShapeGroup, IShapeInter shape, double coeff){
+        if(isShapeGroup){
+            // Take the y min
+            double min = Double.POSITIVE_INFINITY;
+            IShapeInter shapeRef = shape;
+            for(IShapeInter shapeChild : shape.getChildren()){
+                min = Math.min(min, shapeChild.getPos().getY());
+                shapeRef = shapeChild;
+            }
+            shapeRef.setDeltaX(0);
+            shapeRef.setDeltaY(0);
+
+            for(IShapeInter shapeChild : shape.getChildren()){
+                if(!shapeChild.equals(shapeRef)){
+                    double x = shapeChild.getPos().getX()-shapeRef.getPos().getX();
+                    double y = shapeChild.getPos().getY()-shapeRef.getPos().getY();
+                    shapeChild.setDeltaX(x);
+                    shapeChild.setDeltaY(y);
+                }
+                ArrayList<Double> vector = shapeChild.getVector();
+                for(int i = 0; i < vector.size(); i++){
+                    vector.set(i, vector.get(i) * coeff);
+                }
+                shapeChild.setCoeff(coeff);
+                shapeChild.setVector(vector);
+                updateViewResize(shapeChild);
+            }
+        }else{
+            ArrayList<Double> vector = shape.getVector();
+            for(int i = 0; i < vector.size(); i++){
+                vector.set(i, vector.get(i) * coeff);
+            }
+            shape.setCoeff(coeff);
+            shape.setVector(vector);
+            updateViewResize(shape);
+        }
+    }
+
+
+    public void addToToolbar(IController controller, IShapeInter shapeToTranslate, boolean isInShapeGroup){
+
+        ToolBar toolbar = (ToolBar) controller.getView().getToolBar();
+        int itemPos = toolbar.getItems().size()-2;
+        int shapePos = controller.getShapesInToolBar().size();
+
+        double toolbar_w = toolbar.getWidth();
+        // Resize shape
+        double margin_left = toolbar.getPadding().getLeft();
+        double margin_right = toolbar.getPadding().getRight();
+        double value = (toolbar_w-margin_left-margin_right)/shapeToTranslate.getWidth();
+        //value *= 100;
+        //ICommand resizeCommand;
+        if(isInShapeGroup){
+            for (IShapeInter shapeGroup : controller.getShapeGroups()) {
+                if (shapeGroup.getChildren().contains(shapeToTranslate)) {
+                    value = (toolbar_w-margin_left-margin_right)/shapeGroup.getWidth();
+                    //value *= 100;
+                    /*resizeCommand = new ResizeCommand(controller, shapeGroup, value, true);
+                    controller.addLastCommand(resizeCommand);
+                    controller.setCurrentPosInCommands(controller.getNbCommands());
+                    resizeCommand.execute();*/
+                    resizeInToolbar(isInShapeGroup, shapeGroup, value);
+
+                    int index;
+                    for(IShapeInter child : shapeGroup.getChildren()){
+                        controller.addShapeInToolbar(child, controller, itemPos,shapePos);
+                        index = controller.getShapesInCanvas().indexOf(child);
+                        controller.removeShape(child, controller.getView().getShapesInCanvas().get(index));
+                        itemPos++;
+                        shapePos++;
+                    }
+                    controller.getShapeGroupsInToolBar().add(shapeGroup);
+                    controller.updateEvents();
+                    controller.saveState();
+                    return;
+                }
+            }
+        }
+/*
+        resizeCommand = new ResizeCommand(controller, shapeToTranslate, value, false);
+        controller.addLastCommand(resizeCommand);
+        controller.setCurrentPosInCommands(controller.getNbCommands());
+        resizeCommand.execute();
+*/
+        resizeInToolbar(isInShapeGroup, shapeToTranslate, value);
+        // Controller
+        controller.addShapeInToolbar(shapeToTranslate, controller, itemPos,shapePos);
+        int index = controller.getShapesInCanvas().indexOf(shapeToTranslate);
+        controller.removeShape(shapeToTranslate, controller.getView().getShapesInCanvas().get(index));
+        controller.updateEvents();
+        controller.saveState();
+    }
     /**
      * @return Temporary group of ShapeInter selected
      */

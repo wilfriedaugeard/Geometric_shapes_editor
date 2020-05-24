@@ -188,4 +188,8 @@ public interface IController extends Serializable {
      * @return The created shape
      */
     public IShapeInter createShapeInCanvas(IController controller, IShapeInter shapeModel, double x, double y, boolean applyCoeff);
+
+    public void addToToolbar(IController controller, IShapeInter shapeToTranslate, boolean isInShapeGroup);
+
+    public void removeShapeInToolbar(IShapeInter shapeInToolbar, Boolean isInShapeGroup);
 }

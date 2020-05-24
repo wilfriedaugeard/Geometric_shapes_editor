@@ -157,6 +157,16 @@ public class ControllerJavaFXAdaptee implements IController {
     }
 
     @Override
+    public void addToToolbar(IController controller, IShapeInter shapeToTranslate, boolean isInShapeGroup) {
+        controllerJavaFX.addToToolbar(controller, shapeToTranslate, isInShapeGroup);
+    }
+
+    @Override
+    public void removeShapeInToolbar(IShapeInter shapeInToolbar, Boolean isInShapeGroup) {
+        controllerJavaFX.removeShapeInToolbar(shapeInToolbar, isInShapeGroup);
+    }
+
+    @Override
     public ArrayList<IShapeInter> getShapeGroupsInToolBar() {
         return controllerJavaFX.getShapeGroupsInToolBar();
     }
