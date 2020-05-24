@@ -152,6 +152,11 @@ public class ControllerJavaFXAdaptee implements IController {
     }
 
     @Override
+    public IShapeInter createShapeInCanvas(IController controller, IShapeInter shapeModel, double x, double y, boolean applyCoeff) {
+        return controllerJavaFX.createShapeInCanvas(controller, shapeModel,x,y, applyCoeff);
+    }
+
+    @Override
     public ArrayList<IShapeInter> getShapeGroupsInToolBar() {
         return controllerJavaFX.getShapeGroupsInToolBar();
     }

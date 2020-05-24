@@ -1,5 +1,6 @@
 package sample.Controller;
 
+import javafx.scene.shape.Shape;
 import sample.Controller.Command.ICommand;
 import sample.Controller.Events.Event;
 import sample.Model.IShapeInter;
@@ -175,4 +176,16 @@ public interface IController extends Serializable {
      * @param existState Boolean to ckeck if a save of the soft state exist
      */
     public void setExistState(boolean existState);
+
+
+    /**
+     * Create a shape in the canvas
+     * @param controller The controller
+     * @param shapeModel The shape to create
+     * @param x The x position of the shape
+     * @param y The y position of the shape
+     * @param applyCoeff Boolean to apply the size coefficient
+     * @return The created shape
+     */
+    public IShapeInter createShapeInCanvas(IController controller, IShapeInter shapeModel, double x, double y, boolean applyCoeff);
 }

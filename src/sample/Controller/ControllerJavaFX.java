@@ -215,12 +215,19 @@ public class ControllerJavaFX implements Serializable {
         }
         // if the shape doesn't belong to a group
         if (noGroup) {
-            for (int i = 0; i < view.getShapesInCanvas().size(); i++) {
+            /*for (int i = 0; i < view.getShapesInCanvas().size(); i++) {
                 Shape shapeView = view.getShapesInCanvas().get(i);
                 if (shape.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shape.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
                     removeShape(shape, shapeView);
                 }
-            }
+            }*/
+            int i = shapesInCanvas.indexOf(shape);
+            System.out.println("ShapeInter: "+shape);
+            System.out.println("list inter: "+shapesInCanvas);
+            System.out.println("list view: "+view.getShapesInCanvas());
+            System.out.println("i: "+i);
+            Shape shapeView = view.getShapesInCanvas().get(i);
+            removeShape(shape, shapeView);
         }
     }
 
@@ -367,6 +374,60 @@ public class ControllerJavaFX implements Serializable {
         events.add(EventFactory.getEvent("SaveEvent",controller));
         events.add(EventFactory.getEvent("LoadEvent",controller));
         updateEvents();
+    }
+
+    /**
+     * Create a shape in the canvas
+     * @param controller The controller
+     * @param shapeModel The shape to create
+     * @param x The x position of the shape
+     * @param y The y position of the shape
+     * @param applyCoeff Boolean to apply the size coefficient
+     * @return The created shape
+     */
+    public IShapeInter createShapeInCanvas(IController controller, IShapeInter shapeModel, double x, double y, boolean applyCoeff){
+        for (IShapeInter group : controller.getShapeGroupsInToolBar()) {
+            if (group.getChildren().contains(shapeModel)) {
+                IShapeInter copy = group.clone();
+
+                for(int i = 0; i<group.getChildren().size(); i++){
+                    IShapeInter shapeInter = copy.getChild(i);
+                    ArrayList<Double> vector = shapeInter.getVector();
+                    if(applyCoeff){
+                        for (int j = 0; j < vector.size(); j++) {
+                            vector.set(j, vector.get(j) / shapeInter.getCoeff());
+                        }
+                    }
+                    shapeInter.setVector(vector);
+                    controller.getShapesInCanvas().add(shapeInter);
+
+                    Point p = PointFactory.getPoint(x + copy.getChild(i).getDeltaX() , y+copy.getChild(i).getDeltaY());
+                    shapeInter.setPos(p);
+                }
+
+                IShapeDrawer drawer = copy.createShapeDrawer(controller);
+                drawer.drawShape();
+                controller.getShapeGroups().add(copy);
+                controller.updateEvents();
+                return group;
+            }
+        }
+        IShapeInter copy = shapeModel.clone();
+        ArrayList<Double> vector = copy.getVector();
+        if (applyCoeff) {
+            for (int i = 0; i < vector.size(); i++) {
+                vector.set(i, vector.get(i) / copy.getCoeff());
+            }
+        }
+        copy.setVector(vector);
+        copy.setPos(PointFactory.getPoint(x, y));
+        copy.setRGB(shapeModel.getRGB());
+        IShapeDrawer drawer = copy.createShapeDrawer(controller);
+        drawer.drawShape();
+        controller.getShapesInCanvas().add(copy);
+        controller.updateEvents();
+        return copy;
+
     }
 
     /**

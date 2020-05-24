@@ -5,11 +5,8 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
-import sample.Controller.Command.ICommand;
-import sample.Controller.Command.ResizeCommand;
+import sample.Controller.Command.*;
 import sample.Controller.IController;
-import sample.Controller.Command.RemoveCommand;
-import sample.Controller.Command.TranslateCommand;
 import sample.Factory.ModelFactory.PointFactory;
 import sample.Model.Point;
 import sample.Model.IShapeInter;
@@ -85,12 +82,8 @@ public class DragAndDropEvent implements Event {
     };
 
 
-    public void createShape(Shape shape, double x, double y){
-            int shapeIndex = controller.getView().getShapesInToolBar().indexOf(shape);
-            if(shapeIndex < 0){
-                return;
-            }
-            IShapeInter shapeModel = controller.getShapesInToolBar().get(shapeIndex);
+    public void createShape(IShapeInter shapeModel, double x, double y){
+
             for (IShapeInter group : controller.getShapeGroupsInToolBar()) {
                 if (group.getChildren().contains(shapeModel)) {
                     IShapeInter copy = group.clone();
@@ -302,7 +295,15 @@ public class DragAndDropEvent implements Event {
                     if(!sameShapeInToolBar(shapeToTranslate) && !toolbarShapeMove)
                         addToToolbar();
                 }else{
-                    createShape(shapeInView, x, y);
+                    int shapeIndex = controller.getView().getShapesInToolBar().indexOf(shapeInView);
+                    if(shapeIndex >= 0){
+                        ICommand createShapeCommand = new CreateShapeCommand(shapeToTranslate, x, y, controller);
+                        controller.addLastCommand(createShapeCommand);
+                        controller.setCurrentPosInCommands(controller.getNbCommands());
+                        System.out.println("-> "+controller.getNbCommands());
+                        createShapeCommand.execute();
+                    }
+
                 }
                 mouseEvent.consume();
                 return;
