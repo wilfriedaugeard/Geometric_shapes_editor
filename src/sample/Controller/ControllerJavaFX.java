@@ -202,8 +202,10 @@ public class ControllerJavaFX implements Serializable {
     public void updateViewRemove(IShapeInter shape) {
         boolean noGroup = true;
         // Range shape group in order to find the corresponding shape in view
+        ArrayList<IShapeInter> groupToRemove = new ArrayList<>();
         for (IShapeInter shapeGroup : getShapeGroups()) {
             if (shape.equals(shapeGroup)) {
+                groupToRemove.add(shapeGroup);
                 for (int nChild = 0; nChild < shapeGroup.getChildren().size(); nChild++) {
                     IShapeInter shapeModel = shapeGroup.getChild(nChild);
                     int i = getShapesInCanvas().indexOf(shapeModel);
@@ -213,19 +215,10 @@ public class ControllerJavaFX implements Serializable {
                 }
             }
         }
+        getShapeGroups().removeAll(groupToRemove);
         // if the shape doesn't belong to a group
         if (noGroup) {
-            /*for (int i = 0; i < view.getShapesInCanvas().size(); i++) {
-                Shape shapeView = view.getShapesInCanvas().get(i);
-                if (shape.getPos().getX() == view.getShapeXPositionInToolBar(shapeView) && shape.getPos().getY() == view.getShapeYPositionInToolBar(shapeView)) {
-                    removeShape(shape, shapeView);
-                }
-            }*/
             int i = shapesInCanvas.indexOf(shape);
-            System.out.println("ShapeInter: "+shape);
-            System.out.println("list inter: "+shapesInCanvas);
-            System.out.println("list view: "+view.getShapesInCanvas());
-            System.out.println("i: "+i);
             Shape shapeView = view.getShapesInCanvas().get(i);
             removeShape(shape, shapeView);
         }
@@ -409,7 +402,7 @@ public class ControllerJavaFX implements Serializable {
                 drawer.drawShape();
                 controller.getShapeGroups().add(copy);
                 controller.updateEvents();
-                return group;
+                return copy;
             }
         }
         IShapeInter copy = shapeModel.clone();
@@ -426,6 +419,7 @@ public class ControllerJavaFX implements Serializable {
         drawer.drawShape();
         controller.getShapesInCanvas().add(copy);
         controller.updateEvents();
+        System.out.println("Solo: "+controller.getShapesInCanvas());
         return copy;
 
     }

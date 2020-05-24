@@ -82,46 +82,6 @@ public class DragAndDropEvent implements Event {
     };
 
 
-    public void createShape(IShapeInter shapeModel, double x, double y){
-
-            for (IShapeInter group : controller.getShapeGroupsInToolBar()) {
-                if (group.getChildren().contains(shapeModel)) {
-                    IShapeInter copy = group.clone();
-
-                    for(int i = 0; i<group.getChildren().size(); i++){
-                        IShapeInter shapeInter = copy.getChild(i);
-                        ArrayList<Double> vector = shapeInter.getVector();
-                        for (int j = 0; j < vector.size(); j++) {
-                            vector.set(j, vector.get(j) / shapeInter.getCoeff());
-                        }
-                        shapeInter.setVector(vector);
-                        controller.getShapesInCanvas().add(shapeInter);
-
-                        Point p = PointFactory.getPoint(x + copy.getChild(i).getDeltaX() , y+copy.getChild(i).getDeltaY());
-                        shapeInter.setPos(p);
-                    }
-
-                    IShapeDrawer drawer = copy.createShapeDrawer(controller);
-                    drawer.drawShape();
-                    controller.getShapeGroups().add(copy);
-                    controller.updateEvents();
-                    return;
-                }
-            }
-            IShapeInter copy = shapeModel.clone();
-            ArrayList<Double> vector = copy.getVector();
-            for (int i = 0; i < vector.size(); i++) {
-                vector.set(i, vector.get(i) / copy.getCoeff());
-            }
-            copy.setVector(vector);
-            copy.setPos(PointFactory.getPoint(x, y));
-            copy.setRGB(shapeModel.getRGB());
-            IShapeDrawer drawer = copy.createShapeDrawer(controller);
-            drawer.drawShape();
-            controller.getShapesInCanvas().add(copy);
-            controller.updateEvents();
-
-    }
 
     public void moveShapeInToolbar(IShapeInter shapeInToolbar){
         double x = controller.getView().getShapeXPositionInToolBar(shapeInView);
@@ -131,7 +91,7 @@ public class DragAndDropEvent implements Event {
         posInTolbar = controller.getShapesInToolBar().indexOf(shapeInToolbar);
         shapeToTranslate = shapeInToolbar;
         for(IShapeInter group : controller.getShapeGroupsInToolBar()){
-            if (group.getChildren().contains(shapeToTranslate)){
+            if (group.getChildren().containsAll(shapeToTranslate.getChildren())){
                 isInShapeGroup = true;
                 shapeGroupToModify = group;
             }
@@ -156,6 +116,9 @@ public class DragAndDropEvent implements Event {
             int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
             // shape in toolbar bar selected
             if(indexOfShape < 0){
+                System.out.println("ShapeInview :"+shapeInView);
+                System.out.println("ShapeToTrabslate: "+shapeToTranslate);
+                System.out.println("ShapeToModify: "+shapeGroupToModify);
                 shapeInToolBarTmp = new ArrayList<>();
                 shapeInToolBarTmp.addAll(controller.getShapesInToolBar());
 

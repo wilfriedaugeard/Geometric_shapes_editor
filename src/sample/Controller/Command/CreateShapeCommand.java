@@ -23,12 +23,11 @@ public class CreateShapeCommand implements ICommand{
 
     @Override
     public void undo() {
-        System.out.println("undo");
         controller.updateViewRemove(shapeCreated);
     }
 
     @Override
     public void redo() {
-        shapeCreated = controller.createShapeInCanvas(controller, shapeInToolbar, posX, posY, true);
+        shapeCreated = controller.createShapeInCanvas(controller, shapeInToolbar, posX, posY, false);
     }
 }
