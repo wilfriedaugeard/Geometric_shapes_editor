@@ -13,6 +13,9 @@ import sample.Model.*;
 
 import java.util.ArrayList;
 
+/**
+ * Shape selection
+ */
 public class SelectionShapeEvent implements Event {
     protected IController controller;
     private Point mousePosStart;
@@ -24,11 +27,19 @@ public class SelectionShapeEvent implements Event {
         shapeGroup = controller.getShapeGroupTmp();
     }
 
+    /**
+     * Check if a x point is on the toolbar
+     * @param x The x position
+     * @return True if is on toolbar
+     */
     public boolean isOnToolbar(double x){
         ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
         return x <= toolBar.getWidth();
     }
 
+    /**
+     * Mouse pressed, begin to the creation of the selection rectangle
+     */
     EventHandler<MouseEvent> createSelectionRectangleOnClick = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             BorderPane bp = (BorderPane) controller.getView().getRoot();
@@ -55,6 +66,9 @@ public class SelectionShapeEvent implements Event {
         }
     };
 
+    /**
+     * Drag of the selection rectangle
+     */
     EventHandler<MouseEvent> selectionRectangleDraggedInCanvas = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             if(selectionRectangle!=null) {
@@ -67,6 +81,9 @@ public class SelectionShapeEvent implements Event {
         }
     };
 
+    /**
+     * Mouse released, add all shapes in the selection rectangle to a tempory group
+     */
     EventHandler<MouseEvent> releasedMouseAndCreateGroupShape = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             if(selectionRectangle!=null) {
@@ -88,6 +105,9 @@ public class SelectionShapeEvent implements Event {
         }
     };
 
+    /**
+     *  Control + click event. Add the selectioned shape to a tempory group
+     */
     EventHandler<MouseEvent> CTRLAndMouseOnClickShapeGroup = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             if(mouseEvent.getButton() != MouseButton.PRIMARY){
@@ -112,7 +132,6 @@ public class SelectionShapeEvent implements Event {
                                     }
                                 }
                                 shapeGroup.add(shapetoAdd);
-                                System.out.println(shapetoAdd.getClass().toString() + " is added to ShapeGroup");
                             }
                         }
                     }

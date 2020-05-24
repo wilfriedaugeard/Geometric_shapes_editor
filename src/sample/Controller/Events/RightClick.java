@@ -17,15 +17,16 @@ import sample.Model.IShapeInter;
 
 import java.util.ArrayList;
 
+/**
+ * Right click action
+ */
 public class RightClick implements Event {
     private final IController controller;
     private Shape shapeInCanvas;
     private ColorPicker colorPicker;
     private final ContextMenu shapeMenu;
     private double tmp_rotate;
-    private double rotate_saved;
     private double size_saved;
-    private double last_size;
     private double last_rotate;
 
     public RightClick(IController controller){
@@ -39,9 +40,7 @@ public class RightClick implements Event {
      */
     EventHandler<ContextMenuEvent> getShapeOnMousePressed = new EventHandler<>() {
         public void handle(ContextMenuEvent event) {
-
             shapeInCanvas = (Shape) event.getSource();
-
             double x = controller.getView().getShapeXPositionInToolBar(shapeInCanvas);
             double y = controller.getView().getShapeYPositionInToolBar(shapeInCanvas);
 
@@ -57,9 +56,7 @@ public class RightClick implements Event {
                     }
                 }
             }
-
             event.consume();
-
         }
     };
 
@@ -69,10 +66,8 @@ public class RightClick implements Event {
     EventHandler<ActionEvent> colorPickerEv = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
-
             double x = controller.getView().getShapeXPositionInToolBar(shapeInCanvas);
             double y = controller.getView().getShapeYPositionInToolBar(shapeInCanvas);
-
             ArrayList<Shape> shapes = controller.getView().getShapesInCanvas();
             if (shapes.size() == controller.getShapesInCanvas().size()) {
                 double shapeX, shapeY;
@@ -214,33 +209,33 @@ public class RightClick implements Event {
         }
     }
 
+    /**
+     * Clear fileds of form
+     * @param shapeSelected The shape to edit
+     */
     public void clearField(IShapeInter shapeSelected){
-
         double value = (size_saved*100)/shapeSelected.getWidth();
         resizeShape(shapeSelected, value);
         if(tmp_rotate != 0){
             rotateShape(shapeSelected,-tmp_rotate);
             tmp_rotate = 0;
-            rotate_saved = 0;
+
         }
         last_rotate = 0;
-        last_size = 0;
     }
 
-
+    /**
+     * Edit button event
+     */
     EventHandler<ActionEvent> edit = new EventHandler<>() {
         @Override
         public void handle(ActionEvent event) {
             int index = controller.getView().getShapesInCanvas().indexOf(shapeInCanvas);
             IShapeInter shapeSelected = controller.getShapesInCanvas().get(index);
             size_saved = shapeSelected.getWidth();
-
-            last_size = 0;
             tmp_rotate = 0;
-            rotate_saved = 0;
 
             TxtCapture dialog = new TxtCapture();
-
             // BUTTON EVENTS
             dialog.getSubmit().setOnAction(e -> {
                 treatments(shapeSelected, dialog);
@@ -259,12 +254,8 @@ public class RightClick implements Event {
                 dialog.getRotation().clear();
                 clearField(shapeSelected);
             });
-
-
         }
     };
-
-
 
     @Override
     public void launchEvent() {

@@ -23,7 +23,6 @@ public class SaveEvent implements Event {
      */
     EventHandler<ActionEvent> saveButton = new EventHandler<>() {
         public void handle(ActionEvent actionEvent) {
-
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialFileName("save.ser");
             File savedFile = fileChooser.showSaveDialog(null);
@@ -32,9 +31,9 @@ public class SaveEvent implements Event {
                 filename = savedFile.getName();
             }
 
-
             ObjectOutputStream oos = null;
             try {
+                assert filename != null;
                 File file = new File(filename);
                 oos = new ObjectOutputStream(new FileOutputStream(file));
                 oos.writeObject(controller);

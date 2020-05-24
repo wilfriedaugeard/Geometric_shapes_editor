@@ -10,13 +10,13 @@ import sample.Controller.IController;
 import sample.Factory.ModelFactory.PointFactory;
 import sample.Model.Point;
 import sample.Model.IShapeInter;
-import sample.View.Drawer.IShapeDrawer;
 
 import java.util.ArrayList;
 
-
+/**
+ * Drag and drop event. Move, delete or create a shape / group of shapes.
+ */
 public class DragAndDropEvent implements Event {
-
     /*No shape group case*/
     private IShapeInter shapeToTranslate;
 
@@ -41,6 +41,9 @@ public class DragAndDropEvent implements Event {
         this.controller = controller;
     }
 
+    /**
+     * Moving a shape
+     */
     EventHandler<MouseEvent> finalShapeToCanvas = new EventHandler<>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -79,18 +82,23 @@ public class DragAndDropEvent implements Event {
         }
     };
 
+    /**
+     * Place a shape in the fontground
+     */
     EventHandler<MouseEvent> moveShapeOnPressingMouse = mouseEvent -> {
         if (mouseEvent.getButton() != MouseButton.PRIMARY) {
             mouseEvent.consume();
             return;
         }
         Shape shape = (Shape) mouseEvent.getSource();
-
         shape.toFront();
     };
 
 
-
+    /**
+     * A shape in the toolbar is moving
+     * @param shapeInToolbar The moving toolbar shape
+     */
     public void moveShapeInToolbar(IShapeInter shapeInToolbar){
         double x = controller.getView().getShapeXPositionInToolBar(shapeInView);
         double y = controller.getView().getShapeYPositionInToolBar(shapeInView);
@@ -111,7 +119,9 @@ public class DragAndDropEvent implements Event {
     }
 
 
-
+    /**
+     * Get the shape while mouse is pressed
+     */
     EventHandler<MouseEvent> getShapeOnMousePressed = new EventHandler<MouseEvent>() {
         public void handle(MouseEvent mouseEvent) {
             if(mouseEvent.getButton() != MouseButton.PRIMARY){
@@ -120,8 +130,6 @@ public class DragAndDropEvent implements Event {
             }
             toolbarShapeMove = false;
             shapeInView = (Shape) mouseEvent.getSource();
-            double x = controller.getView().getShapeXPositionInToolBar(shapeInView);
-            double y = controller.getView().getShapeYPositionInToolBar(shapeInView);
             isInShapeGroup = false;
             int indexOfShape = controller.getView().getShapesInCanvas().indexOf(shapeInView);
             // shape in toolbar bar selected
@@ -134,12 +142,10 @@ public class DragAndDropEvent implements Event {
 
                 MousePos = PointFactory.getPoint(mouseEvent.getSceneX(), mouseEvent.getSceneY());
                 BeginPos = PointFactory.getPoint(mouseEvent.getSceneX(), mouseEvent.getSceneY());
-                //mouseEvent.consume();
+                mouseEvent.consume();
                 return;
             }
             shapeToTranslate = controller.getShapesInCanvas().get(indexOfShape);
-
-
             //Get the shape's group if it is in a ShapeGroup
             for(IShapeInter shapeGroup : controller.getShapeGroups()){
                 if(shapeGroup.getChildren().containsAll(shapeToTranslate.getChildren())){
@@ -147,14 +153,15 @@ public class DragAndDropEvent implements Event {
                     isInShapeGroup = true;
                 }
             }
-
             MousePos = PointFactory.getPoint(mouseEvent.getSceneX(), mouseEvent.getSceneY());
             BeginPos = PointFactory.getPoint(mouseEvent.getSceneX(), mouseEvent.getSceneY());
             mouseEvent.consume();
         }
     };
 
-
+    /**
+     * The shape is on trash. Call remove command.
+     */
     private void onTrash(){
         ICommand removeCommand;
 
@@ -163,15 +170,15 @@ public class DragAndDropEvent implements Event {
         }else {
             removeCommand = new RemoveCommand(shapeToTranslate, controller);
         }
-
         controller.addLastCommand(removeCommand);
         controller.setCurrentPosInCommands(controller.getNbCommands());
         removeCommand.execute();
-
     }
 
 
-
+    /**
+     * When the shape is released over the toolbar
+     */
     EventHandler<MouseEvent> overToolbar = new EventHandler<>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -179,7 +186,6 @@ public class DragAndDropEvent implements Event {
                 mouseEvent.consume();
                 return;
             }
-
             double x = MousePos.getX();
             double y = MousePos.getY();
 
@@ -193,8 +199,6 @@ public class DragAndDropEvent implements Event {
                     ToolBar toolBar = (ToolBar) controller.getView().getToolBar();
                     if(isInShapeGroup){
                         for(IShapeInter child : shapeGroupToModify.getChildren()){
-                            System.out.println("GROUP :"+shapeGroupToModify);
-                            System.out.println("Child: "+shapeGroupToModify.getChildren());
                             // View delete
                             int i = controller.getShapesInToolBar().indexOf(child);
                             System.out.println(controller.getShapesInToolBar());
@@ -241,7 +245,10 @@ public class DragAndDropEvent implements Event {
         }
     };
 
-
+    /**
+     * Check if a group of shapes exist in the toolbar
+     * @param shapeGroupInToolbar The shape to ckeck
+     */
     public boolean sameShapeGroupInToolBar(IShapeInter shapeGroupInToolbar){
         for (IShapeInter group : controller.getShapeGroups()){
             if(group.getChildren().contains(shapeGroupInToolbar)){
@@ -258,6 +265,10 @@ public class DragAndDropEvent implements Event {
         return true;
     }
 
+    /**
+     * Check if a shape exist in the toolbar
+     * @param shapeExisted The shape to check
+     */
     public boolean shapeExisted(IShapeInter shapeExisted){
         for (IShapeInter shapeInToolBar : controller.getShapesInToolBar()) {
             if (shapeExisted.getRGB() == shapeInToolBar.getRGB()
@@ -270,7 +281,8 @@ public class DragAndDropEvent implements Event {
     }
 
     /**
-     * Check if the shapeInCanvas has a same shape in toolbar
+     * Check if the a shape has a same shape in the toolbar
+     * @param shapeInCanvas The shape
      */
     public boolean sameShapeInToolBar(IShapeInter shapeInCanvas) {
         if(isInShapeGroup){

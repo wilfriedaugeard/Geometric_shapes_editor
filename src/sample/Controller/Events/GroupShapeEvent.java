@@ -8,6 +8,9 @@ import sample.Controller.IController;
 import sample.Controller.Command.DeGroupShapeCommand;
 import sample.Model.IShapeInter;
 
+/**
+ * Group and degroup shapes
+ */
 public class GroupShapeEvent implements Event {
     private IController controller;
 
@@ -15,6 +18,9 @@ public class GroupShapeEvent implements Event {
         this.controller = controller;
     }
 
+    /**
+     * Group shapes. Call Group command
+     */
    EventHandler<ActionEvent> groupShape = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -26,6 +32,9 @@ public class GroupShapeEvent implements Event {
         }
     };
 
+    /**
+     * Degroup a group. Call Degroup command
+     */
     EventHandler<ActionEvent> DeGroupShape = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {

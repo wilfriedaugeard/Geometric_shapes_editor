@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import sample.Controller.IController;
 
+/**
+ * Redo action
+ */
 public class RedoEvent implements Event {
 
     protected IController controller;

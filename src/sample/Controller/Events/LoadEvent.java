@@ -37,6 +37,7 @@ public class LoadEvent implements Event {
 
             ObjectInput ois = null;
             try {
+                assert filename != null;
                 final FileInputStream file = new FileInputStream(filename);
                 ois = new ObjectInputStream(file);
                 final ControllerJavaFXAdaptee controller_load = (ControllerJavaFXAdaptee) ois.readObject();
